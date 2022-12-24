@@ -1,3 +1,4 @@
+import { Button } from '@street-vendor/core';
 import styled from 'styled-components';
 
 const StyledPage = styled.div`
@@ -20,6 +21,7 @@ export function Index() {
               <span> Hello there, </span>
               Welcome boss 👋
             </h1>
+            <Button />
           </div>
 
           <div id="hero" className="rounded">
