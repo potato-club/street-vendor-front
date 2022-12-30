@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { customColor, customColorType } from '../constants/customColor';
+import { customColor, customColorType } from '../../constants/customColor';
 
 export type TypographyProps = React.PropsWithChildren<{
   size:
