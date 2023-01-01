@@ -40,10 +40,10 @@ pre {
     Liberation Mono, Courier New, monospace;
 }
 svg {
-  display: block;
-  vertical-align: middle;
-  shape-rendering: auto;
-  text-rendering: optimizeLegibility;
+  /* display: block; */
+  /* vertical-align: middle; */
+  /* shape-rendering: auto; */
+  /* text-rendering: optimizeLegibility; */
 }
 pre {
   background-color: rgba(55, 65, 81, 1);

@@ -1,12 +1,12 @@
 import Image from 'next/image';
 import React from 'react';
 import styled from 'styled-components';
-import { storeImageDummy } from "../../../dummy/detailStore/storeImageDummy";
+import { storeImageDummy } from '../../../dummy/detailStore/storeImageDummy';
 
 export const StoreImage = () => {
   return (
     <ImageWrapper>
-      <LeftImage style={{ width: storeImageDummy.length > 1 ? '50vw' : '100vw' }}>
+      <LeftImage style={{ width: storeImageDummy.length > 1 ? '50%' : '100%' }}>
         <Image src={storeImageDummy[0]} alt="detailStoreImage" fill />
       </LeftImage>
       {storeImageDummy.length > 1 && (
@@ -43,7 +43,7 @@ const RightImage = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 50vw;
+  width: 50%;
   margin-left: 4px;
   gap: 4px;
 `;
