@@ -1,1 +1,1 @@
-export { StoreImage } from './storeImage';
+export { StoreImage } from './StoreImage';

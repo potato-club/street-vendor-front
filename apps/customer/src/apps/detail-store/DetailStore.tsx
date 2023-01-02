@@ -1,10 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Typography, customColor } from '@street-vendor/core';
-import { Tteokbokki } from './components/Icons/foodCategory/Tteokbokki';
 import { Rating } from 'react-simple-star-rating';
-import { EmptySpoon } from './components/Icons/score/EmptySpoon';
-import { FullSpoon } from './components/Icons/score/FullSpoon';
+import { Arrow, EmptySpoon, FullSpoon, SpeechBubble, Star, Tteokbokki } from './Icons';
+import { StoreImage } from './components';
 export const DetailStore = () => {
   return (
     <Container>
@@ -23,7 +22,7 @@ export const DetailStore = () => {
             송도 1동 행정복지센터 대각선
           </Typography>
         </Info>
-        <Review>
+        <FlexBox gap={24}>
           <Typography size="14" fontWeight="bold" color="orange2">
             최근 리뷰 10
           </Typography>
@@ -43,7 +42,21 @@ export const DetailStore = () => {
               3.5 숟가락
             </Typography>
           </RatingWrapper>
-        </Review>
+        </FlexBox>
+        <FlexBox gap={12}>
+          <IconButton>
+            <Star />
+            <Typography size='12' fontWeight='bold'>즐겨찾기</Typography>
+          </IconButton>
+          <IconButton>
+            <Arrow />
+            <Typography size='12' fontWeight='bold'>길찾기</Typography>
+          </IconButton>
+          <IconButton>
+            <SpeechBubble />
+            <Typography size='12' fontWeight='bold'>공유하기</Typography>
+          </IconButton>
+        </FlexBox>
       </Wrapper>
     </Container>
   );
@@ -52,13 +65,16 @@ export const DetailStore = () => {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  /* filter: drop-shadow(3px 3px 10px ${customColor.black}26); */
+  /* box-shadow: 3px 3px 10px ${customColor.black}26; */
+  /* border-top-left-radius: 24px; */
+  /* border-top-right-radius: 24px; */
 `;
 
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  filter: drop-shadow(3px 3px 10px ${customColor.black}26);
 `;
 
 const GrayLine = styled.hr`
@@ -83,9 +99,9 @@ const Category = styled.div`
   gap: 4px;
 `;
 
-const Review = styled.div`
+const FlexBox = styled.div<{ gap?: number}>`
   display: flex;
-  gap: 24px;
+  gap: ${({ gap }) => `${gap}px`};
   align-items: center;
 `;
 
@@ -98,4 +114,17 @@ const RatingWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 12px;
+`;
+
+const IconButton = styled.button`
+  display: flex;
+  white-space: nowrap;
+  width: 88px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: ${customColor.beige};
+  padding: 6px 20px;
+  border-radius: 20px;
+  gap: 4px;
 `;
