@@ -1,62 +1,56 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Typography, customColor } from '@street-vendor/core';
-import { Rating } from 'react-simple-star-rating';
-import { Arrow, EmptySpoon, FullSpoon, SpeechBubble, Star, Tteokbokki } from './Icons';
-import { StoreImage } from './components';
+import { customColor, Typography } from '@street-vendor/core';
+import { Info, StoreImage } from './components';
+import { CustomRadioButton } from './components/Menu/CustomRadioButton';
+import { FlexBox } from './components/common/FlexBox';
+import Image from 'next/image';
 export const DetailStore = () => {
+  const [filter, setFilter] = useState<string>('basic');
   return (
     <Container>
-      {/* <StoreImage /> */}
+      <StoreImage />
+      <Info />
+      <Line />
       <Wrapper>
-        <GrayLine />
-        <Info>
-          <Typography size="20" fontWeight="bold">
-            서윤보경이네 떡볶이집
-          </Typography>
-          <Category>
-            <Tteokbokki size={24} />
-            <Typography size="16">떡볶이</Typography>
-          </Category>
-          <Typography size="16" color="darkGray">
-            송도 1동 행정복지센터 대각선
-          </Typography>
-        </Info>
-        <FlexBox gap={24}>
-          <Typography size="14" fontWeight="bold" color="orange2">
-            최근 리뷰 10
-          </Typography>
-          <OrangeLine />
-          <RatingWrapper>
-            <Rating
-              initialValue={3.5}
-              emptyIcon={<EmptySpoon />}
-              fillIcon={<FullSpoon />}
-              emptyStyle={{ display: 'flex', alignItems: 'center' }}
-              allowFraction
-              readonly
-              transition
-              allowHover={false}
-            />
-            <Typography size="14" fontWeight="bold" color="orange2">
-              3.5 숟가락
-            </Typography>
-          </RatingWrapper>
-        </FlexBox>
         <FlexBox gap={12}>
-          <IconButton>
-            <Star />
-            <Typography size='12' fontWeight='bold'>즐겨찾기</Typography>
-          </IconButton>
-          <IconButton>
-            <Arrow />
-            <Typography size='12' fontWeight='bold'>길찾기</Typography>
-          </IconButton>
-          <IconButton>
-            <SpeechBubble />
-            <Typography size='12' fontWeight='bold'>공유하기</Typography>
-          </IconButton>
+          <CustomRadioButton
+            id="basic"
+            label="기본"
+            name="filter"
+            selectedValue={filter}
+            onChange={(e) => setFilter(e.target.value)}
+          />
+          <CustomRadioButton
+            id="recommend"
+            label="추천순"
+            name="filter"
+            selectedValue={filter}
+            onChange={(e) => setFilter(e.target.value)}
+          />
+          <CustomRadioButton
+            id="popularity"
+            label="인기순"
+            name="filter"
+            selectedValue={filter}
+            onChange={(e) => setFilter(e.target.value)}
+          />
         </FlexBox>
+        <ItemWrapper>
+          <Item>
+            <Food>
+              <Image
+                style={{ borderRadius: '12px' }}
+                src={'/cat.png'}
+                width={80}
+                height={60}
+                alt="food"
+              />
+              <Typography size="16">떡볶이 1인분 1000원</Typography>
+            </Food>
+            <Counter>- 1 +</Counter>
+          </Item>
+        </ItemWrapper>
       </Wrapper>
     </Container>
   );
@@ -71,60 +65,39 @@ const Container = styled.div`
   /* border-top-right-radius: 24px; */
 `;
 
+const Line = styled.hr`
+  width: 100%;
+  border: solid 6px ${customColor.beige};
+  margin: 20px 0;
+`;
+
 const Wrapper = styled.div`
   display: flex;
-  align-items: center;
-  flex-direction: column;
-`;
-
-const GrayLine = styled.hr`
-  margin: 40px 0;
-  width: 40px;
-  opacity: 0.3;
-  border: 3px solid #7c7c7c;
-  border-radius: 24px;
-`;
-
-const Info = styled.div`
-  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 20px;
 `;
 
-const Category = styled.div`
+const ItemWrapper = styled.div`
   display: flex;
-  align-items: center;
-  gap: 4px;
-`;
-
-const FlexBox = styled.div<{ gap?: number}>`
-  display: flex;
-  gap: ${({ gap }) => `${gap}px`};
-  align-items: center;
-`;
-
-const OrangeLine = styled.hr`
-  height: 18px;
-  border: 1px solid ${customColor.orange2};
-`;
-
-const RatingWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 12px;
-`;
-
-const IconButton = styled.button`
-  display: flex;
-  white-space: nowrap;
-  width: 88px;
-  flex-direction: column;
-  align-items: center;
+  padding: 16px 0;
   justify-content: center;
-  background-color: ${customColor.beige};
-  padding: 6px 20px;
-  border-radius: 20px;
-  gap: 4px;
+  :not(:last-child) {
+    border-bottom: 1px solid ${customColor.gray}80;
+  }
+`;
+
+const Item = styled.div`
+  display: flex;
+`;
+
+const Food = styled.div`
+  display: flex;
+  gap: 8px;
+`;
+
+const Counter = styled.div`
+  display: flex;
+  align-items: flex-end;
 `;
