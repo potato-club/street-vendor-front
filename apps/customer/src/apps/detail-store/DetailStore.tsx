@@ -50,6 +50,19 @@ export const DetailStore = () => {
             </Food>
             <Counter>- 1 +</Counter>
           </Item>
+          <Item>
+            <Food>
+              <Image
+                style={{ borderRadius: '12px' }}
+                src={'/cat.png'}
+                width={80}
+                height={60}
+                alt="food"
+              />
+              <Typography size="16">떡볶이 1인분 1000원</Typography>
+            </Food>
+            <Counter>- 1 +</Counter>
+          </Item>
         </ItemWrapper>
       </Wrapper>
     </Container>
@@ -81,15 +94,17 @@ const Wrapper = styled.div`
 
 const ItemWrapper = styled.div`
   display: flex;
-  padding: 16px 0;
+  flex-direction: column;
   justify-content: center;
-  :not(:last-child) {
-    border-bottom: 1px solid ${customColor.gray}80;
-  }
 `;
 
 const Item = styled.div`
   display: flex;
+  border-top: 1px solid ${customColor.gray};
+  padding: 16px 0;
+  :last-child {
+    border-bottom: 1px solid ${customColor.gray};
+  }
 `;
 
 const Food = styled.div`
