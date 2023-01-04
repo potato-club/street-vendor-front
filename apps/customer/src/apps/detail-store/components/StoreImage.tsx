@@ -5,38 +5,48 @@ import { storeImageDummy } from '../../../dummy/detailStore/storeImageDummy';
 
 export const StoreImage = () => {
   return (
-    <ImageWrapper>
-      <LeftImage style={{ width: storeImageDummy.length > 1 ? '50%' : '100%' }}>
-        <Image src={storeImageDummy[0]} alt="detailStoreImage" fill />
-      </LeftImage>
-      {storeImageDummy.length > 1 && (
-        <RightImage>
-          {storeImageDummy.slice(1).map((data, index) => (
-            <div
-              key={index}
-              style={{
-                position: 'relative',
-                height: 256 / (storeImageDummy.length - 1),
-              }}
-            >
-              <Image src={data} fill alt="detailStoreImage" />
-            </div>
-          ))}
-        </RightImage>
-      )}
-    </ImageWrapper>
+    <Container>
+      <Wrapper>
+        <LeftImage
+          style={{ width: storeImageDummy.length > 1 ? '50%' : '100%' }}
+        >
+          <Image src={storeImageDummy[0]} alt="detailStoreImage" fill />
+        </LeftImage>
+        {storeImageDummy.length > 1 && (
+          <RightImage>
+            {storeImageDummy.slice(1).map((data, index) => (
+              <div
+                key={index}
+                style={{
+                  position: 'relative',
+                  height: '100%',
+                }}
+              >
+                <Image src={data} fill alt="detailStoreImage" />
+              </div>
+            ))}
+          </RightImage>
+        )}
+      </Wrapper>
+    </Container>
   );
 };
 
-const ImageWrapper = styled.div`
+const Container = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`;
+const Wrapper = styled.div`
   display: flex;
   /* gap: 4px; */
   width: 100%;
-  height: 260px;
+  max-width: 768px;
 `;
 
 const LeftImage = styled.div`
   position: relative;
+  aspect-ratio: 0.75;
 `;
 
 const RightImage = styled.div`
