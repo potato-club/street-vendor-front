@@ -42,6 +42,7 @@ type typographyDefault = {
   defaultColor: string;
 };
 const TypographyText = styled.div<TypographyProps & typographyDefault>`
+  font-family: 'Noto Sans KR';
   font-size: ${({ size }) => size + 'px'};
   color: ${({ color, defaultColor }) =>
     color ? handleColor(color) : defaultColor};

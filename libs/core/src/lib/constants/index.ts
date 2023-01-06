@@ -1,0 +1,1 @@
+export { customColor } from './customColor';

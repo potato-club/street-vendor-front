@@ -5,3 +5,6 @@ export * from './AskSelectButton';
 export * from './AddPhotoButton';
 export * from './AddedPhotoButton';
 export * from './Button';
+export * from './card/CardNotice';
+export * from './containers/notice/detail/DetailNoticeContainer';
+export * from './containers/notice/ListNoticeContainer';
