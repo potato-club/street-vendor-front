@@ -2,15 +2,25 @@ import styled from 'styled-components';
 import { customColor } from '../../constants';
 import { Typography } from '../Typography';
 import { FieldErrorsImpl, FieldValues, UseFormRegister } from 'react-hook-form';
+import { AskOption } from './AskOption';
 
+interface OptionProps {
+  name: string;
+  value: string;
+}
 interface SelectProps {
   label: string;
   placeholder: string;
+  options: OptionProps[];
   register: UseFormRegister<FieldValues>;
   errors: Partial<FieldErrorsImpl>;
 }
 
 export const AskSelect = (props: SelectProps) => {
+  props.options = [
+    { name: '조', value: '금주' },
+    { name: '조', value: '은주' },
+  ];
   return (
     <Wrapper>
       <Label>
@@ -22,7 +32,9 @@ export const AskSelect = (props: SelectProps) => {
         <Option value={''} disabled hidden>
           {props.placeholder}
         </Option>
-        <Option>앙</Option>
+        {props.options.map((item) => (
+          <AskOption name={item.name} value={item.value} />
+        ))}
       </Select>
       <ArrowIcon>
         <svg
@@ -69,9 +81,8 @@ const Select = styled.select`
   font-family: inherit;
   letter-spacing: -0.5px;
   &::placeholder {
-    color: ${customColor.gray};
+    color: ${customColor.darkGray};
     white-space: pre-wrap;
-    /* 나중에 darkgray로 바꾸기 */
   }
   -webkit-appearance: none;
   -moz-appearance: none;
