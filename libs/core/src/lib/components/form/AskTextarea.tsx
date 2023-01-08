@@ -9,7 +9,6 @@ import {
 } from 'react-hook-form';
 
 interface InputProps {
-  name: string;
   placeholder: string;
   maxLength: number;
   register: UseFormRegister<FieldValues>;
@@ -29,9 +28,9 @@ export const AskLongInput = (props: InputProps) => {
         maxLength={props.maxLength}
         {...props.register('askContent')}
       />
-      {props.errors[props.name] && (
+      {props.errors['askContent'] && (
         <Error>
-          <Typography size="16">에러에러</Typography>
+          <Typography size="16">에러Textarea</Typography>
         </Error>
       )}
       <MaxLength>
