@@ -21,10 +21,10 @@ export const AskButton = (props: ButtonProps) => {
       onClick={props.onClick}
     >
       <Typography
-        size="20"
+        size="16"
         color="beige"
         fontWeight="bold"
-        letterSpacing="-0.5px"
+        letterSpacing="-1px"
       >
         {props.content}
       </Typography>
@@ -38,8 +38,9 @@ const Button = styled.button<ButtonStyledProps>`
   justify-content: center;
   background: none;
   border: none;
-  width: 160px;
-  height: 58px;
+  padding: 16px 8px;
+  width: 40%;
+  max-width: 160px;
   border-radius: 14px;
   background: ${(props) =>
     props.background === 'orange2' ? customColor.orange2 : customColor.orange3};

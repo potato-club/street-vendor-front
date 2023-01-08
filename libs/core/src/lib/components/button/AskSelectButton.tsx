@@ -5,7 +5,7 @@ import { Typography } from '../Typography';
 interface ButtonProps {
   content: string;
   isSelected: boolean;
-  onClick?: () => void;
+  onClick: () => void;
 }
 interface ButtonStyledProps {
   content?: string;
@@ -18,7 +18,7 @@ export const AskSelectButton = (props: ButtonProps) => {
         color={props.isSelected ? 'orange1' : 'gray'}
         size="16"
         fontWeight="bold"
-        letterSpacing="-0.5px"
+        letterSpacing="-1px"
       >
         {props.content}
       </Typography>
@@ -29,16 +29,18 @@ export const AskSelectButton = (props: ButtonProps) => {
 
 const Button = styled.button`
   display: flex;
+  width: 50%;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   background: none;
   border: none;
-  gap: 8px;
+  gap: 6px;
 `;
 const UnderBar = styled.div<ButtonStyledProps>`
   height: 5px;
-  width: 136px;
+  width: 100%;
+  max-width: 132px;
   background: ${(props) =>
     props.isSelected ? customColor.orange2 : customColor.gray};
   border-radius: 5px;

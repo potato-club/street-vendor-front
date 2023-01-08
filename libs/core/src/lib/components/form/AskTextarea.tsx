@@ -16,7 +16,7 @@ interface InputProps {
   watch: UseFormWatch<FieldValues>;
 }
 
-export const AskLongInput = (props: InputProps) => {
+export const AskTextarea = (props: InputProps) => {
   const commaFormat = (num: number) => {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
@@ -27,6 +27,7 @@ export const AskLongInput = (props: InputProps) => {
         placeholder={props.placeholder}
         maxLength={props.maxLength}
         {...props.register('askContent')}
+        defaultValue={''}
       />
       {props.errors['askContent'] && (
         <Error>
@@ -35,8 +36,10 @@ export const AskLongInput = (props: InputProps) => {
       )}
       <MaxLength>
         <Typography size="16" color="gray" letterSpacing="-0.5px">
-          {props.watch('askContent').length} /{' '}
-          {commaFormat(props.maxLength || 3000)}
+          {props.watch('askContent') === undefined
+            ? 0
+            : props.watch('askContent').length}{' '}
+          / {commaFormat(props.maxLength || 3000)}
         </Typography>
       </MaxLength>
     </Wrapper>

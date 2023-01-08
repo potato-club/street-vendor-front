@@ -28,8 +28,8 @@ export const AskSelect = (props: SelectProps) => {
         <Option value={''} disabled hidden>
           {props.placeholder}
         </Option>
-        {props.options.map((item) => (
-          <AskOption name={item.name} value={item.value} />
+        {props.options.map((item, idx) => (
+          <AskOption key={idx} name={item.name} value={item.value} />
         ))}
       </Select>
       <ArrowIcon>
