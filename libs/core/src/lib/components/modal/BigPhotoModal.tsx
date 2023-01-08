@@ -28,18 +28,15 @@ export const BigPhotoModal = (props: ModalProps) => {
         content: {
           display: 'flex',
           WebkitOverflowScrolling: 'touch',
-          background: 'red',
           border: 'none',
           overflow: 'hidden',
-          margin: '0 auto',
           height: 'calc(100% - 48px)',
           width: 'calc(100% - 48px)',
-          inset: '0px',
+          inset: '0',
           padding: '0',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%,-50%)',
           pointerEvents: 'none',
+          background: 'none',
+          margin: 'auto',
         },
       }}
     >
