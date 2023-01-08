@@ -17,10 +17,6 @@ interface SelectProps {
 }
 
 export const AskSelect = (props: SelectProps) => {
-  props.options = [
-    { name: '조', value: '금주' },
-    { name: '조', value: '은주' },
-  ];
   return (
     <Wrapper>
       <Label>

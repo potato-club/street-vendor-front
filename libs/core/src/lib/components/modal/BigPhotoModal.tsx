@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import ReactModal from 'react-modal';
 import Image from 'next/image';
 
