@@ -25,6 +25,7 @@ export type TypographyProps = React.PropsWithChildren<{
   fontHidden?: boolean;
   letterSpacing?: string;
   underlineColor?: keyof customColorType;
+  notBreak?: boolean;
 }>;
 export const Typography = (props: TypographyProps) => {
   return (
@@ -56,4 +57,7 @@ const TypographyText = styled.div<TypographyProps & typographyDefault>`
 
   ${({ underlineColor }) =>
     underlineColor ? `text-decoration: underline; text-underline-position:under; text-decoration-color: ${underlineColor}` : ''};
+  
+  ${({notBreak}) => 
+    notBreak ? `white-space:nowrap;` : ''};
 `;

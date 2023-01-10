@@ -27,6 +27,7 @@ export const Counter = () => {
 const Container = styled.div`
   display: flex;
   align-items: flex-end;
+  justify-content: flex-end;
 `;
 
 const Wrapper = styled.div`

@@ -1,4 +1,4 @@
-import { customColor, Typography } from '@street-vendor/core';
+import { BasicButton, customColor, Typography } from '@street-vendor/core';
 import Image from 'next/image';
 import React, { useState } from 'react'
 import styled from 'styled-components';
@@ -39,7 +39,7 @@ export const Menu = () => {
       </div>
       <ItemWrapper>
         <Item>
-          <Food>
+          <FoodInfo>
             <Image
               style={{ borderRadius: '12px' }}
               src={'/cat.png'}
@@ -51,11 +51,11 @@ export const Menu = () => {
               <Typography size="16">떡볶이 1인분</Typography>
               <Typography size="16">1000원</Typography>
             </div>
-          </Food>
+          </FoodInfo>
           <Counter />
         </Item>
         <Item>
-          <Food>
+          <FoodInfo>
             <Image
               style={{ borderRadius: '12px' }}
               src={'/cat.png'}
@@ -67,21 +67,21 @@ export const Menu = () => {
               <Typography size="16">떡볶이 1인분</Typography>
               <Typography size="16">1000원</Typography>
             </div>
-          </Food>
+          </FoodInfo>
           <Counter />
         </Item>
       </ItemWrapper>
       <ButtonWrapper>
-        <Button backgroundColor={customColor.orange3}>
+        <BasicButton backgroundColor='orange3' flexGrow={1}>
           <Typography size="16" color="white" fontWeight="bold">
             장바구니
           </Typography>
-        </Button>
-        <Button backgroundColor={customColor.orange2} flexGrow={2}>
+        </BasicButton>
+        <BasicButton backgroundColor='orange2' flexGrow={2}>
           <Typography size="16" color="white" fontWeight="bold">
             바로 주문하기
           </Typography>
-        </Button>
+        </BasicButton>
       </ButtonWrapper>
     </MenuWrapper>
   );
@@ -121,7 +121,7 @@ const Item = styled.div`
   }
 `;
 
-const Food = styled.div`
+const FoodInfo = styled.div`
   display: flex;
   gap: 8px;
 `;
@@ -132,19 +132,4 @@ const ButtonWrapper = styled.div`
   align-items: center;
   justify-content: center;
   gap: 12px;
-`;
-
-type ButtonStyle = {
-  backgroundColor: string;
-  flexGrow?: number;
-};
-
-const Button = styled.div<ButtonStyle>`
-  background-color: ${({ backgroundColor }) => backgroundColor};
-  flex-grow: ${({ flexGrow }) => (flexGrow ? flexGrow : 1)};
-  border-radius: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px;
 `;
