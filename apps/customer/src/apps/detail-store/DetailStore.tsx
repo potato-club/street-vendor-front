@@ -117,7 +117,9 @@ const Wrapper = styled.div`
 
 const ContentWrapper = styled.div`
   width: 100%;
-  max-width: 768px; // Todo 다같이 디자인 확인해보고 max-width 수치 줄일거면 줄이기
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 
@@ -132,6 +134,8 @@ const MenuWrapper = styled.div`
   align-items: center;
   justify-content: center;
   gap: 40px;
+  width: 100%;
+  max-width: 400px; // Todo 다같이 디자인 확인해보고 max-width 수치 바꿀거면 바꾸기
   /* padding: 10px 20px 20px 20px; */
   padding: 20px 0 20px 0;
 

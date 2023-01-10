@@ -73,6 +73,7 @@ const Container = styled.div`
   flex-direction: column;
   width: 100%;
   padding: 20px 0 20px 0;
+  max-width: 400px; // Todo 다같이 디자인 확인해보고 max-width 수치 바꿀거면 바꾸기
 
   @media screen and (min-width: 375px) {
     padding: 20px 40px 40px 40px;
