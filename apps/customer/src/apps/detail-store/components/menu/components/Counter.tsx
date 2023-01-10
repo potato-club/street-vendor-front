@@ -39,7 +39,6 @@ const Wrapper = styled.div`
 
 const Button = styled.button`
   border: none;
-  cursor: pointer;
   background: transparent;
   outline: none;
   /* :hover {

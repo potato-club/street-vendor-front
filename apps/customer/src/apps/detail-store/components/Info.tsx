@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { Typography, customColor } from '@street-vendor/core';
 import { Rating } from 'react-simple-star-rating';
 import { Arrow, EmptySpoon, FullSpoon, SpeechBubble, Star, Tteokbokki } from '../Icons';
-import { FlexBox } from './common/FlexBox';
 
 export const Info = () => {
   return (
@@ -21,7 +20,7 @@ export const Info = () => {
           송도 1동 행정복지센터 대각선
         </Typography>
         <FlexBox gap={16}>
-          <Typography size="14" fontWeight="bold" color="orange2">
+          <Typography size="14" fontWeight="bold" color="orange2" underlineColor='orange2'>
             최근 리뷰 10
           </Typography>
           <OrangeLine />
@@ -131,4 +130,11 @@ const ButtonWrapper = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-between;
+`;
+
+const FlexBox = styled.div<{ gap?: number }>`
+  display: flex;
+  gap: ${({ gap }) => `${gap}px`};
+  align-items: center;
+  justify-content: center;
 `;

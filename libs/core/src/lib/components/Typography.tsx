@@ -24,6 +24,7 @@ export type TypographyProps = React.PropsWithChildren<{
   fontHeight?: string;
   fontHidden?: boolean;
   letterSpacing?: string;
+  underlineColor?: keyof customColorType;
 }>;
 export const Typography = (props: TypographyProps) => {
   return (
@@ -52,4 +53,7 @@ const TypographyText = styled.div<TypographyProps & typographyDefault>`
     fontHeight === 'normal' ? '' : `line-height: ${fontHeight};`};
   ${({ fontHidden }) =>
     fontHidden ? 'overflow: hidden;text-overflow: ellipsis;' : ''};
+
+  ${({ underlineColor }) =>
+    underlineColor ? `text-decoration: underline; text-underline-position:under; text-decoration-color: ${underlineColor}` : ''};
 `;
