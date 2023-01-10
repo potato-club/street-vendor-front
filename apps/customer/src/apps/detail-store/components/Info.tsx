@@ -41,7 +41,7 @@ export const Info = () => {
             </Typography>
           </RatingWrapper>
         </FlexBox>
-        <FlexBox gap={12}>
+        <ButtonWrapper>
           <IconButton>
             <Star />
             <Typography size="12" fontWeight="bold">
@@ -60,7 +60,7 @@ export const Info = () => {
               공유하기
             </Typography>
           </IconButton>
-        </FlexBox>
+        </ButtonWrapper>
       </Wrapper>
     </Container>
   );
@@ -72,10 +72,15 @@ const Container = styled.div`
   align-items: center;
   flex-direction: column;
   width: 100%;
+  padding: 20px 0 20px 0;
+
+  @media screen and (min-width: 375px) {
+    padding: 20px 40px 40px 40px;
+  }
 `;
 
 const GrayLine = styled.hr`
-  margin: 40px 0;
+  margin-bottom: 40px;
   width: 40px;
   opacity: 0.3;
   border: 3px solid #7c7c7c;
@@ -119,4 +124,10 @@ const IconButton = styled.button`
   padding: 6px 20px;
   border-radius: 20px;
   gap: 4px;
+`;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
 `;

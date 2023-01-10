@@ -41,7 +41,6 @@ const Wrapper = styled.div`
   display: flex;
   /* gap: 4px; */
   width: 100%;
-  max-width: 768px;
 `;
 
 const LeftImage = styled.div`
