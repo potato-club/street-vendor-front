@@ -1,20 +1,13 @@
-import { BasicButton, customColor, Typography } from '@street-vendor/core';
-import Image from 'next/image';
-import React, { useState } from 'react'
+import { BasicButton, Typography } from '@street-vendor/core';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Counter, CustomRadioButton } from './components/index';
+import { CustomRadioButton, Item } from './components/index';
 
 export const Menu = () => {
-    const [filter, setFilter] = useState<string>('basic');
+  const [filter, setFilter] = useState<string>('basic');
   return (
-    <MenuWrapper>
-      <div
-        style={{
-          display: 'flex',
-          width: '100%',
-          justifyContent: 'space-between',
-        }}
-      >
+    <Container>
+      <FilterWrapper>
         <CustomRadioButton
           id="basic"
           label="기본"
@@ -36,59 +29,28 @@ export const Menu = () => {
           selectedValue={filter}
           onChange={(e) => setFilter(e.target.value)}
         />
-      </div>
+      </FilterWrapper>
       <ItemWrapper>
-        <Item>
-          <FoodInfo>
-            <Image
-              style={{ borderRadius: '12px' }}
-              src={'/cat.png'}
-              width={80}
-              height={60}
-              alt="food"
-            />
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <Typography size="16">떡볶이 1인분</Typography>
-              <Typography size="16">1000원</Typography>
-            </div>
-          </FoodInfo>
-          <Counter />
-        </Item>
-        <Item>
-          <FoodInfo>
-            <Image
-              style={{ borderRadius: '12px' }}
-              src={'/cat.png'}
-              width={80}
-              height={60}
-              alt="food"
-            />
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <Typography size="16">떡볶이 1인분</Typography>
-              <Typography size="16">1000원</Typography>
-            </div>
-          </FoodInfo>
-          <Counter />
-        </Item>
+        <Item />
+        <Item />
       </ItemWrapper>
       <ButtonWrapper>
-        <BasicButton backgroundColor='orange3' flexGrow={1}>
+        <BasicButton backgroundColor="orange3" flexGrow={1}>
           <Typography size="16" color="white" fontWeight="bold">
             장바구니
           </Typography>
         </BasicButton>
-        <BasicButton backgroundColor='orange2' flexGrow={2}>
+        <BasicButton backgroundColor="orange2" flexGrow={2}>
           <Typography size="16" color="white" fontWeight="bold">
             바로 주문하기
           </Typography>
         </BasicButton>
       </ButtonWrapper>
-    </MenuWrapper>
+    </Container>
   );
-}
+};
 
-
-const MenuWrapper = styled.div`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -104,26 +66,17 @@ const MenuWrapper = styled.div`
   }
 `;
 
+const FilterWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+`;
+
 const ItemWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 100%;
-`;
-
-const Item = styled.div`
-  display: flex;
-  border-top: 1px solid ${customColor.gray};
-  padding: 16px 0;
-  justify-content: space-between;
-  :last-child {
-    border-bottom: 1px solid ${customColor.gray};
-  }
-`;
-
-const FoodInfo = styled.div`
-  display: flex;
-  gap: 8px;
 `;
 
 const ButtonWrapper = styled.div`
