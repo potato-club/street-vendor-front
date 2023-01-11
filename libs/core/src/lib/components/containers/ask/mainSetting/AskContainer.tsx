@@ -37,7 +37,7 @@ const Container = styled.section`
   height: 100%;
   align-items: center;
   justify-content: center;
-  padding: 10% 7% 0;
+  padding-top: 10%;
 `;
 const ContainerInner = styled.div`
   display: flex;
@@ -52,4 +52,5 @@ const TopBar = styled.div`
   width: 100%;
   justify-content: center;
   gap: 0 8%;
+  padding:0 7%;
 `;
