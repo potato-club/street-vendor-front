@@ -4,9 +4,6 @@ import { Typography } from '../Typography';
 import { FieldErrorsImpl, FieldValues, UseFormRegister } from 'react-hook-form';
 
 interface InputProps {
-  label: string;
-  placeholder: string;
-  maxLength?: number;
   register: UseFormRegister<FieldValues>;
   errors: Partial<FieldErrorsImpl>;
 }
@@ -16,13 +13,13 @@ export const AskInput = (props: InputProps) => {
     <Wrapper>
       <Label>
         <Typography size="16" fontWeight="bold" letterSpacing="-0.5px">
-          {props.label}
+          문의 내용
         </Typography>
       </Label>
       <Input
         type={'text'}
-        placeholder={props.placeholder}
-        maxLength={props.maxLength || 32}
+        placeholder="제목을 작성해주세요."
+        maxLength={32}
         {...props.register('askTitle')}
       />
       {props.errors['askTitle'] && (
