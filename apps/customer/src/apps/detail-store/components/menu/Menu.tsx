@@ -55,14 +55,17 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 40px;
+  gap: 20px;
   width: 100%;
   max-width: 400px; // Todo 다같이 디자인 확인해보고 max-width 수치 바꿀거면 바꾸기
-  /* padding: 10px 20px 20px 20px; */
-  padding: 20px 0 20px 0;
+  padding: 20px 0px;
+
+  @media screen and (min-width: 320px) {
+    padding: 20px 20px;
+  }
 
   @media screen and (min-width: 375px) {
-    padding: 20px 40px 40px 40px;
+    padding: 20px 40px;
   }
 `;
 

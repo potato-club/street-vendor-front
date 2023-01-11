@@ -9,18 +9,25 @@ export const Info = () => {
     <Container>
       <GrayLine />
       <Wrapper>
-        <Typography size="20" fontWeight="bold">
-          서윤보경이네 떡볶이집
-        </Typography>
-        <Category>
-          <Tteokbokki size={24} />
-          <Typography size="16">떡볶이</Typography>
-        </Category>
-        <Typography size="16" color="darkGray">
-          송도 1동 행정복지센터 대각선
-        </Typography>
+        <Title>
+          <Typography size="20" fontWeight="bold"  fontHeight='1'>
+            서윤보경이네 떡볶이집
+          </Typography>
+          <Category>
+            <Tteokbokki size={24} />
+            <Typography size="16">떡볶이</Typography>
+          </Category>
+          <Typography size="16" color="darkGray" fontHeight='1'>
+            송도 1동 행정복지센터 대각선
+          </Typography>
+        </Title>
         <FlexBox gap={16}>
-          <Typography size="14" fontWeight="bold" color="orange2" underlineColor='orange2'>
+          <Typography
+            size="14"
+            fontWeight="bold"
+            color="orange2"
+            underlineColor="orange2"
+          >
             최근 리뷰 10
           </Typography>
           <OrangeLine />
@@ -71,12 +78,22 @@ const Container = styled.div`
   align-items: center;
   flex-direction: column;
   width: 100%;
-  padding: 20px 0 20px 0;
   max-width: 400px; // Todo 다같이 디자인 확인해보고 max-width 수치 바꿀거면 바꾸기
+  padding: 20px 0;
 
-  @media screen and (min-width: 375px) {
-    padding: 20px 40px 40px 40px;
+  @media screen and (min-width: 320px) {
+    padding: 20px;
   }
+  @media screen and (min-width: 375px) {
+    padding: 20px 40px;
+  }
+`;
+
+const Title = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
 `;
 
 const GrayLine = styled.hr`
@@ -93,7 +110,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 20px;
 `;
 
 const Category = styled.div`
@@ -137,4 +154,8 @@ const FlexBox = styled.div<{ gap?: number }>`
   gap: ${({ gap }) => `${gap}px`};
   align-items: center;
   justify-content: center;
+  white-space: normal;
+  @media screen and (min-width: 300px) {
+    white-space: nowrap;
+  }
 `;
