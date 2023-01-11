@@ -1,74 +1,28 @@
-import { BasicButton, customColor, Typography } from '@street-vendor/core';
-import Image from 'next/image';
+import { customColor, Typography } from '@street-vendor/core';
 import React from 'react';
 import styled from 'styled-components';
-import { Counter } from '../detail-store/components/menu/components';
+import { Title, Item } from './components';
+import { OrderButton } from './components/OrderButton';
 
 export const ShoppingBasket = () => {
   return (
     <Container>
       <Wrapper>
-        <Title>
-          <Typography size="24">서윤보경이네 떡볶이집</Typography>
-          <Typography
-            size="16"
-            color="orange2"
-            underlineColor="orange2"
-            notBreak
-          >
-            가게 위치
-          </Typography>
-        </Title>
+        <Title />
         <ItemWrapper>
-          <Item>
-            <FoodInfo>
-              <ImageWrapper>
-                <Image
-                  style={{ borderRadius: '12px' }}
-                  src={'/cat.png'}
-                  fill
-                  alt="food"
-                />
-              </ImageWrapper>
-              <PriceAndOrder>
-                <div
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: 4,
-                    marginTop: 20,
-                  }}
-                >
-                  <Typography size="16">떡볶이 1인분</Typography>
-                  <Typography size="16">1000원</Typography>
-                </div>
-                <Counter />
-              </PriceAndOrder>
-            </FoodInfo>
-          </Item>
+          <Item />
         </ItemWrapper>
         <AddButton>
           <Typography size="20">+ 메뉴 추가하기</Typography>
         </AddButton>
-        <Total>
-          <div style={{ width: '100%', maxWidth: 400, padding: 20 }}>
+        <TotalContainer>
+          <TotalWrapper>
             <Typography size="24">총 주문금액</Typography>
             <Typography size="20">3000원</Typography>
-          </div>
-        </Total>
+          </TotalWrapper>
+        </TotalContainer>
       </Wrapper>
-      <ButtonWrapper>
-        <BasicButton
-          backgroundColor="orange3"
-          maxWidth={320}
-          height={54}
-          style={{ width: '60%' }}
-        >
-          <Typography size="20" color="white" fontWeight="bold">
-            주문하기
-          </Typography>
-        </BasicButton>
-      </ButtonWrapper>
+      <OrderButton />
     </Container>
   );
 };
@@ -90,52 +44,11 @@ const Wrapper = styled.div`
   background-color: ${customColor.white};
 `;
 
-const Title = styled.div`
-  display: flex;
-  align-items: center;
-  width: 100%;
-  max-width: 400px;
-  gap: 8px;
-  padding: 20px;
-`;
-
 const ItemWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 100%;
-`;
-
-const Item = styled.div`
-  display: flex;
-  width: 100%;
-  border-top: 1px solid ${customColor.gray}60;
-  justify-content: center;
-  :last-child {
-    border-bottom: 1px solid ${customColor.gray}60;
-  }
-`;
-
-const FoodInfo = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 400px;
-  gap: 20px;
-  padding: 20px;
-`;
-
-const PriceAndOrder = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-`;
-
-const ImageWrapper = styled.div`
-  position: relative;
-  width: 50%;
-  max-width: 300px;
-  aspect-ratio: 16 / 9;
 `;
 
 const AddButton = styled.div`
@@ -147,7 +60,7 @@ const AddButton = styled.div`
   border-bottom: 1px solid ${customColor.gray};
 `;
 
-const Total = styled.div`
+const TotalContainer = styled.div`
   display: flex;
   width: 100%;
   align-items: center;
@@ -156,11 +69,8 @@ const Total = styled.div`
   box-shadow: 0px 3px 6px ${customColor.gray};
 `;
 
-const ButtonWrapper = styled.div`
-  position: absolute;
-  bottom: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+const TotalWrapper = styled.div`
   width: 100%;
+  max-width: 400px;
+  padding: 20px;
 `;
