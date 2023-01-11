@@ -3,9 +3,8 @@ import { AskSelect } from '../../../form/AskSelect';
 import { useForm } from 'react-hook-form';
 import { AskInput } from '../../../form/AskInput';
 import { AskTextarea } from '../../../form/AskTextarea';
-import { useState } from 'react';
-import { Typography } from '../../../Typography';
-import { AddPhotoButton } from '../../../button/AddPhotoButton';
+import { AskPhoto } from '../../../form/AskPhoto';
+import { AskEmail } from '../../../form/AskEmail';
 
 export const AskForm = () => {
   const {
@@ -19,8 +18,6 @@ export const AskForm = () => {
     <Form>
       <AskType>
         <AskSelect
-          label="문의 유형"
-          placeholder="유형을 선택해주세요."
           options={[
             { name: '조금주', value: 'human' },
             { name: '조흥', value: 'dog' },
@@ -31,32 +28,25 @@ export const AskForm = () => {
       </AskType>
       <AskContent>
         <AskInput
-          label="문의 내용"
-          placeholder="제목을 작성해주세요."
-          maxLength={32}
           register={register}
           errors={errors}
         />
         <AskTextarea
-          placeholder={`문의 내용을 작성해주세요.\n최선을 다해 답변해드리겠습니다:).`}
-          maxLength={3000}
           register={register}
           errors={errors}
           watch={watch}
         />
       </AskContent>
       <AskImg>
-        <Typography size="16" fontWeight="bold" letterSpacing="-0.5px">
-          첨부 사진
-        </Typography>
-        <Images>
-          <AddPhotoButton errors={errors} />
-        </Images>
-        <Typography size="12" color="darkGray" letterSpacing="-0.5px">
-          사진은 최대 3장까지 등록 가능합니다.
-        </Typography>
+        <AskPhoto 
+          register={register}
+          errors={errors}/>
       </AskImg>
-      <AskEmail></AskEmail>
+      <AskConnect>
+        <AskEmail
+          register={register}
+          errors={errors}/>
+      </AskConnect>
     </Form>
   );
 };
@@ -66,6 +56,7 @@ const Form = styled.form`
   flex-direction: column;
   gap: 26px 0;
   width: 100%;
+  padding:0 7%;
   overflow-y: auto;
 `;
 const AskType = styled.div`
@@ -84,13 +75,7 @@ const AskImg = styled.div`
   width: 100%;
   gap: 12px 0;
 `;
-const Images = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  gap: 0 18px;
-`;
-const AskEmail = styled.div`
+const AskConnect = styled.div`
   display: flex;
   width: 100%;
 `;
