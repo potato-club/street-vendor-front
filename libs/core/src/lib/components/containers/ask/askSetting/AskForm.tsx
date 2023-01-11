@@ -5,6 +5,9 @@ import { AskInput } from '../../../form/AskInput';
 import { AskTextarea } from '../../../form/AskTextarea';
 import { AskPhoto } from '../../../form/AskPhoto';
 import { AskEmail } from '../../../form/AskEmail';
+import { AskAgree } from '../../../form/AskAgree';
+import { useState } from 'react';
+import { AskSubmit } from '../../../form/AskSubmit';
 
 export const AskForm = () => {
   const {
@@ -13,7 +16,7 @@ export const AskForm = () => {
     formState: { errors },
     watch,
   } = useForm();
-
+  const [isAgreeChecked, setIsAgreeChecked] = useState(false);
   return (
     <Form>
       <AskType>
@@ -27,26 +30,21 @@ export const AskForm = () => {
         />
       </AskType>
       <AskContent>
-        <AskInput
-          register={register}
-          errors={errors}
-        />
-        <AskTextarea
-          register={register}
-          errors={errors}
-          watch={watch}
-        />
+        <AskInput register={register} errors={errors} />
+        <AskTextarea register={register} errors={errors} watch={watch} />
       </AskContent>
       <AskImg>
-        <AskPhoto 
-          register={register}
-          errors={errors}/>
+        <AskPhoto errors={errors} />
       </AskImg>
-      <AskConnect>
-        <AskEmail
-          register={register}
-          errors={errors}/>
-      </AskConnect>
+      <AskEmail register={register} errors={errors} />
+      <AskAgree
+        isAgreeChecked={isAgreeChecked}
+        onClickAgreeContent={() => {
+          setIsAgreeChecked((prev) => !prev);
+        }}
+        onClickCheckBox={() => {}}
+      />
+      <AskSubmit isAgreeChecked={isAgreeChecked} onClick={() => {}} />
     </Form>
   );
 };
@@ -56,7 +54,7 @@ const Form = styled.form`
   flex-direction: column;
   gap: 26px 0;
   width: 100%;
-  padding:0 7%;
+  padding: 0 7%;
   overflow-y: auto;
 `;
 const AskType = styled.div`
@@ -74,8 +72,4 @@ const AskImg = styled.div`
   flex-direction: column;
   width: 100%;
   gap: 12px 0;
-`;
-const AskConnect = styled.div`
-  display: flex;
-  width: 100%;
 `;
