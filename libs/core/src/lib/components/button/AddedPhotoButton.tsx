@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { customColor } from '../../constants';
 import { FieldErrorsImpl } from 'react-hook-form';
+import Image from 'next/image';
 
 interface ButtonProps {
   src: string;
@@ -14,13 +15,19 @@ interface ButtonStyledProps {
 export const AddedPhotoButton = (props: ButtonProps) => {
   return (
     <Button onClick={props.onClick} type="button">
-      <Img src={props.src} />
+      <Image
+        src={`/${props.src}`}
+        alt={props.src}
+        fill
+        style={{ objectFit: 'cover', borderRadius:'inherit' }}
+      />
     </Button>
   );
 };
 
 const Button = styled.button`
   display: flex;
+  position: relative;
   width: 64px;
   height: 64px;
   justify-content: center;
@@ -30,8 +37,4 @@ const Button = styled.button`
   position: relative;
   background: ${customColor.beige};
   border-radius: 12px;
-`;
-const Img = styled.image<ButtonStyledProps>`
-  width: 100%;
-  height: 100%;
 `;
