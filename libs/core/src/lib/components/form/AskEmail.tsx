@@ -8,23 +8,22 @@ interface InputProps {
   errors: Partial<FieldErrorsImpl>;
 }
 
-export const AskInput = (props: InputProps) => {
+export const AskEmail = (props: InputProps) => {
   return (
     <Wrapper>
       <Label>
         <Typography size="16" fontWeight="bold" letterSpacing="-0.5px">
-          문의 내용
+          이메일
         </Typography>
       </Label>
       <Input
-        type={'text'}
-        placeholder="제목을 작성해주세요."
-        maxLength={32}
-        {...props.register('askTitle')}
+        type={'email'}
+        placeholder="이메일을 작성해 주세요."
+        {...props.register('askEmail')}
       />
-      {props.errors['askTitle'] && (
+      {props.errors['askEmail'] && (
         <Error>
-          <Typography size="16">에러Title</Typography>
+          <Typography size="16">에러Email</Typography>
         </Error>
       )}
     </Wrapper>
@@ -52,7 +51,6 @@ const Input = styled.input`
   &::placeholder {
     color: ${customColor.darkGray};
     white-space: pre-wrap;
-    /* 나중에 darkgray로 바꾸기 */
   }
 `;
 const Error = styled.span``;

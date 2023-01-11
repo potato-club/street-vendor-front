@@ -2,26 +2,29 @@ import styled from 'styled-components';
 import { customColor } from '../../constants';
 import { Typography } from '../Typography';
 import { FieldErrorsImpl, FieldValues, UseFormRegister } from 'react-hook-form';
+import { AddPhotoButton } from '../button/AddPhotoButton';
+import { AddedPhotoButton } from '../button/AddedPhotoButton';
 
 interface InputProps {
   register: UseFormRegister<FieldValues>;
   errors: Partial<FieldErrorsImpl>;
 }
 
-export const AskInput = (props: InputProps) => {
+export const AskPhoto = (props: InputProps) => {
   return (
     <Wrapper>
       <Label>
         <Typography size="16" fontWeight="bold" letterSpacing="-0.5px">
-          문의 내용
+          첨부 사진
         </Typography>
       </Label>
-      <Input
-        type={'text'}
-        placeholder="제목을 작성해주세요."
-        maxLength={32}
-        {...props.register('askTitle')}
-      />
+      <Images>
+        <AddedPhotoButton src={""} errors={props.errors}/>
+        <AddPhotoButton errors={props.errors}/>
+      </Images>
+      <Typography size="12" color="darkGray" letterSpacing="-0.5px">
+          사진은 최대 3장까지 등록 가능합니다.
+        </Typography>
       {props.errors['askTitle'] && (
         <Error>
           <Typography size="16">에러Title</Typography>
@@ -36,23 +39,14 @@ const Wrapper = styled.article`
   flex-direction: column;
   position: relative;
   width: 100%;
+  gap:12px 0;
 `;
 const Label = styled.label`
-  margin-bottom: 12px;
 `;
-const Input = styled.input`
+const Images = styled.div`
+  display: flex;
+  flex-direction: row;
   width: 100%;
-  height: 48px;
-  padding: 0px 18px;
-  background-color: ${customColor.beige};
-  border-radius: 12px;
-  font-size: 14px;
-  letter-spacing: -0.5px;
-  font-family: inherit;
-  &::placeholder {
-    color: ${customColor.darkGray};
-    white-space: pre-wrap;
-    /* 나중에 darkgray로 바꾸기 */
-  }
+  gap: 0 18px;
 `;
 const Error = styled.span``;

@@ -9,14 +9,12 @@ import {
 } from 'react-hook-form';
 
 interface InputProps {
-  placeholder: string;
-  maxLength: number;
   register: UseFormRegister<FieldValues>;
   errors: Partial<FieldErrorsImpl>;
   watch: UseFormWatch<FieldValues>;
 }
 
-export const AskLongInput = (props: InputProps) => {
+export const AskTextarea = (props: InputProps) => {
   const commaFormat = (num: number) => {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
@@ -24,9 +22,10 @@ export const AskLongInput = (props: InputProps) => {
   return (
     <Wrapper>
       <Textarea
-        placeholder={props.placeholder}
-        maxLength={props.maxLength}
+        placeholder={`문의 내용을 작성해주세요.\n최선을 다해 답변해드리겠습니다!:)`}
+        maxLength={3000}
         {...props.register('askContent')}
+        defaultValue={''}
       />
       {props.errors['askContent'] && (
         <Error>
@@ -35,8 +34,10 @@ export const AskLongInput = (props: InputProps) => {
       )}
       <MaxLength>
         <Typography size="16" color="gray" letterSpacing="-0.5px">
-          {props.watch('askContent').length} /{' '}
-          {commaFormat(props.maxLength || 3000)}
+          {props.watch('askContent') === undefined
+            ? 0
+            : commaFormat(props.watch('askContent').length)}{' '}
+          / {commaFormat(3000)}
         </Typography>
       </MaxLength>
     </Wrapper>

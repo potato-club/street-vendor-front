@@ -8,23 +8,22 @@ interface InputProps {
   errors: Partial<FieldErrorsImpl>;
 }
 
-export const AskInput = (props: InputProps) => {
+export const AskPhone = (props: InputProps) => {
   return (
     <Wrapper>
       <Label>
         <Typography size="16" fontWeight="bold" letterSpacing="-0.5px">
-          문의 내용
+          휴대폰 번호
         </Typography>
       </Label>
       <Input
         type={'text'}
-        placeholder="제목을 작성해주세요."
-        maxLength={32}
-        {...props.register('askTitle')}
+        placeholder="010-1234-5678"
+        {...props.register('askPhone')}
       />
-      {props.errors['askTitle'] && (
+      {props.errors['askPhone'] && (
         <Error>
-          <Typography size="16">에러Title</Typography>
+          <Typography size="16">에러Phone</Typography>
         </Error>
       )}
     </Wrapper>
@@ -52,7 +51,6 @@ const Input = styled.input`
   &::placeholder {
     color: ${customColor.darkGray};
     white-space: pre-wrap;
-    /* 나중에 darkgray로 바꾸기 */
   }
 `;
 const Error = styled.span``;
