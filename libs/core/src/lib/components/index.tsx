@@ -10,7 +10,6 @@ export * from './form/AskSelect';
 export * from './form/AskInput';
 export * from './form/AskTextarea';
 export * from './form/AskPhoto';
-export * from './form/AskPhone';
 export * from './form/AskEmail';
 export * from './form/AskAgree';
 export * from './form/AskSubmit';
