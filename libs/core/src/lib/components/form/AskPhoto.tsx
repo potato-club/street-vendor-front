@@ -1,12 +1,10 @@
 import styled from 'styled-components';
-import { customColor } from '../../constants';
 import { Typography } from '../Typography';
-import { FieldErrorsImpl, FieldValues, UseFormRegister } from 'react-hook-form';
+import { FieldErrorsImpl } from 'react-hook-form';
 import { AddPhotoButton } from '../button/AddPhotoButton';
 import { AddedPhotoButton } from '../button/AddedPhotoButton';
 
 interface InputProps {
-  register: UseFormRegister<FieldValues>;
   errors: Partial<FieldErrorsImpl>;
 }
 

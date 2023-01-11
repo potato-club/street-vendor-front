@@ -2,6 +2,7 @@ export type customColorType = {
   white: string;
   black: string;
   gray: string;
+  lightGray: string;
   darkGray: string;
   beige: string;
   brown: string;
@@ -16,7 +17,7 @@ export const customColor: customColorType = {
   white: '#FFFFFF',
   black: '#000000',
   gray: '#ADADAD',
-
+  lightGray: '#BCBCBC',
   darkGray: '#7C7C7C',
 
   beige: '#F6F1EC',

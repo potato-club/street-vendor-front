@@ -12,6 +12,8 @@ export * from './form/AskTextarea';
 export * from './form/AskPhoto';
 export * from './form/AskPhone';
 export * from './form/AskEmail';
+export * from './form/AskAgree';
+export * from './form/AskSubmit';
 export * from './card/CardNotice';
 export * from './containers/notice/detail/DetailNoticeContainer';
 export * from './containers/notice/ListNoticeContainer';
