@@ -1,6 +1,6 @@
-import { Typography } from '../../../components/Typography';
 import styled from 'styled-components';
-import { customColor } from '../../../constants/customColor';
+import { customColor } from '../../constants';
+import { Typography } from '../Typography';
 
 type Props = {
   onClick: () => void;
