@@ -2,7 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import { Typography, customColor } from '@street-vendor/core';
 import { Rating } from 'react-simple-star-rating';
-import { Arrow, EmptySpoon, FullSpoon, SpeechBubble, Star, Tteokbokki } from '../Icons';
+import {
+  Arrow,
+  EmptySpoon,
+  FullSpoon,
+  SpeechBubble,
+  Star,
+  Tteokbokki,
+} from '../Icons';
 
 export const Info = () => {
   return (
@@ -10,14 +17,14 @@ export const Info = () => {
       <GrayLine />
       <Wrapper>
         <Title>
-          <Typography size="20" fontWeight="bold"  fontHeight='1'>
+          <Typography size="20" fontWeight="bold" fontHeight="1">
             서윤보경이네 떡볶이집
           </Typography>
           <Category>
             <Tteokbokki size={24} />
             <Typography size="16">떡볶이</Typography>
           </Category>
-          <Typography size="16" color="darkGray" fontHeight='1'>
+          <Typography size="16" color="darkGray" fontHeight="1">
             송도 1동 행정복지센터 대각선
           </Typography>
         </Title>
@@ -71,7 +78,6 @@ export const Info = () => {
     </Container>
   );
 };
-
 
 const Container = styled.div`
   display: flex;
