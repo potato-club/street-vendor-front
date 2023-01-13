@@ -10,7 +10,7 @@ export const StoreImage = () => {
         <LeftImage
           style={{ width: storeImageDummy.length > 1 ? '50%' : '100%' }}
         >
-          <Image src={storeImageDummy[0]} alt="detailStoreImage" fill />
+          <Image src={storeImageDummy[0]} alt="detailStoreImage" fill style={{objectFit: 'cover'}}/>
         </LeftImage>
         {storeImageDummy.length > 1 && (
           <RightImage>
@@ -22,7 +22,7 @@ export const StoreImage = () => {
                   height: '100%',
                 }}
               >
-                <Image src={data} fill alt="detailStoreImage" />
+                <Image src={data} fill alt="detailStoreImage" style={{objectFit: 'cover'}}/>
               </div>
             ))}
           </RightImage>
@@ -41,11 +41,12 @@ const Wrapper = styled.div`
   display: flex;
   /* gap: 4px; */
   width: 100%;
+  aspect-ratio: 1.5;
 `;
 
 const LeftImage = styled.div`
   position: relative;
-  aspect-ratio: 0.75;
+  /* aspect-ratio: 0.75; */
 `;
 
 const RightImage = styled.div`

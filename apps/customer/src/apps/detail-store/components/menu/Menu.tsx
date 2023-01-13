@@ -16,13 +16,6 @@ export const Menu = () => {
           onChange={(e) => setFilter(e.target.value)}
         />
         <CustomRadioButton
-          id="recommend"
-          label="추천순"
-          name="filter"
-          selectedValue={filter}
-          onChange={(e) => setFilter(e.target.value)}
-        />
-        <CustomRadioButton
           id="popularity"
           label="인기순"
           name="filter"
@@ -71,7 +64,9 @@ const Container = styled.div`
 
 const FilterWrapper = styled.div`
   display: flex;
-  width: 100%;
+  --infoGap : calc((100% - 88px * 3) / 2);
+  width: calc(100% - 88px - var(--infoGap));
+  align-self: flex-start;
   justify-content: space-between;
 `;
 
