@@ -1,3 +1,4 @@
+import { CSSProperties } from 'react';
 import styled from 'styled-components';
 import { customColor, customColorType } from '../constants/customColor';
 
@@ -26,10 +27,11 @@ export type TypographyProps = React.PropsWithChildren<{
   letterSpacing?: string;
   underlineColor?: keyof customColorType;
   notBreak?: boolean;
+  style?: CSSProperties;
 }>;
 export const Typography = (props: TypographyProps) => {
   return (
-    <TypographyText {...props} defaultColor={customColor.black}>
+    <TypographyText style={props.style} {...props} defaultColor={customColor.black}>
       {props.children}
     </TypographyText>
   );

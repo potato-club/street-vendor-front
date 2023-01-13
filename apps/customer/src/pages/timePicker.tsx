@@ -1,9 +1,9 @@
-// TimePicker Test Pgae
+// TimePicker Test Page
 import { customColor, Typography } from '@street-vendor/core';
 import React, { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
-
+import { timePickerBackground } from './timePickerBackground';
 
 export default function TimePickerPage() {
   const hours = useMemo(() => Array.from(new Array(12), (_, i) => i + 1), []);
@@ -28,7 +28,9 @@ export default function TimePickerPage() {
   return (
     <Container>
       <Wrapper>
-        <Typography size="20">가게 방문 예정 시간</Typography>
+        <Typography size="24" fontWeight="bold">
+          가게 방문 예정 시간
+        </Typography>
         <TimeWrapper>
           <StyledSwiper
             onSlideChange={(e) => setAtNoon(e.realIndex)}
@@ -37,8 +39,22 @@ export default function TimePickerPage() {
             centeredSlides
             direction="vertical"
           >
-            <SwiperSlide>오전</SwiperSlide>
-            <SwiperSlide>오후</SwiperSlide>
+            <SwiperSlide>
+              <Typography
+                size="20"
+                style={{ display: 'flex', justifyContent: 'center' }}
+              >
+                오전
+              </Typography>
+            </SwiperSlide>
+            <SwiperSlide>
+              <Typography
+                size="20"
+                style={{ display: 'flex', justifyContent: 'center' }}
+              >
+                오후
+              </Typography>
+            </SwiperSlide>
           </StyledSwiper>
           <StyledSwiper
             onSlideChange={(e) => setActiveHours(e.realIndex + 1)}
@@ -49,7 +65,14 @@ export default function TimePickerPage() {
             direction="vertical"
           >
             {hours.map((data, i) => (
-              <SwiperSlide key={i}>{data}</SwiperSlide>
+              <SwiperSlide key={i}>
+                <Typography
+                  size="20"
+                  style={{ display: 'flex', justifyContent: 'center' }}
+                >
+                  {data}
+                </Typography>
+              </SwiperSlide>
             ))}
           </StyledSwiper>
           <div style={{ height: 'calc(100% / 3)' }}>
@@ -64,7 +87,14 @@ export default function TimePickerPage() {
             direction="vertical"
           >
             {minute.map((data, i) => (
-              <SwiperSlide key={i}>{data}</SwiperSlide>
+              <SwiperSlide key={i}>
+                <Typography
+                  size="20"
+                  style={{ display: 'flex', justifyContent: 'center' }}
+                >
+                  {data}
+                </Typography>
+              </SwiperSlide>
             ))}
           </StyledSwiper>
         </TimeWrapper>
@@ -97,36 +127,36 @@ const Container = styled.div`
 `;
 
 const Wrapper = styled.div`
-  background-color: skyblue;
-  width: 100%;
+  width: 90%;
   max-width: 325px;
   height: 100%;
   max-height: 470px;
   display: flex;
+  background: url("data:image/svg+xml,${timePickerBackground}") no-repeat center;
+  background-size: cover;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 40px;
-  .swiper-slide-active {
-    color: black;
-  }
-  :not(.swiper-slide-active) {
-    color: ${customColor.darkGray}80;
-  }
 `;
 
 const TimeWrapper = styled.div`
   display: flex;
   width: 100%;
   height: 50%;
-  gap: 40px;
   align-items: center;
   justify-content: center;
 `;
 
 const StyledSwiper = styled(Swiper)`
   height: 100%;
+  width: 20%;
   overflow: hidden;
+  div div :not(.swiper-slide-active) {
+    div {
+      color: ${customColor.darkGray}80;
+    }
+  }
 `;
 
 const ButtonWrapper = styled.div`
@@ -138,5 +168,6 @@ const Button = styled.button`
   width: 92px;
   height: 48px;
   border-radius: 24px;
+  background-color: ${customColor.white};
   box-shadow: 0px 4px 4px ${customColor.gray}80;
 `;
