@@ -12,6 +12,7 @@ export default function TimePickerPage() {
     []
   );
 
+  const [atnoon, setAtnoon] = useState<number>(0);
   const [activeHours, setActiveHours] = useState<number>(1);
   const [activeMinute, setActiveMinute] = useState<number>(0);
 
@@ -27,6 +28,16 @@ export default function TimePickerPage() {
     <Container>
       <Wrapper>
         <TimeWrapper>
+          <StyledSwiper
+            onSlideChange={(e) => setActiveMinute(e.realIndex)}
+            slidesPerView={3}
+            initialSlide={atnoon}
+            centeredSlides
+            direction="vertical"
+          >
+            <SwiperSlide>오전</SwiperSlide>
+            <SwiperSlide>오후</SwiperSlide>
+          </StyledSwiper>
           <StyledSwiper
             onSlideChange={(e) => setActiveHours(e.realIndex + 1)}
             slidesPerView={3}
@@ -70,6 +81,7 @@ const Container = styled.div`
 `;
 
 const Wrapper = styled.div`
+  background-color: skyblue;
   width: 100%;
   max-width: 325px;
   height: 100%;
@@ -92,7 +104,7 @@ const Wrapper = styled.div`
 const TimeWrapper = styled.div`
   display: flex;
   width: 100%;
-  height: 100%;
+  height: 50%;
   gap: 40px;
   align-items: center;
   justify-content: center;
