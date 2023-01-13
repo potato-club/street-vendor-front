@@ -59,6 +59,7 @@ const FoodInfo = styled.div`
 const PriceAndOrder = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   width: 50%;
 `;
 
@@ -66,5 +67,5 @@ const ImageWrapper = styled.div`
   position: relative;
   width: 50%;
   max-width: 300px;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 4 / 3;
 `;
