@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form';
 import { AskInput } from '../../../form/AskInput';
 import { AskTextarea } from '../../../form/AskTextarea';
 import { AskPhoto } from '../../../form/AskPhoto';
-import { AskEmail } from '../../../form/AskEmail';
 import { AskAgree } from '../../../form/AskAgree';
 import { useState } from 'react';
 import { AskSubmit } from '../../../form/AskSubmit';
@@ -36,13 +35,12 @@ export const AskForm = () => {
       <AskImg>
         <AskPhoto errors={errors} />
       </AskImg>
-      <AskEmail register={register} errors={errors} />
       <AskAgree
         isAgreeChecked={isAgreeChecked}
-        onClickAgreeContent={() => {
+        onClickAgreeContent={() => {}}
+        onClickCheckBox={() => {
           setIsAgreeChecked((prev) => !prev);
         }}
-        onClickCheckBox={() => {}}
       />
       <AskSubmit isAgreeChecked={isAgreeChecked} onClick={() => {}} />
     </Form>

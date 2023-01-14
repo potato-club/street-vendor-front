@@ -11,7 +11,7 @@ export const AskContainer = () => {
       <ContainerInner>
         <TopBar>
           <AskSelectButton
-            content="이메일 문의"
+            content="1:1 문의"
             isSelected={isAskForm}
             onClick={() => {
               setIsAskForm(true);

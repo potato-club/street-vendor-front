@@ -21,8 +21,7 @@ export const InitialAskContainer = () => {
         </Typography>
       </Content>
       <AskButtons>
-        <AskButton content="1:1 문의" background="orange2" />
-        <AskButton content="이메일 문의" background="orange3" />
+        <AskButton content="1:1 문의" background="orange3" />
       </AskButtons>
     </Container>
   );
@@ -33,6 +32,7 @@ const Container = styled.div`
   flex-direction: column;
   width: 100%;
   height: 100%;
+  padding: 10% 7%;
 `;
 const Content = styled.div`
   display: flex;
@@ -45,8 +45,11 @@ const Content = styled.div`
 `;
 const AskButtons = styled.div`
   display: flex;
-  flex-direction: row;
-  margin-bottom: 60px;
+  position: absolute;
+  width: 100%;
   justify-content: center;
-  gap: 0 5%;
+  margin-bottom: 54px;
+  bottom: 0px;
+  left: 50%;
+  transform: translate(-50%, 0);
 `;
