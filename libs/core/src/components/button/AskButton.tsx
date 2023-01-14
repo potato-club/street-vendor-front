@@ -11,7 +11,6 @@ interface ButtonStyledProps {
   content: string;
   background: 'orange2' | 'orange3';
 }
-//  type하면 안되는지 여쭙기!
 
 export const AskButton = (props: ButtonProps) => {
   return (
@@ -39,8 +38,7 @@ const Button = styled.button<ButtonStyledProps>`
   background: none;
   border: none;
   padding: 16px 8px;
-  width: 40%;
-  max-width: 160px;
+  width: 100%;
   border-radius: 14px;
   background: ${(props) =>
     props.background === 'orange2' ? customColor.orange2 : customColor.orange3};
