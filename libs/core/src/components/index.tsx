@@ -18,4 +18,5 @@ export * from './form/CustomFixedInput';
 export * from './card/CardNotice';
 export * from './containers/notice/detail/DetailNoticeContainer';
 export * from './containers/notice/ListNoticeContainer';
+export * from './containers/ask/AskMainContainer';
 export { Typography } from './Typography';
