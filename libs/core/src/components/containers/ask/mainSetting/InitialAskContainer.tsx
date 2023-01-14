@@ -12,10 +12,10 @@ export const InitialAskContainer = () => {
           letterSpacing="-1.5px"
           fontWeight="bold"
         >
-          이메일 문의 내역이 없어요
+          1:1 문의 내역이 없어요
         </Typography>
         <Typography size="12" textAlign="center" color="gray">
-          마이 페이지나 고객 센터&gt;이메일 문의 탭에서
+          마이 페이지나 고객 센터&gt;1:1 문의 탭에서
           <br />
           고객님의 궁금하신 점을 풀어주세요!
         </Typography>
@@ -29,8 +29,10 @@ export const InitialAskContainer = () => {
 
 const Container = styled.div`
   display: flex;
+  position: relative;
   flex-direction: column;
   width: 100%;
+  max-width: 390px;
   height: 100%;
   padding: 10% 7%;
 `;
@@ -51,5 +53,6 @@ const AskButtons = styled.div`
   margin-bottom: 54px;
   bottom: 0px;
   left: 50%;
+  padding: 0 7%;
   transform: translate(-50%, 0);
 `;

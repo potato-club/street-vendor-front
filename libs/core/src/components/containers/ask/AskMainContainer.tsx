@@ -24,6 +24,7 @@ const Container = styled.section`
   position: relative;
   width: 100vw;
   height: 100vh;
+  justify-content: center;
 `;
 const TestButton = styled.button`
   position: absolute;
