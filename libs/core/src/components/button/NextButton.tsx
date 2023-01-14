@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { customColor } from '@street-vendor/core';
+import { customColor } from '../../constants';
 import { customColorType } from 'libs/core/src/constants/customColor';
+import { Typography } from '../Typography';
 
 interface ButtonProps {
   background: keyof customColorType;

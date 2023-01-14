@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import ReactModal from 'react-modal';
-import { customColor, Typography } from '@street-vendor/core';
+import { customColor } from '../../constants';
+import { Typography } from '../Typography';
 
 interface ModalProps {
   onClickDirect?: () => void;

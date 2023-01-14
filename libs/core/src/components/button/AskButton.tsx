@@ -1,5 +1,6 @@
-import { customColor, Typography } from '@street-vendor/core';
 import styled from 'styled-components';
+import { customColor } from '../../constants';
+import { Typography } from '../Typography';
 
 interface ButtonProps {
   content: string;

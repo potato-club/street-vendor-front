@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Typography } from '@street-vendor/core';
+import { Typography } from '../Typography';
 import { FieldErrorsImpl } from 'react-hook-form';
 import { AddPhotoButton } from '../button/AddPhotoButton';
 import { AddedPhotoButton } from '../button/AddedPhotoButton';

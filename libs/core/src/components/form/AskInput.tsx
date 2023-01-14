@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { customColor, Typography } from '@street-vendor/core';
+import { customColor } from '../../constants';
+import { Typography } from '../Typography';
 import { FieldErrorsImpl, FieldValues, UseFormRegister } from 'react-hook-form';
 
 interface InputProps {

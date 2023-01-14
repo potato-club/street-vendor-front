@@ -1,33 +1,33 @@
 import styled from 'styled-components';
 import { FieldErrorsImpl } from 'react-hook-form';
-import Image from 'next/image';
-import { customColor } from '@street-vendor/core';
+import { customColor } from '../../constants';
 
 interface ButtonProps {
-  src: string;
   onClick?: () => void;
   errors: Partial<FieldErrorsImpl>;
 }
-interface ButtonStyledProps {
-  src: string;
-}
 
-export const AddedPhotoButton = (props: ButtonProps) => {
+export const AddPhotoButton = (props: ButtonProps) => {
   return (
     <Button onClick={props.onClick} type="button">
-      <Image
-        src={`/${props.src}`}
-        alt={props.src}
-        fill
-        style={{ objectFit: 'cover', borderRadius:'inherit' }}
-      />
+      <AddIcon>
+        <svg
+          width="25"
+          height="25"
+          viewBox="0 0 25 25"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M25 12H0V14H25V12Z" fill={customColor.orange2} />
+          <path d="M11 0L11 25H13L13 0H11Z" fill={customColor.orange2} />
+        </svg>
+      </AddIcon>
     </Button>
   );
 };
 
 const Button = styled.button`
   display: flex;
-  position: relative;
   width: 64px;
   height: 64px;
   justify-content: center;
@@ -38,3 +38,4 @@ const Button = styled.button`
   background: ${customColor.beige};
   border-radius: 12px;
 `;
+const AddIcon = styled.div``;

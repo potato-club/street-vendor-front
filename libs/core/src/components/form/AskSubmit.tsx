@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { customColor, Typography } from '@street-vendor/core';
+import { customColor } from '../../constants';
+import { Typography } from '../Typography';
 
 interface ButtonProps {
   isAgreeChecked: boolean;
@@ -39,4 +40,5 @@ const Button = styled.button<ButtonStyledProps>`
   border-radius: 14px;
   background: ${(props) =>
     props.isAgreeChecked ? customColor.orange3 : customColor.lightGray};
+  margin: 74px 0 54px;
 `;
