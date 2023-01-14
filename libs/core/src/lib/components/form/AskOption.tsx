@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import { customColor } from '../../constants';
-import { Typography } from '../Typography';
+import { customColor, Typography } from '@street-vendor/core';
 
 interface OptionProps {
   value: string;

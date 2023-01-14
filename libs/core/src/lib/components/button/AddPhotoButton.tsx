@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { customColor } from '../../constants';
+import { customColor } from '@street-vendor/core';
 import { FieldErrorsImpl } from 'react-hook-form';
 
 interface ButtonProps {

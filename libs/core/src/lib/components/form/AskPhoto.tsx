@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Typography } from '../Typography';
+import { Typography } from '@street-vendor/core';
 import { FieldErrorsImpl } from 'react-hook-form';
 import { AddPhotoButton } from '../button/AddPhotoButton';
 import { AddedPhotoButton } from '../button/AddedPhotoButton';
@@ -17,12 +17,12 @@ export const AskPhoto = (props: InputProps) => {
         </Typography>
       </Label>
       <Images>
-        <AddedPhotoButton src={""} errors={props.errors}/>
-        <AddPhotoButton errors={props.errors}/>
+        <AddedPhotoButton src={''} errors={props.errors} />
+        <AddPhotoButton errors={props.errors} />
       </Images>
       <Typography size="12" color="darkGray" letterSpacing="-0.5px">
-          사진은 최대 3장까지 등록 가능합니다.
-        </Typography>
+        사진은 최대 3장까지 등록 가능합니다.
+      </Typography>
       {props.errors['askTitle'] && (
         <Error>
           <Typography size="16">에러Title</Typography>
@@ -37,10 +37,9 @@ const Wrapper = styled.article`
   flex-direction: column;
   position: relative;
   width: 100%;
-  gap:12px 0;
+  gap: 12px 0;
 `;
-const Label = styled.label`
-`;
+const Label = styled.label``;
 const Images = styled.div`
   display: flex;
   flex-direction: row;

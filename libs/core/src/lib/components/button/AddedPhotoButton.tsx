@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { customColor } from '../../constants';
 import { FieldErrorsImpl } from 'react-hook-form';
 import Image from 'next/image';
+import { customColor } from '@street-vendor/core';
 
 interface ButtonProps {
   src: string;

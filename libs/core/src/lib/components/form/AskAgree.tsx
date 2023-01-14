@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import { customColor } from '../../constants';
-import { Typography } from '../Typography';
+import { customColor, Typography } from '@street-vendor/core';
 
 interface ButtonProps {
   isAgreeChecked: boolean;
@@ -21,10 +20,10 @@ export const AskAgree = (props: ButtonProps) => {
       </Label>
       <CheckBox onClick={props.onClickCheckBox}>
         <CheckButton isAgreeChecked={props.isAgreeChecked} type="button">
-          {props.isAgreeChecked?"O":"X"}
+          {props.isAgreeChecked ? 'O' : 'X'}
         </CheckButton>
         <Button onClick={props.onClickAgreeContent}>
-          <Typography size='16'>개인정보 수집 및 이용 동의하기</Typography>
+          <Typography size="16">개인정보 수집 및 이용 동의하기</Typography>
         </Button>
       </CheckBox>
     </Wrapper>

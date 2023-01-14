@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import { customColor } from '../../constants';
-import { Typography } from '../Typography';
+import { customColor, Typography } from '@street-vendor/core';
 
 interface ButtonProps {
   content: string;
@@ -11,6 +10,7 @@ interface ButtonStyledProps {
   content?: string;
   isSelected: boolean;
 }
+
 export const AskSelectButton = (props: ButtonProps) => {
   return (
     <Button onClick={props.onClick}>
