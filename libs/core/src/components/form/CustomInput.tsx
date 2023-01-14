@@ -4,26 +4,35 @@ import { Typography } from '../Typography';
 import { FieldErrorsImpl, FieldValues, UseFormRegister } from 'react-hook-form';
 
 interface InputProps {
+  name: string;
+  label?: string;
+  placeholder?: string;
+  type?: string;
   register: UseFormRegister<FieldValues>;
   errors: Partial<FieldErrorsImpl>;
 }
 
-export const AskEmail = (props: InputProps) => {
+export const CustomInput = (props: InputProps) => {
   return (
     <Wrapper>
-      <Label>
-        <Typography size="16" fontWeight="bold" letterSpacing="-0.5px">
-          이메일
-        </Typography>
-      </Label>
+      {props.label && (
+        <Label>
+          <Typography size="16" letterSpacing="-0.5px">
+            {props.label}
+          </Typography>
+        </Label>
+      )}
       <Input
-        type={'email'}
-        placeholder="이메일을 작성해 주세요."
-        {...props.register('askEmail')}
+        type={props.type}
+        placeholder={props.placeholder}
+        {...props.register(props.name)}
       />
-      {props.errors['askEmail'] && (
+      {/* 전화번호 정규식 넣으실거면 ↓↓↓
+      var tel = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/
+      */}
+      {props.errors[props.name] && (
         <Error>
-          <Typography size="16">에러Email</Typography>
+          <Typography size="16">에러Title</Typography>
         </Error>
       )}
     </Wrapper>

@@ -12,7 +12,11 @@ interface ButtonStyledProps {
 
 export const AskSubmit = (props: ButtonProps) => {
   return (
-    <Button onClick={props.onClick} isAgreeChecked={props.isAgreeChecked} type="submit">
+    <Button
+      onClick={props.onClick}
+      isAgreeChecked={props.isAgreeChecked}
+      type="submit"
+    >
       <Typography
         size="20"
         color="beige"
@@ -35,5 +39,6 @@ const Button = styled.button<ButtonStyledProps>`
   width: 100%;
   border-radius: 14px;
   background: ${(props) =>
-    props.isAgreeChecked? customColor.orange3 : customColor.lightGray};
+    props.isAgreeChecked ? customColor.orange3 : customColor.lightGray};
+  margin: 74px 0 54px;
 `;

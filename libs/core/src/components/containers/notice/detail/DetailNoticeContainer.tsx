@@ -1,6 +1,6 @@
-import { customColor } from '../../../../constants/customColor';
+import { customColor } from 'libs/core/src/constants';
+import { Typography } from 'libs/core/src/components';
 import styled from 'styled-components';
-import { Typography } from '../../../Typography';
 
 export const DetailNoticeContainer = () => {
   return (

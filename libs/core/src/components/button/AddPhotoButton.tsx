@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { customColor } from '../../constants';
 import { FieldErrorsImpl } from 'react-hook-form';
+import { customColor } from '../../constants';
 
 interface ButtonProps {
   onClick?: () => void;

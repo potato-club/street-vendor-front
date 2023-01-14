@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { customColor } from '../../constants';
 import { FieldErrorsImpl } from 'react-hook-form';
 import Image from 'next/image';
+import { customColor } from '../../constants';
 
 interface ButtonProps {
   src: string;
@@ -19,7 +19,7 @@ export const AddedPhotoButton = (props: ButtonProps) => {
         src={`/${props.src}`}
         alt={props.src}
         fill
-        style={{ objectFit: 'cover', borderRadius:'inherit' }}
+        style={{ objectFit: 'cover', borderRadius: 'inherit' }}
       />
     </Button>
   );

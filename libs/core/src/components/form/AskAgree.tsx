@@ -19,12 +19,39 @@ export const AskAgree = (props: ButtonProps) => {
           약관동의
         </Typography>
       </Label>
-      <CheckBox onClick={props.onClickCheckBox}>
-        <CheckButton isAgreeChecked={props.isAgreeChecked} type="button">
-          {props.isAgreeChecked?"O":"X"}
+      <CheckBox>
+        <CheckButton
+          isAgreeChecked={props.isAgreeChecked}
+          type="button"
+          onClick={props.onClickCheckBox}
+        >
+          {props.isAgreeChecked && (
+            <svg
+              width="16"
+              height="18"
+              viewBox="0 0 16 18"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1.07227 8.97119L5.81827 16.0902"
+                stroke="#F6F1EC"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+              <path
+                d="M14.3184 1.99023L5.81836 16.0902"
+                stroke="#F6F1EC"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+          )}
         </CheckButton>
         <Button onClick={props.onClickAgreeContent}>
-          <Typography size='16'>개인정보 수집 및 이용 동의하기</Typography>
+          <Typography size="16" letterSpacing="-1.5px">
+            개인정보 수집 및 이용 동의하기
+          </Typography>
         </Button>
       </CheckBox>
     </Wrapper>
@@ -43,23 +70,24 @@ const CheckBox = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  gap: 0 3%;
 `;
 const CheckButton = styled.button<ButtonStyledProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  background: none;
-  border: 1px solid ${customColor.orange3};
-  border-radius: 14px;
+  width: 30px;
+  height: 30px;
+  background: ${(props) =>
+    props.isAgreeChecked ? customColor.orange3 : 'none'};
+  border: 2px solid ${customColor.orange3};
+  border-radius: 10px;
 `;
 const Button = styled.button`
   display: flex;
   align-items: center;
   background: none;
   border: none;
-  padding: 16px 8px;
   border-radius: 14px;
   text-decoration: underline;
   text-underline-position: under;
