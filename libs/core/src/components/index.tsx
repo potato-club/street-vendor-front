@@ -6,7 +6,6 @@ export * from './button/NextButton';
 export * from './modal/BigPhotoModal';
 export * from './modal/GetPhotoModal';
 export * from './form/AskAgree';
-export * from './form/AskEmail';
 export * from './form/AskInput';
 export * from './form/AskOption';
 export * from './form/AskPhoto';
