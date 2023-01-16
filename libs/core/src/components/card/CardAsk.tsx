@@ -64,8 +64,6 @@ export const CardAsk = (props: Props) => {
 const Container = styled.article`
   display: flex;
   width: 100%;
-  height: 122px;
-  padding: 0 7%;
 `;
 const ContainerInner = styled.button`
   display: flex;
@@ -73,10 +71,9 @@ const ContainerInner = styled.button`
   flex-direction: column;
   background: ${customColor.beige};
   width: 100%;
-  height: 100%;
   border-radius: 12px;
   padding: 16px 18px;
-  justify-content: space-between;
+  gap: 12px 0;
   border: none;
 `;
 const Title = styled.div`
