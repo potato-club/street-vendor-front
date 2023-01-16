@@ -34,8 +34,8 @@ export const AskContainer = () => {
 const Container = styled.section`
   display: flex;
   width: 100%;
+  max-width: 390px;
   height: 100%;
-  padding-top: 10%;
 `;
 const ContainerInner = styled.div`
   display: flex;
@@ -43,14 +43,13 @@ const ContainerInner = styled.div`
   width: 100%;
   height: 100%;
   align-items: center;
-  justify-content: center;
-  gap: 24px 0;
+  gap: 26px 0;
+  padding-top: 10%;
 `;
 const TopBar = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
-  max-width: 390px;
   gap: 0 8%;
   padding: 0 7%;
 `;
