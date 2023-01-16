@@ -91,4 +91,5 @@ const Button = styled.button`
   border-radius: 14px;
   text-decoration: underline;
   text-underline-position: under;
+  padding: 0;
 `;
