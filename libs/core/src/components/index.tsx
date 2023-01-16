@@ -15,6 +15,7 @@ export * from './form/AskTextarea';
 export * from './form/CustomInput';
 export * from './form/CustomFixedInput';
 export * from './card/CardNotice';
+export * from './card/CardAsk';
 export * from './containers/notice/detail/DetailNoticeContainer';
 export * from './containers/notice/ListNoticeContainer';
 export { Typography } from './Typography';
