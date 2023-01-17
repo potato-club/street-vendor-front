@@ -54,7 +54,7 @@ const Button = styled.button`
   padding: 0px 18px;
   background-color: ${customColor.beige};
   border-radius: 12px;
-  font-size: 14px;
+  font-size: 12px;
   letter-spacing: -0.5px;
   font-family: inherit;
   justify-content: flex-start;
