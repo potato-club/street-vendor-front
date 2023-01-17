@@ -7,7 +7,13 @@ interface OptionProps {
   name: string;
 }
 export const AskOption = (props: OptionProps) => {
-  return <Option value={props.value}>{props.name}</Option>;
+  return (
+    <Option value={props.value}>
+      <Typography size="12" letterSpacing="-0.5px">
+        {props.name}
+      </Typography>
+    </Option>
+  );
 };
 
 const Option = styled.option``;

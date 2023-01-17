@@ -36,8 +36,8 @@ export const AskTextarea = (props: InputProps) => {
         <Typography size="16" color="gray" letterSpacing="-0.5px">
           {props.watch('askContent') === undefined
             ? 0
-            : commaFormat(props.watch('askContent').length)}{' '}
-          / {commaFormat(3000)}
+            : commaFormat(props.watch('askContent').length)}
+          &nbsp;/&nbsp;{commaFormat(3000)}
         </Typography>
       </MaxLength>
     </Wrapper>
@@ -56,7 +56,7 @@ const Textarea = styled.textarea`
   padding: 17px 18px;
   background-color: ${customColor.beige};
   border-radius: 12px;
-  font-size: 14px;
+  font-size: 12px;
   letter-spacing: -0.5px;
   font-family: inherit;
   &::placeholder {

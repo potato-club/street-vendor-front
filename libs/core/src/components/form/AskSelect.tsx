@@ -71,7 +71,7 @@ const Select = styled.select`
   padding: 0px 18px;
   background-color: ${customColor.beige};
   border-radius: 12px;
-  font-size: 14px;
+  font-size: 12px;
   font-family: inherit;
   letter-spacing: -0.5px;
   &::placeholder {

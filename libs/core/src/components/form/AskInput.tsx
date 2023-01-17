@@ -46,13 +46,12 @@ const Input = styled.input`
   padding: 0px 18px;
   background-color: ${customColor.beige};
   border-radius: 12px;
-  font-size: 14px;
+  font-size: 12px;
   letter-spacing: -0.5px;
   font-family: inherit;
   &::placeholder {
     color: ${customColor.darkGray};
     white-space: pre-wrap;
-    /* 나중에 darkgray로 바꾸기 */
   }
 `;
 const Error = styled.span``;
