@@ -48,8 +48,8 @@ export const AskAgree = (props: ButtonProps) => {
             </svg>
           )}
         </CheckButton>
-        <Button onClick={props.onClickAgreeContent}>
-          <Typography size="16" letterSpacing="-1.5px">
+        <Button type="button" onClick={props.onClickAgreeContent}>
+          <Typography size="16" letterSpacing="-1.6px">
             개인정보 수집 및 이용 동의하기
           </Typography>
         </Button>
