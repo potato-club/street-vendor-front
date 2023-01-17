@@ -9,6 +9,7 @@ export const OrderButton = () => {
         backgroundColor="orange3"
         maxWidth={320}
         height={54}
+        borderRadius={24}
         style={{ width: '60%' }}
       >
         <Typography size="20" color="white" fontWeight="bold">

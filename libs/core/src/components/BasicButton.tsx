@@ -8,6 +8,7 @@ type ButtonStyle = {
   maxWidth?: number;
   flexGrow?: number;
   height?: number;
+  borderRadius?: number;
   style?: CSSProperties;
   children: React.ReactNode;
 };
@@ -17,10 +18,10 @@ export const BasicButton = (props: ButtonStyle) => {
 
 const Container = styled.div<ButtonStyle>`
   background-color: ${({ backgroundColor }) => handleColor(backgroundColor)};
-  flex-grow: ${({ flexGrow }) => flexGrow ? `${flexGrow}` : ''};
+  flex-grow: ${({ flexGrow }) => (flexGrow ? `${flexGrow}` : '')};
   height: ${({ height }) => (height ? `${height}px` : '')};
   max-width: ${({ maxWidth }) => (maxWidth ? `${maxWidth}px` : '')};
-  border-radius: 24px;
+  border-radius: ${({ borderRadius }) => borderRadius ? `${borderRadius}px` : '12px'};
   display: flex;
   align-items: center;
   justify-content: center;
