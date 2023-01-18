@@ -1,32 +1,36 @@
+import Router from 'next/router';
 import styled from 'styled-components';
 import { AskSelectButton } from '../../../button/AskSelectButton';
-import { useState } from 'react';
-import { AskForm } from '../askSetting/AskForm';
-import { MyAsk } from '../askSetting/MyAsk';
+import { AskDetail } from '../askSetting/AskDetail';
 
-export const AskContainer = () => {
-  const [isAskForm, setIsAskForm] = useState(true);
+interface Props {
+  pathName: string;
+}
+
+export const AskDetailContainer = (props: Props) => {
+  const handleAskRouter = () => {
+    Router.push(props.pathName);
+  };
+  const handleMyRouter = () => {
+    Router.push(props.pathName + '/my');
+  };
   return (
     <Container>
       <ContainerInner>
         <TopBar>
           <AskSelectButton
             content="1:1 문의"
-            isSelected={isAskForm}
-            onClick={() => {
-              setIsAskForm(true);
-            }}
+            isSelected={false}
+            onClick={handleAskRouter}
           />
           <AskSelectButton
             content="나의 문의내역"
-            isSelected={!isAskForm}
-            onClick={() => {
-              setIsAskForm(false);
-            }}
+            isSelected={true}
+            onClick={handleMyRouter}
           />
         </TopBar>
       </ContainerInner>
-      {isAskForm ? <AskForm /> : <MyAsk />}
+      <AskDetail pathName={props.pathName} />
     </Container>
   );
 };

@@ -1,30 +1,27 @@
-import { useState } from 'react';
+import Router from 'next/router';
 import styled from 'styled-components';
 import { CardAsk } from '../../../card/CardAsk';
-import { DetailNoticeContainer } from '../../notice/detail/DetailNoticeContainer';
-import { DetailAskContainer } from '../detail/DetailAskContainer';
 
-export const MyAsk = () => {
-  const [isDetail, setIsDetail] = useState(false);
-  const handleClickCardAsk = () => {
-    setIsDetail((prev) => !prev);
+interface Props {
+  detailPathName: string;
+}
+
+export const MyAsk = (props: Props) => {
+  const handleDetailRouter = () => {
+    Router.push(props.detailPathName);
   };
   return (
     <Container>
       <ContainerInner>
-        {!isDetail ? (
-          <CardList>
-            <CardAsk onClick={handleClickCardAsk} />
-            <CardAsk onClick={handleClickCardAsk} />
-            <CardAsk onClick={handleClickCardAsk} />
-            <CardAsk onClick={handleClickCardAsk} />
-            <CardAsk onClick={handleClickCardAsk} />
-            <CardAsk onClick={handleClickCardAsk} />
-            <ContainerEnd />
-          </CardList>
-        ) : (
-          <DetailAskContainer></DetailAskContainer>
-        )}
+        <CardList>
+          <CardAsk onClick={handleDetailRouter} />
+          <CardAsk onClick={handleDetailRouter} />
+          <CardAsk onClick={handleDetailRouter} />
+          <CardAsk onClick={handleDetailRouter} />
+          <CardAsk onClick={handleDetailRouter} />
+          <CardAsk onClick={handleDetailRouter} />
+          <ContainerEnd />
+        </CardList>
       </ContainerInner>
     </Container>
   );

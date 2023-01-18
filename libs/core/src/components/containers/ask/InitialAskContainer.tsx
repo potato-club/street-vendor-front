@@ -1,8 +1,16 @@
+import Router from 'next/router';
 import styled from 'styled-components';
-import { Typography } from '../../../Typography';
-import { AskButton } from '../../../button/AskButton';
+import { AskButton } from '../../button/AskButton';
+import { Typography } from '../../Typography';
 
-export const InitialAskContainer = () => {
+interface Props {
+  pathName: string;
+}
+
+export const InitialAskContainer = (props: Props) => {
+  const handleRouter = () => {
+    Router.push(props.pathName);
+  };
   return (
     <Container>
       <Content>
@@ -21,7 +29,11 @@ export const InitialAskContainer = () => {
         </Typography>
       </Content>
       <AskButtons>
-        <AskButton content="1:1 문의" background="orange3" />
+        <AskButton
+          content="1:1 문의"
+          background="orange3"
+          onClick={handleRouter}
+        />
       </AskButtons>
     </Container>
   );
@@ -31,9 +43,9 @@ const Container = styled.div`
   display: flex;
   position: relative;
   flex-direction: column;
-  width: 100%;
+  width: 100vw;
   max-width: 390px;
-  height: 100%;
+  height: 100vh;
   padding: 10% 7%;
 `;
 const Content = styled.div`
