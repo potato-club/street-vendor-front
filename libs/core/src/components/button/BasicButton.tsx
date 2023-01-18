@@ -1,6 +1,6 @@
 import styled, { CSSProperties } from 'styled-components';
-import { customColorType } from '../constants/customColor';
-import { handleColor } from './Typography';
+import { customColorType } from '../../constants/customColor';
+import { handleColor } from '../Typography';
 
 type ButtonStyle = {
   backgroundColor: keyof customColorType;
@@ -13,7 +13,11 @@ type ButtonStyle = {
   children: React.ReactNode;
 };
 export const BasicButton = (props: ButtonStyle) => {
-  return <Container style={props.style} {...props}>{props.children}</Container>;
+  return (
+    <Container style={props.style} {...props}>
+      {props.children}
+    </Container>
+  );
 };
 
 const Container = styled.div<ButtonStyle>`
@@ -21,7 +25,8 @@ const Container = styled.div<ButtonStyle>`
   flex-grow: ${({ flexGrow }) => (flexGrow ? `${flexGrow}` : '')};
   height: ${({ height }) => (height ? `${height}px` : '')};
   max-width: ${({ maxWidth }) => (maxWidth ? `${maxWidth}px` : '')};
-  border-radius: ${({ borderRadius }) => borderRadius ? `${borderRadius}px` : '12px'};
+  border-radius: ${({ borderRadius }) =>
+    borderRadius ? `${borderRadius}px` : '12px'};
   display: flex;
   align-items: center;
   justify-content: center;
