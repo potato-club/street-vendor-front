@@ -13,7 +13,7 @@ export const CardAsk = (props: Props) => {
         <Title>
           <State>
             <Typography
-              size="16"
+              size="12"
               fontWeight="bold"
               color="orange2"
               letterSpacing="-1.0px"
@@ -23,7 +23,7 @@ export const CardAsk = (props: Props) => {
           </State>
           <Type>
             <Typography
-              size="16"
+              size="12"
               fontWeight="bold"
               color="gray"
               letterSpacing="-1.0px"
@@ -33,7 +33,7 @@ export const CardAsk = (props: Props) => {
           </Type>
         </Title>
         <Body>
-          <Typography size="16" letterSpacing="-1.0px">
+          <Typography size="12" letterSpacing="-1.0px">
             환불이 안돼요ㅜㅜㅜ
           </Typography>
         </Body>

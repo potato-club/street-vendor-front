@@ -33,7 +33,7 @@ export const AskTextarea = (props: InputProps) => {
         </Error>
       )}
       <MaxLength>
-        <Typography size="16" color="gray" letterSpacing="-0.5px">
+        <Typography size="12" color="gray" letterSpacing="-0.5px">
           {props.watch('askContent') === undefined
             ? 0
             : commaFormat(props.watch('askContent').length)}
