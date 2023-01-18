@@ -1,24 +1,26 @@
 import { BasicButton, Typography } from '@street-vendor/core';
 import React from 'react'
 import styled from 'styled-components';
-
-export const OrderButton = () => {
+type Props = {
+  buttonText: string;
+}
+export const BottomButton = ({ buttonText }: Props) => {
   return (
     <Container>
       <BasicButton
         backgroundColor="orange3"
         maxWidth={320}
         height={54}
-        borderRadius={24}
         style={{ width: '60%' }}
+        shadow
       >
         <Typography size="20" color="white" fontWeight="bold">
-          주문하기
+          {buttonText}
         </Typography>
       </BasicButton>
     </Container>
   );
-}
+};
 
 const Container = styled.div`
   position: absolute;

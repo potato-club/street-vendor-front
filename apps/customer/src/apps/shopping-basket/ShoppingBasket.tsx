@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Title, TotalPrice } from '../common';
 import { Item } from './components';
-import { OrderButton } from './components/OrderButton';
+import { BottomButton } from '../common/BottomButton';
 
 export const ShoppingBasket = () => {
   return (
@@ -18,7 +18,7 @@ export const ShoppingBasket = () => {
         </AddButton>
         <TotalPrice />
       </Wrapper>
-      <OrderButton />
+      <BottomButton buttonText='주문하기'/>
     </Container>
   );
 };

@@ -20,7 +20,7 @@ const Container = styled.div`
   align-items: center;
   flex-direction: column;
   gap: 8px;
-  box-shadow: 0px 3px 6px ${customColor.gray};
+  box-shadow: 0px 3px 6px ${customColor.gray}80;
 `;
 
 const Wrapper = styled.div`

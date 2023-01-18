@@ -2,7 +2,7 @@ import { BasicButton, customColor, CustomInput, Typography } from '@street-vendo
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
-import { Line, Title } from '../common';
+import { BottomButton, Line, Title, TotalPrice } from '../common';
 
 export const Order = () => {
   const { register, formState : { errors } } = useForm();
@@ -30,19 +30,15 @@ export const Order = () => {
         <Line px={4} />
         <FlexColumn className="paymentWay">
           <Typography size="20">결제 수단</Typography>
-          <BasicButton backgroundColor="orange3" maxWidth={140}>
+          <BasicButton backgroundColor="orange3" maxWidth={112}>
             <Typography size="16" fontWeight="bold" color="white">
               계좌이체
             </Typography>
           </BasicButton>
         </FlexColumn>
         <Line px={4} />
-        <TotalContainer>
-          <TotalWrapper>
-            <Typography size="24">총 주문금액</Typography>
-            <Typography size="20">3000원</Typography>
-          </TotalWrapper>
-        </TotalContainer>
+        <TotalPrice />
+        <BottomButton buttonText="주문하기" />
       </Wrapper>
     </Container>
   );
@@ -54,6 +50,7 @@ const Container = styled.div`
   position: relative;
   background-color: ${customColor.beige};
   min-height: 100vh;
+  padding-bottom: 200px;
 `;
 
 const Wrapper = styled.div`
@@ -71,19 +68,4 @@ const FlexColumn = styled.div`
   max-width: 400px;
   padding: 20px;
   gap: 20px;
-`;
-
-const TotalContainer = styled.div`
-  display: flex;
-  width: 100%;
-  align-items: center;
-  flex-direction: column;
-  gap: 8px;
-  box-shadow: 0px 3px 6px ${customColor.gray};
-`;
-
-const TotalWrapper = styled.div`
-  width: 100%;
-  max-width: 400px;
-  padding: 20px;
 `;
