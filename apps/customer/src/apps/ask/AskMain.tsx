@@ -1,5 +1,6 @@
-import { AskMainContainer } from '@street-vendor/core';
+import { AskContainer } from '@street-vendor/core';
+import { pathName } from '../../configs/pathName';
 
 export const AskMain = () => {
-  return <AskMainContainer />;
+  return <AskContainer pathName={pathName.ASK.MY.INDEX} />;
 };
