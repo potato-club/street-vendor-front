@@ -1,3 +1,4 @@
+import { CSSProperties } from 'react';
 import styled from 'styled-components';
 import { customColor, customColorType } from '../constants/customColor';
 
@@ -24,10 +25,13 @@ export type TypographyProps = React.PropsWithChildren<{
   fontHeight?: string;
   fontHidden?: boolean;
   letterSpacing?: string;
+  underlineColor?: keyof customColorType;
+  notBreak?: boolean;
+  style?: CSSProperties;
 }>;
 export const Typography = (props: TypographyProps) => {
   return (
-    <TypographyText {...props} defaultColor={customColor.black}>
+    <TypographyText style={props.style} {...props} defaultColor={customColor.black}>
       {props.children}
     </TypographyText>
   );
@@ -53,4 +57,10 @@ const TypographyText = styled.div<TypographyProps & typographyDefault>`
     fontHeight === 'normal' ? '' : `line-height: ${fontHeight};`};
   ${({ fontHidden }) =>
     fontHidden ? 'overflow: hidden;text-overflow: ellipsis;' : ''};
+
+  ${({ underlineColor }) =>
+    underlineColor ? `text-decoration: underline; text-underline-position:under; text-decoration-color: ${underlineColor}` : ''};
+  
+  ${({notBreak}) => 
+    notBreak ? `white-space:nowrap;` : ''};
 `;
