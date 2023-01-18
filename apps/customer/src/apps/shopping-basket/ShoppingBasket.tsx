@@ -1,7 +1,8 @@
 import { customColor, Typography } from '@street-vendor/core';
 import React from 'react';
 import styled from 'styled-components';
-import { Title, Item } from './components';
+import { Title, TotalPrice } from '../common';
+import { Item } from './components';
 import { OrderButton } from './components/OrderButton';
 
 export const ShoppingBasket = () => {
@@ -15,12 +16,7 @@ export const ShoppingBasket = () => {
         <AddButton>
           <Typography size="20">+ 메뉴 추가하기</Typography>
         </AddButton>
-        <TotalContainer>
-          <TotalWrapper>
-            <Typography size="24">총 주문금액</Typography>
-            <Typography size="20">3000원</Typography>
-          </TotalWrapper>
-        </TotalContainer>
+        <TotalPrice />
       </Wrapper>
       <OrderButton />
     </Container>
@@ -58,19 +54,4 @@ const AddButton = styled.div`
   justify-content: center;
   padding: 20px;
   border-bottom: 1px solid ${customColor.gray};
-`;
-
-const TotalContainer = styled.div`
-  display: flex;
-  width: 100%;
-  align-items: center;
-  flex-direction: column;
-  gap: 8px;
-  box-shadow: 0px 3px 6px ${customColor.gray};
-`;
-
-const TotalWrapper = styled.div`
-  width: 100%;
-  max-width: 400px;
-  padding: 20px;
 `;

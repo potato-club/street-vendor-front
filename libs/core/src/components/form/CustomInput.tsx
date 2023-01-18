@@ -7,7 +7,7 @@ interface InputProps {
   name: string;
   label?: string;
   placeholder?: string;
-  type?: string;
+  type?: React.HTMLInputTypeAttribute;
   register: UseFormRegister<FieldValues>;
   errors: Partial<FieldErrorsImpl>;
 }
