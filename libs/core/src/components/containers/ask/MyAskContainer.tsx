@@ -33,8 +33,8 @@ const Container = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   gap: 26px 0;
 `;
 const ContainerInner = styled.div`

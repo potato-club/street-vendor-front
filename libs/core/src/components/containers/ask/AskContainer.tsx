@@ -22,8 +22,8 @@ export const AskContainer = (props: Props) => {
             onClick={handleRouter}
           />
         </TopBar>
+        <AskForm />
       </ContainerInner>
-      <AskForm />
     </Container>
   );
 };
@@ -32,15 +32,17 @@ const Container = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-  height: 100%;
-  gap: 26px 0;
+  width: 100vw;
+  height: 100vh;
 `;
 const ContainerInner = styled.div`
   display: flex;
+  flex-direction: column;
   width: 100%;
+  height: 100%;
   max-width: 390px;
-  align-items: center;
+  gap: 26px 0;
+  justify-content: center;
   padding-top: 38px;
 `;
 const TopBar = styled.div`

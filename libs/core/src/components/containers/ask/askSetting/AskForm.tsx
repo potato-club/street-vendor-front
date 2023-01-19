@@ -56,7 +56,7 @@ const Form = styled.form`
   flex-direction: column;
   width: 100%;
   align-items: center;
-  overflow-y: auto;
+  overflow-y: scroll;
 `;
 const FormInner = styled.div`
   display: flex;
