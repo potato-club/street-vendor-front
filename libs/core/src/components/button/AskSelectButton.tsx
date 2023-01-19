@@ -5,7 +5,7 @@ import { Typography } from '../Typography';
 interface ButtonProps {
   content: string;
   isSelected: boolean;
-  onClick: () => void;
+  onClick?: () => void;
 }
 interface ButtonStyledProps {
   content?: string;
