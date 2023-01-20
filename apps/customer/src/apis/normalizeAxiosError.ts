@@ -1,4 +1,4 @@
-import { tokenService } from '../libs/tokenService';
+import { sessionService } from '../libs/sessionService';
 import axios from 'axios';
 
 export const UNAUTH_ERROR = 'UNAUTH_ERROR';
@@ -37,8 +37,7 @@ export default function normalizeAxiosError(error: any) {
   // service error, 400 401 404 500 502...
   if (error.response) {
     if ([401, 423].includes(error.response.status)) {
-      tokenService.resetIdToken();
-      tokenService.setRefreshToken('');
+      sessionService.resetIdSession();
       location.replace('/login?warn');
 
       return xhrError({
