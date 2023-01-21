@@ -7,4 +7,9 @@ export const pathName = {
     LIST: '/notice',
     DETAIL: '/notice/detail',
   },
+  MY_PAGE: '/my-page',
+  WITHDRAWAL: {
+    CHECK: '/withdrawal/check',
+    OUTRO: '/withdrawal/outro',
+  },
 };

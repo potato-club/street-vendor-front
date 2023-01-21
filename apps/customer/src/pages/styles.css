@@ -148,3 +148,7 @@ a {
 textarea {
   resize: none;
 }
+
+input {
+  border: none;
+}
