@@ -1,6 +1,8 @@
+import { useQueryEditMyProfileImage } from '../../../hooks/query/my-page/useQueryEditMyProfileImage';
 import { useRef } from 'react';
 
 export const useProfileImage = () => {
+  const { mutate } = useQueryEditMyProfileImage();
   const fileUploadRef = useRef<HTMLInputElement>(null);
 
   const handleClickUploadFile = () => {

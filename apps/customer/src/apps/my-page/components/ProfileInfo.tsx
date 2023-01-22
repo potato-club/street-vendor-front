@@ -1,9 +1,16 @@
 import { customColor, CustomInput, Typography } from '@street-vendor/core';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
+import { useQueryEditMyNickname } from '../../../hooks/query/my-page/useQueryEditMyNickname';
 
-export const ProfileInfo = () => {
+type Props = {
+  email: string;
+  nickname: string;
+};
+export const ProfileInfo = ({ email, nickname }: Props) => {
   const { register, handleSubmit } = useForm();
+  const { mutate } = useQueryEditMyNickname();
+
   return (
     <form
       onSubmit={handleSubmit((data) => {

@@ -2,14 +2,19 @@ import { Typography } from '@street-vendor/core';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { pathName } from '../../configs/pathName';
+import { useQueryGetMyInfo } from '../../hooks/query/my-page/useQueryGetMyInfo';
 import { ProfileImage } from './components/ProfileImage';
 import { ProfileInfo } from './components/ProfileInfo';
 
 export const MyPage = () => {
+  const { isLoading, data } = useQueryGetMyInfo();
+  if (isLoading) {
+    return <div>로딩중</div>;
+  }
   return (
     <Container>
-      <ProfileImage />
-      <ProfileInfo />
+      <ProfileImage imageUrl={data.profileUrl} />
+      <ProfileInfo email={data.email} nickname={data.nickName} />
       <ButtonWithdrawal />
     </Container>
   );

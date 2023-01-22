@@ -3,12 +3,23 @@ import Image from 'next/image';
 import ProfileImageDefault from '../../../../public/profile_img_default.png';
 import { customColor, Typography } from '@street-vendor/core';
 import { useProfileImage } from './ProfileImage.hook';
-export const ProfileImage = () => {
+
+type Props = {
+  imageUrl: string;
+};
+
+export const ProfileImage = ({ imageUrl }: Props) => {
   const { fileUploadRef, handleClickUploadFile, handleChangeInputFile } =
     useProfileImage();
+
   return (
     <Container>
-      <Image src={ProfileImageDefault} alt={''} width={115} height={115} />
+      <Image
+        src={imageUrl !== '' ? imageUrl : ProfileImageDefault}
+        alt={''}
+        width={115}
+        height={115}
+      />
       <Button onClick={handleClickUploadFile}>
         <Typography size="16" color="white">
           프로필 사진 변경

@@ -4,6 +4,7 @@ import Router from 'next/router';
 import { useState } from 'react';
 import styled from 'styled-components';
 import { NoticeText } from './dummy/DummyNoticeText';
+import { useQueryWithdrawal } from '../../../hooks/query/withdrawal/useQueryWithdrawal';
 interface ButtonStyledProps {
   isCheck: boolean;
 }
@@ -12,7 +13,6 @@ export const WithdrawalCheck = () => {
   const handleClickCheck = () => {
     setIsCheck((prev) => !prev);
   };
-  console.log(NoticeText);
   return (
     <Container>
       <NoticeWrapper>
@@ -66,6 +66,8 @@ export const WithdrawalCheck = () => {
 };
 
 const ButtonWithDrawal = ({ isCheck }: { isCheck: boolean }) => {
+  const { mutate } = useQueryWithdrawal();
+
   const handleClickButton = () => {
     if (isCheck) {
       //!! 대충 회원탈퇴하는 로직
