@@ -4,7 +4,7 @@ import { pathName } from '../../../configs/pathName';
 export const MyAsk = () => {
   return (
     <MyAskContainer
-      pathName={pathName.ASK.INDEX}
+      pathName={pathName.ASK.FORM}
       detailPathName={pathName.ASK.MY.DETAIL}
     />
   );

@@ -8,10 +8,10 @@ export const pathName = {
     DETAIL: '/notice/detail',
   },
   ASK: {
-    INDEX: '/ask',
+    FORM: '/ask',
     START: '/ask/start',
     MY: {
-      INDEX: '/ask/my',
+      LIST: '/ask/my',
       DETAIL: '/ask/my/*',
     },
   },
