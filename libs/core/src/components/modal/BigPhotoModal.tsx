@@ -5,6 +5,7 @@ interface ModalProps {
   closeModal: () => void;
   isModalOpen: boolean;
   src: string;
+  alt?: string;
 }
 
 export const BigPhotoModal = (props: ModalProps) => {
@@ -29,8 +30,8 @@ export const BigPhotoModal = (props: ModalProps) => {
           WebkitOverflowScrolling: 'touch',
           border: 'none',
           overflow: 'hidden',
-          height: 'calc(100% - 48px)',
-          width: 'calc(100% - 48px)',
+          height: 'calc(100% - 16px)',
+          width: 'calc(100% - 16px)',
           inset: '0',
           padding: '0',
           pointerEvents: 'none',
@@ -40,8 +41,8 @@ export const BigPhotoModal = (props: ModalProps) => {
       }}
     >
       <Image
-        src={`/img/${props.src}.jpg`}
-        alt={props.src}
+        src={props.src}
+        alt={props.alt || props.src}
         fill
         style={{ objectFit: 'contain' }}
       />
