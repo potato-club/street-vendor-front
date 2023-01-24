@@ -11,16 +11,17 @@ type ButtonStyle = {
   borderRadius?: number;
   style?: CSSProperties;
   children: React.ReactNode;
+  onClick?: () => void;
 };
 export const BasicButton = (props: ButtonStyle) => {
   return (
-    <Container style={props.style} {...props}>
+    <Container style={props.style} {...props} onClick={props.onClick}>
       {props.children}
     </Container>
   );
 };
 
-const Container = styled.div<ButtonStyle>`
+const Container = styled.button<ButtonStyle>`
   background-color: ${({ backgroundColor }) => handleColor(backgroundColor)};
   flex-grow: ${({ flexGrow }) => (flexGrow ? `${flexGrow}` : '')};
   height: ${({ height }) => (height ? `${height}px` : '')};

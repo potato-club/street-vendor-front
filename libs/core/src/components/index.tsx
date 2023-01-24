@@ -5,6 +5,7 @@ export * from './button/AskSelectButton';
 export * from './button/NextButton';
 export * from './modal/BigPhotoModal';
 export * from './modal/GetPhotoModal';
+export * from './modal/CustomModal';
 export * from './form/AskAgree';
 export * from './form/AskInput';
 export * from './form/AskOption';
