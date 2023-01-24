@@ -1,8 +1,8 @@
 import type { NextPage } from 'next';
-import { AskMain } from 'apps/customer/src/apps/ask/AskMain';
+import { AskGuide } from 'apps/customer/src/apps/ask/AskGuide';
 
-const AskMainPage: NextPage = () => {
-  return <AskMain />;
+const AskGuidePage: NextPage = () => {
+  return <AskGuide />;
 };
 
-export default AskMainPage;
+export default AskGuidePage;

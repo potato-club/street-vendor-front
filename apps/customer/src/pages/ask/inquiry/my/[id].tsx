@@ -1,4 +1,4 @@
-import { AskDetail } from 'apps/customer/src/apps/ask/my/AskDetail';
+import { AskDetail } from 'apps/customer/src/apps/ask/inquiry/my/AskDetail';
 import type { NextPage } from 'next';
 
 const AskDetailPage: NextPage = () => {
