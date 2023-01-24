@@ -1,7 +1,7 @@
 import Router from 'next/router';
 import styled from 'styled-components';
 import { AskButton } from '../../button/AskButton';
-import { Typography } from '../../Typography';
+import { Typography } from '@street-vendor/core';
 
 interface Props {
   pathName: string;
@@ -13,40 +13,49 @@ export const InitialAskContainer = (props: Props) => {
   };
   return (
     <Container>
-      <Content>
-        <Typography
-          size="20"
-          textAlign="center"
-          letterSpacing="-1.5px"
-          fontWeight="bold"
-        >
-          1:1 문의 내역이 없어요
-        </Typography>
-        <Typography size="12" textAlign="center" color="gray">
-          마이 페이지나 고객 센터&gt;1:1 문의 탭에서
-          <br />
-          고객님의 궁금하신 점을 풀어주세요!
-        </Typography>
-      </Content>
-      <AskButtons>
-        <AskButton
-          content="1:1 문의"
-          background="orange3"
-          onClick={handleRouter}
-        />
-      </AskButtons>
+      <ContainerInner>
+        <Content>
+          <Typography
+            size="20"
+            textAlign="center"
+            letterSpacing="-1.5px"
+            fontWeight="bold"
+          >
+            1:1 문의 내역이 없어요
+          </Typography>
+          <Typography size="12" textAlign="center" color="gray">
+            마이 페이지나 고객 센터&gt;1:1 문의 탭에서
+            <br />
+            고객님의 궁금하신 점을 풀어주세요!
+          </Typography>
+        </Content>
+        <AskButtons>
+          <AskButton
+            content="1:1 문의"
+            background="orange3"
+            onClick={handleRouter}
+          />
+        </AskButtons>
+      </ContainerInner>
     </Container>
   );
 };
 
-const Container = styled.div`
+const Container = styled.section`
   display: flex;
-  position: relative;
-  flex-direction: column;
   width: 100vw;
   max-width: 390px;
   height: 100vh;
-  padding: 10% 7%;
+  justify-content: center;
+  margin: 0 auto;
+`;
+const ContainerInner = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 0 7%;
 `;
 const Content = styled.div`
   display: flex;
