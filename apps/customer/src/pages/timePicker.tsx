@@ -2,6 +2,7 @@
 import { customColor, Typography } from '@street-vendor/core';
 import React, { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
+import { FreeMode } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { timePickerBackground } from './timePickerBackground';
 
@@ -61,6 +62,12 @@ export default function TimePickerPage() {
             slidesPerView={3}
             initialSlide={activeHours - 1}
             loop
+            modules={[FreeMode]}
+            freeMode={{
+              enabled: true,
+              sticky: true,
+              momentumRatio: 0.1,
+            }}
             centeredSlides
             direction="vertical"
           >
@@ -85,6 +92,12 @@ export default function TimePickerPage() {
             loop
             centeredSlides
             direction="vertical"
+            modules={[FreeMode]}
+            freeMode={{
+              enabled: true,
+              sticky: true,
+              momentumRatio: 0.1,
+            }}
           >
             {minute.map((data, i) => (
               <SwiperSlide key={i}>
