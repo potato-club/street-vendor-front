@@ -1,44 +1,62 @@
-import { BasicButton, customColor, CustomInput, Typography } from '@street-vendor/core';
-import React from 'react';
-import { useForm } from 'react-hook-form';
+import {
+  BasicButton,
+  customColor,
+  CustomInput,
+  Typography,
+} from '@street-vendor/core';
+import React, { useCallback } from 'react';
+import { FieldValues, useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { BottomButton, Line, Title, TotalPrice } from '../common';
+import { PhoneNumberInput } from './components';
 
 export const Order = () => {
-  const { register, formState : { errors } } = useForm();
+  const {
+    register,
+    formState: { errors },
+    control,
+    handleSubmit
+  } = useForm();
+
+  const submit = useCallback((data: FieldValues) => {
+    console.log(data);
+  }, []);
+  
   return (
     <Container>
       <Wrapper>
         <Title />
         <Line px={1} />
-        <FlexColumn className="inputWrapper">
-          <CustomInput
-            register={register}
-            name="phoneNumber"
-            placeholder="전화번호를 입력해주세요"
-            errors={errors}
-            label="주문자 정보"
-          />
-          <CustomInput
-            register={register}
-            name="time"
-            errors={errors}
-            placeholder="언제 오실 예정이신가요?"
-            label="가게 방문 예정 시간"
-          />
-        </FlexColumn>
-        <Line px={4} />
-        <FlexColumn className="paymentWay">
-          <Typography size="20">결제 수단</Typography>
-          <BasicButton backgroundColor="orange3" maxWidth={112}>
-            <Typography size="16" fontWeight="bold" color="white">
-              계좌이체
-            </Typography>
-          </BasicButton>
-        </FlexColumn>
-        <Line px={4} />
-        <TotalPrice />
-        <BottomButton buttonText="주문하기" />
+        <Form onSubmit={handleSubmit(submit)}>
+          <FlexColumn className="inputWrapper">
+            <PhoneNumberInput
+              control={control}
+              name="phoneNumber"
+              placeholder="전화번호를 입력해주세요"
+              errors={errors}
+              label="주문자 정보"
+            />
+            <CustomInput
+              register={register}
+              name="time"
+              errors={errors}
+              placeholder="언제 오실 예정이신가요?"
+              label="가게 방문 예정 시간"
+            />
+          </FlexColumn>
+          <Line px={4} />
+          <FlexColumn className="paymentWay">
+            <Typography size="20">결제 수단</Typography>
+            <BasicButton backgroundColor="orange3" maxWidth={112} type="button">
+              <Typography size="16" fontWeight="bold" color="white">
+                계좌이체
+              </Typography>
+            </BasicButton>
+          </FlexColumn>
+          <Line px={4} />
+          <TotalPrice />
+          <BottomButton buttonText="주문하기" type="submit" />
+        </Form>
       </Wrapper>
     </Container>
   );
@@ -59,6 +77,13 @@ const Wrapper = styled.div`
   width: 100%;
   align-items: center;
   background-color: ${customColor.white};
+`;
+
+const Form = styled.form`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const FlexColumn = styled.div`

@@ -1,1 +1,1 @@
-export {}
+export { PhoneNumberInput } from './PhoneNumberInput';

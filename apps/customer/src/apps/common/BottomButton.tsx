@@ -3,8 +3,9 @@ import React from 'react'
 import styled from 'styled-components';
 type Props = {
   buttonText: string;
-}
-export const BottomButton = ({ buttonText }: Props) => {
+  type?: 'submit' | 'reset' | 'button';
+};
+export const BottomButton = ({ buttonText, type }: Props) => {
   return (
     <Container>
       <BasicButton
@@ -13,6 +14,7 @@ export const BottomButton = ({ buttonText }: Props) => {
         height={54}
         style={{ width: '60%' }}
         shadow
+        type={type}
       >
         <Typography size="20" color="white" fontWeight="bold">
           {buttonText}

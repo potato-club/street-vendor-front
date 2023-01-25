@@ -11,6 +11,7 @@ type ButtonStyle = {
   borderRadius?: number;
   style?: CSSProperties;
   shadow?: boolean;
+  type?: 'submit' | 'reset' | 'button';
   children: React.ReactNode;
 };
 export const BasicButton = (props: ButtonStyle) => {
@@ -21,7 +22,7 @@ export const BasicButton = (props: ButtonStyle) => {
   );
 };
 
-const Container = styled.div<ButtonStyle>`
+const Container = styled.button<ButtonStyle>`
   background-color: ${({ backgroundColor }) => handleColor(backgroundColor)};
   flex-grow: ${({ flexGrow }) => (flexGrow ? `${flexGrow}` : '')};
   height: ${({ height }) => (height ? `${height}px` : '')};
