@@ -1,6 +1,7 @@
 // TimePicker Test Page
 import { customColor, Typography } from '@street-vendor/core';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
+import { FieldValues, UseFormSetValue } from 'react-hook-form';
 import Modal from 'react-modal';
 import styled from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -27,12 +28,19 @@ const modalCustomStyles = {
 type Props = {
   isOpen: boolean;
   handleCloseModal: () => void;
+  setValue: UseFormSetValue<FieldValues>;
 };
-export const TimePickerModal = ({ isOpen, handleCloseModal }: Props) => {
-  const hours = useMemo(() => Array.from(new Array(12), (_, i) => i + 1), []);
+export const TimePickerModal = ({ isOpen, handleCloseModal, setValue }: Props) => {
+  const formatTime = (data: { toString: () => string; }) => {
+    return data.toString().padStart(2, '0');
+  };
+
+  const hours = useMemo(() => Array.from(new Array(12), (_, i) => formatTime((i + 1))), []);
+
+
 
   const minute = useMemo(
-    () => Array.from(new Array(60), (_, i) => String(i).padStart(2, '0')),
+    () => Array.from(new Array(60), (_, i) => formatTime(i)),
     []
   );
 
@@ -40,13 +48,11 @@ export const TimePickerModal = ({ isOpen, handleCloseModal }: Props) => {
   const [activeHours, setActiveHours] = useState<number>(1);
   const [activeMinute, setActiveMinute] = useState<number>(0);
 
-  useEffect(() => {
-    console.log(activeHours);
-  }, [activeHours]);
 
-  useEffect(() => {
-    console.log(activeMinute);
-  }, [activeMinute]);
+  const handleConfirmButton = () => {
+    setValue('time', `${atNoon === 0 ? '오전' : '오후'} ${formatTime(activeHours)} : ${formatTime(activeMinute)}`);
+    handleCloseModal();
+  }
 
   return (
     <Modal
@@ -57,94 +63,84 @@ export const TimePickerModal = ({ isOpen, handleCloseModal }: Props) => {
       // onRequestClose={() => handleCloseModal()}
     >
       <Container>
-          <Typography size="24" fontWeight="bold">
-            가게 방문 예정 시간
-          </Typography>
-          <TimeWrapper>
-            <StyledSwiper
-              onSlideChange={(e) => setAtNoon(e.realIndex)}
-              slidesPerView={3}
-              initialSlide={atNoon}
-              centeredSlides
-              direction="vertical"
-            >
-              <SwiperSlide>
+        <Typography size="24" fontWeight="bold">
+          가게 방문 예정 시간
+        </Typography>
+        <TimeWrapper>
+          <StyledSwiper
+            onSlideChange={(e) => setAtNoon(e.realIndex)}
+            slidesPerView={3}
+            initialSlide={atNoon}
+            centeredSlides
+            direction="vertical"
+          >
+            <SwiperSlide>
+              <Typography
+                size="20"
+                style={{ display: 'flex', justifyContent: 'center' }}
+                notBreak
+              >
+                오전
+              </Typography>
+            </SwiperSlide>
+            <SwiperSlide>
+              <Typography
+                size="20"
+                style={{ display: 'flex', justifyContent: 'center' }}
+                notBreak
+              >
+                오후
+              </Typography>
+            </SwiperSlide>
+          </StyledSwiper>
+          <StyledSwiper
+            onSlideChange={(e) => setActiveHours(e.realIndex + 1)}
+            slidesPerView={3}
+            initialSlide={activeHours - 1}
+            loop
+            centeredSlides
+            loopedSlides={12}
+            direction="vertical"
+          >
+            {hours.map((data, i) => (
+              <SwiperSlide key={i}>
                 <Typography
                   size="20"
                   style={{ display: 'flex', justifyContent: 'center' }}
-                  notBreak
                 >
-                  오전
+                  {data}
                 </Typography>
               </SwiperSlide>
-              <SwiperSlide>
+            ))}
+          </StyledSwiper>
+          <div style={{ height: 'calc(100% / 3)' }}>
+            <Typography size="20">:</Typography>
+          </div>
+          <StyledSwiper
+            onSlideChange={(e) => setActiveMinute(e.realIndex)}
+            slidesPerView={3}
+            initialSlide={activeMinute}
+            loop
+            centeredSlides
+            loopedSlides={12}
+            direction="vertical"
+          >
+            {minute.map((data, i) => (
+              <SwiperSlide key={i}>
                 <Typography
                   size="20"
                   style={{ display: 'flex', justifyContent: 'center' }}
-                  notBreak
                 >
-                  오후
+                  {data}
                 </Typography>
               </SwiperSlide>
-            </StyledSwiper>
-            <StyledSwiper
-              onSlideChange={(e) => setActiveHours(e.realIndex + 1)}
-              slidesPerView={3}
-              initialSlide={activeHours - 1}
-              loop
-              centeredSlides
-              loopedSlides={12}
-              direction="vertical"
-            >
-              {hours.map((data, i) => (
-                <SwiperSlide key={i}>
-                  <Typography
-                    size="20"
-                    style={{ display: 'flex', justifyContent: 'center' }}
-                  >
-                    {data}
-                  </Typography>
-                </SwiperSlide>
-              ))}
-            </StyledSwiper>
-            <div style={{ height: 'calc(100% / 3)' }}>
-              <Typography size="20">:</Typography>
-            </div>
-            <StyledSwiper
-              onSlideChange={(e) => setActiveMinute(e.realIndex)}
-              slidesPerView={3}
-              initialSlide={activeMinute}
-              loop
-              centeredSlides
-              loopedSlides={12}
-              direction="vertical"
-            >
-              {minute.map((data, i) => (
-                <SwiperSlide key={i}>
-                  <Typography
-                    size="20"
-                    style={{ display: 'flex', justifyContent: 'center' }}
-                  >
-                    {data}
-                  </Typography>
-                </SwiperSlide>
-              ))}
-            </StyledSwiper>
-          </TimeWrapper>
-          <ButtonWrapper>
-            <Button onClick={() => handleCloseModal()}>취소</Button>
-            <Button
-              onClick={() =>
-                alert(
-                  `${
-                    atNoon === 0 ? '오전' : '오후'
-                  }, ${activeHours}시, ${activeMinute}분`
-                )
-              }
-            >
-              확인
-            </Button>
-          </ButtonWrapper>
+            ))}
+          </StyledSwiper>
+        </TimeWrapper>
+        <ButtonWrapper>
+          <Button onClick={() => handleCloseModal()}>취소</Button>
+          <Button onClick={handleConfirmButton}>확인</Button>
+        </ButtonWrapper>
       </Container>
     </Modal>
   );

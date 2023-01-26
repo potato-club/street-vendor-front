@@ -15,6 +15,7 @@ export const Order = () => {
     register,
     formState: { errors },
     control,
+    setValue,
     handleSubmit
   } = useForm();
 
@@ -37,7 +38,14 @@ export const Order = () => {
               errors={errors}
               label="주문자 정보"
             />
-            <TimePickerInput name="time" label="가게 방문 예정 시간" placeholder='언제 오실 예정이신가요?' register={register} errors={errors} />
+            <TimePickerInput
+              name="time"
+              label="가게 방문 예정 시간"
+              placeholder="언제 오실 예정이신가요?"
+              register={register}
+              errors={errors}
+              setValue={setValue}
+            />
           </FlexColumn>
           <Line px={4} />
           <FlexColumn className="paymentWay">

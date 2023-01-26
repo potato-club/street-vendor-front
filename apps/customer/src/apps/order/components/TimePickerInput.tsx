@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { FieldErrorsImpl, FieldValues, UseFormRegister } from 'react-hook-form';
+import { FieldErrorsImpl, FieldValues, UseFormRegister, UseFormSetValue } from 'react-hook-form';
 import { customColor, Typography } from '@street-vendor/core';
 import { useModal } from '../../../hooks';
 import { TimePickerModal } from './timePickerModal';
@@ -9,6 +9,7 @@ interface InputProps {
   label?: string;
   placeholder?: string;
   register: UseFormRegister<FieldValues>;
+  setValue: UseFormSetValue<FieldValues>;
   errors: Partial<FieldErrorsImpl>;
 }
 
@@ -28,16 +29,13 @@ export const TimePickerInput = (props: InputProps) => {
           placeholder={props.placeholder}
           {...props.register(props.name)}
         />
-        {/* 전화번호 정규식 넣으실거면 ↓↓↓
-      var tel = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/
-      */}
         {props.errors[props.name] && (
           <Error>
             <Typography size="16">에러Title</Typography>
           </Error>
         )}
       </Wrapper>
-      <TimePickerModal isOpen={isOpen} handleCloseModal={handleCloseModal} />
+      <TimePickerModal isOpen={isOpen} handleCloseModal={handleCloseModal} setValue={props.setValue}/>
     </>
   );
 };
