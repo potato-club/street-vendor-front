@@ -1,7 +1,6 @@
 import {
   BasicButton,
   customColor,
-  CustomInput,
   Typography,
 } from '@street-vendor/core';
 import React, { useCallback } from 'react';
@@ -9,6 +8,7 @@ import { FieldValues, useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { BottomButton, Line, Title, TotalPrice } from '../common';
 import { PhoneNumberInput } from './components';
+import { TimePickerInput } from './components/TimePickerInput';
 
 export const Order = () => {
   const {
@@ -17,6 +17,7 @@ export const Order = () => {
     control,
     handleSubmit
   } = useForm();
+
 
   const submit = useCallback((data: FieldValues) => {
     console.log(data);
@@ -36,13 +37,7 @@ export const Order = () => {
               errors={errors}
               label="주문자 정보"
             />
-            <CustomInput
-              register={register}
-              name="time"
-              errors={errors}
-              placeholder="언제 오실 예정이신가요?"
-              label="가게 방문 예정 시간"
-            />
+            <TimePickerInput name="time" label="가게 방문 예정 시간" placeholder='언제 오실 예정이신가요?' register={register} errors={errors} />
           </FlexColumn>
           <Line px={4} />
           <FlexColumn className="paymentWay">
