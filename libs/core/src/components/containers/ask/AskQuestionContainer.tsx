@@ -26,16 +26,7 @@ export const AskQuestionContainer = (props: Props) => {
               size="12"
               letterSpacing="-1.0px"
               textAlign="left"
-              style={{ wordBreak: 'keep-all' }}
-            >
-              - 사장님께서 처음 가게 위치를 등록하실때 지도로 좌표를 찍어
-              등록하게 됩니다. 가게 리스트와 마이노점에서 수정도 가능합니다.
-            </Typography>
-            <Typography
-              size="12"
-              letterSpacing="-1.0px"
-              textAlign="left"
-              style={{ wordBreak: 'keep-all' }}
+              style={{ wordBreak: 'keep-all', lineHeight: '20px' }}
             >
               - 또한 근처 랜드마크등을 등록 할 수 있기에,그런 기능을 잘 활용하여
               주시길 바랍니다.
@@ -51,7 +42,7 @@ export const AskQuestionContainer = (props: Props) => {
               size="12"
               letterSpacing="-1.0px"
               textAlign="left"
-              style={{ wordBreak: 'keep-all' }}
+              style={{ wordBreak: 'keep-all', lineHeight: '20px' }}
             >
               - 사장님께서 처음 가게 위치를 등록하실때 지도로 좌표를 찍어
               등록하게 됩니다. 가게 리스트와 마이노점에서 수정도 가능합니다.
@@ -60,7 +51,7 @@ export const AskQuestionContainer = (props: Props) => {
               size="12"
               letterSpacing="-1.0px"
               textAlign="left"
-              style={{ wordBreak: 'keep-all' }}
+              style={{ wordBreak: 'keep-all', lineHeight: '20px' }}
             >
               - 또한 근처 랜드마크등을 등록 할 수 있기에,그런 기능을 잘 활용하여
               주시길 바랍니다.
