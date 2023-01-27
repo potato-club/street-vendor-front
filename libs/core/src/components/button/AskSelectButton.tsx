@@ -35,7 +35,6 @@ const Button = styled.button`
   align-items: center;
   justify-content: center;
   background: none;
-  border: none;
   gap: 6px;
 `;
 const UnderBar = styled.div<ButtonStyledProps>`

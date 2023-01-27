@@ -74,7 +74,6 @@ const ContainerInner = styled.button`
   border-radius: 12px;
   padding: 16px 18px;
   gap: 12px 0;
-  border: none;
 `;
 const Title = styled.div`
   display: flex;
