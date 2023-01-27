@@ -86,5 +86,4 @@ const Answer = styled.div`
 `;
 const EndButton = styled.button`
   background: none;
-  border: none;
 `;

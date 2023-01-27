@@ -94,7 +94,6 @@ const Question = styled.button`
   box-shadow: 0px 3px 6px 0px ${customColor.black + '25'};
   justify-content: center;
   padding: 0px;
-  border: none;
 `;
 const QuestionInner = styled.div`
   display: flex;
