@@ -1,4 +1,3 @@
-// TimePicker Test Page
 import { customColor, Typography } from '@street-vendor/core';
 import React, { useMemo, useState } from 'react';
 import { FieldValues, UseFormSetValue } from 'react-hook-form';
@@ -6,6 +5,7 @@ import Modal from 'react-modal';
 import styled from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { timePickerBackground } from './timePickerBackground';
+import 'swiper/css';
 
 const modalCustomStyles = {
   content: {
@@ -60,7 +60,7 @@ export const TimePickerModal = ({ isOpen, handleCloseModal, setValue }: Props) =
       ariaHideApp={false}
       isOpen={isOpen}
       contentLabel="TimePickerModal"
-      // onRequestClose={() => handleCloseModal()}
+      onRequestClose={() => handleCloseModal()}
     >
       <Container>
         <Typography size="24" fontWeight="bold">
@@ -175,7 +175,6 @@ const TimeWrapper = styled.div`
 const StyledSwiper = styled(Swiper)`
   height: 100%;
   width: 20%;
-  overflow: hidden;
   div div :not(.swiper-slide-active) {
     div {
       color: ${customColor.darkGray}80;
