@@ -23,5 +23,6 @@ export * from './box/ReadLabelBox';
 export * from './box/ReadStretchBox';
 export * from './containers/notice/detail/DetailNoticeContainer';
 export * from './containers/notice/ListNoticeContainer';
+export * from './containers/alarm/AlarmContainer';
 export { Typography } from './Typography';
 export { BasicButton } from './button/BasicButton';
