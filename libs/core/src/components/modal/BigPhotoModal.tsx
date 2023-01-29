@@ -1,5 +1,6 @@
 import ReactModal from 'react-modal';
 import Image from 'next/image';
+import { customColor } from '../../constants';
 
 interface ModalProps {
   closeModal: () => void;
@@ -22,7 +23,7 @@ export const BigPhotoModal = (props: ModalProps) => {
           left: 0,
           right: 0,
           bottom: 0,
-          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+          backgroundColor: `${customColor.black + '88'}`,
           zIndex: 10,
         },
         content: {

@@ -35,13 +35,13 @@ export const AskAgree = (props: ButtonProps) => {
             >
               <path
                 d="M1.07227 8.97119L5.81827 16.0902"
-                stroke="#F6F1EC"
+                stroke={customColor.beige}
                 stroke-width="2"
                 stroke-linecap="round"
               />
               <path
                 d="M14.3184 1.99023L5.81836 16.0902"
-                stroke="#F6F1EC"
+                stroke={customColor.beige}
                 stroke-width="2"
                 stroke-linecap="round"
               />

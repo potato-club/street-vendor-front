@@ -13,6 +13,7 @@ export * from './form/AskPhoto';
 export * from './form/AskSelect';
 export * from './form/AskSubmit';
 export * from './form/AskTextarea';
+export * from './form/AskContent';
 export * from './form/CustomInput';
 export * from './form/CustomFixedInput';
 export * from './card/CardNotice';
