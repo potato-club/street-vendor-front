@@ -9,6 +9,9 @@ interface OptionProps {
   value: string;
 }
 interface SelectProps {
+  label: string;
+  placeholder: string;
+  value: string;
   options: OptionProps[];
   register: UseFormRegister<FieldValues>;
   errors: Partial<FieldErrorsImpl>;
@@ -19,12 +22,12 @@ export const AskSelect = (props: SelectProps) => {
     <Wrapper>
       <Label>
         <Typography size="16" fontWeight="bold" letterSpacing="-0.5px">
-          문의 유형
+          {props.label}
         </Typography>
       </Label>
-      <Select defaultValue={''} {...props.register('askType')}>
+      <Select defaultValue={''} {...props.register(props.value)}>
         <Option value={''} disabled hidden>
-          유형을 선택해주세요.
+          {props.placeholder}
         </Option>
         {props.options.map((item, idx) => (
           <AskOption key={idx} name={item.name} value={item.value} />
@@ -47,7 +50,7 @@ export const AskSelect = (props: SelectProps) => {
           />
         </svg>
       </ArrowIcon>
-      {props.errors['askType'] && (
+      {props.errors[props.value] && (
         <Error>
           <Typography size="16">에러Select</Typography>
         </Error>

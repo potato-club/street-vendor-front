@@ -8,16 +8,19 @@ import {
   UseFormWatch,
 } from 'react-hook-form';
 
-interface InputProps {
+interface ContentProps {
   label: string;
-  placeholder: string;
-  value: string;
+  type: string;
+  placeholderInput: string;
+  valueInput: string;
+  placeholderText: string;
+  valueText: string;
   register: UseFormRegister<FieldValues>;
   errors: Partial<FieldErrorsImpl>;
   watch: UseFormWatch<FieldValues>;
 }
 
-export const AskTextarea = (props: InputProps) => {
+export const AskContent = (props: ContentProps) => {
   const commaFormat = (num: number) => {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
@@ -30,22 +33,28 @@ export const AskTextarea = (props: InputProps) => {
         </Typography>
         <MaxLength>
           <Typography size="12" color="gray" letterSpacing="-0.5px">
-            {props.watch(props.value) === undefined
+            {props.watch(props.valueText) === undefined
               ? 0
-              : commaFormat(props.watch(props.value).length)}
-            &nbsp;/&nbsp;{commaFormat(300)}
+              : commaFormat(props.watch(props.valueText).length)}
+            &nbsp;/&nbsp;{commaFormat(3000)}
           </Typography>
         </MaxLength>
       </Label>
+      <Input
+        type={props.type}
+        placeholder={props.placeholderInput}
+        maxLength={32}
+        {...props.register(props.valueInput)}
+      />
       <Textarea
-        placeholder={props.placeholder}
-        maxLength={300}
-        {...props.register(props.value)}
+        placeholder={props.placeholderText}
+        maxLength={3000}
+        {...props.register(props.valueText)}
         defaultValue={''}
       />
-      {props.errors[props.value] && (
+      {(props.errors[props.valueInput] || props.errors[props.valueText]) && (
         <Error>
-          <Typography size="16">에러Textarea</Typography>
+          <Typography size="16">에러Content</Typography>
         </Error>
       )}
     </Wrapper>
@@ -55,8 +64,8 @@ export const AskTextarea = (props: InputProps) => {
 const Wrapper = styled.article`
   display: flex;
   flex-direction: column;
-  width: 100%;
   position: relative;
+  width: 100%;
 `;
 const Label = styled.label`
   display: flex;
@@ -64,6 +73,21 @@ const Label = styled.label`
   margin-bottom: 12px;
   justify-content: space-between;
   align-items: flex-end;
+`;
+const Input = styled.input`
+  width: 100%;
+  height: 48px;
+  padding: 0px 18px;
+  background-color: ${customColor.beige};
+  border-radius: 12px;
+  font-size: 12px;
+  letter-spacing: -0.5px;
+  font-family: inherit;
+  margin-bottom: 20px;
+  &::placeholder {
+    color: ${customColor.darkGray};
+    white-space: pre-wrap;
+  }
 `;
 const Textarea = styled.textarea`
   resize: none;
@@ -80,10 +104,10 @@ const Textarea = styled.textarea`
     white-space: pre-wrap;
   }
 `;
-const Error = styled.span``;
 const MaxLength = styled.span`
   display: flex;
   bottom: 20px;
   right: 24px;
   pointer-events: none;
 `;
+const Error = styled.span``;

@@ -37,7 +37,7 @@ export const ReadStretchBox = (props: BoxProps) => {
             >
               <path
                 d="M1.83398 1L7.00098 5.183L12.167 1"
-                stroke="#FF8B00"
+                stroke={customColor.orange2}
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
