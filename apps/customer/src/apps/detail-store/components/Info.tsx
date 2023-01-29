@@ -1,11 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Typography, customColor } from '@street-vendor/core';
-import { Rating } from 'react-simple-star-rating';
+import { Typography, customColor, SpoonRating } from '@street-vendor/core';
 import {
   Arrow,
-  EmptySpoon,
-  FullSpoon,
   SpeechBubble,
   Star,
   Tteokbokki,
@@ -39,17 +36,7 @@ export const Info = () => {
           </Typography>
           <OrangeLine />
           <RatingWrapper>
-            <Rating
-              initialValue={3.5}
-              emptyIcon={<EmptySpoon />}
-              fillIcon={<FullSpoon />}
-              emptyStyle={{ display: 'flex', alignItems: 'center' }}
-              allowFraction
-              readonly
-              style={{cursor:'default'}} // readonly 를 사용할때 콘솔창 에러를 없애기위해 해줘야할듯함. (라이브러리 이슈)
-              transition
-              allowHover={false}
-            />
+            <SpoonRating readonly initialValue={3.5}/>
             <Typography size="14" fontWeight="bold" color="orange2">
               3.5 숟가락
             </Typography>

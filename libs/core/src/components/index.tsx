@@ -22,5 +22,6 @@ export * from './box/ReadLabelBox';
 export * from './box/ReadStretchBox';
 export * from './containers/notice/detail/DetailNoticeContainer';
 export * from './containers/notice/ListNoticeContainer';
+export * from './rating/SpoonRating';
 export { Typography } from './Typography';
 export { BasicButton } from './button/BasicButton';
