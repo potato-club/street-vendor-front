@@ -1,36 +1,38 @@
 import styled from 'styled-components';
-import { customColor } from '../../constants';
-import { Typography } from '../Typography';
-import { FieldErrorsImpl, FieldValues, UseFormRegister } from 'react-hook-form';
+import { Control, FieldErrorsImpl, FieldValues } from 'react-hook-form';
+import { customColor, Typography } from '@street-vendor/core';
+import PhoneInput from 'react-phone-number-input/react-hook-form-input';
+
 
 interface InputProps {
   name: string;
   label?: string;
   placeholder?: string;
-  type?: React.HTMLInputTypeAttribute;
-  register: UseFormRegister<FieldValues>;
+  control: Control<FieldValues>;
   errors: Partial<FieldErrorsImpl>;
 }
 
-export const CustomInput = (props: InputProps) => {
+export const PhoneNumberInput = ({ name, control, label, placeholder, errors }: InputProps) => {
   return (
     <Wrapper>
-      {props.label && (
+      {label && (
         <Label>
           <Typography size="16" letterSpacing="-0.5px">
-            {props.label}
+            {label}
           </Typography>
         </Label>
       )}
       <Input
-        type={props.type}
-        placeholder={props.placeholder}
-        {...props.register(props.name)}
+        country="KR"
+        name="phoneInput"
+        control={control}
+        rules={{ required: true }}
+        placeholder={placeholder}
       />
       {/* 전화번호 정규식 넣으실거면 ↓↓↓
       var tel = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/
       */}
-      {props.errors[props.name] && (
+      {errors[name] && (
         <Error>
           <Typography size="16">에러Title</Typography>
         </Error>
@@ -48,7 +50,13 @@ const Wrapper = styled.article`
 const Label = styled.label`
   margin-bottom: 12px;
 `;
-const Input = styled.input`
+
+// placeHolder 를 그냥쓰면 라이브러리 내에서 타입오류를 발생시켜서 attrs 를 사용하였음.
+const Input = styled(PhoneInput).attrs(
+  ({ placeholder }: { placeholder: string }) => ({
+    placeholder,
+  })
+)`
   width: 100%;
   height: 48px;
   padding: 0px 18px;
@@ -62,4 +70,5 @@ const Input = styled.input`
     white-space: pre-wrap;
   }
 `;
+
 const Error = styled.span``;
