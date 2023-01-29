@@ -24,7 +24,7 @@ export const GetPhotoModal = (props: ModalProps) => {
           left: 0,
           right: 0,
           bottom: 0,
-          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+          backgroundColor: `${customColor.black + '88'}`,
           zIndex: 10,
           height: '100%',
           width: '100%',
@@ -113,7 +113,7 @@ const GotoAlbum = styled.button`
   height: 28px;
   border: none;
   border-radius: 20px;
-  box-shadow: 0px 3px 6px 0px #00000025;
+  box-shadow: 0px 3px 6px 0px ${customColor.black + '25'};
   background: ${customColor.orange4};
 `;
 const GotoDirect = styled.button`
@@ -124,6 +124,6 @@ const GotoDirect = styled.button`
   height: 28px;
   border: none;
   border-radius: 20px;
-  box-shadow: 0px 3px 6px 0px #00000025;
+  box-shadow: 0px 3px 6px 0px ${customColor.black + '25'};
   background: ${customColor.orange3};
 `;
