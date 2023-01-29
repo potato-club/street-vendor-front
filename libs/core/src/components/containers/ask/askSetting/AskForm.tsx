@@ -1,12 +1,13 @@
 import styled from 'styled-components';
-import { AskSelect } from '../../../form/AskSelect';
-import { useForm } from 'react-hook-form';
-import { AskInput } from '../../../form/AskInput';
-import { AskTextarea } from '../../../form/AskTextarea';
-import { AskPhoto } from '../../../form/AskPhoto';
-import { AskAgree } from '../../../form/AskAgree';
 import { useState } from 'react';
-import { AskSubmit } from '../../../form/AskSubmit';
+import { useForm } from 'react-hook-form';
+import {
+  AskSelect,
+  AskContent,
+  AskPhoto,
+  AskAgree,
+  AskSubmit,
+} from '@street-vendor/core';
 
 export const AskForm = () => {
   const {
@@ -21,6 +22,9 @@ export const AskForm = () => {
       <FormInner>
         <AskType>
           <AskSelect
+            label="문의 유형"
+            placeholder="유형을 선택해주세요."
+            value="askSelect"
             options={[
               { name: '조금주', value: 'human' },
               { name: '조흥', value: 'dog' },
@@ -29,12 +33,26 @@ export const AskForm = () => {
             errors={errors}
           />
         </AskType>
-        <AskContent>
-          <AskInput register={register} errors={errors} />
-          <AskTextarea register={register} errors={errors} watch={watch} />
-        </AskContent>
+        <AskContents>
+          <AskContent
+            label="문의 내용"
+            type="text"
+            placeholderInput="제목을 작성해주세요."
+            valueInput="askInput"
+            placeholderText={`문의 내용을 작성해주세요.\n최선을 다해 답변해드리겠습니다!:)`}
+            valueText="askTextarea"
+            register={register}
+            errors={errors}
+            watch={watch}
+          />
+        </AskContents>
         <AskImg>
-          <AskPhoto errors={errors} />
+          <AskPhoto
+            label="첨부 사진"
+            placeholder="사진은 최대 3장까지 등록 가능합니다."
+            value="askPhoto"
+            errors={errors}
+          />
         </AskImg>
         <AskCheck>
           <AskAgree
@@ -70,7 +88,7 @@ const AskType = styled.div`
   width: 100%;
   padding: 0 7%;
 `;
-const AskContent = styled.div`
+const AskContents = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
