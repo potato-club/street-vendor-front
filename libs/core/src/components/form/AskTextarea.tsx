@@ -9,6 +9,9 @@ import {
 } from 'react-hook-form';
 
 interface InputProps {
+  label: string;
+  placeholder: string;
+  value: string;
   register: UseFormRegister<FieldValues>;
   errors: Partial<FieldErrorsImpl>;
   watch: UseFormWatch<FieldValues>;
@@ -21,33 +24,46 @@ export const AskTextarea = (props: InputProps) => {
 
   return (
     <Wrapper>
+      <Label>
+        <Typography size="16" fontWeight="bold" letterSpacing="-0.5px">
+          {props.label}
+        </Typography>
+        <MaxLength>
+          <Typography size="12" color="gray" letterSpacing="-0.5px">
+            {props.watch(props.value) === undefined
+              ? 0
+              : commaFormat(props.watch(props.value).length)}
+            &nbsp;/&nbsp;{commaFormat(300)}
+          </Typography>
+        </MaxLength>
+      </Label>
       <Textarea
-        placeholder={`문의 내용을 작성해주세요.\n최선을 다해 답변해드리겠습니다!:)`}
-        maxLength={3000}
-        {...props.register('askContent')}
+        placeholder={props.placeholder}
+        maxLength={300}
+        {...props.register(props.value)}
         defaultValue={''}
       />
-      {props.errors['askContent'] && (
+      {props.errors[props.value] && (
         <Error>
           <Typography size="16">에러Textarea</Typography>
         </Error>
       )}
-      <MaxLength>
-        <Typography size="12" color="gray" letterSpacing="-0.5px">
-          {props.watch('askContent') === undefined
-            ? 0
-            : commaFormat(props.watch('askContent').length)}
-          &nbsp;/&nbsp;{commaFormat(3000)}
-        </Typography>
-      </MaxLength>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.article`
   display: flex;
+  flex-direction: column;
   width: 100%;
   position: relative;
+`;
+const Label = styled.label`
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 12px;
+  justify-content: space-between;
+  align-items: flex-end;
 `;
 const Textarea = styled.textarea`
   resize: none;
@@ -66,7 +82,7 @@ const Textarea = styled.textarea`
 `;
 const Error = styled.span``;
 const MaxLength = styled.span`
-  position: absolute;
+  display: flex;
   bottom: 20px;
   right: 24px;
   pointer-events: none;
