@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 import { FieldErrorsImpl, FieldValues, UseFormRegister, UseFormSetValue } from 'react-hook-form';
-import { customColor, Typography } from '@street-vendor/core';
+import { customColor, TimePickerModal, Typography } from '@street-vendor/core';
 import { useModal } from '../../../hooks';
-import { TimePickerModal } from './timePickerModal';
 
 interface InputProps {
   name: string;

@@ -1,4 +1,3 @@
-import { customColor, Typography } from '@street-vendor/core';
 import React, { useMemo, useState } from 'react';
 import { FieldValues, UseFormSetValue } from 'react-hook-form';
 import Modal from 'react-modal';
@@ -6,6 +5,8 @@ import styled from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { timePickerBackground } from './timePickerBackground';
 import 'swiper/css';
+import { customColor } from '../../constants';
+import { Typography } from '../Typography';
 
 const modalCustomStyles = {
   content: {
@@ -60,7 +61,7 @@ export const TimePickerModal = ({ isOpen, handleCloseModal, setValue }: Props) =
       ariaHideApp={false}
       isOpen={isOpen}
       contentLabel="TimePickerModal"
-      onRequestClose={() => handleCloseModal()}
+      // onRequestClose={() => handleCloseModal()}
     >
       <Container>
         <Typography size="24" fontWeight="bold">
