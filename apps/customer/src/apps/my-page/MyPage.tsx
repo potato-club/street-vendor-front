@@ -7,10 +7,17 @@ import { ProfileImage } from './components/ProfileImage';
 import { ProfileInfo } from './components/ProfileInfo';
 
 export const MyPage = () => {
-  const { isLoading, data } = useQueryGetMyInfo();
-  if (isLoading) {
-    return <div>로딩중</div>;
-  }
+  // const { isLoading, data } = useQueryGetMyInfo();
+  // if (isLoading) {
+  //   return <div>로딩중</div>;
+  // }
+  return (
+    <Container>
+      <ProfileImage imageUrl={''} />
+      <ProfileInfo email={'dd'} nickname={'fff'} />
+      <ButtonWithdrawal />
+    </Container>
+  );
   return (
     <Container>
       <ProfileImage imageUrl={data.profileUrl} />
@@ -39,6 +46,8 @@ const Container = styled.div`
   padding: 0px 17px;
   padding-top: 55px;
   height: 100vh;
+  max-width: 400px;
+  margin: auto;
 `;
 
 const Button = styled.button`

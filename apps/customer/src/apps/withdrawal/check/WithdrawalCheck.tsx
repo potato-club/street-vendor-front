@@ -105,6 +105,8 @@ const Container = styled.div`
   padding: 0px 17px;
   padding-top: 55px;
   height: 100vh;
+  max-width: 400px;
+  margin: auto;
 `;
 const NoticeWrapper = styled.article`
   display: flex;

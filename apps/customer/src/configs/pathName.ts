@@ -12,4 +12,8 @@ export const pathName = {
     CHECK: '/withdrawal/check',
     OUTRO: '/withdrawal/outro',
   },
+  ORDER_HISTORY: {
+    LIST: '/order-history',
+    DETAIL: '/order-history/detail',
+  },
 };

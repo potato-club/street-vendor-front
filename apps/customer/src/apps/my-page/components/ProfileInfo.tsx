@@ -19,11 +19,11 @@ export const ProfileInfo = ({ email, nickname }: Props) => {
     >
       <Container>
         <CustomInput
-          name="name"
+          name="email"
           register={register}
           errors={undefined}
-          placeholder="이름"
-          label="이름"
+          placeholder="이메일"
+          label="이메일"
         />
         <CustomInput
           name="nickName"
