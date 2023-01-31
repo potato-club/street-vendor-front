@@ -28,11 +28,6 @@ export const Menu = () => {
         <Item />
       </ItemWrapper>
       <ButtonWrapper>
-        <BasicButton backgroundColor="orange3" flexGrow={1} shadow>
-          <Typography size="16" color="white" fontWeight="bold">
-            장바구니
-          </Typography>
-        </BasicButton>
         <BasicButton backgroundColor="orange3" flexGrow={2} shadow>
           <Typography size="16" color="white" fontWeight="bold">
             바로 주문하기

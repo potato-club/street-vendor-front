@@ -58,7 +58,11 @@ export const Order = () => {
           </FlexColumn>
           <Line px={4} />
           <TotalPrice />
-          <BottomButton buttonText="주문하기" type="submit" />
+          <BottomButton
+            buttonText="주문하기"
+            type="submit"
+            TopText="꼭 가게 방문 예정 시간에 방문해주세요!"
+          />
         </Form>
       </Wrapper>
     </Container>
@@ -70,7 +74,6 @@ const Container = styled.div`
   flex-direction: column;
   position: relative;
   background-color: ${customColor.beige};
-  min-height: 100vh;
   padding-bottom: 200px;
 `;
 
