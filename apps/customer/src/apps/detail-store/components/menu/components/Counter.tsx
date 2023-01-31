@@ -35,7 +35,7 @@ const Wrapper = styled.div`
   border: 1px solid ${customColor.gray}80;
   border-radius: 24px;
   gap: 4px;
-  padding: 2px 8px 2px 8px;
+  padding: 4px 20px;
 `;
 
 const Button = styled.button`
