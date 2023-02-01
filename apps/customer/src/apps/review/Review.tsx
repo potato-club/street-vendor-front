@@ -2,8 +2,10 @@ import {
   AskPhoto,
   AskSubmit,
   AskTextarea,
+  CustomModal,
   Typography,
 } from '@street-vendor/core';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 
@@ -13,8 +15,25 @@ export const Review = () => {
     formState: { errors },
     watch,
   } = useForm();
+  const [isback, setIsBack] = useState(false);
   return (
     <Container>
+      <CustomModal
+        isTwoButtons
+        isModalOpen={isback}
+        closeModal={() => {
+          setIsBack(false);
+        }}
+        content="리뷰 작성을 취소하시겠습니까?"
+        button1Label="예"
+        button2Label="아니오"
+        onClickButton1={() => {
+          setIsBack(true);
+        }}
+        onClickButton2={() => {
+          setIsBack(false);
+        }}
+      />
       <ContainerInner>
         <Spoon>
           <SpoonText>
@@ -45,6 +64,14 @@ export const Review = () => {
             errors={errors}
           />
         </ReviewPhoto>
+        <Button
+          type="button"
+          onClick={() => {
+            setIsBack(true);
+          }}
+        >
+          앙
+        </Button>
         <ReviewRegister>
           <AskSubmit isAgreeChecked={true} onClick={() => {}} />
         </ReviewRegister>
@@ -96,4 +123,10 @@ const ReviewRegister = styled.div`
   width: 100%;
   bottom: 0;
   padding: 0 7%;
+`;
+const Button = styled.button`
+  display: flex;
+  margin: 20px 7%;
+  justify-content: center;
+  padding: 8px 0;
 `;
