@@ -30,7 +30,7 @@ export const CustomInput = (props: InputProps) => {
       {/* 전화번호 정규식 넣으실거면 ↓↓↓
       var tel = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/
       */}
-      {props.errors[props.name] && (
+      {props.errors?.[props.name] && (
         <Error>
           <Typography size="16">에러Title</Typography>
         </Error>

@@ -147,6 +147,9 @@ textarea {
   resize: none;
 }
 
+input {
+  border: none;
+}
 button {
   border: 0;
 }
