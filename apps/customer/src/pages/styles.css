@@ -128,7 +128,8 @@ table {
 
 html,
 body,
-__next {
+#__next,
+main {
   height: 100%;
 }
 

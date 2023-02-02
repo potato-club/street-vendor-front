@@ -5,6 +5,7 @@ import { Typography } from '../Typography';
 type Props = {
   onClick: () => void;
 };
+
 export const CardNotice = ({ onClick }: Props) => {
   return (
     <Container onClick={onClick}>
