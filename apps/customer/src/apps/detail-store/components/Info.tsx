@@ -99,7 +99,7 @@ const GrayLine = styled.hr`
   margin-bottom: 40px;
   width: 40px;
   opacity: 0.3;
-  border: 3px solid #7c7c7c;
+  border-bottom: 3px solid #7c7c7c;
   border-radius: 24px;
 `;
 

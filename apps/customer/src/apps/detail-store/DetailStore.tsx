@@ -2,12 +2,21 @@ import React from 'react';
 import { customColor } from '@street-vendor/core';
 import { Info, StoreImage, Menu } from './components';
 import styled from 'styled-components';
+import { useSpring, animated } from '@react-spring/web';
 
 export const DetailStore = () => {
+ const props = useSpring({
+   from: { y: -10 },
+   to: { y: -40 },
+   config: {
+    tension: 100,
+   }
+ });
+
   return (
     <Container>
       <StoreImage />
-      <ContentWrapper>
+      <ContentWrapper style={props}>
         <Info />
         <Line />
         <Menu />
@@ -28,11 +37,14 @@ const Container = styled.div`
   /* border-top-right-radius: 24px; */
 `;
 
-const ContentWrapper = styled.div`
+const ContentWrapper = styled(animated.div)`
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: ${customColor.white};
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
 `;
 
 const Line = styled.hr`
