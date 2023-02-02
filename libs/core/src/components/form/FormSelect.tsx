@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { customColor } from '../../constants';
 import { Typography } from '../Typography';
 import { FieldErrorsImpl, FieldValues, UseFormRegister } from 'react-hook-form';
-import { AskOption } from './AskOption';
+import { AskOption } from './FormOption';
 
 interface OptionProps {
   name: string;
