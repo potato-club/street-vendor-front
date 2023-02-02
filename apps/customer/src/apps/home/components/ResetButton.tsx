@@ -44,7 +44,10 @@ export const ResetButton: React.FC<ResetButtonProps> = (props) => {
 
 const Container = styled.button`
   display: flex;
-  padding: 8px;
+  width: 48px;
+  height: 48px;
+  justify-content: center;
+  align-items: center;
   border-radius: 12px;
   box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.16);
   background-color: ${customColor.orange2};
