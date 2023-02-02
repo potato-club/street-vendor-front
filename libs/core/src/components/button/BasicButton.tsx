@@ -13,10 +13,11 @@ type ButtonStyle = {
   shadow?: boolean;
   type?: 'submit' | 'reset' | 'button';
   children: React.ReactNode;
+  onClick?: () => void;
 };
 export const BasicButton = (props: ButtonStyle) => {
   return (
-    <Container style={props.style} {...props}>
+    <Container style={props.style} {...props} onClick={props.onClick}>
       {props.children}
     </Container>
   );

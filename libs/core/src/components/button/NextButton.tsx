@@ -39,7 +39,6 @@ const Button = styled.button`
   align-items: center;
   justify-content: center;
   background: none;
-  border: none;
   position: relative;
 `;
 const Content = styled.span`

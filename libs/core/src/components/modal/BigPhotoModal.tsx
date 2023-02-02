@@ -13,13 +13,14 @@ const modalStyle = {
     backgroundColor: `${customColor.black}90`,
   },
   content: {
+    '--imageSize': 'min(80vw, 80vh)',
     overflow: 'hidden',
     background: 'none',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%,-50%)',
-    width: '80%',
-    height: '80%',
+    width: 'var(--imageSize)',
+    height: 'var(---imageSize)',
     border: 'none',
     padding: 0,
   },
@@ -29,9 +30,10 @@ type Props = {
   isOpen: boolean;
   handleCloseModal: () => void;
   src: string | string[];
+  initialIndex?: number;
 };
 
-export const BigPhotoModal = ({ isOpen, handleCloseModal, src }: Props) => {
+export const BigPhotoModal = ({ isOpen, handleCloseModal, src, initialIndex }: Props) => {
   // src 가 배열인경우
   if (Array.isArray(src))
     return (
@@ -44,6 +46,7 @@ export const BigPhotoModal = ({ isOpen, handleCloseModal, src }: Props) => {
         <StyledSwiper
           modules={[Navigation]}
           navigation
+          initialSlide={initialIndex}
           spaceBetween={100}
         >
           {src.map((data, index) => (
