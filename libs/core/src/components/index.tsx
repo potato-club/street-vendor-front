@@ -24,6 +24,7 @@ export * from './box/ReadLabelBox';
 export * from './box/ReadStretchBox';
 export * from './containers/notice/detail/DetailNoticeContainer';
 export * from './containers/notice/ListNoticeContainer';
+export * from './containers/ask';
 export * from './rating/SpoonRating';
 export * from './timePicker/TimePickerModal';
 export { Typography } from './Typography';
