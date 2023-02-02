@@ -4,9 +4,9 @@ import { Typography, customColor, SpoonRating } from '@street-vendor/core';
 import {
   Arrow,
   SpeechBubble,
-  Star,
   Tteokbokki,
 } from '../Icons';
+import { Star } from '../../common/icons';
 
 export const Info = () => {
   return (
