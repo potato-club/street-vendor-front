@@ -59,8 +59,8 @@ const TypographyText = styled.div<TypographyProps & typographyDefault>`
   text-align: ${({ textAlign }) => textAlign};
   font-weight: ${({ fontWeight }) => fontWeight};
   letter-spacing: ${({ letterSpacing }) => letterSpacing ?? 'normal'};
-  ${({ fontHeight }) =>
-    fontHeight === 'normal' ? '' : `line-height: ${fontHeight};`};
+  line-height: ${({ fontHeight }) => fontHeight ? fontHeight : 'normal'};
+
   ${({ fontHidden }) =>
     fontHidden ? 'overflow: hidden;text-overflow: ellipsis;' : ''};
 

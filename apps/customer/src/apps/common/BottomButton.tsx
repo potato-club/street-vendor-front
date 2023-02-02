@@ -1,30 +1,44 @@
 import { BasicButton, Typography } from '@street-vendor/core';
 import React from 'react'
 import styled from 'styled-components';
-
-export const OrderButton = () => {
+type Props = {
+  buttonText: string;
+  type?: 'submit' | 'reset' | 'button';
+  TopText?: string;
+};
+export const BottomButton = ({ buttonText, type, TopText }: Props) => {
   return (
     <Container>
+      {TopText && <TopTextWrapper>
+        <Typography size="16" fontWeight="bold">
+          {TopText}
+        </Typography>
+      </TopTextWrapper>}
       <BasicButton
         backgroundColor="orange3"
         maxWidth={320}
         height={54}
-        borderRadius={24}
-        style={{ width: '60%' }}
+        style={{width: '100%'}}
+        shadow
+        type={type}
       >
         <Typography size="20" color="white" fontWeight="bold">
-          주문하기
+          {buttonText}
         </Typography>
       </BasicButton>
     </Container>
   );
-}
+};
 
 const Container = styled.div`
   position: absolute;
   bottom: 80px;
   display: flex;
   align-items: center;
+  flex-direction: column;
   justify-content: center;
   width: 100%;
+  gap: 20px 0;
 `;
+
+const TopTextWrapper = styled.div``

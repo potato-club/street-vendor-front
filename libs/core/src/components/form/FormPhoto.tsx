@@ -5,6 +5,9 @@ import { AddPhotoButton } from '../button/AddPhotoButton';
 import { AddedPhotoButton } from '../button/AddedPhotoButton';
 
 interface InputProps {
+  label: string;
+  placeholder: string;
+  value: string;
   errors: Partial<FieldErrorsImpl>;
 }
 
@@ -13,7 +16,7 @@ export const AskPhoto = (props: InputProps) => {
     <Wrapper>
       <Label>
         <Typography size="16" fontWeight="bold" letterSpacing="-0.5px">
-          첨부 사진
+          {props.label}
         </Typography>
       </Label>
       <Images>
@@ -21,11 +24,11 @@ export const AskPhoto = (props: InputProps) => {
         <AddPhotoButton errors={props.errors} />
       </Images>
       <Typography size="12" color="darkGray" letterSpacing="-0.5px">
-        사진은 최대 3장까지 등록 가능합니다.
+        {props.placeholder}
       </Typography>
-      {props.errors['askTitle'] && (
+      {props.errors[props.value] && (
         <Error>
-          <Typography size="16">에러Title</Typography>
+          <Typography size="16">에러Photo</Typography>
         </Error>
       )}
     </Wrapper>

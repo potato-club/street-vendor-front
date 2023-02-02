@@ -1,6 +1,6 @@
 import { customColor } from '../../constants';
 import { Typography } from '../Typography';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { useState } from 'react';
 
 interface BoxProps {
@@ -37,7 +37,7 @@ export const ReadStretchBox = (props: BoxProps) => {
             >
               <path
                 d="M1.83398 1L7.00098 5.183L12.167 1"
-                stroke="#FF8B00"
+                stroke={customColor.orange2}
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -74,8 +74,20 @@ const Box = styled.button<BoxStyle>`
   transition: height 0.3s ease;
   ${(props) =>
     props.isFold
-      ? 'display: block; height: 48px; padding: 16px 52px 16px 18px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;'
-      : 'display:flex; height: 225px; padding: 16px 18px; text-align:left;'}
+      ? css`
+          display: block;
+          height: 48px;
+          padding: 16px 52px 16px 18px;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+        `
+      : css`
+          display: flex;
+          height: 225px;
+          padding: 16px 18px;
+          text-align: left;
+        `}
 `;
 const ArrowIcon = styled.div`
   display: flex;

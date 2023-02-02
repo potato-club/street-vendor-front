@@ -33,7 +33,6 @@ const Button = styled.button`
   justify-content: center;
   align-items: center;
   background: none;
-  border: none;
   position: relative;
   background: ${customColor.beige};
   border-radius: 12px;

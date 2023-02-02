@@ -127,10 +127,8 @@ table {
 }
 
 html,
-body {
-  height: 100%;
-}
-#__next {
+body,
+__next {
   height: 100%;
 }
 
@@ -138,7 +136,6 @@ body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  transition: padding, font-size 0.3s ease;
 }
 
 a {
@@ -151,4 +148,11 @@ textarea {
 
 input {
   border: none;
+}
+button {
+  border: 0;
+}
+
+hr {
+  margin: 0;
 }

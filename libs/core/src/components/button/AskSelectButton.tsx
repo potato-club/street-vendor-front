@@ -5,7 +5,7 @@ import { Typography } from '../Typography';
 interface ButtonProps {
   content: string;
   isSelected: boolean;
-  onClick: () => void;
+  onClick?: () => void;
 }
 interface ButtonStyledProps {
   content?: string;
@@ -35,7 +35,6 @@ const Button = styled.button`
   align-items: center;
   justify-content: center;
   background: none;
-  border: none;
   gap: 6px;
 `;
 const UnderBar = styled.div<ButtonStyledProps>`
