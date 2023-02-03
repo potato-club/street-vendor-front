@@ -1,6 +1,6 @@
-import axios from 'axios';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
+import { authApi } from '../../apis/controller/auth.api';
 
 const GooglePage = () => {
   const { asPath } = useRouter();
@@ -10,18 +10,8 @@ const GooglePage = () => {
     const parsedHash = new URLSearchParams(hash);
 
     const accessToken = parsedHash.get('access_token');
-
-    axios
-      .post(
-        'https://dev.street-vendor.shop/api/v1/auth/google',
-        {
-          requestToken: accessToken,
-        },
-        { headers: { 'Content-Type': 'application/json' } }
-      )
-      .then((value) => {
-        console.log(value);
-      });
+    console.log(accessToken);
+    authApi.googleLogin({ accessToken });
   }, [asPath]);
 
   return <div>로그인 확인 중...</div>;

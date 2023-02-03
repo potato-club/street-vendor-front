@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Image from 'next/image';
-import ProfileImageDefault from '../../../../public/profile_img_default.png';
+import ProfileImageDefault from '../../../../public/img/profile_img_default.png';
 import { customColor, Typography } from '@street-vendor/core';
 import { useProfileImage } from './ProfileImage.hook';
 
