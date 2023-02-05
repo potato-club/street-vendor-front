@@ -1,15 +1,47 @@
-// TimePicker Test Page
-import { customColor, Typography } from '@street-vendor/core';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
+import { FieldValues, UseFormSetValue } from 'react-hook-form';
+import Modal from 'react-modal';
 import styled from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { timePickerBackground } from './timePickerBackground';
+import 'swiper/css';
+import { customColor } from '../../constants';
+import { Typography } from '../Typography';
 
-export default function TimePickerPage() {
-  const hours = useMemo(() => Array.from(new Array(12), (_, i) => i + 1), []);
+const modalCustomStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 'min(325px, 90%)',
+    height: 'min(470px, 100%)',
+    overflow: 'hidden',
+    padding: 0,
+    border: 'none',
+    backgroundColor: 'transparent',
+    borderRadius: '20px',
+  },
+  overlay: {
+    background: `${customColor.gray}80`,
+  },
+};
+
+type Props = {
+  isOpen: boolean;
+  handleCloseModal: () => void;
+  setValue: UseFormSetValue<FieldValues>;
+};
+export const TimePickerModal = ({ isOpen, handleCloseModal, setValue }: Props) => {
+  const formatTime = (data: { toString: () => string; }) => {
+    return data.toString().padStart(2, '0');
+  };
+
+  const hours = useMemo(() => Array.from(new Array(12), (_, i) => formatTime((i + 1))), []);
+
+
 
   const minute = useMemo(
-    () => Array.from(new Array(60), (_, i) => String(i).padStart(2, '0')),
+    () => Array.from(new Array(60), (_, i) => formatTime(i)),
     []
   );
 
@@ -17,17 +49,21 @@ export default function TimePickerPage() {
   const [activeHours, setActiveHours] = useState<number>(1);
   const [activeMinute, setActiveMinute] = useState<number>(0);
 
-  useEffect(() => {
-    console.log(activeHours);
-  }, [activeHours]);
 
-  useEffect(() => {
-    console.log(activeMinute);
-  }, [activeMinute]);
+  const handleConfirmButton = () => {
+    setValue('time', `${atNoon === 0 ? '오전' : '오후'} ${formatTime(activeHours)} : ${formatTime(activeMinute)}`);
+    handleCloseModal();
+  }
 
   return (
-    <Container>
-      <Wrapper>
+    <Modal
+      style={modalCustomStyles}
+      ariaHideApp={false}
+      isOpen={isOpen}
+      contentLabel="TimePickerModal"
+      // onRequestClose={() => handleCloseModal()}
+    >
+      <Container>
         <Typography size="24" fontWeight="bold">
           가게 방문 예정 시간
         </Typography>
@@ -43,6 +79,7 @@ export default function TimePickerPage() {
               <Typography
                 size="20"
                 style={{ display: 'flex', justifyContent: 'center' }}
+                notBreak
               >
                 오전
               </Typography>
@@ -51,6 +88,7 @@ export default function TimePickerPage() {
               <Typography
                 size="20"
                 style={{ display: 'flex', justifyContent: 'center' }}
+                notBreak
               >
                 오후
               </Typography>
@@ -62,6 +100,7 @@ export default function TimePickerPage() {
             initialSlide={activeHours - 1}
             loop
             centeredSlides
+            loopedSlides={12}
             direction="vertical"
           >
             {hours.map((data, i) => (
@@ -84,6 +123,7 @@ export default function TimePickerPage() {
             initialSlide={activeMinute}
             loop
             centeredSlides
+            loopedSlides={12}
             direction="vertical"
           >
             {minute.map((data, i) => (
@@ -99,46 +139,31 @@ export default function TimePickerPage() {
           </StyledSwiper>
         </TimeWrapper>
         <ButtonWrapper>
-          <Button onClick={() => alert('취소')}>취소</Button>
-          <Button
-            onClick={() =>
-              alert(
-                `${
-                  atNoon === 0 ? '오전' : '오후'
-                }, ${activeHours}시, ${activeMinute}분`
-              )
-            }
-          >
-            확인
-          </Button>
+          <Button onClick={() => handleCloseModal()}>취소</Button>
+          <Button onClick={handleConfirmButton}>확인</Button>
         </ButtonWrapper>
-      </Wrapper>
-    </Container>
+      </Container>
+    </Modal>
   );
-}
+};
 
 const Container = styled.div`
   display: flex;
   width: 100%;
-  height: 100vh;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-`;
-
-const Wrapper = styled.div`
-  width: 90%;
-  max-width: 325px;
   height: 100%;
-  max-height: 470px;
-  display: flex;
+  align-items: center;
+  position: relative;
   background: url("data:image/svg+xml,${timePickerBackground}") no-repeat center;
   background-size: cover;
+  justify-content: center;
+  position: relative;
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 40px;
 `;
+
 
 const TimeWrapper = styled.div`
   display: flex;
@@ -151,7 +176,6 @@ const TimeWrapper = styled.div`
 const StyledSwiper = styled(Swiper)`
   height: 100%;
   width: 20%;
-  overflow: hidden;
   div div :not(.swiper-slide-active) {
     div {
       color: ${customColor.darkGray}80;
