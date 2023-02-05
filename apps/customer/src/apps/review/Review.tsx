@@ -3,10 +3,11 @@ import {
   AskSubmit,
   AskTextarea,
   CustomModal,
+  SpoonRatingForm,
   Typography,
 } from '@street-vendor/core';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useCallback, useState } from 'react';
+import { FieldValues, useForm } from 'react-hook-form';
 import styled from 'styled-components';
 
 export const Review = () => {
@@ -14,8 +15,13 @@ export const Review = () => {
     register,
     formState: { errors },
     watch,
+    handleSubmit,
   } = useForm();
   const [isback, setIsBack] = useState(false);
+  const submit = useCallback((data: FieldValues) => {
+    console.log(data);
+  }, []);
+
   return (
     <Container>
       <CustomModal
@@ -34,7 +40,7 @@ export const Review = () => {
           setIsBack(false);
         }}
       />
-      <ContainerInner>
+      <ContainerInner onSubmit={handleSubmit(submit)}>
         <Spoon>
           <SpoonText>
             <Typography size="16" fontWeight="bold" letterSpacing="-0.9px">
@@ -43,7 +49,7 @@ export const Review = () => {
             <Typography size="12" color="darkGray" letterSpacing="-0.6px">
               맛있으셨나요? 맛있었던만큼 숟가락 갯수를 선택해주세요.
             </Typography>
-            숟가락
+            <SpoonRatingForm />
           </SpoonText>
         </Spoon>
         <ReviewText>
