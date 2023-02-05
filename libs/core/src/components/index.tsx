@@ -6,6 +6,7 @@ export * from './button/NextButton';
 export * from './modal/BigPhotoModal';
 export * from './modal/GetPhotoModal';
 export * from './modal/CustomModal';
+export * from './modal/CustomWhiteModal';
 export * from './form/FormAgree';
 export * from './form/FormInput';
 export * from './form/FormOption';
