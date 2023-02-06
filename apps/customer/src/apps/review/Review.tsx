@@ -15,6 +15,7 @@ export const Review = () => {
     register,
     formState: { errors },
     watch,
+    control,
     handleSubmit,
   } = useForm();
   const [isback, setIsBack] = useState(false);
@@ -49,7 +50,11 @@ export const Review = () => {
             <Typography size="12" color="darkGray" letterSpacing="-0.6px">
               맛있으셨나요? 맛있었던만큼 숟가락 갯수를 선택해주세요.
             </Typography>
-            <SpoonRatingForm />
+            <SpoonRatingForm
+              name="reviewRating"
+              control={control}
+              errors={errors}
+            />
           </SpoonText>
         </Spoon>
         <ReviewText>
