@@ -26,6 +26,7 @@ export * from './box/ReadStretchBox';
 export * from './containers/notice/detail/DetailNoticeContainer';
 export * from './containers/notice/ListNoticeContainer';
 export * from './rating/SpoonRating';
+export * from './rating/SpoonRatingForm';
 export * from './timePicker/TimePickerModal';
 export { Typography } from './Typography';
 export { BasicButton } from './button/BasicButton';
