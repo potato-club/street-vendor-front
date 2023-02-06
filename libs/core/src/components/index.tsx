@@ -8,6 +8,7 @@ export * from './modal/BigPhotoModal';
 export * from './modal/GetPhotoModal';
 
 export * from './modal/CustomModal';
+export * from './modal/CustomWhiteModal';
 export * from './form/FormAgree';
 export * from './form/FormInput';
 export * from './form/FormOption';
@@ -40,6 +41,7 @@ export * from './navigation/AppBar';
 
 export * from './containers/ask';
 export * from './rating/SpoonRating';
+export * from './rating/SpoonRatingForm';
 export * from './timePicker/TimePickerModal';
 
 export { Typography } from './Typography';
