@@ -1,8 +1,9 @@
 import React from 'react';
 import { customColor } from '@street-vendor/core';
-import { Info, StoreImage, Menu } from './components';
+import { Info, Menu } from './components';
 import styled from 'styled-components';
 import { useSpring, animated } from '@react-spring/web';
+import { MultiPhotoDisplay } from '../common/MultiPhotoDisplay';
 
 export const DetailStore = () => {
  const props = useSpring({
@@ -15,7 +16,7 @@ export const DetailStore = () => {
 
   return (
     <Container>
-      <StoreImage />
+      <MultiPhotoDisplay />
       <ContentWrapper style={props}>
         <Info />
         <Line />
