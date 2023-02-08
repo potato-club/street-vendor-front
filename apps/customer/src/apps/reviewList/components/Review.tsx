@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { MultiPhotoDisplay } from '../../common/MultiPhotoDisplay';
 import { Menu } from './index';
+import { AiOutlineMore } from 'react-icons/ai';
 
 export const Review = () => {
   return (
@@ -38,6 +39,9 @@ export const Review = () => {
             </Typography>
           </FlexBox>
         </div>
+        <IconWrapper>
+          <AiOutlineMore size={20} />
+        </IconWrapper>
       </UserWrapper>
       <StyledSwiper slidesPerView="auto">
         <SwiperSlide style={{ width: '70%' }}>
@@ -80,6 +84,7 @@ const Container = styled.div`
 `;
 
 const UserWrapper = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   padding-right: 20px;
@@ -95,4 +100,10 @@ const FlexBox = styled.div`
 const StyledSwiper = styled(Swiper)`
   width: 100%;
   height: 100%;
+`;
+
+const IconWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  right: 20px;
 `;
