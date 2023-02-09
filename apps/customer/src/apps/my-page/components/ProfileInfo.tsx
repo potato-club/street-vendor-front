@@ -10,7 +10,6 @@ type Props = {
 export const ProfileInfo = ({ email, nickname }: Props) => {
   const { register, handleSubmit } = useForm();
   const { mutate } = useQueryEditMyNickname();
-
   return (
     <form
       onSubmit={handleSubmit((data) => {
