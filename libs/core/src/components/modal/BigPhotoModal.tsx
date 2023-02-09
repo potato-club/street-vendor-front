@@ -11,6 +11,7 @@ const modalStyle = {
   overlay: {
     inset: 0,
     backgroundColor: `${customColor.black}90`,
+    zIndex: 99,
   },
   content: {
     '--imageSize': 'min(80vw, 80vh)',
@@ -23,6 +24,7 @@ const modalStyle = {
     height: 'var(---imageSize)',
     border: 'none',
     padding: 0,
+    zIndex: 99,
   },
 };
 
@@ -33,7 +35,12 @@ type Props = {
   initialIndex?: number;
 };
 
-export const BigPhotoModal = ({ isOpen, handleCloseModal, src, initialIndex }: Props) => {
+export const BigPhotoModal = ({
+  isOpen,
+  handleCloseModal,
+  src,
+  initialIndex,
+}: Props) => {
   // src 가 배열인경우
   if (Array.isArray(src))
     return (
@@ -74,12 +81,7 @@ export const BigPhotoModal = ({ isOpen, handleCloseModal, src, initialIndex }: P
       style={modalStyle}
     >
       <ImageWrapper>
-        <Image
-          src={src}
-          alt={'menu'}
-          fill
-          style={{ objectFit: 'contain' }}
-        />
+        <Image src={src} alt={'menu'} fill style={{ objectFit: 'contain' }} />
       </ImageWrapper>
     </Modal>
   );
