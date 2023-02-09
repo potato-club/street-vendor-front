@@ -1,5 +1,5 @@
 import sendApi from '../sendApi';
-import { RequestToken } from './auth.api.type';
+import { RequestRegister, RequestToken } from './auth.api.type';
 
 export const authApi = {
   googleLogin: async ({ accessToken }: RequestToken) => {
@@ -33,6 +33,10 @@ export const authApi = {
   },
   withdrawal: async () => {
     const response = await sendApi.post('/api/v1/sign-out', {});
+    return response.data;
+  },
+  signUp: async (params: RequestRegister) => {
+    const response = await sendApi.post('/api/v1/sign-up', params);
     return response.data;
   },
 };
