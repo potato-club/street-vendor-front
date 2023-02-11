@@ -7,21 +7,15 @@ import { ProfileImage } from './components/ProfileImage';
 import { ProfileInfo } from './components/ProfileInfo';
 
 export const MyPage = () => {
-  // const { isLoading, data } = useQueryGetMyInfo();
-  // if (isLoading) {
-  //   return <div>로딩중</div>;
-  // }
-  return (
-    <Container>
-      <ProfileImage imageUrl={''} />
-      <ProfileInfo email={'dd'} nickname={'fff'} />
-      <ButtonWithdrawal />
-    </Container>
-  );
+  const { isLoading, data } = useQueryGetMyInfo();
+  if (isLoading) {
+    return <div>로딩중</div>;
+  }
+
   return (
     <Container>
       <ProfileImage imageUrl={data.profileUrl} />
-      <ProfileInfo email={data.email} nickname={data.nickName} />
+      <ProfileInfo email={data.email} nickname={data.nickname} />
       <ButtonWithdrawal />
     </Container>
   );

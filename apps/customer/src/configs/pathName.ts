@@ -1,8 +1,7 @@
 export const pathName = {
   INDEX: '/',
-  LOGIN: {
-    INDEX: '/login',
-  },
+  LOGIN: '/login',
+
   NOTICE: {
     LIST: '/notice',
     DETAIL: '/notice/detail',
@@ -29,4 +28,6 @@ export const pathName = {
       },
     },
   },
+  REGISTER: '/register',
+  HOME: '/home',
 };
