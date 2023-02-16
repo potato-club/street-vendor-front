@@ -6,9 +6,10 @@ import {
   SpoonRatingForm,
   Typography,
 } from '@street-vendor/core';
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
 import styled from 'styled-components';
+import { useQueryPostReview } from '../../hooks/query/review/useQueryPostReview';
 
 export const Review = () => {
   const {
@@ -18,10 +19,11 @@ export const Review = () => {
     control,
     handleSubmit,
   } = useForm();
+  const { mutate } = useQueryPostReview();
   const [isback, setIsBack] = useState(false);
-  const submit = useCallback((data: FieldValues) => {
-    console.log(data);
-  }, []);
+  const submit = (data: FieldValues) => {
+    mutate({ review: data, storeId: '1' });
+  };
 
   return (
     <Container>
@@ -75,14 +77,6 @@ export const Review = () => {
             errors={errors}
           />
         </ReviewPhoto>
-        <Button
-          type="button"
-          onClick={() => {
-            setIsBack(true);
-          }}
-        >
-          앙
-        </Button>
         <ReviewRegister>
           <AskSubmit isAgreeChecked={true} onClick={() => {}} />
         </ReviewRegister>
