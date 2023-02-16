@@ -128,7 +128,8 @@ table {
 
 html,
 body,
-__next {
+#__next,
+main {
   height: 100%;
 }
 
@@ -146,6 +147,13 @@ textarea {
   resize: none;
 }
 
+input {
+  border: none;
+}
 button {
   border: 0;
+}
+
+hr {
+  margin: 0;
 }

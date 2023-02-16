@@ -31,7 +31,7 @@ export const CustomModal = (props: ModalProps) => {
           left: 0,
           right: 0,
           bottom: 0,
-          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+          backgroundColor: `${customColor.black + '88'}`,
           zIndex: 10,
           height: '100%',
           width: '100%',
@@ -111,7 +111,7 @@ const Button1 = styled.button<ModalStyle>`
   border-radius: 20px;
   align-items: center;
   justify-content: center;
-  box-shadow: 0px 3px 6px 0px #00000025;
+  box-shadow: 0px 3px 6px 0px ${customColor.black + '25'};
   &:active {
     background: ${customColor.orange4};
     ${(props) => props.isTwoButtons && `background: ${customColor.white};`}
@@ -125,5 +125,5 @@ const Button2 = styled.button`
   border-radius: 20px;
   align-items: center;
   justify-content: center;
-  box-shadow: 0px 3px 6px 0px #00000025;
+  box-shadow: 0px 3px 6px 0px ${customColor.black + '25'};
 `;
