@@ -33,9 +33,9 @@ export const AskPhoto = (props: InputProps) => {
         {images.map((i, id) => (
           <AddedPhotoButton key={id + 1} src={i} errors={props.errors} />
         ))}
-        {props.watch(props.value).length < 4 && (
+        {props.watch(props.value)?.length < 4 && (
           <AddPhotoButton
-            value={props.value + `[${props.watch(props.value).length}]`}
+            value={props.value + `[${props.watch(props.value)?.length}]`}
             register={props.register}
             setImages={(image: string) => {
               setImages([...images, image]);
@@ -46,11 +46,6 @@ export const AskPhoto = (props: InputProps) => {
       <Typography size="12" color="darkGray" letterSpacing="-0.5px">
         {props.placeholder}
       </Typography>
-      {props.errors[props.value] && (
-        <Error>
-          <Typography size="16">에러Photo</Typography>
-        </Error>
-      )}
     </Wrapper>
   );
 };
@@ -69,4 +64,3 @@ const Images = styled.div`
   width: 100%;
   gap: 0 18px;
 `;
-const Error = styled.span``;

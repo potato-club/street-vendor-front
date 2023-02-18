@@ -7,9 +7,15 @@ import {
   Typography,
 } from '@street-vendor/core';
 import { useState } from 'react';
-import { FieldValues, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { useQueryPostReview } from '../../hooks/query/review/useQueryPostReview';
+
+interface FieldValues {
+  reviewRating: number;
+  reviewContent: string;
+  reviewPhoto: string | FileList[];
+}
 
 export const Review = () => {
   const {
@@ -18,16 +24,21 @@ export const Review = () => {
     watch,
     control,
     handleSubmit,
-  } = useForm();
+  } = useForm({
+    defaultValues: { reviewRating: 0, reviewContent: '', reviewPhoto: [''] },
+  });
   const { mutate } = useQueryPostReview();
   const [isback, setIsBack] = useState(false);
   const submit = (data: FieldValues) => {
-    mutate({ review: data, storeId: '1' });
+    // mutate({ review: data, storeId: '1' });
+    console.log(data);
   };
+  console.log(watch('reviewPhoto'));
+  console.log(watch('reviewContent'));
 
   return (
     <Container>
-      <CustomModal
+      {/* <CustomModal
         isTwoButtons
         isModalOpen={isback}
         closeModal={() => {
@@ -42,7 +53,7 @@ export const Review = () => {
         onClickButton2={() => {
           setIsBack(false);
         }}
-      />
+      /> */}
       <ContainerInner onSubmit={handleSubmit(submit)}>
         <Spoon>
           <SpoonText>
@@ -75,10 +86,17 @@ export const Review = () => {
             value="reviewPhoto"
             placeholder="사진은 최대 3장까지 등록 가능합니다."
             errors={errors}
+            watch={watch}
+            register={register}
           />
         </ReviewPhoto>
         <ReviewRegister>
-          <AskSubmit isAgreeChecked={true} onClick={() => {}} />
+          <AskSubmit
+            isAgreeChecked={true}
+            onClick={() => {
+              console.log();
+            }}
+          />
         </ReviewRegister>
       </ContainerInner>
     </Container>
@@ -124,14 +142,8 @@ const ReviewPhoto = styled.div`
 `;
 const ReviewRegister = styled.div`
   display: flex;
-  position: absolute;
+  /* position: absolute; */
   width: 100%;
   bottom: 0;
   padding: 0 7%;
-`;
-const Button = styled.button`
-  display: flex;
-  margin: 20px 7%;
-  justify-content: center;
-  padding: 8px 0;
 `;
