@@ -4,19 +4,17 @@ import {
   FieldErrorsImpl,
   FieldValues,
   UseFormRegister,
-  UseFormSetValue,
   UseFormWatch,
 } from 'react-hook-form';
 import { AddPhotoButton } from '../button/AddPhotoButton';
 import { AddedPhotoButton } from '../button/AddedPhotoButton';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 interface InputProps {
   label: string;
   placeholder: string;
   value: string;
   register: UseFormRegister<FieldValues>;
-  setValue: UseFormSetValue<FieldValues>;
   watch: UseFormWatch<FieldValues>;
   errors: Partial<FieldErrorsImpl>;
 }
@@ -39,7 +37,6 @@ export const AskPhoto = (props: InputProps) => {
           <AddPhotoButton
             value={props.value + `[${props.watch(props.value).length}]`}
             register={props.register}
-            setValue={props.setValue}
             setImages={(image: string) => {
               setImages([...images, image]);
             }}
