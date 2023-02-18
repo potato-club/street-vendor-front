@@ -6,7 +6,7 @@ import {
   SpeechBubble,
   Tteokbokki,
 } from '../Icons';
-import { Star } from '../../common/icons';
+import { Star } from '../../../components/icons';
 
 export const Info = () => {
   return (

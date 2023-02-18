@@ -2,7 +2,7 @@ import { customColor, SpoonRating, Typography } from '@street-vendor/core';
 import Image from 'next/image';
 import React from 'react'
 import styled from 'styled-components';
-import { Star } from '../../common/icons';
+import { Star } from '../../../components/icons';
 
 export const Store = () => {
   return (
