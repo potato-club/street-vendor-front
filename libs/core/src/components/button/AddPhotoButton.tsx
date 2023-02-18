@@ -1,27 +1,15 @@
 import styled from 'styled-components';
-import {
-  FieldValues,
-  UseFormRegister,
-  UseFormSetValue,
-  UseFormWatch,
-} from 'react-hook-form';
+import { FieldValues, UseFormRegister } from 'react-hook-form';
 import { customColor } from '../../constants';
-import { ChangeEvent, useState } from 'react';
-import { AddedPhotoButton } from './AddedPhotoButton';
+import { ChangeEvent } from 'react';
 
 interface ButtonProps {
   register: UseFormRegister<FieldValues>;
-  setValue: UseFormSetValue<FieldValues>;
   value: string;
   setImages: (image: string) => void;
 }
 
-export const AddPhotoButton = ({
-  value,
-  register,
-  setValue,
-  setImages,
-}: ButtonProps) => {
+export const AddPhotoButton = ({ value, register, setImages }: ButtonProps) => {
   const { ref, onChange, ...rest } = register(value);
   const addImage = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
