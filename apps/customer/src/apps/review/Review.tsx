@@ -11,12 +11,6 @@ import { FieldValues, useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { useQueryPostReview } from '../../hooks/query/review/useQueryPostReview';
 
-// interface FieldValues {
-//   reviewRating: number;
-//   reviewContent: string;
-//   reviewPhoto: string | FileList[];
-// }
-
 export const Review = () => {
   const {
     register,
@@ -28,8 +22,8 @@ export const Review = () => {
   const { mutate } = useQueryPostReview();
   const [isback, setIsBack] = useState(false);
   const submit = async (data: FieldValues) => {
-    // mutate({ review: data, storeId: '1' });
-    console.log(data);
+    data.reviewPhoto.pop();
+    mutate({ review: data, storeId: '1' });
   };
 
   return (
