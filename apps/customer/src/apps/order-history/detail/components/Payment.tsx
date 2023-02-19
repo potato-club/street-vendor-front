@@ -4,14 +4,16 @@ import styled from 'styled-components';
 export const Payment = () => {
   return (
     <Container>
-      <Typography size="16" fontWeight="bold">
-        결제 방법
-      </Typography>
-      <Button>
-        <Typography size="14" color="white">
-          계좌 이체
+      <ContainerInner>
+        <Typography size="16" fontWeight="bold" letterSpacing="-1.0px">
+          결제 방법
         </Typography>
-      </Button>
+        <Button>
+          <Typography size="14" color="white" letterSpacing="-1.0px">
+            계좌 이체
+          </Typography>
+        </Button>
+      </ContainerInner>
     </Container>
   );
 };
@@ -19,13 +21,17 @@ const Container = styled.div`
   background-color: ${customColor.white};
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  width: 100%;
+  padding: 22px 7%;
+`;
+const ContainerInner = styled.div`
+  display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 22px 22px;
+  max-width: 400px;
   gap: 16px;
+  align-items: flex-start;
 `;
-
 const Button = styled.button`
   border: none;
   border-radius: 999px;
