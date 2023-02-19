@@ -143,7 +143,7 @@ const Headers = styled.div`
 `;
 const MenuInfo = styled.div`
   display: flex;
-  gap: 10px;
+  gap: 6px;
   width: 100%;
   flex-direction: column;
   padding-top: 5px;
