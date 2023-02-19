@@ -151,12 +151,12 @@ textarea {
 input {
   border: none;
 }
-
-input {
+select {
   border: none;
 }
 button {
   border: 0;
+  background: transparent;
 }
 
 hr {
