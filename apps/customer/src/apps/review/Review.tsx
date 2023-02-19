@@ -45,41 +45,43 @@ export const Review = () => {
         }}
       /> */}
       <ContainerInner onSubmit={handleSubmit(submit)}>
-        <Spoon>
-          <SpoonText>
-            <Typography size="16" fontWeight="bold" letterSpacing="-0.9px">
-              맛숟가락
-            </Typography>
-            <Typography size="12" color="darkGray" letterSpacing="-0.6px">
-              맛있으셨나요? 맛있었던만큼 숟가락 갯수를 선택해주세요.
-            </Typography>
-            <SpoonRatingForm
-              name="reviewRating"
-              control={control}
+        <Content>
+          <Spoon>
+            <SpoonText>
+              <Typography size="16" fontWeight="bold" letterSpacing="-0.9px">
+                맛숟가락
+              </Typography>
+              <Typography size="12" color="darkGray" letterSpacing="-0.6px">
+                맛있으셨나요? 맛있었던만큼 숟가락 갯수를 선택해주세요.
+              </Typography>
+              <SpoonRatingForm
+                name="reviewRating"
+                control={control}
+                errors={errors}
+              />
+            </SpoonText>
+          </Spoon>
+          <ReviewText>
+            <AskTextarea
+              label="리뷰하기"
+              placeholder="리뷰 내용을 작성해주세요:)"
+              value="reviewContent"
+              register={register}
               errors={errors}
+              watch={watch}
             />
-          </SpoonText>
-        </Spoon>
-        <ReviewText>
-          <AskTextarea
-            label="리뷰하기"
-            placeholder="리뷰 내용을 작성해주세요:)"
-            value="reviewContent"
-            register={register}
-            errors={errors}
-            watch={watch}
-          />
-        </ReviewText>
-        <ReviewPhoto>
-          <AskPhoto
-            label="첨부 사진"
-            value="reviewPhoto"
-            placeholder="사진은 최대 3장까지 등록 가능합니다."
-            errors={errors}
-            watch={watch}
-            register={register}
-          />
-        </ReviewPhoto>
+          </ReviewText>
+          <ReviewPhoto>
+            <AskPhoto
+              label="첨부 사진"
+              value="reviewPhoto"
+              placeholder="사진은 최대 3장까지 등록 가능합니다."
+              errors={errors}
+              watch={watch}
+              register={register}
+            />
+          </ReviewPhoto>
+        </Content>
         <ReviewRegister>
           <AskSubmit
             isAgreeChecked={true}
@@ -107,7 +109,9 @@ const ContainerInner = styled.form`
   max-width: 400px;
   min-height: 100%;
   height: 100%;
+  justify-content: space-between;
 `;
+const Content = styled.div``;
 const Spoon = styled.div`
   display: flex;
   flex-direction: column;
@@ -132,8 +136,6 @@ const ReviewPhoto = styled.div`
 `;
 const ReviewRegister = styled.div`
   display: flex;
-  /* position: absolute; */
   width: 100%;
-  bottom: 0;
   padding: 0 7%;
 `;
