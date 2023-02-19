@@ -31,7 +31,11 @@ export type TypographyProps = React.PropsWithChildren<{
 }>;
 export const Typography = (props: TypographyProps) => {
   return (
-    <TypographyText style={props.style} {...props} defaultColor={customColor.black}>
+    <TypographyText
+      style={props.style}
+      {...props}
+      defaultColor={customColor.black}
+    >
       {props.children}
     </TypographyText>
   );
@@ -46,6 +50,8 @@ type typographyDefault = {
   defaultColor: string;
 };
 const TypographyText = styled.div<TypographyProps & typographyDefault>`
+  word-break: keep-all;
+
   font-family: 'Noto Sans KR';
   font-size: ${({ size }) => size + 'px'};
   color: ${({ color, defaultColor }) =>
@@ -53,14 +59,15 @@ const TypographyText = styled.div<TypographyProps & typographyDefault>`
   text-align: ${({ textAlign }) => textAlign};
   font-weight: ${({ fontWeight }) => fontWeight};
   letter-spacing: ${({ letterSpacing }) => letterSpacing ?? 'normal'};
-  ${({ fontHeight }) =>
-    fontHeight === 'normal' ? '' : `line-height: ${fontHeight};`};
+  line-height: ${({ fontHeight }) => fontHeight ? fontHeight : 'normal'};
+
   ${({ fontHidden }) =>
     fontHidden ? 'overflow: hidden;text-overflow: ellipsis;' : ''};
 
   ${({ underlineColor }) =>
-    underlineColor ? `text-decoration: underline; text-underline-position:under; text-decoration-color: ${underlineColor}` : ''};
-  
-  ${({notBreak}) => 
-    notBreak ? `white-space:nowrap;` : ''};
+    underlineColor
+      ? `text-decoration: underline; text-underline-position:under; text-decoration-color: ${underlineColor}`
+      : ''};
+
+  ${({ notBreak }) => (notBreak ? `white-space:nowrap;` : '')};
 `;

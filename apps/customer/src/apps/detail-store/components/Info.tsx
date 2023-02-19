@@ -1,15 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Typography, customColor } from '@street-vendor/core';
-import { Rating } from 'react-simple-star-rating';
+import { Typography, customColor, SpoonRating } from '@street-vendor/core';
 import {
   Arrow,
-  EmptySpoon,
-  FullSpoon,
   SpeechBubble,
-  Star,
   Tteokbokki,
 } from '../Icons';
+import { Star } from '../../../components/icons';
 
 export const Info = () => {
   return (
@@ -28,6 +25,11 @@ export const Info = () => {
             송도 1동 행정복지센터 대각선
           </Typography>
         </Title>
+        <Intro>
+          <Typography size="12" color='darkGray' fontHeight='1.4'>
+            서윤이와 보경이가 정성을 팔고있습니다. 떡볶이가 맛있습니다!
+          </Typography>
+        </Intro>
         <FlexBox gap={16}>
           <Typography
             size="14"
@@ -39,16 +41,7 @@ export const Info = () => {
           </Typography>
           <OrangeLine />
           <RatingWrapper>
-            <Rating
-              initialValue={3.5}
-              emptyIcon={<EmptySpoon />}
-              fillIcon={<FullSpoon />}
-              emptyStyle={{ display: 'flex', alignItems: 'center' }}
-              allowFraction
-              readonly
-              transition
-              allowHover={false}
-            />
+            <SpoonRating readonly initialValue={3.5} />
             <Typography size="14" fontWeight="bold" color="orange2">
               3.5 숟가락
             </Typography>
@@ -106,7 +99,7 @@ const GrayLine = styled.hr`
   margin-bottom: 40px;
   width: 40px;
   opacity: 0.3;
-  border: 3px solid #7c7c7c;
+  border-bottom: 3px solid #7c7c7c;
   border-radius: 24px;
 `;
 
@@ -123,6 +116,13 @@ const Category = styled.div`
   display: flex;
   align-items: center;
   gap: 4px;
+`;
+
+const Intro = styled.div`
+  width: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const OrangeLine = styled.hr`

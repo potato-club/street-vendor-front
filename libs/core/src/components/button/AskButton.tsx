@@ -36,7 +36,6 @@ const Button = styled.button<ButtonStyledProps>`
   align-items: center;
   justify-content: center;
   background: none;
-  border: none;
   padding: 16px 8px;
   width: 100%;
   border-radius: 14px;
