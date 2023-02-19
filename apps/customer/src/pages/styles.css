@@ -145,6 +145,11 @@ a {
 
 textarea {
   resize: none;
+  border: none;
+}
+
+input {
+  border: none;
 }
 
 input {
