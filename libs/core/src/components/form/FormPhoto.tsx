@@ -33,16 +33,18 @@ export const AskPhoto = (props: InputProps) => {
         {images.map((i, id) => (
           <AddedPhotoButton key={id + 1} src={i} errors={props.errors} />
         ))}
-        {props.watch(props.value)?.length < 4 && (
+        {images.length < 3 && (
           <AddPhotoButton
-            value={props.value + `[${props.watch(props.value)?.length}]`}
+            key={images.length}
+            value={`${props.value}.${images.length}`}
             register={props.register}
             setImages={(image: string) => {
-              setImages([...images, image]);
+              setImages((prev) => [...prev, image]);
             }}
           />
         )}
       </Images>
+
       <Typography size="12" color="darkGray" letterSpacing="-0.5px">
         {props.placeholder}
       </Typography>

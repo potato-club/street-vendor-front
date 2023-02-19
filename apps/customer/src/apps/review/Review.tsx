@@ -7,15 +7,15 @@ import {
   Typography,
 } from '@street-vendor/core';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { FieldValues, useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { useQueryPostReview } from '../../hooks/query/review/useQueryPostReview';
 
-interface FieldValues {
-  reviewRating: number;
-  reviewContent: string;
-  reviewPhoto: string | FileList[];
-}
+// interface FieldValues {
+//   reviewRating: number;
+//   reviewContent: string;
+//   reviewPhoto: string | FileList[];
+// }
 
 export const Review = () => {
   const {
@@ -24,17 +24,13 @@ export const Review = () => {
     watch,
     control,
     handleSubmit,
-  } = useForm({
-    defaultValues: { reviewRating: 0, reviewContent: '', reviewPhoto: [''] },
-  });
+  } = useForm<FieldValues>();
   const { mutate } = useQueryPostReview();
   const [isback, setIsBack] = useState(false);
-  const submit = (data: FieldValues) => {
+  const submit = async (data: FieldValues) => {
     // mutate({ review: data, storeId: '1' });
     console.log(data);
   };
-  console.log(watch('reviewPhoto'));
-  console.log(watch('reviewContent'));
 
   return (
     <Container>
