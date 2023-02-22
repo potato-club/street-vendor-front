@@ -1,9 +1,15 @@
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { pathName } from 'apps/boss/src/configs/pathName';
 import { customColor, NextButton, Typography } from '@street-vendor/core';
 import styled from 'styled-components';
 import Image from 'next/image';
 import Logo_Big from '../../../../public/img/logo/logo_big.png';
+import Router from 'next/router';
 
 export const StartStoreRegister = () => {
+  const handleRouter = () => {
+    Router.push(pathName.STORE_REGISTER.CATEGORY);
+  };
   return (
     <Container>
       <BackIcon>
@@ -63,7 +69,7 @@ export const StartStoreRegister = () => {
         </Content>
       </ContainerInner>
       <Button>
-        <NextButton background="white">
+        <NextButton background="white" onClick={handleRouter}>
           <Typography
             color="black"
             fontWeight="bold"
