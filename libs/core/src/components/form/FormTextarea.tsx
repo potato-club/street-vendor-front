@@ -17,7 +17,7 @@ interface InputProps {
   watch: UseFormWatch<FieldValues>;
 }
 
-export const AskTextarea = (props: InputProps) => {
+export const FormTextarea = (props: InputProps) => {
   const commaFormat = (num: number) => {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
