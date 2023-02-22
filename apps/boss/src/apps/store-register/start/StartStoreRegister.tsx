@@ -60,19 +60,21 @@ export const StartStoreRegister = () => {
             <br />
             가게 만드는 방법을 알려드릴게요
           </Typography>
-          <NextButton background="white">
-            <Typography
-              color="black"
-              fontWeight="bold"
-              size="16"
-              letterSpacing="-1.5px"
-              textAlign="center"
-            >
-              다음으로
-            </Typography>
-          </NextButton>
         </Content>
       </ContainerInner>
+      <Button>
+        <NextButton background="white">
+          <Typography
+            color="black"
+            fontWeight="bold"
+            size="16"
+            letterSpacing="-1.5px"
+            textAlign="center"
+          >
+            다음으로
+          </Typography>
+        </NextButton>
+      </Button>
     </Container>
   );
 };
@@ -94,6 +96,7 @@ const ContainerInner = styled.div`
   align-items: center;
   justify-content: center;
   padding-top: 24px;
+  padding-bottom: 58px;
 `;
 const BackIcon = styled.div`
   display: flex;
@@ -106,7 +109,6 @@ const Content = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-top: 8%;
   height: 100%;
   gap: 8%;
 `;
@@ -114,4 +116,9 @@ const Title = styled.div`
   display: flex;
   flex-direction: column;
   gap: 22px 0;
+`;
+const Button = styled.div`
+  display: flex;
+  position: absolute;
+  bottom: 54px;
 `;
