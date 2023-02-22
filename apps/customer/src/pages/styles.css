@@ -145,13 +145,18 @@ a {
 
 textarea {
   resize: none;
+  border: none;
 }
 
 input {
   border: none;
 }
+select {
+  border: none;
+}
 button {
   border: 0;
+  background: transparent;
 }
 
 hr {

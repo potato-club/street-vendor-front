@@ -19,9 +19,7 @@ interface InputProps {
   errors: Partial<FieldErrorsImpl>;
 }
 
-export const AskPhoto = (props: InputProps) => {
-  const [images, setImages] = useState<string[]>([]);
-
+export const FormPhoto = (props: InputProps) => {
   return (
     <Wrapper>
       <Label>
