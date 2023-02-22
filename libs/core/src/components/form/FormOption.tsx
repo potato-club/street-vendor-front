@@ -4,7 +4,7 @@ interface OptionProps {
   value: string;
   name: string;
 }
-export const AskOption = (props: OptionProps) => {
+export const FormOption = (props: OptionProps) => {
   return <Option value={props.value}>{props.name}</Option>;
 };
 
