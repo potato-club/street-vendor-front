@@ -47,3 +47,5 @@ export * from './Select';
 
 export { Typography } from './Typography';
 export { BasicButton } from './button/BasicButton';
+
+export * from './Toast';

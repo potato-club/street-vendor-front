@@ -41,9 +41,6 @@ Thumbs.db
 # Next.js
 .next
 
-# Environment Files
-.env
-.env.local
 # React Native
 
 # Xcode
@@ -107,5 +104,6 @@ buck-out/
 **/ios/Pods/
 **/vendor/bundle/
 
-
-apps/customer-native-e2e/artifacts
+# Environment Files
+.env
+.env.local

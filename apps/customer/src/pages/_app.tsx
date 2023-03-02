@@ -1,3 +1,4 @@
+import { Toast } from '@street-vendor/core';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { QueryClient, QueryClientProvider } from 'react-query';
@@ -16,6 +17,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
         <main className="app">
           <Component {...pageProps} />
         </main>
+        <Toast />
       </RecoilRoot>
     </QueryClientProvider>
   );

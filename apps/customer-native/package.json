@@ -10,6 +10,7 @@
     "react-native": "*",
     "react-native-config": "*",
     "react-native-svg": "*",
-    "react-native-webview": "^11.26.0"
+    "react-native-webview": "^11.26.0",
+    "metro-config": "*"
   }
 }
