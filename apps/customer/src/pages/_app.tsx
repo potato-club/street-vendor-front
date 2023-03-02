@@ -4,7 +4,13 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { RecoilRoot } from 'recoil';
 import './styles.css';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 500,
+    }
+  }
+});
 
 function CustomApp({ Component, pageProps }: AppProps) {
   return (

@@ -1,6 +1,7 @@
 import { sessionService } from '../libs/sessionService';
 import api from './api';
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   get: async (url: string, params?: any) => {
     const idSession = await sessionService.getIdSession();

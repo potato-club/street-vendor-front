@@ -1,11 +1,14 @@
 import { BigPhotoModal } from '@street-vendor/core';
+import { useQueryGetDetailStore } from '../../../hooks/query/detail-store/useQueryGetDetailStore';
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { storeImageDummy } from '../../../dummy/detailStore/storeImageDummy';
 import { useModal } from "./../../../hooks/useModal";
 
 export const StoreImage = () => {
+ const { data } = useQueryGetDetailStore();
+  
   const { isOpen, handleOpenModal, handleCloseModal } = useModal();
   const [clickIndex, setClickIndex] = useState<number>(0);
   const handleImageClick = (num: number) => {
