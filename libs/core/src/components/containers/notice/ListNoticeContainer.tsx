@@ -29,6 +29,8 @@ export const ListNoticeContainer = ({ detailPathName }: Props) => {
 
 const Container = styled.div`
   padding: 0px 17px;
+  max-width: 400px;
+  margin: auto;
   margin-top: 55px;
   margin-bottom: 121px;
 `;

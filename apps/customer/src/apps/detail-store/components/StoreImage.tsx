@@ -1,16 +1,26 @@
+import { BigPhotoModal } from '@street-vendor/core';
 import Image from 'next/image';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { storeImageDummy } from '../../../dummy/detailStore/storeImageDummy';
+import { useModal } from "./../../../hooks/useModal";
 
 export const StoreImage = () => {
+  const { isOpen, handleOpenModal, handleCloseModal } = useModal();
+  const [clickIndex, setClickIndex] = useState<number>(0);
+  const handleImageClick = (num: number) => {
+    setClickIndex(num);
+    handleOpenModal();
+  }
+
   return (
     <Container>
+      {storeImageDummy && 
       <Wrapper>
         <LeftImage
           style={{ width: storeImageDummy.length > 1 ? '50%' : '100%' }}
         >
-          <Image src={storeImageDummy[0]} alt="detailStoreImage" fill style={{objectFit: 'cover'}}/>
+          <Image onClick={() => handleImageClick(0)} src={storeImageDummy[0]} alt="detailStoreImage" fill style={{objectFit: 'cover'}}/>
         </LeftImage>
         {storeImageDummy.length > 1 && (
           <RightImage>
@@ -21,6 +31,7 @@ export const StoreImage = () => {
                   position: 'relative',
                   height: '100%',
                 }}
+                onClick={() => handleImageClick(index + 1)}
               >
                 <Image src={data} fill alt="detailStoreImage" style={{objectFit: 'cover'}}/>
               </div>
@@ -28,6 +39,8 @@ export const StoreImage = () => {
           </RightImage>
         )}
       </Wrapper>
+      }
+      <BigPhotoModal src={storeImageDummy} isOpen={isOpen} handleCloseModal={handleCloseModal} initialIndex={clickIndex}/>
     </Container>
   );
 };

@@ -104,5 +104,6 @@ buck-out/
 **/ios/Pods/
 **/vendor/bundle/
 
-
-apps/customer-native-e2e/artifacts
+# Environment Files
+.env
+.env.local

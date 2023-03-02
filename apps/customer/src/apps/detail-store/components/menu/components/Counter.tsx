@@ -34,8 +34,8 @@ const Wrapper = styled.div`
   display: flex;
   border: 1px solid ${customColor.gray}80;
   border-radius: 24px;
-  gap: 4px;
-  padding: 2px 8px 2px 8px;
+  gap: 16px;
+  padding: 4px 8px;
 `;
 
 const Button = styled.button`

@@ -39,7 +39,7 @@ const Header = styled.div`
   justify-content: center;
   align-items: center;
   gap: 18px;
-  padding: 20px 0;
+  padding: 20px 17px;
   background-color: ${customColor.white};
   padding-top: 67px;
 `;
@@ -63,6 +63,8 @@ const Body = styled.div`
   align-items: center;
   gap: 25px;
   padding: 36px 34px;
+  max-width: 400px;
+  margin: auto;
 `;
 
 const ImageBox = styled.div`
