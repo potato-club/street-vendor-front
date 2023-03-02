@@ -42,3 +42,5 @@ export * from './rating/SpoonRatingForm';
 export * from './timePicker/TimePickerModal';
 export { Typography } from './Typography';
 export { BasicButton } from './button/BasicButton';
+
+export * from './Toast';
