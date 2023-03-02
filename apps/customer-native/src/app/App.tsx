@@ -30,7 +30,11 @@ export const App = () => {
   return (
     <WebView
       ref={webViewRef}
-      source={{ uri: 'http://127.0.0.1:4000/' }}
+      source={{
+        uri: `http://${
+          Platform.OS === 'android' ? '10.0.2.2' : '127.0.0.1'
+        }:4000/home`,
+      }}
       contentInsetAdjustmentBehavior="automatic"
     />
   );

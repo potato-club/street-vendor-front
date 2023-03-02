@@ -3,8 +3,10 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "build": "nx run-many --target=build",
-    "serve": "nx run-many --parallel --target=serve",
+    "build": "nx run-many --target=build --projects=boss,customer",
+    "build:android": "nx build-android customer-native",
+    "serve": "nx run-many --parallel --target=serve --projects=boss,customer",
+    "serve:android": "nx run-android customer-native",
     "export": "nx run-many --target=export",
     "test": "nx run-many --target=test",
     "lint": "nx run-many --target=lint"
