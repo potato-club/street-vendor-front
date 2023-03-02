@@ -1,10 +1,11 @@
 import { customColor, Typography } from '@street-vendor/core';
 import { pathName } from '../../../configs/pathName';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import styled from 'styled-components';
 import { NoticeText } from './dummy/DummyNoticeText';
 import { useQueryWithdrawal } from '../../../hooks/query/withdrawal/useQueryWithdrawal';
+import { toast } from 'react-hot-toast';
 interface ButtonStyledProps {
   isCheck: boolean;
 }
@@ -67,13 +68,13 @@ export const WithdrawalCheck = () => {
 
 const ButtonWithDrawal = ({ isCheck }: { isCheck: boolean }) => {
   const { mutate } = useQueryWithdrawal();
-
+  const router = useRouter();
   const handleClickButton = () => {
     if (isCheck) {
       //!! 대충 회원탈퇴하는 로직
-      Router.push(pathName.WITHDRAWAL.OUTRO);
+      router.push(pathName.WITHDRAWAL.OUTRO);
     } else {
-      alert('체크해라');
+      toast.error('유의사항 확인을 체크해주세요.');
     }
   };
   return (
