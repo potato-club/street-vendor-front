@@ -1,16 +1,34 @@
 import { customColor, Typography } from '@street-vendor/core';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { atomScheduleModalTime } from 'apps/boss/src/recoil/atoms/atomStoreRegister';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
-interface Props {
+interface ScheduleType {
   day: string;
+  isChecked: boolean;
+  open: string;
+  close: string;
+}
+interface Props {
+  day: ScheduleType;
   handleOpenModal: () => void;
+  time: string;
+  index: number;
 }
 
-export const TimeSchedule = ({ day, handleOpenModal }: Props) => {
+export const TimeSchedule = ({ day, time, index, handleOpenModal }: Props) => {
+  const [modalValue, setModalValue] = useRecoilState(atomScheduleModalTime);
   return (
-    <Button type="button" onClick={handleOpenModal}>
+    <Button
+      type="button"
+      onClick={() => {
+        setModalValue({ day: index, time: time });
+        handleOpenModal();
+      }}
+    >
       <Typography size="16" letterSpacing="-0.5px">
-        {day}
+        {day[time]}
       </Typography>
       <svg
         width="14"

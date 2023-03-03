@@ -40,12 +40,16 @@ export const DaySchedule = ({ index, handleOpenModal }: Props) => {
         </Typography>
         <TimeScheduler>
           <TimeSchedule
-            day={scheduleValue[index].open}
+            day={scheduleValue[index]}
+            time="open"
             handleOpenModal={handleOpenModal}
+            index={index}
           />
           <TimeSchedule
-            day={scheduleValue[index].close}
+            day={scheduleValue[index]}
+            time="close"
             handleOpenModal={handleOpenModal}
+            index={index}
           />
         </TimeScheduler>
       </Schedule>
