@@ -7,9 +7,8 @@ export const useQueryGetDetailStore = () => {
   const router = useRouter();
 
   const getData = useCallback(async () => {
-    const res = await detailApi.getDetail(String(router.query.id));
-    console.log(res);
-    return res;
+    const { data } = await detailApi.getDetail(String(router.query.id));
+    return data;
   }, [router.query.id]);
 
   return useQuery(['useQueryGetDetailStore', router.query.id], getData, {

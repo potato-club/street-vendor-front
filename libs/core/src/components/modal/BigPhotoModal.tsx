@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import { ImageUrlType } from '@street-vendor/core';
 
 const modalStyle = {
   overlay: {
@@ -26,10 +27,11 @@ const modalStyle = {
   },
 };
 
+
 type Props = {
   isOpen: boolean;
   handleCloseModal: () => void;
-  src: string | string[];
+  src: ImageUrlType | ImageUrlType[];
   initialIndex?: number;
 };
 
@@ -53,7 +55,7 @@ export const BigPhotoModal = ({ isOpen, handleCloseModal, src, initialIndex }: P
             <SwiperSlide key={`${data}-${index}`}>
               <ImageWrapper>
                 <Image
-                  src={data}
+                  src={data.pictureUrl}
                   alt={'menu'}
                   fill
                   style={{ objectFit: 'contain' }}
@@ -75,7 +77,7 @@ export const BigPhotoModal = ({ isOpen, handleCloseModal, src, initialIndex }: P
     >
       <ImageWrapper>
         <Image
-          src={src}
+          src={src.pictureUrl}
           alt={'menu'}
           fill
           style={{ objectFit: 'contain' }}

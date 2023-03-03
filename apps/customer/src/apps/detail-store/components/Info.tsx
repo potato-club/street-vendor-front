@@ -1,74 +1,75 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Typography, customColor, SpoonRating } from '@street-vendor/core';
-import {
-  Arrow,
-  SpeechBubble,
-  Tteokbokki,
-} from '../Icons';
+import { Arrow, SpeechBubble, Tteokbokki } from '../Icons';
 import { Star } from '../../common/icons';
+import { useQueryGetDetailStore } from '../../../hooks/query/detail-store/useQueryGetDetailStore';
 
 export const Info = () => {
+  const { data } = useQueryGetDetailStore();
+
   return (
-    <Container>
-      <GrayLine />
-      <Wrapper>
-        <Title>
-          <Typography size="20" fontWeight="bold" fontHeight="1">
-            서윤보경이네 떡볶이집
-          </Typography>
-          <Category>
-            <Tteokbokki size={24} />
-            <Typography size="16">떡볶이</Typography>
-          </Category>
-          <Typography size="16" color="darkGray" fontHeight="1">
-            송도 1동 행정복지센터 대각선
-          </Typography>
-        </Title>
-        <Intro>
-          <Typography size="12" color='darkGray' fontHeight='1.4'>
-            서윤이와 보경이가 정성을 팔고있습니다. 떡볶이가 맛있습니다!
-          </Typography>
-        </Intro>
-        <FlexBox gap={16}>
-          <Typography
-            size="14"
-            fontWeight="bold"
-            color="orange2"
-            underlineColor="orange2"
-          >
-            최근 리뷰 10
-          </Typography>
-          <OrangeLine />
-          <RatingWrapper>
-            <SpoonRating readonly initialValue={3.5} />
-            <Typography size="14" fontWeight="bold" color="orange2">
-              3.5 숟가락
+    data && (
+      <Container>
+        <GrayLine />
+        <Wrapper>
+          <Title>
+            <Typography size="20" fontWeight="bold" fontHeight="1">
+              {data.storeName}
             </Typography>
-          </RatingWrapper>
-        </FlexBox>
-        <ButtonWrapper>
-          <IconButton>
-            <Star />
-            <Typography size="12" fontWeight="bold">
-              즐겨찾기
+            <Category>
+              <Tteokbokki size={24} />
+              <Typography size="16">{data.category}</Typography>
+            </Category>
+            <Typography size="16" color="darkGray" fontHeight="1">
+              {data.locationDescription}
             </Typography>
-          </IconButton>
-          <IconButton>
-            <Arrow />
-            <Typography size="12" fontWeight="bold">
-              길찾기
+          </Title>
+          <Intro>
+            <Typography size="12" color="darkGray" fontHeight="1.4">
+              {data.storeDescription}
             </Typography>
-          </IconButton>
-          <IconButton>
-            <SpeechBubble />
-            <Typography size="12" fontWeight="bold">
-              공유하기
+          </Intro>
+          <FlexBox gap={16}>
+            <Typography
+              size="14"
+              fontWeight="bold"
+              color="orange2"
+              underlineColor="orange2"
+            >
+              최근 리뷰 {data.reviewCount}
             </Typography>
-          </IconButton>
-        </ButtonWrapper>
-      </Wrapper>
-    </Container>
+            <OrangeLine />
+            <RatingWrapper>
+              <SpoonRating readonly initialValue={data.score} />
+              <Typography size="14" fontWeight="bold" color="orange2">
+                {data.score} 숟가락
+              </Typography>
+            </RatingWrapper>
+          </FlexBox>
+          <ButtonWrapper>
+            <IconButton>
+              <Star />
+              <Typography size="12" fontWeight="bold">
+                즐겨찾기
+              </Typography>
+            </IconButton>
+            <IconButton>
+              <Arrow />
+              <Typography size="12" fontWeight="bold">
+                길찾기
+              </Typography>
+            </IconButton>
+            <IconButton>
+              <SpeechBubble />
+              <Typography size="12" fontWeight="bold">
+                공유하기
+              </Typography>
+            </IconButton>
+          </ButtonWrapper>
+        </Wrapper>
+      </Container>
+    )
   );
 };
 

@@ -12,6 +12,11 @@ const queryClient = new QueryClient({
   }
 });
 
+// Todo mock 서버 사용안하게 되면 삭제
+if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
+  import('../mocks');
+}
+
 function CustomApp({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
