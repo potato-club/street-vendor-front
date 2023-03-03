@@ -3,13 +3,13 @@ import React from 'react';
 import styled from 'styled-components';
 
 export interface NavigationButtonProps {
-  onClick: VoidFunction;
+  onClick: (isBack: boolean) => void;
   isBack?: boolean;
 }
 
 export const NavigationButton: React.FC<NavigationButtonProps> = (props) => {
   return (
-    <Container onClick={props.onClick}>
+    <Container onClick={() => props.onClick(props.isBack ?? false)}>
       {props.isBack ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"

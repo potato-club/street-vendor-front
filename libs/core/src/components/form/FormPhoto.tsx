@@ -11,7 +11,7 @@ interface InputProps {
   errors: Partial<FieldErrorsImpl>;
 }
 
-export const AskPhoto = (props: InputProps) => {
+export const FormPhoto = (props: InputProps) => {
   return (
     <Wrapper>
       <Label>
