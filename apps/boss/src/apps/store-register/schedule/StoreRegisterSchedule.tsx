@@ -25,7 +25,6 @@ export const StoreRegisterSchedule = () => {
       <StoreRegisterTimePickerModal
         isOpen={isModalOpen}
         handleCloseModal={() => setIsModalOpen(false)}
-        setValue={setValue}
       />
       <Form>
         <FormInner>
