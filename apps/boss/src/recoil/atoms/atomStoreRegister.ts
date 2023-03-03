@@ -27,3 +27,7 @@ export const atomStoreRegisterSchedule = atom<ScheduleType[]>({
     { day: '일', isChecked: true, open: '오전 09:00', close: '오후 10:00' },
   ],
 });
+export const atomScheduleModalTime = atom<{ day: number; time: string }>({
+  key: 'atomScheduleTime',
+  default: { day: 0, time: 'open' },
+});
