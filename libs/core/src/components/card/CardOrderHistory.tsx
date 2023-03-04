@@ -21,10 +21,11 @@ export const CardOrderHistory = ({ detailPathName }: Props) => {
         button2Label="아니요"
         isTwoButtons={true}
         onClickButton1={() => setIsModalOpen(false)}
+        onClickButton2={() => setIsModalOpen(false)}
       />
-      <InfoContainer onClick={() => Router.push(`${detailPathName}/1`)}>
+      <InfoContainer>
         <Headers>
-          <Store>
+          <Store onClick={() => Router.push(`${detailPathName}/1`)}>
             <Typography
               size="20"
               color="black"
@@ -43,14 +44,14 @@ export const CardOrderHistory = ({ detailPathName }: Props) => {
               <path
                 d="M1.24194 11.833L6.99994 6.66602L1.24194 1.5"
                 stroke="#FF8B00"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
             </svg>
           </Store>
           <RightWrapper>
-            <OrderStatus>
+            <OrderStatus onClick={() => Router.push(`${detailPathName}/1`)}>
               <Typography size="12" color="orange2" letterSpacing="-1.0px">
                 주문상세
               </Typography>
@@ -156,7 +157,7 @@ const BottomBar = styled.div`
   height: 11px;
   background-color: ${customColor.beige};
 `;
-const Store = styled.div`
+const Store = styled.button`
   display: flex;
   flex-direction: row;
   align-items: center;
