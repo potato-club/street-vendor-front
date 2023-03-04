@@ -3,7 +3,7 @@ import { pathName } from '../../../configs/pathName';
 import router from 'next/router';
 import styled from 'styled-components';
 import Image from 'next/image';
-import Logo_Big from '../../../../public/logo_big.png';
+import Logo_Big from '../../../../public/img/logo/logo_big.png';
 export const Outro = () => {
   return (
     <Container>

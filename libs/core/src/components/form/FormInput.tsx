@@ -12,7 +12,7 @@ interface InputProps {
   errors: Partial<FieldErrorsImpl>;
 }
 
-export const AskInput = (props: InputProps) => {
+export const FormInput = (props: InputProps) => {
   return (
     <Wrapper>
       <Label>

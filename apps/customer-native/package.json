@@ -1,0 +1,16 @@
+{
+  "name": "customer-native",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "@react-native-async-storage/async-storage": "*",
+    "@testing-library/jest-native": "*",
+    "@testing-library/react-native": "*",
+    "react": "*",
+    "react-native": "*",
+    "react-native-config": "*",
+    "react-native-svg": "*",
+    "react-native-webview": "^11.26.0",
+    "metro-config": "*"
+  }
+}
