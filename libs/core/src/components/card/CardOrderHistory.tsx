@@ -1,14 +1,27 @@
 import Router from 'next/router';
 import styled from 'styled-components';
+import { TfiClose } from 'react-icons/tfi';
 import { customColor } from '../../constants';
 import { Typography } from '../Typography';
+import { CustomModal } from '../modal/CustomModal';
+import { useState } from 'react';
 
 type Props = {
   detailPathName: string;
 };
 export const CardOrderHistory = ({ detailPathName }: Props) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <Container>
+      <CustomModal
+        isModalOpen={isModalOpen}
+        closeModal={() => setIsModalOpen(false)}
+        content="선택한 주문내역을 삭제하시겠습니까?"
+        button1Label="예"
+        button2Label="아니요"
+        isTwoButtons={true}
+        onClickButton1={() => setIsModalOpen(false)}
+      />
       <InfoContainer onClick={() => Router.push(`${detailPathName}/1`)}>
         <Headers>
           <Store>
@@ -42,28 +55,9 @@ export const CardOrderHistory = ({ detailPathName }: Props) => {
                 주문상세
               </Typography>
             </OrderStatus>
-            <MoreButton>
-              <svg
-                width="2"
-                height="12"
-                viewBox="0 0 2 12"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M1 10C0.447715 10 0 10.4477 0 11C0 11.5523 0.447715 12 1 12C1.55228 12 2 11.5523 2 11C2 10.4477 1.55228 10 1 10Z"
-                  fill="black"
-                />
-                <path
-                  d="M1 5C0.447715 5 0 5.44772 0 6C0 6.55228 0.447715 7 1 7C1.55228 7 2 6.55228 2 6C2 5.44772 1.55228 5 1 5Z"
-                  fill="black"
-                />
-                <path
-                  d="M1 0C0.447715 0 0 0.447715 0 1C0 1.55228 0.447715 2 1 2C1.55228 2 2 1.55228 2 1C2 0.447715 1.55228 0 1 0Z"
-                  fill="black"
-                />
-              </svg>
-            </MoreButton>
+            <CloseButton onClick={() => setIsModalOpen(true)}>
+              <TfiClose />
+            </CloseButton>
           </RightWrapper>
         </Headers>
         <Typography size="14" color="gray">
@@ -179,10 +173,11 @@ const OrderStatus = styled.button`
   border-radius: 999px;
   padding: 5px 11px;
 `;
-const MoreButton = styled.button`
+const CloseButton = styled.button`
   display: flex;
   background: transparent;
   align-items: center;
   justify-content: center;
-  padding: 4px;
+  color: ${customColor.lightGray};
+  font-size: 14px;
 `;
