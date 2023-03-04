@@ -11,6 +11,7 @@ interface ModalProps {
 }
 
 export const GetPhotoModal = (props: ModalProps) => {
+  ReactModal.setAppElement('#__next');
   return (
     <ReactModal
       shouldCloseOnOverlayClick={true}

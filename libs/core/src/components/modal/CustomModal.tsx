@@ -18,8 +18,10 @@ interface ModalStyle {
 }
 
 export const CustomModal = (props: ModalProps) => {
+  ReactModal.setAppElement('#__next');
   return (
     <ReactModal
+      ariaHideApp={false}
       shouldCloseOnOverlayClick={true}
       onRequestClose={props.closeModal}
       isOpen={true}
@@ -44,7 +46,7 @@ export const CustomModal = (props: ModalProps) => {
           border: 'none',
           padding: '0px',
           width: 'calc(100% - 16px)',
-          height: '130px',
+          minHeight: 'max-content',
           maxWidth: '300px',
           overflow: 'hidden',
           top: '50%',
@@ -57,7 +59,7 @@ export const CustomModal = (props: ModalProps) => {
     >
       <ModalWrapper>
         <Content>
-          <Typography letterSpacing="-1.0px" size="16">
+          <Typography letterSpacing="-1.0px" size="16" fontHeight="26px">
             {props.content}
           </Typography>
         </Content>
@@ -93,10 +95,12 @@ const ModalWrapper = styled.article`
   border: none;
   position: relative;
   gap: 24px 0;
+  padding: 24px;
 `;
 const Content = styled.div`
   display: flex;
   flex-direction: column;
+  text-align: center;
 `;
 const ButtonBox = styled.div`
   display: flex;
@@ -105,7 +109,7 @@ const ButtonBox = styled.div`
 `;
 const Button1 = styled.button<ModalStyle>`
   display: flex;
-  background: ${customColor.white};
+  background: ${customColor.orange3};
   width: 70px;
   height: 30px;
   border-radius: 20px;
