@@ -40,6 +40,9 @@ const Button = styled.button`
   justify-content: center;
   background: none;
   position: relative;
+  svg {
+    filter: drop-shadow(3px 3px 6px ${customColor.black + '25'});
+  }
 `;
 const Content = styled.span`
   position: absolute;
