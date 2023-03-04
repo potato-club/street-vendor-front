@@ -1,13 +1,14 @@
 import {
-  AskPhoto,
-  AskSubmit,
-  AskTextarea,
+  FormPhoto,
+  FormSubmit,
+  FormTextarea,
   CustomModal,
   SpoonRatingForm,
   Typography,
 } from '@street-vendor/core';
 import { useState } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
+import { toast } from 'react-hot-toast';
 import styled from 'styled-components';
 import { useQueryPostReview } from '../../hooks/query/review/useQueryPostReview';
 
@@ -62,7 +63,7 @@ export const Review = () => {
             </SpoonText>
           </Spoon>
           <ReviewText>
-            <AskTextarea
+            <FormTextarea
               label="리뷰하기"
               placeholder="리뷰 내용을 작성해주세요:)"
               value="reviewContent"
@@ -72,7 +73,7 @@ export const Review = () => {
             />
           </ReviewText>
           <ReviewPhoto>
-            <AskPhoto
+            <FormPhoto
               label="첨부 사진"
               value="reviewPhoto"
               placeholder="사진은 최대 3장까지 등록 가능합니다."
@@ -83,7 +84,7 @@ export const Review = () => {
           </ReviewPhoto>
         </Content>
         <ReviewRegister>
-          <AskSubmit
+          <FormSubmit
             isAgreeChecked={true}
             onClick={() => {
               console.log();

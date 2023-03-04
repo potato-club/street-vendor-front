@@ -20,6 +20,7 @@ interface InputProps {
 }
 
 export const FormPhoto = (props: InputProps) => {
+  const [images, setImages] = useState<string[]>([]);
   return (
     <Wrapper>
       <Label>
