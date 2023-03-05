@@ -17,11 +17,11 @@ export const Item = (props: MenuType) => {
           alt="food"
         />
         <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <Typography size="16">{props.menuName}</Typography>
+          <Typography size="16">{props.menuName} {props.menuCount}개</Typography>
           <Typography size="16">{props.menuPrice}원</Typography>
         </div>
       </FoodInfo>
-      <Counter />
+      <Counter menuId={props.menuId}/>
     </Container>
   );
 };

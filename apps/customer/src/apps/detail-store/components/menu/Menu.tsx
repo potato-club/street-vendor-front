@@ -6,7 +6,7 @@ import { useQueryGetDetailStore } from '../../../../hooks/query/detail-store/use
 
 export const Menu = () => {
   const [filter, setFilter] = useState<string>('basic');
- const { data } = useQueryGetDetailStore();
+  const { data } = useQueryGetDetailStore();
   
   return (
     <Container>
@@ -27,7 +27,7 @@ export const Menu = () => {
         />
       </FilterWrapper>
       <ItemWrapper>
-        {data && data.menuList.map((menu:MenuType) => (
+        {data?.menuList?.map((menu:MenuType) => (
           <Item key={menu.menuId} {...menu}/>
         ))}
       </ItemWrapper>

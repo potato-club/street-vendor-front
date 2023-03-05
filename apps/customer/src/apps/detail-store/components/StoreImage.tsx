@@ -19,7 +19,7 @@ export const StoreImage = () => {
 
   return (
     <Container>
-      {data?.storeImageResponses.length > 0 && (
+      {data?.storeImageResponses?.length > 0 && (
         <>
           <Wrapper>
             <LeftImage

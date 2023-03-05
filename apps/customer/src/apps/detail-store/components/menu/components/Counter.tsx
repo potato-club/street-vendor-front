@@ -1,20 +1,40 @@
 import { customColor, Typography } from '@street-vendor/core';
-import React from 'react';
+import { menuCount } from '../../../../../recoil/atoms/menuCount';
+import React, { useCallback } from 'react';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
+type Props = {
+  menuId: number;
+};
+export const Counter = ({ menuId }: Props) => {
+  const [menu, setMenu] = useRecoilState(menuCount(menuId));
+  const handleCount = useCallback((action: string) => {
+    if (action === '+') {
+      setMenu({
+        ...menu,
+        count: menu.count + 1,
+      });
+    } else {
+      if(menu.count === 0) return;
+      setMenu({
+        ...menu,
+        count: menu.count - 1,
+      });
+    }
+  }, [menu, setMenu]);
 
-export const Counter = () => {
   return (
     <Container>
       <Wrapper>
-        <Button>
+        <Button onClick={() => handleCount('-')}>
           <Typography size="14" fontWeight="bold" color="gray">
             -
           </Typography>
         </Button>
         <Typography size="14" fontWeight="bold" color="black">
-          1
+          {menu.count}
         </Typography>
-        <Button>
+        <Button onClick={() => handleCount('+')}>
           <Typography size="14" fontWeight="bold" color="black">
             +
           </Typography>
