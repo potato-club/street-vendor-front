@@ -7,6 +7,7 @@ export const menuCount = atomFamily<MenuCountType, number>({
     return {
       menuId,
       count: 0,
+      price: undefined,
     };
   },
 });

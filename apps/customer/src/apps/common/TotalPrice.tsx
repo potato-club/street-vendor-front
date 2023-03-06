@@ -1,13 +1,16 @@
 import { customColor, Typography } from '@street-vendor/core';
 import React from 'react'
 import styled from 'styled-components';
+import { useRecoilValue } from "recoil";
+import { totalPrice } from '../../recoil/atoms';
 
 export const TotalPrice = () => {
+  const price = useRecoilValue(totalPrice);
   return (
     <Container>
       <Wrapper>
         <Typography size="24">총 주문금액</Typography>
-        <Typography size="20">3000원</Typography>
+        <Typography size="20">{price}원</Typography>
       </Wrapper>
     </Container>
   );
