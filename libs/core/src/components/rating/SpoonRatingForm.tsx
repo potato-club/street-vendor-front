@@ -18,7 +18,7 @@ export const SpoonRatingForm = (props: Props) => {
     <Controller
       name={props.name}
       control={props.control}
-      rules={{ required: '만족도를 선택해주세요' }}
+      rules={{ required: false }}
       render={({ field: { onChange } }) => (
         <Rating
           onClick={onChange}
