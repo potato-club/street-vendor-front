@@ -18,6 +18,7 @@ interface ModalStyle {
 }
 
 export const CustomModal = (props: ModalProps) => {
+  ReactModal.setAppElement('#__next');
   return (
     <ReactModal
       ariaHideApp={false}
