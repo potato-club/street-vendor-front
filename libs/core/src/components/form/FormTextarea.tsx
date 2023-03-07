@@ -43,11 +43,6 @@ export const FormTextarea = (props: InputProps) => {
         {...props.register(props.value)}
         defaultValue={''}
       />
-      {props.errors[props.value] && (
-        <Error>
-          <Typography size="16">에러Textarea</Typography>
-        </Error>
-      )}
     </Wrapper>
   );
 };
@@ -80,7 +75,6 @@ const Textarea = styled.textarea`
     white-space: pre-wrap;
   }
 `;
-const Error = styled.span``;
 const MaxLength = styled.span`
   display: flex;
   bottom: 20px;

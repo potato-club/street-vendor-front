@@ -33,7 +33,13 @@ type Props = {
   initialIndex?: number;
 };
 
-export const BigPhotoModal = ({ isOpen, handleCloseModal, src, initialIndex }: Props) => {
+export const BigPhotoModal = ({
+  isOpen,
+  handleCloseModal,
+  src,
+  initialIndex,
+}: Props) => {
+  Modal.setAppElement('#__next');
   // src 가 배열인경우
   if (Array.isArray(src))
     return (
@@ -74,12 +80,7 @@ export const BigPhotoModal = ({ isOpen, handleCloseModal, src, initialIndex }: P
       style={modalStyle}
     >
       <ImageWrapper>
-        <Image
-          src={src}
-          alt={'menu'}
-          fill
-          style={{ objectFit: 'contain' }}
-        />
+        <Image src={src} alt={'menu'} fill style={{ objectFit: 'contain' }} />
       </ImageWrapper>
     </Modal>
   );
