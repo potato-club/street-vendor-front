@@ -1,8 +1,4 @@
-import {
-  NextButton,
-  StoreRegisterTimePickerModal,
-  Typography,
-} from '@street-vendor/core';
+import { NextButton, Typography } from '@street-vendor/core';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { atomStoreRegisterSchedule } from 'apps/boss/src/recoil/atoms/atomStoreRegister';
 import { useState } from 'react';
@@ -11,6 +7,7 @@ import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { QuestionLabel } from '../components/QuestionLabel';
 import { DaySchedule } from './components/DayScheduler';
+import { StoreRegisterTimePickerModal } from './components/StoreRegisterTimePickerModal';
 
 export const StoreRegisterSchedule = () => {
   const scheduleValue = useRecoilValue(atomStoreRegisterSchedule);
