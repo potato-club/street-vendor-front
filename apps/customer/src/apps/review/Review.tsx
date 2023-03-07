@@ -23,8 +23,14 @@ export const Review = () => {
   const { mutate } = useQueryPostReview();
   const [isback, setIsBack] = useState(false);
   const submit = async (data: FieldValues) => {
-    data.reviewPhoto.pop();
-    mutate({ review: data, storeId: '1' });
+    if (data['reviewRating'] === undefined || data['reviewContent'] === '') {
+      data['reviewRating'] === undefined &&
+        toast.error('만족도를 선택해주세요');
+      data['reviewContent'] === '' && toast.error('리뷰내용을 입력해주세요');
+    } else {
+      data.reviewPhoto.pop();
+      mutate({ review: data, storeId: '1' });
+    }
   };
 
   return (
