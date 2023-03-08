@@ -106,4 +106,9 @@ const Input = styled.input`
   padding: 0 18px;
   letter-spacing: -1px;
   font-size: 12px;
+  &::-webkit-inner-spin-button {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+  }
 `;
