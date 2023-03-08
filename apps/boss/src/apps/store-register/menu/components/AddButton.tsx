@@ -1,14 +1,22 @@
 import { customColor } from '@street-vendor/core';
 import styled from 'styled-components';
 import { HiOutlinePlus } from 'react-icons/hi';
+import { useRecoilState } from 'recoil';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { atomStoreRegisterMenu } from 'apps/boss/src/recoil/atoms/atomStoreRegister';
 
-interface Props {
-  handleClickButton: () => void;
-}
-
-export const AddButton = ({ handleClickButton }: Props) => {
+export const AddButton = () => {
+  const [menuArray, setMenuArray] = useRecoilState(atomStoreRegisterMenu);
   return (
-    <Button type="button" onClick={handleClickButton}>
+    <Button
+      type="button"
+      onClick={() =>
+        setMenuArray((prev) => [
+          ...prev,
+          { image: null, name: null, price: null, weight: null },
+        ])
+      }
+    >
       <PlusIcon />
     </Button>
   );

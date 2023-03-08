@@ -1,5 +1,7 @@
 import { NextButton, Typography } from '@street-vendor/core';
-import { useState } from 'react';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { atomStoreRegisterMenu } from 'apps/boss/src/recoil/atoms/atomStoreRegister';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { QuestionLabel } from '../components/QuestionLabel';
 import { AddButton } from './components/AddButton';
@@ -13,14 +15,9 @@ export interface MenuProps {
 }
 
 export const StoreRegisterMenu = () => {
-  const [menuLength, setMenuLength] = useState<MenuProps[]>([
-    { image: null, name: null, price: null, weight: null },
-  ]);
-  const handlePushMenuLength = () => {
-    setMenuLength((prev) => [
-      ...prev,
-      { image: null, name: null, price: null, weight: null },
-    ]);
+  const [menuArray, setMenuArray] = useRecoilState(atomStoreRegisterMenu);
+  const handleSetMenuArray = (index: number, value: MenuProps) => {
+    setMenuArray(menuArray.map((i, id) => (id === index ? value : i)));
   };
   return (
     <Container>
@@ -28,10 +25,14 @@ export const StoreRegisterMenu = () => {
         <FormInner>
           <QuestionLabel label="이름과 가격, 용량/개수를 적어주세요">
             <MenuBox>
-              {menuLength.map((i, id) => (
-                <AddMenu key={id} id={id} />
+              {menuArray.map((i, id) => (
+                <AddMenu
+                  key={id}
+                  id={id}
+                  handleSetMenuArray={handleSetMenuArray}
+                />
               ))}
-              <AddButton handleClickButton={handlePushMenuLength} />
+              <AddButton />
             </MenuBox>
           </QuestionLabel>
           <Button>

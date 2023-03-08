@@ -1,15 +1,28 @@
 import { customColor } from '@street-vendor/core';
 import styled from 'styled-components';
 import { HiOutlinePlus } from 'react-icons/hi';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import Image from 'next/image';
 
 interface Props {
   id: number;
+  handleSetMenuArray: (
+    id: number,
+    value: {
+      image: File;
+      name: string;
+      price: number;
+      weight: string;
+    }
+  ) => void;
 }
 
-export const AddMenu = ({ id }: Props) => {
+export const AddMenu = ({ id, handleSetMenuArray }: Props) => {
   const [image, setImage] = useState<string>('');
+  const [file, setFile] = useState<File>();
+  const [menuName, setMenuName] = useState<string>();
+  const [menuPrice, setMenuPrice] = useState<number>();
+  const [menuWeight, setMenuWeight] = useState<string>();
   const handleAddImage = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     if (e.target.value[0]) {
@@ -18,8 +31,21 @@ export const AddMenu = ({ id }: Props) => {
       fileReader.onload = () => {
         setImage(String(fileReader.result!));
       };
+      setFile(e.target.files[0]);
     }
   };
+  useEffect(() => {
+    file &&
+      menuName &&
+      menuPrice &&
+      menuPrice &&
+      handleSetMenuArray(id, {
+        image: file,
+        name: menuName,
+        price: menuPrice,
+        weight: menuWeight,
+      });
+  }, [file, menuName, menuPrice, menuWeight]);
 
   return (
     <Wrapper>
@@ -38,9 +64,24 @@ export const AddMenu = ({ id }: Props) => {
         {image === '' && <ImagePlusIcon />}
       </ImageBox>
       <Info>
-        <Input type="text" placeholder="예) 메뉴이름" />
-        <Input type="number" placeholder="예) 가격" />
-        <Input type="text" placeholder="예) 용량/개수" />
+        <Input
+          type="text"
+          placeholder="예) 메뉴이름"
+          value={menuName}
+          onChange={(e) => setMenuName(e.target.value)}
+        />
+        <Input
+          type="number"
+          placeholder="예) 가격"
+          value={menuPrice}
+          onChange={(e) => setMenuPrice(Number(e.target.value))}
+        />
+        <Input
+          type="text"
+          placeholder="예) 용량/개수"
+          value={menuWeight}
+          onChange={(e) => setMenuWeight(e.target.value)}
+        />
       </Info>
     </Wrapper>
   );
