@@ -36,62 +36,65 @@ export const StoreRegister = () => {
       />
       <Form>
         <FormInner>
-          <QuestionLabel label="카테고리">
-            <CustomSelect
-              init="카테고리 선택"
-              content={categoryValue}
-              onClick={() => {
-                setModalContent('category');
-                setIsModalOpen(true);
-              }}
-            />
-          </QuestionLabel>
-          <QuestionLabel label="가게 이름">
-            <CustomInput
-              placeholder="예) 서윤보경네"
-              name="storeName"
-              register={register}
-              errors={errors}
-            />
-          </QuestionLabel>
-          <QuestionLabel label="한줄 설명">
-            <CustomInput
-              placeholder="예) 분식을 파는 서윤보경네 입니다"
-              name="storeDescription"
-              register={register}
-              errors={errors}
-            />
-          </QuestionLabel>
-          <QuestionLabel label="위치 설명">
-            <CustomInput
-              placeholder="예) 당정역 2번 출구 앞"
-              name="storeLocation"
-              register={register}
-              errors={errors}
-            />
-          </QuestionLabel>
-          <QuestionLabel label="계좌번호">
-            <Account>
+          <InputBox>
+            <QuestionLabel label="카테고리">
               <CustomSelect
-                init="은행선택"
-                content={accountValue}
-                width={140}
+                init="카테고리 선택"
+                content={categoryValue}
                 onClick={() => {
-                  setModalContent('account');
+                  setModalContent('category');
                   setIsModalOpen(true);
                 }}
               />
+            </QuestionLabel>
+            <QuestionLabel label="가게 이름">
               <CustomInput
-                placeholder="계좌번호 입력"
-                name="storeAccountNumber"
+                placeholder="예) 서윤보경네"
+                name="storeName"
                 register={register}
                 errors={errors}
               />
-            </Account>
-            <Typography size="12" color="orange1" letterSpacing="-1.0px">
-              *계좌입력은 정확히 해주세요
-            </Typography>
-          </QuestionLabel>
+            </QuestionLabel>
+            <QuestionLabel label="한줄 설명">
+              <CustomInput
+                placeholder="예) 분식을 파는 서윤보경네 입니다"
+                name="storeDescription"
+                register={register}
+                errors={errors}
+              />
+            </QuestionLabel>
+            <QuestionLabel label="위치 설명">
+              <CustomInput
+                placeholder="예) 당정역 2번 출구 앞"
+                name="storeLocation"
+                register={register}
+                errors={errors}
+              />
+            </QuestionLabel>
+            <QuestionLabel label="계좌번호">
+              <Account>
+                <CustomSelect
+                  init="은행선택"
+                  content={accountValue}
+                  width={140}
+                  onClick={() => {
+                    setModalContent('account');
+                    setIsModalOpen(true);
+                  }}
+                />
+                <CustomInput
+                  placeholder="계좌번호 입력"
+                  name="storeAccountNumber"
+                  register={register}
+                  errors={errors}
+                />
+              </Account>
+              <Typography size="12" color="orange1" letterSpacing="-1.0px">
+                *계좌입력은 정확히 해주세요
+              </Typography>
+            </QuestionLabel>
+          </InputBox>
+
           <Button>
             <NextButton background="orange4">
               <Typography
@@ -132,7 +135,8 @@ const FormInner = styled.div`
   width: 100%;
   height: 100%;
   align-items: center;
-  gap: 28px;
+  justify-content: space-between;
+  gap: 20px;
   padding: 0 7%;
 `;
 const Button = styled.div`
@@ -146,4 +150,9 @@ const Account = styled.div`
   display: flex;
   flex-direction: row;
   gap: 0 10px;
+`;
+const InputBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 `;
