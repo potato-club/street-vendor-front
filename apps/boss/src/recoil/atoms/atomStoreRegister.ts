@@ -6,6 +6,12 @@ export interface ScheduleType {
   open: string;
   close: string;
 }
+export interface MenuType {
+  image: File;
+  name: string;
+  price: number;
+  weight: string;
+}
 
 export const atomStoreRegisterCategory = atom<string>({
   key: 'atomStoreRegisterCategory',
@@ -30,4 +36,8 @@ export const atomStoreRegisterSchedule = atom<ScheduleType[]>({
 export const atomScheduleModalTime = atom<{ day: number; time: string }>({
   key: 'atomScheduleTime',
   default: { day: 0, time: 'open' },
+});
+export const atomStoreRegisterMenu = atom<MenuType[]>({
+  key: 'atomStoreRegisterMenu',
+  default: [{ image: null, name: null, price: null, weight: null }],
 });
