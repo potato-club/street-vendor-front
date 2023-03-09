@@ -1,6 +1,6 @@
 import { customColor, Typography } from '@street-vendor/core';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { atomStoreRegisterPhoto } from 'apps/boss/src/recoil/atoms/atomStoreRegister';
-import { customColorType } from 'libs/core/src/constants/customColor';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
@@ -11,10 +11,9 @@ interface Props {
 
 export const PhotoButton = ({ setImages }: Props) => {
   const [photoArray, setPhotoArray] = useRecoilState(atomStoreRegisterPhoto);
-  const [files, setFiles] = useState<FileList>();
+  const [files, setFiles] = useState<any>();
   const handleAddImage = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    let array = [];
     if (e.target.value[0]) {
       Object.values(e.target.files).map((i) => {
         const fileReader = new FileReader();
@@ -24,6 +23,7 @@ export const PhotoButton = ({ setImages }: Props) => {
         };
       });
       setFiles(e.target.files);
+      console.log(files);
     }
   };
   useEffect(() => {
