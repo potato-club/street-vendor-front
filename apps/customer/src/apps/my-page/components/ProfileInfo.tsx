@@ -32,6 +32,10 @@ export const ProfileInfo = () => {
   return (
     <form
       onSubmit={handleSubmit((data) => {
+        if (data.nickname === nickname) {
+          handleEditMode();
+          return;
+        }
         mutate(data.nickname, {
           onSuccess: () => {
             handleEditMode();
