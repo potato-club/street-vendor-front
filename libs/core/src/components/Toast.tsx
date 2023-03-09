@@ -1,4 +1,8 @@
 import { Toaster } from 'react-hot-toast';
+import { customColor } from '../constants';
+
+const SUCCESS_COLOR = customColor.orange3;
+const ERROR_COLOR = '#FF5500';
 
 export const Toast = () => {
   return (
@@ -9,20 +13,32 @@ export const Toast = () => {
       toastOptions={{
         duration: 5000,
         style: {
-          background: '#ffffff',
-          color: '#363636',
+          borderRadius: '999px',
+          minWidth: '200px',
+          wordBreak: 'keep-all',
         },
 
         success: {
           duration: 3000,
           style: {
-            border: '1px solid #FFCD69',
+            color: SUCCESS_COLOR,
+            border: `1px solid ${SUCCESS_COLOR}`,
+            borderRadius: '999px',
+          },
+          iconTheme: {
+            primary: SUCCESS_COLOR,
+            secondary: '#fff',
           },
         },
         error: {
           style: {
-            color: '#ff4b4b',
-            border: '1px solid #ff4b4b',
+            color: ERROR_COLOR,
+            border: `1px solid ${ERROR_COLOR}`,
+            borderRadius: '999px',
+          },
+          iconTheme: {
+            primary: ERROR_COLOR,
+            secondary: '#fff',
           },
         },
       }}
