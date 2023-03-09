@@ -1,17 +1,26 @@
 import styled from 'styled-components';
 import { Typography } from '../Typography';
-import { FieldErrorsImpl } from 'react-hook-form';
+import {
+  FieldErrorsImpl,
+  FieldValues,
+  UseFormRegister,
+  UseFormWatch,
+} from 'react-hook-form';
 import { AddPhotoButton } from '../button/AddPhotoButton';
 import { AddedPhotoButton } from '../button/AddedPhotoButton';
+import { useState } from 'react';
 
 interface InputProps {
   label: string;
   placeholder: string;
   value: string;
+  register: UseFormRegister<FieldValues>;
+  watch: UseFormWatch<FieldValues>;
   errors: Partial<FieldErrorsImpl>;
 }
 
 export const FormPhoto = (props: InputProps) => {
+  const [images, setImages] = useState<string[]>([]);
   return (
     <Wrapper>
       <Label>
@@ -20,17 +29,24 @@ export const FormPhoto = (props: InputProps) => {
         </Typography>
       </Label>
       <Images>
-        <AddedPhotoButton src={''} errors={props.errors} />
-        <AddPhotoButton errors={props.errors} />
+        {images.map((i, id) => (
+          <AddedPhotoButton key={id + 1} src={i} errors={props.errors} />
+        ))}
+        {images.length < 3 && (
+          <AddPhotoButton
+            key={images.length}
+            value={`${props.value}.${images.length}`}
+            register={props.register}
+            setImages={(image: string) => {
+              setImages((prev) => [...prev, image]);
+            }}
+          />
+        )}
       </Images>
+
       <Typography size="12" color="darkGray" letterSpacing="-0.5px">
         {props.placeholder}
       </Typography>
-      {props.errors[props.value] && (
-        <Error>
-          <Typography size="16">에러Photo</Typography>
-        </Error>
-      )}
     </Wrapper>
   );
 };
@@ -49,4 +65,3 @@ const Images = styled.div`
   width: 100%;
   gap: 0 18px;
 `;
-const Error = styled.span``;
