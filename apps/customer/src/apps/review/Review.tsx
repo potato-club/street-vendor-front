@@ -1,14 +1,16 @@
 import {
-  AskPhoto,
-  AskSubmit,
-  AskTextarea,
+  FormPhoto,
+  FormSubmit,
+  FormTextarea,
   CustomModal,
   SpoonRatingForm,
   Typography,
 } from '@street-vendor/core';
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
+import { toast } from 'react-hot-toast';
 import styled from 'styled-components';
+import { useQueryPostReview } from '../../hooks/query/review/useQueryPostReview';
 
 export const Review = () => {
   const {
@@ -17,15 +19,23 @@ export const Review = () => {
     watch,
     control,
     handleSubmit,
-  } = useForm();
+  } = useForm<FieldValues>();
+  const { mutate } = useQueryPostReview();
   const [isback, setIsBack] = useState(false);
-  const submit = useCallback((data: FieldValues) => {
-    console.log(data);
-  }, []);
+  const submit = async (data: FieldValues) => {
+    if (data['reviewRating'] === undefined || data['reviewContent'] === '') {
+      data['reviewRating'] === undefined &&
+        toast.error('만족도를 선택해주세요');
+      data['reviewContent'] === '' && toast.error('리뷰내용을 입력해주세요');
+    } else {
+      data.reviewPhoto.pop();
+      mutate({ review: data, storeId: '1' });
+    }
+  };
 
   return (
     <Container>
-      <CustomModal
+      {/* <CustomModal
         isTwoButtons
         isModalOpen={isback}
         closeModal={() => {
@@ -40,51 +50,52 @@ export const Review = () => {
         onClickButton2={() => {
           setIsBack(false);
         }}
-      />
+      /> */}
       <ContainerInner onSubmit={handleSubmit(submit)}>
-        <Spoon>
-          <SpoonText>
-            <Typography size="16" fontWeight="bold" letterSpacing="-0.9px">
-              맛숟가락
-            </Typography>
-            <Typography size="12" color="darkGray" letterSpacing="-0.6px">
-              맛있으셨나요? 맛있었던만큼 숟가락 갯수를 선택해주세요.
-            </Typography>
-            <SpoonRatingForm
-              name="reviewRating"
-              control={control}
+        <Content>
+          <Spoon>
+            <SpoonText>
+              <Typography size="16" fontWeight="bold" letterSpacing="-0.9px">
+                맛숟가락
+              </Typography>
+              <Typography size="12" color="darkGray" letterSpacing="-0.6px">
+                맛있으셨나요? 맛있었던만큼 숟가락 갯수를 선택해주세요.
+              </Typography>
+              <SpoonRatingForm
+                name="reviewRating"
+                control={control}
+                errors={errors}
+              />
+            </SpoonText>
+          </Spoon>
+          <ReviewText>
+            <FormTextarea
+              label="리뷰하기"
+              placeholder="리뷰 내용을 작성해주세요:)"
+              value="reviewContent"
+              register={register}
               errors={errors}
+              watch={watch}
             />
-          </SpoonText>
-        </Spoon>
-        <ReviewText>
-          <AskTextarea
-            label="리뷰하기"
-            placeholder="리뷰 내용을 작성해주세요:)"
-            value="reviewContent"
-            register={register}
-            errors={errors}
-            watch={watch}
-          />
-        </ReviewText>
-        <ReviewPhoto>
-          <AskPhoto
-            label="첨부 사진"
-            value="reviewPhoto"
-            placeholder="사진은 최대 3장까지 등록 가능합니다."
-            errors={errors}
-          />
-        </ReviewPhoto>
-        <Button
-          type="button"
-          onClick={() => {
-            setIsBack(true);
-          }}
-        >
-          앙
-        </Button>
+          </ReviewText>
+          <ReviewPhoto>
+            <FormPhoto
+              label="첨부 사진"
+              value="reviewPhoto"
+              placeholder="사진은 최대 3장까지 등록 가능합니다."
+              errors={errors}
+              watch={watch}
+              register={register}
+            />
+          </ReviewPhoto>
+        </Content>
         <ReviewRegister>
-          <AskSubmit isAgreeChecked={true} onClick={() => {}} />
+          <FormSubmit
+            isAgreeChecked={true}
+            onClick={() => {
+              console.log();
+            }}
+          />
         </ReviewRegister>
       </ContainerInner>
     </Container>
@@ -105,7 +116,9 @@ const ContainerInner = styled.form`
   max-width: 400px;
   min-height: 100%;
   height: 100%;
+  justify-content: space-between;
 `;
+const Content = styled.div``;
 const Spoon = styled.div`
   display: flex;
   flex-direction: column;
@@ -130,14 +143,6 @@ const ReviewPhoto = styled.div`
 `;
 const ReviewRegister = styled.div`
   display: flex;
-  position: absolute;
   width: 100%;
-  bottom: 0;
   padding: 0 7%;
-`;
-const Button = styled.button`
-  display: flex;
-  margin: 20px 7%;
-  justify-content: center;
-  padding: 8px 0;
 `;
