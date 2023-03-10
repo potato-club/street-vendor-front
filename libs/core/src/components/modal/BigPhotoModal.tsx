@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import { ImageUrlType } from '@street-vendor/core';
 
 const modalStyle = {
   overlay: {
