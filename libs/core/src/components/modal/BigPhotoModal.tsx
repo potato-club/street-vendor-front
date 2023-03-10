@@ -31,13 +31,18 @@ const modalStyle = {
 type Props = {
   isOpen: boolean;
   handleCloseModal: () => void;
-  src: ImageUrlType | ImageUrlType[];
+  imageInfo: ImageUrlType | ImageUrlType[];
   initialIndex?: number;
 };
 
-export const BigPhotoModal = ({ isOpen, handleCloseModal, src, initialIndex }: Props) => {
-  // src 가 배열인경우
-  if (Array.isArray(src))
+export const BigPhotoModal = ({
+  isOpen,
+  handleCloseModal,
+  imageInfo,
+  initialIndex,
+}: Props) => {
+  // imageInfo 가 배열인경우
+  if (Array.isArray(imageInfo))
     return (
       <Modal
         ariaHideApp={false}
@@ -51,7 +56,7 @@ export const BigPhotoModal = ({ isOpen, handleCloseModal, src, initialIndex }: P
           initialSlide={initialIndex}
           spaceBetween={100}
         >
-          {src.map((data, index) => (
+          {imageInfo.map((data, index) => (
             <SwiperSlide key={`${data}-${index}`}>
               <ImageWrapper>
                 <Image
@@ -67,7 +72,7 @@ export const BigPhotoModal = ({ isOpen, handleCloseModal, src, initialIndex }: P
       </Modal>
     );
 
-  // src 가 배열이 아닌경우
+  // imageInfo 가 배열이 아닌경우
   return (
     <Modal
       ariaHideApp={false}
@@ -77,7 +82,7 @@ export const BigPhotoModal = ({ isOpen, handleCloseModal, src, initialIndex }: P
     >
       <ImageWrapper>
         <Image
-          src={src.pictureUrl}
+          src={imageInfo.pictureUrl}
           alt={'menu'}
           fill
           style={{ objectFit: 'contain' }}

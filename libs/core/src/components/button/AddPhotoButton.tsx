@@ -1,15 +1,40 @@
 import styled from 'styled-components';
-import { FieldErrorsImpl } from 'react-hook-form';
+import { FieldValues, UseFormRegister } from 'react-hook-form';
 import { customColor } from '../../constants';
+import { ChangeEvent } from "react";
 
 interface ButtonProps {
-  onClick?: () => void;
-  errors: Partial<FieldErrorsImpl>;
+  register: UseFormRegister<FieldValues>;
+  value: string;
+  setImages: (image: string) => void;
 }
 
-export const AddPhotoButton = (props: ButtonProps) => {
+export const AddPhotoButton = ({ value, register, setImages }: ButtonProps) => {
+  const { onChange, ...rest } = register(value);
+
+  const addImage = (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    if (e.target.value[0] && e.target.files) {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(e.target.files[0]);
+      fileReader.onload = () => {
+        setImages(String(fileReader.result));
+      };
+    }
+  };
+
   return (
-    <Button onClick={props.onClick} type="button">
+    <Wrapper>
+      <FileButton
+        type="file"
+        id={value}
+        accept="image/*"
+        onChange={(e) => {
+          addImage(e);
+          onChange(e);
+        }}
+        {...rest}
+      />
       <AddIcon>
         <svg
           width="25"
@@ -22,11 +47,15 @@ export const AddPhotoButton = (props: ButtonProps) => {
           <path d="M11 0L11 25H13L13 0H11Z" fill={customColor.orange2} />
         </svg>
       </AddIcon>
-    </Button>
+    </Wrapper>
   );
 };
 
-const Button = styled.button`
+const Wrapper = styled.article`
+  display: flex;
+  position: relative;
+`;
+const FileButton = styled.input`
   display: flex;
   width: 64px;
   height: 64px;
@@ -36,5 +65,18 @@ const Button = styled.button`
   position: relative;
   background: ${customColor.beige};
   border-radius: 12px;
+  font-size: 0;
+  &::file-selector-button {
+    display: none;
+  }
 `;
-const AddIcon = styled.div``;
+const AddIcon = styled.div`
+  display: flex;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+`;

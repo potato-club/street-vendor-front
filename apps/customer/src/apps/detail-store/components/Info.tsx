@@ -1,9 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Typography, customColor, SpoonRating } from '@street-vendor/core';
-import { Arrow, SpeechBubble, Tteokbokki } from '../Icons';
-import { Star } from '../../common/icons';
-import { useQueryGetDetailStore } from '../../../hooks/query/detail-store/useQueryGetDetailStore';
+import {
+  Arrow,
+  SpeechBubble,
+  Tteokbokki,
+} from '../Icons';
+import { Star } from '../../../components/icons';
+import { useQueryGetDetailStore } from '../../../../src/hooks/query/detail-store/useQueryGetDetailStore';
 
 export const Info = () => {
   const { data } = useQueryGetDetailStore();

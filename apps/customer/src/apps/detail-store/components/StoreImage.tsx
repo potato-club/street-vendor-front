@@ -8,7 +8,6 @@ import { useModal } from './../../../hooks/useModal';
 export const StoreImage = () => {
   const { data } = useQueryGetDetailStore();
 
-
   const { isOpen, handleOpenModal, handleCloseModal } = useModal();
   const [clickIndex, setClickIndex] = useState<number>(0);
 
@@ -37,28 +36,30 @@ export const StoreImage = () => {
             </LeftImage>
             {data.storeImageResponses.length > 1 && (
               <RightImage>
-                {data.storeImageResponses.slice(1).map((data:ImageUrlType, index) => (
-                  <div
-                    key={data.id}
-                    style={{
-                      position: 'relative',
-                      height: '100%',
-                    }}
-                    onClick={() => handleImageClick(index + 1)}
-                  >
-                    <Image
-                      src={data.pictureUrl}
-                      fill
-                      alt="detailStoreImage"
-                      style={{ objectFit: 'cover' }}
-                    />
-                  </div>
-                ))}
+                {data.storeImageResponses
+                  .slice(1)
+                  .map((data: ImageUrlType, index) => (
+                    <div
+                      key={data.id}
+                      style={{
+                        position: 'relative',
+                        height: '100%',
+                      }}
+                      onClick={() => handleImageClick(index + 1)}
+                    >
+                      <Image
+                        src={data.pictureUrl}
+                        fill
+                        alt="detailStoreImage"
+                        style={{ objectFit: 'cover' }}
+                      />
+                    </div>
+                  ))}
               </RightImage>
             )}
           </Wrapper>
           <BigPhotoModal
-            src={data.storeImageResponses}
+            imageInfo={data.storeImageResponses}
             isOpen={isOpen}
             handleCloseModal={handleCloseModal}
             initialIndex={clickIndex}

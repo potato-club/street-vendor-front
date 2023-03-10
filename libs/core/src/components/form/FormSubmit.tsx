@@ -10,7 +10,7 @@ interface ButtonStyledProps {
   isAgreeChecked: boolean;
 }
 
-export const AskSubmit = (props: ButtonProps) => {
+export const FormSubmit = (props: ButtonProps) => {
   return (
     <Button
       onClick={props.onClick}

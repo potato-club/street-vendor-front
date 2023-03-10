@@ -10,6 +10,7 @@ interface ModalProps {
 }
 
 export const CustomWhiteModal = (props: ModalProps) => {
+  ReactModal.setAppElement('#__next');
   return (
     <ReactModal
       shouldCloseOnOverlayClick={true}
