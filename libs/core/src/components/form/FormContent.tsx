@@ -20,7 +20,7 @@ interface ContentProps {
   watch: UseFormWatch<FieldValues>;
 }
 
-export const AskContent = (props: ContentProps) => {
+export const FormContent = (props: ContentProps) => {
   const commaFormat = (num: number) => {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };

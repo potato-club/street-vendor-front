@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { customColor } from '../../constants';
 import { Typography } from '../Typography';
 import { FieldErrorsImpl, FieldValues, UseFormRegister } from 'react-hook-form';
-import { AskOption } from './FormOption';
+import { FormOption } from './FormOption';
 
 interface OptionProps {
   name: string;
@@ -30,7 +30,7 @@ export const AskSelect = (props: SelectProps) => {
           {props.placeholder}
         </Option>
         {props.options.map((item, idx) => (
-          <AskOption key={idx} name={item.name} value={item.value} />
+          <FormOption key={idx} name={item.name} value={item.value} />
         ))}
       </Select>
       <ArrowIcon>

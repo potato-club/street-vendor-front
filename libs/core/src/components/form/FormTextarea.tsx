@@ -17,7 +17,7 @@ interface InputProps {
   watch: UseFormWatch<FieldValues>;
 }
 
-export const AskTextarea = (props: InputProps) => {
+export const FormTextarea = (props: InputProps) => {
   const commaFormat = (num: number) => {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
@@ -43,11 +43,6 @@ export const AskTextarea = (props: InputProps) => {
         {...props.register(props.value)}
         defaultValue={''}
       />
-      {props.errors[props.value] && (
-        <Error>
-          <Typography size="16">에러Textarea</Typography>
-        </Error>
-      )}
     </Wrapper>
   );
 };
@@ -80,7 +75,6 @@ const Textarea = styled.textarea`
     white-space: pre-wrap;
   }
 `;
-const Error = styled.span``;
 const MaxLength = styled.span`
   display: flex;
   bottom: 20px;

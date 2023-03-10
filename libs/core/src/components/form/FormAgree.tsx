@@ -11,7 +11,7 @@ interface ButtonStyledProps {
   isAgreeChecked: boolean;
 }
 
-export const AskAgree = (props: ButtonProps) => {
+export const FormAgree = (props: ButtonProps) => {
   return (
     <Wrapper>
       <Label>

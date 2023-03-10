@@ -12,6 +12,11 @@ const nextConfig = {
     // See: https://github.com/gregberge/svgr
     svgr: false,
   },
+  images: {
+    // Todo mock 서버 도메인은 나중에 지워야함! (search.pstatic.net)
+    domains: ['search.pstatic.net'],
+  },
 };
+
 
 module.exports = withNx(nextConfig);

@@ -28,10 +28,11 @@ const modalStyle = {
   },
 };
 
+
 type Props = {
   isOpen: boolean;
   handleCloseModal: () => void;
-  src: string | string[];
+  src: string[] | string;
   initialIndex?: number;
 };
 
@@ -81,7 +82,12 @@ export const BigPhotoModal = ({
       style={modalStyle}
     >
       <ImageWrapper>
-        <Image src={src} alt={'menu'} fill style={{ objectFit: 'contain' }} />
+        <Image
+          src={src}
+          alt={'menu'}
+          fill
+          style={{ objectFit: 'contain' }}
+        />
       </ImageWrapper>
     </Modal>
   );

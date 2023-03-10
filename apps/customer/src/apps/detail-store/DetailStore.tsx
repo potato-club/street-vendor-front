@@ -4,20 +4,26 @@ import { Info, Menu } from './components';
 import styled from 'styled-components';
 import { useSpring, animated } from '@react-spring/web';
 import { MultiPhotoDisplay } from '../common/MultiPhotoDisplay';
+import { useQueryGetDetailStore } from '../../hooks/query/detail-store/useQueryGetDetailStore';
 
 export const DetailStore = () => {
- const props = useSpring({
+ const springAnimation = useSpring({
    from: { y: -10 },
    to: { y: -40 },
    config: {
     tension: 100,
    }
  });
+ const { isLoading } = useQueryGetDetailStore();
+
+  if (isLoading) {
+    return <div>로딩중</div>;
+  }
 
   return (
     <Container>
       <MultiPhotoDisplay />
-      <ContentWrapper style={props}>
+      <ContentWrapper style={springAnimation}>
         <Info />
         <Line />
         <Menu />

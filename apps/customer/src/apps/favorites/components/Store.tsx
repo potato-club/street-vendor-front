@@ -1,8 +1,8 @@
 import { customColor, SpoonRating, Typography } from '@street-vendor/core';
 import Image from 'next/image';
-import React from 'react'
+import React from 'react';
 import styled from 'styled-components';
-import { Star } from '../../common/icons';
+import { Star } from '../../../components/icons';
 
 export const Store = () => {
   return (
@@ -40,13 +40,14 @@ export const Store = () => {
         </Flex>
         <Flex>
           <SpoonRating initialValue={3.5} readonly />
-          <Typography size="12" fontWeight='bold'>3.5 숟가락</Typography>
+          <Typography size="12" fontWeight="bold">
+            3.5 숟가락
+          </Typography>
         </Flex>
       </InfoWrapper>
     </Container>
   );
-}
-
+};
 
 const Container = styled.div`
   display: flex;
@@ -56,6 +57,7 @@ const Container = styled.div`
   border-radius: 20px;
   box-shadow: 0px 3px 6px ${customColor.gray};
   overflow: hidden;
+  flex: none;
 `;
 
 const ImageWrapper = styled.div`

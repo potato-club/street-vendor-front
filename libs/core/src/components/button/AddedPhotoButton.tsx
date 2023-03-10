@@ -16,8 +16,8 @@ export const AddedPhotoButton = (props: ButtonProps) => {
   return (
     <Button onClick={props.onClick} type="button">
       <Image
-        src={`/${props.src}`}
-        alt={props.src}
+        src={props.src}
+        alt="photo"
         fill
         style={{ objectFit: 'cover', borderRadius: 'inherit' }}
       />
