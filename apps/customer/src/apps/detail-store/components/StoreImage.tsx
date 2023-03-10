@@ -59,7 +59,7 @@ export const StoreImage = () => {
             )}
           </Wrapper>
           <BigPhotoModal
-            imageInfo={data.storeImageResponses}
+            src={data.storeImageResponses.map((data:ImageUrlType) => data.pictureUrl)}
             isOpen={isOpen}
             handleCloseModal={handleCloseModal}
             initialIndex={clickIndex}

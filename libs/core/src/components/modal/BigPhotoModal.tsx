@@ -12,6 +12,7 @@ const modalStyle = {
   overlay: {
     inset: 0,
     backgroundColor: `${customColor.black}90`,
+    zIndex: 99,
   },
   content: {
     '--imageSize': 'min(80vw, 80vh)',
@@ -24,6 +25,7 @@ const modalStyle = {
     height: 'var(---imageSize)',
     border: 'none',
     padding: 0,
+    zIndex: 99,
   },
 };
 
@@ -31,18 +33,18 @@ const modalStyle = {
 type Props = {
   isOpen: boolean;
   handleCloseModal: () => void;
-  imageInfo: ImageUrlType | ImageUrlType[];
+  src: string[] | string;
   initialIndex?: number;
 };
 
 export const BigPhotoModal = ({
   isOpen,
   handleCloseModal,
-  imageInfo,
+  src,
   initialIndex,
 }: Props) => {
-  // imageInfo 가 배열인경우
-  if (Array.isArray(imageInfo))
+  // src 가 배열인경우
+  if (Array.isArray(src))
     return (
       <Modal
         ariaHideApp={false}
@@ -56,11 +58,11 @@ export const BigPhotoModal = ({
           initialSlide={initialIndex}
           spaceBetween={100}
         >
-          {imageInfo.map((data, index) => (
+          {src.map((data, index) => (
             <SwiperSlide key={`${data}-${index}`}>
               <ImageWrapper>
                 <Image
-                  src={data.pictureUrl}
+                  src={data}
                   alt={'menu'}
                   fill
                   style={{ objectFit: 'contain' }}
@@ -72,7 +74,7 @@ export const BigPhotoModal = ({
       </Modal>
     );
 
-  // imageInfo 가 배열이 아닌경우
+  // src 가 배열이 아닌경우
   return (
     <Modal
       ariaHideApp={false}
@@ -82,7 +84,7 @@ export const BigPhotoModal = ({
     >
       <ImageWrapper>
         <Image
-          src={imageInfo.pictureUrl}
+          src={src}
           alt={'menu'}
           fill
           style={{ objectFit: 'contain' }}
