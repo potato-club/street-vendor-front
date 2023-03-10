@@ -5,20 +5,23 @@ type Props = {
   buttonText: string;
   type?: 'submit' | 'reset' | 'button';
   TopText?: string;
+  onClick?: () => void;
 };
-export const BottomButton = ({ buttonText, type, TopText }: Props) => {
+export const BottomButton = ({ buttonText, type, TopText, onClick }: Props) => {
   return (
-    <Container>
-      {TopText && <TopTextWrapper>
-        <Typography size="16" fontWeight="bold">
-          {TopText}
-        </Typography>
-      </TopTextWrapper>}
+    <Container onClick={onClick}>
+      {TopText && (
+        <TopTextWrapper>
+          <Typography size="16" fontWeight="bold">
+            {TopText}
+          </Typography>
+        </TopTextWrapper>
+      )}
       <BasicButton
         backgroundColor="orange3"
         maxWidth={320}
         height={54}
-        style={{width: '100%'}}
+        style={{ width: '100%' }}
         shadow
         type={type}
       >

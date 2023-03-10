@@ -3,20 +3,26 @@ import { customColor } from '@street-vendor/core';
 import { Info, StoreImage, Menu } from './components';
 import styled from 'styled-components';
 import { useSpring, animated } from '@react-spring/web';
+import { useQueryGetDetailStore } from '../../hooks/query/detail-store/useQueryGetDetailStore';
 
 export const DetailStore = () => {
- const props = useSpring({
+ const springAnimation = useSpring({
    from: { y: -10 },
    to: { y: -40 },
    config: {
     tension: 100,
    }
  });
+ const { isLoading } = useQueryGetDetailStore();
+
+  if (isLoading) {
+    return <div>로딩중</div>;
+  }
 
   return (
     <Container>
       <StoreImage />
-      <ContentWrapper style={props}>
+      <ContentWrapper style={springAnimation}>
         <Info />
         <Line />
         <Menu />

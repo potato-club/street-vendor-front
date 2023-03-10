@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import { ImageUrlType } from '@street-vendor/core';
 
 const modalStyle = {
   overlay: {
@@ -26,22 +27,22 @@ const modalStyle = {
   },
 };
 
+
 type Props = {
   isOpen: boolean;
   handleCloseModal: () => void;
-  src: string | string[];
+  imageInfo: ImageUrlType | ImageUrlType[];
   initialIndex?: number;
 };
 
 export const BigPhotoModal = ({
   isOpen,
   handleCloseModal,
-  src,
+  imageInfo,
   initialIndex,
 }: Props) => {
-  Modal.setAppElement('#__next');
-  // src 가 배열인경우
-  if (Array.isArray(src))
+  // imageInfo 가 배열인경우
+  if (Array.isArray(imageInfo))
     return (
       <Modal
         ariaHideApp={false}
@@ -55,11 +56,11 @@ export const BigPhotoModal = ({
           initialSlide={initialIndex}
           spaceBetween={100}
         >
-          {src.map((data, index) => (
+          {imageInfo.map((data, index) => (
             <SwiperSlide key={`${data}-${index}`}>
               <ImageWrapper>
                 <Image
-                  src={data}
+                  src={data.pictureUrl}
                   alt={'menu'}
                   fill
                   style={{ objectFit: 'contain' }}
@@ -71,7 +72,7 @@ export const BigPhotoModal = ({
       </Modal>
     );
 
-  // src 가 배열이 아닌경우
+  // imageInfo 가 배열이 아닌경우
   return (
     <Modal
       ariaHideApp={false}
@@ -80,7 +81,12 @@ export const BigPhotoModal = ({
       style={modalStyle}
     >
       <ImageWrapper>
-        <Image src={src} alt={'menu'} fill style={{ objectFit: 'contain' }} />
+        <Image
+          src={imageInfo.pictureUrl}
+          alt={'menu'}
+          fill
+          style={{ objectFit: 'contain' }}
+        />
       </ImageWrapper>
     </Modal>
   );

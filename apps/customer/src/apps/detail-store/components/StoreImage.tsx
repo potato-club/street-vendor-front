@@ -1,46 +1,71 @@
-import { BigPhotoModal } from '@street-vendor/core';
+import { BigPhotoModal, ImageUrlType } from '@street-vendor/core';
+import { useQueryGetDetailStore } from '../../../hooks/query/detail-store/useQueryGetDetailStore';
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { storeImageDummy } from '../../../dummy/detailStore/storeImageDummy';
-import { useModal } from "./../../../hooks/useModal";
+import { useModal } from './../../../hooks/useModal';
 
 export const StoreImage = () => {
+  const { data } = useQueryGetDetailStore();
+
   const { isOpen, handleOpenModal, handleCloseModal } = useModal();
   const [clickIndex, setClickIndex] = useState<number>(0);
+
   const handleImageClick = (num: number) => {
     setClickIndex(num);
     handleOpenModal();
-  }
+  };
 
   return (
     <Container>
-      {storeImageDummy && 
-      <Wrapper>
-        <LeftImage
-          style={{ width: storeImageDummy.length > 1 ? '50%' : '100%' }}
-        >
-          <Image onClick={() => handleImageClick(0)} src={storeImageDummy[0]} alt="detailStoreImage" fill style={{objectFit: 'cover'}}/>
-        </LeftImage>
-        {storeImageDummy.length > 1 && (
-          <RightImage>
-            {storeImageDummy.slice(1).map((data, index) => (
-              <div
-                key={index}
-                style={{
-                  position: 'relative',
-                  height: '100%',
-                }}
-                onClick={() => handleImageClick(index + 1)}
-              >
-                <Image src={data} fill alt="detailStoreImage" style={{objectFit: 'cover'}}/>
-              </div>
-            ))}
-          </RightImage>
-        )}
-      </Wrapper>
-      }
-      <BigPhotoModal src={storeImageDummy} isOpen={isOpen} handleCloseModal={handleCloseModal} initialIndex={clickIndex}/>
+      {data?.storeImageResponses?.length > 0 && (
+        <>
+          <Wrapper>
+            <LeftImage
+              style={{
+                width: data.storeImageResponses.length > 1 ? '50%' : '100%',
+              }}
+            >
+              <Image
+                onClick={() => handleImageClick(0)}
+                src={data.storeImageResponses[0].pictureUrl}
+                alt="detailStoreImage"
+                fill
+                style={{ objectFit: 'cover' }}
+              />
+            </LeftImage>
+            {data.storeImageResponses.length > 1 && (
+              <RightImage>
+                {data.storeImageResponses
+                  .slice(1)
+                  .map((data: ImageUrlType, index) => (
+                    <div
+                      key={data.id}
+                      style={{
+                        position: 'relative',
+                        height: '100%',
+                      }}
+                      onClick={() => handleImageClick(index + 1)}
+                    >
+                      <Image
+                        src={data.pictureUrl}
+                        fill
+                        alt="detailStoreImage"
+                        style={{ objectFit: 'cover' }}
+                      />
+                    </div>
+                  ))}
+              </RightImage>
+            )}
+          </Wrapper>
+          <BigPhotoModal
+            imageInfo={data.storeImageResponses}
+            isOpen={isOpen}
+            handleCloseModal={handleCloseModal}
+            initialIndex={clickIndex}
+          />
+        </>
+      )}
     </Container>
   );
 };

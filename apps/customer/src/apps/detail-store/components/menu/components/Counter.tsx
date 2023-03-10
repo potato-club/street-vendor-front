@@ -1,20 +1,47 @@
 import { customColor, Typography } from '@street-vendor/core';
-import React from 'react';
+import { menuCount, totalPrice } from '../../../../../recoil/atoms';
+import React, { useCallback } from 'react';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
+type Props = {
+  menuId: number;
+  menuPrice: number;
+};
+export const Counter = ({ menuId, menuPrice }: Props) => {
+  const [menu, setMenu] = useRecoilState(menuCount(menuId));
+  const setTotalPrice = useSetRecoilState(totalPrice);
+  const handleCount = useCallback(
+    (action: string) => {
+      if (action === '+') {
+        setMenu({
+          ...menu,
+          count: menu.count + 1,
+        });
+        setTotalPrice((prev) => prev + menuPrice);
+      } else {
+        if (menu.count === 0) return;
+        setMenu({
+          ...menu,
+          count: menu.count - 1,
+        });
+        setTotalPrice((prev) => prev - menuPrice);
+      }
+    },
+    [menu, setMenu]
+  );
 
-export const Counter = () => {
   return (
     <Container>
       <Wrapper>
-        <Button>
+        <Button onClick={() => handleCount('-')}>
           <Typography size="14" fontWeight="bold" color="gray">
             -
           </Typography>
         </Button>
         <Typography size="14" fontWeight="bold" color="black">
-          1
+          {menu.count}
         </Typography>
-        <Button>
+        <Button onClick={() => handleCount('+')}>
           <Typography size="14" fontWeight="bold" color="black">
             +
           </Typography>
