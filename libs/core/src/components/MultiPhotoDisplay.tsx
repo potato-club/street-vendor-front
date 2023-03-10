@@ -1,14 +1,14 @@
 import { BigPhotoModal } from '@street-vendor/core';
 import Image from 'next/image';
-import React, { CSSProperties, useEffect, useState } from 'react';
+import { CSSProperties, useState } from 'react';
 import styled from 'styled-components';
-import { imageSrcDummy } from '../../dummy/imageSrcDummy';
-import { useModal } from '../../hooks';
+import { useModal } from '../hooks';
 type Props = {
   borderRadius?: number;
   style?: CSSProperties;
+  srcArray: string[];
 };
-export const MultiPhotoDisplay = ({ borderRadius, style }: Props) => {
+export const MultiPhotoDisplay = ({ borderRadius, style, srcArray }: Props) => {
   const { isOpen, handleOpenModal, handleCloseModal } = useModal();
   const [clickIndex, setClickIndex] = useState<number>(0);
   const handleImageClick = (num: number) => {
@@ -18,22 +18,20 @@ export const MultiPhotoDisplay = ({ borderRadius, style }: Props) => {
 
   return (
     <Container style={style}>
-      {imageSrcDummy && (
+      {srcArray && (
         <Wrapper borderRadius={borderRadius}>
-          <LeftImage
-            style={{ width: imageSrcDummy.length > 1 ? '50%' : '100%' }}
-          >
+          <LeftImage style={{ width: srcArray.length > 1 ? '50%' : '100%' }}>
             <Image
               onClick={() => handleImageClick(0)}
-              src={imageSrcDummy[0]}
+              src={srcArray[0]}
               alt="detailStoreImage"
               fill
               style={{ objectFit: 'cover' }}
             />
           </LeftImage>
-          {imageSrcDummy.length > 1 && (
+          {srcArray.length > 1 && (
             <RightImage>
-              {imageSrcDummy.slice(1).map((data, index) => (
+              {srcArray.slice(1).map((data, index) => (
                 <div
                   key={index}
                   style={{
@@ -55,7 +53,7 @@ export const MultiPhotoDisplay = ({ borderRadius, style }: Props) => {
         </Wrapper>
       )}
       <BigPhotoModal
-        src={imageSrcDummy}
+        srcArray={srcArray}
         isOpen={isOpen}
         handleCloseModal={handleCloseModal}
         initialIndex={clickIndex}

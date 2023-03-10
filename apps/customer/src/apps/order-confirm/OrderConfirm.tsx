@@ -3,11 +3,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { Title, TotalPrice } from '../common';
 import { Item } from './components';
-import { BottomButton } from '../common/BottomButton';
+import { BottomButton } from '../common/button/BottomButton';
 import { useQueryGetDetailStore } from '../../hooks/query/detail-store/useQueryGetDetailStore';
 import Router from 'next/router';
-import { useSetRecoilState } from 'recoil';
-import { totalPrice } from '../../recoil/atoms/totalPrice';
 
 export const OrderConfirm = () => {
   const { data } = useQueryGetDetailStore();

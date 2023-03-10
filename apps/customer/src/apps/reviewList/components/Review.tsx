@@ -1,12 +1,12 @@
-import { customColor, SpoonRating, Typography } from '@street-vendor/core';
+import { customColor, MultiPhotoDisplay, SpoonRating, Typography } from '@street-vendor/core';
 import Image from 'next/image';
 import React from 'react';
 import styled from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import { MultiPhotoDisplay } from '../../common/MultiPhotoDisplay';
 import { Menu } from './index';
 import { AiOutlineMore } from 'react-icons/ai';
+import { imageSrcDummy } from '../../../dummy/imageSrcDummy';
 
 export const Review = () => {
   return (
@@ -54,7 +54,7 @@ export const Review = () => {
           <Menu />
         </SwiperSlide>
       </StyledSwiper>
-      <MultiPhotoDisplay borderRadius={12} style={{ paddingRight: 20 }} />
+      <MultiPhotoDisplay srcArray={imageSrcDummy} borderRadius={12} style={{ paddingRight: 20 }} />
       <Typography size="14">짱 맛있어요~~</Typography>
     </Container>
   );

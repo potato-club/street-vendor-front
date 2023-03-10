@@ -3,8 +3,8 @@ import { customColor } from '@street-vendor/core';
 import { Info, Menu } from './components';
 import styled from 'styled-components';
 import { useSpring, animated } from '@react-spring/web';
-import { MultiPhotoDisplay } from '../common/MultiPhotoDisplay';
 import { useQueryGetDetailStore } from '../../hooks/query/detail-store/useQueryGetDetailStore';
+import { StoreImage } from './components/StoreImage';
 
 export const DetailStore = () => {
  const springAnimation = useSpring({
@@ -22,7 +22,7 @@ export const DetailStore = () => {
 
   return (
     <Container>
-      <MultiPhotoDisplay />
+      <StoreImage />
       <ContentWrapper style={springAnimation}>
         <Info />
         <Line />

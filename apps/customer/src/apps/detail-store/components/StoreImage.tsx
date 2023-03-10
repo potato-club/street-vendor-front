@@ -1,70 +1,19 @@
-import { BigPhotoModal, ImageUrlType } from '@street-vendor/core';
 import { useQueryGetDetailStore } from '../../../hooks/query/detail-store/useQueryGetDetailStore';
-import Image from 'next/image';
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { useModal } from './../../../hooks/useModal';
+import { ImageUrlType, MultiPhotoDisplay } from '@street-vendor/core';
 
 export const StoreImage = () => {
   const { data } = useQueryGetDetailStore();
 
-  const { isOpen, handleOpenModal, handleCloseModal } = useModal();
-  const [clickIndex, setClickIndex] = useState<number>(0);
-
-  const handleImageClick = (num: number) => {
-    setClickIndex(num);
-    handleOpenModal();
-  };
-
   return (
     <Container>
       {data?.storeImageResponses?.length > 0 && (
-        <>
-          <Wrapper>
-            <LeftImage
-              style={{
-                width: data.storeImageResponses.length > 1 ? '50%' : '100%',
-              }}
-            >
-              <Image
-                onClick={() => handleImageClick(0)}
-                src={data.storeImageResponses[0].pictureUrl}
-                alt="detailStoreImage"
-                fill
-                style={{ objectFit: 'cover' }}
-              />
-            </LeftImage>
-            {data.storeImageResponses.length > 1 && (
-              <RightImage>
-                {data.storeImageResponses
-                  .slice(1)
-                  .map((data: ImageUrlType, index) => (
-                    <div
-                      key={data.id}
-                      style={{
-                        position: 'relative',
-                        height: '100%',
-                      }}
-                      onClick={() => handleImageClick(index + 1)}
-                    >
-                      <Image
-                        src={data.pictureUrl}
-                        fill
-                        alt="detailStoreImage"
-                        style={{ objectFit: 'cover' }}
-                      />
-                    </div>
-                  ))}
-              </RightImage>
-            )}
-          </Wrapper>
-          <BigPhotoModal
-            src={data.storeImageResponses.map((data:ImageUrlType) => data.pictureUrl)}
-            isOpen={isOpen}
-            handleCloseModal={handleCloseModal}
-            initialIndex={clickIndex}
-          />
-        </>
+        <MultiPhotoDisplay
+          srcArray={data.storeImageResponses.map(
+            (data: ImageUrlType) => data.pictureUrl
+          )}
+        />
       )}
     </Container>
   );
