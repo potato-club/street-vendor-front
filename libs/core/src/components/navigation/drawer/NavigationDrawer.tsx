@@ -1,3 +1,5 @@
+import { animated, useSpring } from 'react-spring';
+import useMeasure from 'react-use-measure';
 import styled from 'styled-components';
 import { customColor } from '../../../constants';
 import { BasicButton } from '../../button/BasicButton';
@@ -10,9 +12,20 @@ export interface NavigationDrawerProps {
 }
 
 export const NavigationDrawer: React.FC<NavigationDrawerProps> = (props) => {
+  const [ref, bounds] = useMeasure();
+
+  const styles = useSpring({
+    from: {
+      transform: `translate(-${bounds.width}px, 0px)`,
+    },
+    to: {
+      transform: `translate(0px, 0px)`,
+    },
+  });
+
   return (
     <Background>
-      <Container>
+      <Container ref={ref} style={styles}>
         <div
           style={{
             display: 'flex',
@@ -89,7 +102,8 @@ const Background = styled.div`
   background-color: rgba(170, 170, 170, 0.8);
 `;
 
-const Container = styled.div`
+const Container = styled(animated.div)`
+  transform: translate(-1000px, 0px);
   padding-top: 64px;
   display: flex;
   flex-direction: column;

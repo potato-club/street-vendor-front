@@ -1,0 +1,1 @@
+export const imageSrcDummy = ['/cat.png', '/cat.png', '/cat.png'];

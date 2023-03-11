@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { FieldValues, UseFormRegister } from 'react-hook-form';
 import { customColor } from '../../constants';
-import { ChangeEvent } from 'react';
+import { ChangeEvent } from "react";
 
 interface ButtonProps {
   register: UseFormRegister<FieldValues>;
@@ -10,14 +10,15 @@ interface ButtonProps {
 }
 
 export const AddPhotoButton = ({ value, register, setImages }: ButtonProps) => {
-  const { ref, onChange, ...rest } = register(value);
+  const { onChange, ...rest } = register(value);
+
   const addImage = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    if (e.target.value[0]) {
+    if (e.target.value[0] && e.target.files) {
       const fileReader = new FileReader();
-      fileReader.readAsDataURL(e.target.files![0]);
+      fileReader.readAsDataURL(e.target.files[0]);
       fileReader.onload = () => {
-        setImages(String(fileReader.result!));
+        setImages(String(fileReader.result));
       };
     }
   };
@@ -26,16 +27,14 @@ export const AddPhotoButton = ({ value, register, setImages }: ButtonProps) => {
     <Wrapper>
       <FileButton
         type="file"
+        id={value}
         accept="image/*"
         onChange={(e) => {
           addImage(e);
           onChange(e);
         }}
         {...rest}
-        ref={(e) => {
-          ref(e);
-        }}
-      ></FileButton>
+      />
       <AddIcon>
         <svg
           width="25"

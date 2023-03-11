@@ -1,30 +1,43 @@
 import { customColor, Typography } from '@street-vendor/core';
 import Image from 'next/image';
-import React from 'react'
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Counter } from './Counter';
+import { MenuType } from '@street-vendor/core';
+import { useRecoilState } from 'recoil';
+import { menuCount } from '../../../../../recoil/atoms/menuCount';
 
-export const Item = () => {
+export const Item = (props: MenuType) => {
+  const [menu, setMenu] = useRecoilState(menuCount(props.menuId));
+  useEffect(() => {
+    setMenu({
+      ...menu,
+      price: props.menuPrice,
+    });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <Container>
       <FoodInfo>
         <Image
           style={{ borderRadius: '12px' }}
-          src={'/cat.png'}
+          src={props.pictureUrl}
           width={80}
           height={60}
           alt="food"
         />
         <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <Typography size="16">떡볶이 1인분</Typography>
-          <Typography size="16">1000원</Typography>
+          <Typography size="16">
+            {props.menuName} {props.menuCount}개
+          </Typography>
+          <Typography size="16">{props.menuPrice}원</Typography>
         </div>
       </FoodInfo>
-      <Counter />
+      <Counter menuId={props.menuId} menuPrice={props.menuPrice}/>
     </Container>
   );
-}
-
+};
 
 const Container = styled.div`
   display: flex;

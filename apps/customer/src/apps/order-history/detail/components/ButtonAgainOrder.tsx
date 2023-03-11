@@ -4,11 +4,18 @@ import styled from 'styled-components';
 export const ButtonAgainOrder = () => {
   return (
     <Container>
-      <Button>
-        <Typography size="20" color="orange3" fontWeight="bold">
-          한번 더 주문하러 가기!
-        </Typography>
-      </Button>
+      <ContainerInner>
+        <Button>
+          <Typography
+            size="20"
+            color="orange3"
+            fontWeight="bold"
+            letterSpacing="-1.5px"
+          >
+            한 번 더 주문하러 가기!
+          </Typography>
+        </Button>
+      </ContainerInner>
     </Container>
   );
 };
@@ -18,8 +25,14 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-
-  padding: 53px 22px;
+  padding: 53px 7%;
+`;
+const ContainerInner = styled.div`
+  display: flex;
+  width: 100%;
+  max-width: 400px;
+  justify-content: center;
+  align-items: center;
 `;
 const Button = styled.div`
   display: flex;
