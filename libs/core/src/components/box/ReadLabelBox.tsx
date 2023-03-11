@@ -5,6 +5,7 @@ import styled from 'styled-components';
 interface BoxProps {
   label: string;
   content: string;
+  textAlign?: 'center' | 'right' | 'left';
 }
 
 export const ReadLabelBox = (props: BoxProps) => {
@@ -16,7 +17,11 @@ export const ReadLabelBox = (props: BoxProps) => {
         </Typography>
       </Label>
       <Box>
-        <Typography size="12" letterSpacing="-0.5px">
+        <Typography
+          size="12"
+          letterSpacing="-0.5px"
+          textAlign={props.textAlign}
+        >
           {props.content}
         </Typography>
       </Box>
