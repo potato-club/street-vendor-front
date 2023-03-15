@@ -5,26 +5,44 @@ import { CustomSelect } from './components/CustomSelect';
 import { CustomModal } from './components/CustomModal';
 import { QuestionLabel } from './components/QuestionLabel';
 import { useForm } from 'react-hook-form';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import {
   atomStoreRegisterAccount,
   atomStoreRegisterCategory,
+  atomStoreRegisterExplain,
 } from '../../recoil/atoms/atomStoreRegister';
 import Router from 'next/router';
 import { pathName } from '../../configs/pathName';
 
 export const StoreRegister = () => {
-  const handleRouter = () => {
-    Router.push(pathName.STORE_REGISTER.CATEGORY);
-  };
   const categoryValue = useRecoilValue(atomStoreRegisterCategory);
-  const accountValue = useRecoilValue(atomStoreRegisterAccount);
+  const [accountValue, setAccountValue] = useRecoilState(
+    atomStoreRegisterAccount
+  );
+  const [explainValue, setExplainValue] = useRecoilState(
+    atomStoreRegisterExplain
+  );
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [modalContent, setModalContent] = useState('category');
   const {
+    getValues,
     register,
     formState: { errors },
   } = useForm();
+  const handleNext = () => {
+    const data = getValues();
+    setExplainValue({
+      name: data['storeName'],
+      description: data['storeDescription'],
+      location: data['storeLocation'],
+    });
+    setAccountValue({
+      bank: accountValue.bank,
+      number: data['storeAccountNumber'],
+    });
+    Router.push(pathName.STORE_REGISTER.SCHEDULE);
+  };
+
   return (
     <Container>
       <CustomModal
@@ -75,7 +93,7 @@ export const StoreRegister = () => {
               <Account>
                 <CustomSelect
                   init="은행선택"
-                  content={accountValue}
+                  content={accountValue['bank']}
                   width={140}
                   onClick={() => {
                     setModalContent('account');
@@ -94,9 +112,8 @@ export const StoreRegister = () => {
               </Typography>
             </QuestionLabel>
           </InputBox>
-
           <Button>
-            <NextButton background="orange4" onClick={handleRouter}>
+            <NextButton background="orange4" type="button" onClick={handleNext}>
               <Typography
                 color="black"
                 fontWeight="bold"

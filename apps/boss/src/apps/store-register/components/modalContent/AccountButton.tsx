@@ -14,11 +14,12 @@ export const AccountButton = ({ name, src }: Props) => {
   const [accountValue, setAccountValue] = useRecoilState(
     atomStoreRegisterAccount
   );
-  const color = name === accountValue ? customColor.orange4 : customColor.beige;
+  const color =
+    name === accountValue['bank'] ? customColor.orange4 : customColor.beige;
   return (
     <Button
       onClick={() => {
-        setAccountValue(name);
+        setAccountValue({ bank: name, number: accountValue['number'] });
       }}
     >
       <ButtonBody>

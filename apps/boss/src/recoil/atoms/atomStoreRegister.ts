@@ -17,9 +17,9 @@ export const atomStoreRegisterCategory = atom<string>({
   key: 'atomStoreRegisterCategory',
   default: '',
 });
-export const atomStoreRegisterAccount = atom<string>({
+export const atomStoreRegisterAccount = atom<{ bank: string; number: string }>({
   key: 'atomStoreRegisterAccount',
-  default: '',
+  default: { bank: '', number: '' },
 });
 export const atomStoreRegisterExplain = atom<{
   name: string;
