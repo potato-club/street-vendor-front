@@ -8,11 +8,12 @@ interface ButtonProps {
   background: keyof customColorType;
   children: React.ReactNode;
   onClick?: () => void;
+  type?: 'button' | 'submit';
 }
 
 export const NextButton = (props: ButtonProps) => {
   return (
-    <Button onClick={props.onClick}>
+    <Button onClick={props.onClick} type={props.type}>
       <svg
         width="236"
         height="54"
