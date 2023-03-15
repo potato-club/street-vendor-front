@@ -2,7 +2,7 @@ import { customColor, Typography } from '@street-vendor/core';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { atomStoreRegisterSchedule } from 'apps/boss/src/recoil/atoms/atomStoreRegister';
 import { useRecoilState } from 'recoil';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { TimeSchedule } from './TimeSchedule';
 import { ToggleButton } from './ToggleButton';
 
@@ -42,13 +42,17 @@ export const DaySchedule = ({ index, handleOpenModal }: Props) => {
           <TimeSchedule
             day={scheduleValue[index]}
             time="open"
-            handleOpenModal={handleOpenModal}
+            handleOpenModal={() =>
+              scheduleValue[index].isChecked && handleOpenModal()
+            }
             index={index}
           />
           <TimeSchedule
             day={scheduleValue[index]}
             time="close"
-            handleOpenModal={handleOpenModal}
+            handleOpenModal={() =>
+              scheduleValue[index].isChecked && handleOpenModal()
+            }
             index={index}
           />
         </TimeScheduler>
@@ -72,7 +76,12 @@ const Wrapper = styled.article<StyledProps>`
   border-radius: 12px;
   justify-content: space-between;
   align-items: center;
-  ${(props) => !props.isChecked && 'filter: grayscale(70%);'}
+  ${(props) =>
+    !props.isChecked &&
+    css`
+      filter: grayscale(30%);
+      opacity: 0.6;
+    `}
 `;
 const Schedule = styled.div`
   display: flex;

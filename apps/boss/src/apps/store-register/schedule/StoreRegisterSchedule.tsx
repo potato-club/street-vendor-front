@@ -1,8 +1,9 @@
+/* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { NextButton, Typography } from '@street-vendor/core';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { atomStoreRegisterSchedule } from 'apps/boss/src/recoil/atoms/atomStoreRegister';
+import { pathName } from 'apps/boss/src/configs/pathName';
+import Router from 'next/router';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { QuestionLabel } from '../components/QuestionLabel';
@@ -11,12 +12,11 @@ import { StoreRegisterTimePickerModal } from './components/StoreRegisterTimePick
 
 export const StoreRegisterSchedule = () => {
   const scheduleValue = useRecoilValue(atomStoreRegisterSchedule);
-  const {
-    register,
-    setValue,
-    formState: { errors },
-  } = useForm();
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleNext = () => {
+    Router.push(pathName.STORE_REGISTER.MENU);
+  };
   return (
     <Container>
       <StoreRegisterTimePickerModal
@@ -37,7 +37,7 @@ export const StoreRegisterSchedule = () => {
             </Scheduler>
           </QuestionLabel>
           <Button>
-            <NextButton background="orange4">
+            <NextButton background="orange4" type="button" onClick={handleNext}>
               <Typography
                 color="black"
                 fontWeight="bold"
