@@ -1,10 +1,5 @@
 import { useState } from 'react';
-import {
-  customColor,
-  CustomInput,
-  NextButton,
-  Typography,
-} from '@street-vendor/core';
+import { CustomInput, NextButton, Typography } from '@street-vendor/core';
 import styled from 'styled-components';
 import { CustomSelect } from './components/CustomSelect';
 import { CustomModal } from './components/CustomModal';
@@ -15,8 +10,13 @@ import {
   atomStoreRegisterAccount,
   atomStoreRegisterCategory,
 } from '../../recoil/atoms/atomStoreRegister';
+import Router from 'next/router';
+import { pathName } from '../../configs/pathName';
 
 export const StoreRegister = () => {
+  const handleRouter = () => {
+    Router.push(pathName.STORE_REGISTER.CATEGORY);
+  };
   const categoryValue = useRecoilValue(atomStoreRegisterCategory);
   const accountValue = useRecoilValue(atomStoreRegisterAccount);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -96,7 +96,7 @@ export const StoreRegister = () => {
           </InputBox>
 
           <Button>
-            <NextButton background="orange4">
+            <NextButton background="orange4" onClick={handleRouter}>
               <Typography
                 color="black"
                 fontWeight="bold"

@@ -21,6 +21,14 @@ export const atomStoreRegisterAccount = atom<string>({
   key: 'atomStoreRegisterAccount',
   default: '',
 });
+export const atomStoreRegisterExplain = atom<{
+  name: string;
+  description: string;
+  location: string;
+}>({
+  key: 'atomStoreRegisterExplain',
+  default: { name: '', description: '', location: '' },
+});
 export const atomStoreRegisterSchedule = atom<ScheduleType[]>({
   key: 'atomStoreRegisterSchedule',
   default: [
