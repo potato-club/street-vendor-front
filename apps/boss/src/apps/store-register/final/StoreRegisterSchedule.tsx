@@ -1,6 +1,13 @@
-import { NextButton, ReadLabelBox, Typography } from '@street-vendor/core';
+import {
+  MultiPhotoDisplay,
+  NextButton,
+  ReadLabelBox,
+  Typography,
+} from '@street-vendor/core';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import styled from 'styled-components';
+import { CustomBox } from './components/CustomBox';
+import { CustomSelectBox } from './components/CustomSelectBox';
 
 export const StoreRegisterFinal = () => {
   return (
@@ -15,6 +22,21 @@ export const StoreRegisterFinal = () => {
           />
           <ReadLabelBox label="위치 설명" content="당정역 2번 출구 앞" />
           <ReadLabelBox label="위치 설정" content="송도충림아이원3단지" />
+          <AccountBox>
+            <Typography size="16" fontWeight="bold" letterSpacing="-0.5px">
+              계좌번호
+            </Typography>
+            <AccountBoxInner>
+              <CustomSelectBox width={140} content="하나은행" />
+              <CustomBox content="123426" />
+            </AccountBoxInner>
+          </AccountBox>
+          <PhotoBox>
+            <Typography size="16" fontWeight="bold" letterSpacing="-0.5px">
+              가게 사진
+            </Typography>
+            <MultiPhotoDisplay srcArray={[]} />
+          </PhotoBox>
           <Button>
             <NextButton background="orange4">
               <Typography
@@ -58,6 +80,23 @@ const FormInner = styled.div`
   align-items: center;
   padding: 0 7%;
   gap: 36px;
+`;
+const AccountBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+`;
+const AccountBoxInner = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 0 10px;
+`;
+const PhotoBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
 `;
 const Button = styled.div`
   display: flex;
