@@ -2,25 +2,19 @@ import { customColor, Typography } from '@street-vendor/core';
 import styled from 'styled-components';
 
 interface Props {
-  init: string;
-  content: string;
   width?: number;
-  onClick?: () => void;
+  content: string;
 }
 interface StyleProps {
   width: number;
 }
 
-export const CustomSelect = ({ content, onClick, init, width }: Props) => {
+export const CustomSelectBox = ({ width, content }: Props) => {
   return (
-    <Button type="button" onClick={onClick} width={width}>
+    <Box width={width}>
       <Content>
-        <Typography
-          size="12"
-          color={content ? 'black' : 'darkGray'}
-          letterSpacing="-1px"
-        >
-          {content === '' ? init : content}
+        <Typography size="12" letterSpacing="-1px">
+          {content}
         </Typography>
       </Content>
       <svg
@@ -38,11 +32,11 @@ export const CustomSelect = ({ content, onClick, init, width }: Props) => {
           strokeLinejoin="round"
         />
       </svg>
-    </Button>
+    </Box>
   );
 };
 
-const Button = styled.button<StyleProps>`
+const Box = styled.button<StyleProps>`
   display: flex;
   flex-direction: row;
   width: ${(props) => (props.width ? props.width + 'px' : '100%')};
