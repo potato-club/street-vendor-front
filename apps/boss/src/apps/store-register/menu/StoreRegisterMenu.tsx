@@ -1,6 +1,8 @@
+/* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { NextButton, Typography } from '@street-vendor/core';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { pathName } from 'apps/boss/src/configs/pathName';
 import { atomStoreRegisterMenu } from 'apps/boss/src/recoil/atoms/atomStoreRegister';
+import Router from 'next/router';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { QuestionLabel } from '../components/QuestionLabel';
@@ -19,6 +21,10 @@ export const StoreRegisterMenu = () => {
   const handleSetMenuArray = (index: number, value: MenuProps) => {
     setMenuArray(menuArray.map((i, id) => (id === index ? value : i)));
   };
+
+  const handleNext = () => {
+    Router.push(pathName.STORE_REGISTER.PHOTO);
+  };
   return (
     <Container>
       <Form>
@@ -36,7 +42,7 @@ export const StoreRegisterMenu = () => {
             </MenuBox>
           </QuestionLabel>
           <Button>
-            <NextButton background="orange4">
+            <NextButton background="orange4" type="button" onClick={handleNext}>
               <Typography
                 color="black"
                 fontWeight="bold"

@@ -6,7 +6,7 @@ export const pathName = {
     LOCATION: '/store-register/location',
     SCHEDULE: '/store-register/schedule',
     MENU: '/store-register/menu',
-    IMAGE: '/store-register/image',
+    PHOTO: '/store-register/photo',
     FINAL: '/store-register/final',
   },
 };
