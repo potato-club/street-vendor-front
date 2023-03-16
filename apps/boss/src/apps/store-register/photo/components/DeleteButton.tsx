@@ -2,9 +2,13 @@ import { customColor, Typography } from '@street-vendor/core';
 import { customColorType } from 'libs/core/src/constants/customColor';
 import styled from 'styled-components';
 
-export const DeleteButton = () => {
+interface Props {
+  setInit: () => void;
+}
+
+export const DeleteButton = ({ setInit }: Props) => {
   return (
-    <Button type="button" onClick={() => {}}>
+    <Button type="button" onClick={setInit}>
       <Typography size="20" letterSpacing="-1.5px">
         전체 삭제
       </Typography>

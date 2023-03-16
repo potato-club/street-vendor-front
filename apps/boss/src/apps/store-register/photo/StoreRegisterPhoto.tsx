@@ -1,5 +1,10 @@
+/* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { NextButton, Typography } from '@street-vendor/core';
+import { pathName } from 'apps/boss/src/configs/pathName';
+import { atomStoreRegisterPhoto } from 'apps/boss/src/recoil/atoms/atomStoreRegister';
+import Router from 'next/router';
 import { useState } from 'react';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { DeleteButton } from './components/DeleteButton';
 import { PhotoButton } from './components/PhotoButton';
@@ -7,7 +12,13 @@ import { PhotoSwiper } from './components/PhotoSwiper';
 
 export const StoreRegisterPhoto = () => {
   const [images, setImages] = useState<string[]>([]);
-  console.log(images);
+  const [files, setFiles] = useState<FileList>();
+  const [photoArray, setPhotoArray] = useRecoilState(atomStoreRegisterPhoto);
+
+  const handleNext = () => {
+    setPhotoArray(files);
+    Router.push(pathName.STORE_REGISTER.FINAL);
+  };
 
   return (
     <Container>
@@ -20,15 +31,22 @@ export const StoreRegisterPhoto = () => {
             <PhotoSwiper images={images} />
             <Buttons>
               <PhotoButton
+                setInit={() => setImages([])}
                 setImages={(value: string) =>
                   setImages((prev) => [...prev, value])
                 }
+                setFiles={(values: FileList) => setFiles(values)}
               />
-              <DeleteButton />
+              <DeleteButton
+                setInit={() => {
+                  setImages([]);
+                  setPhotoArray(null);
+                }}
+              />
             </Buttons>
           </PhotoBox>
           <Button>
-            <NextButton background="orange4">
+            <NextButton background="orange4" type="button" onClick={handleNext}>
               <Typography
                 color="black"
                 fontWeight="bold"

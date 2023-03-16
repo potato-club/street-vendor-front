@@ -49,7 +49,8 @@ export const atomStoreRegisterMenu = atom<MenuType[]>({
   key: 'atomStoreRegisterMenu',
   default: [{ image: null, name: null, price: null, weight: null }],
 });
-export const atomStoreRegisterPhoto = atom<FileList>({
+export const atomStoreRegisterPhoto = atom<FileList | null>({
   key: 'atomStoreRegisterPhoto',
   default: null,
+  dangerouslyAllowMutability: true,
 });
