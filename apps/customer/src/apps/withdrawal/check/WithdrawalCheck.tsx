@@ -1,6 +1,4 @@
 import { customColor, Typography } from '@street-vendor/core';
-import { pathName } from '../../../configs/pathName';
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 import styled from 'styled-components';
 import { NoticeText } from './dummy/DummyNoticeText';
@@ -68,11 +66,10 @@ export const WithdrawalCheck = () => {
 
 const ButtonWithDrawal = ({ isCheck }: { isCheck: boolean }) => {
   const { mutate } = useQueryWithdrawal();
-  const router = useRouter();
+
   const handleClickButton = () => {
     if (isCheck) {
-      //!! 대충 회원탈퇴하는 로직
-      router.push(pathName.WITHDRAWAL.OUTRO);
+      mutate();
     } else {
       toast.error('유의사항 확인을 체크해주세요.');
     }

@@ -1,4 +1,4 @@
-import { customColor, CustomInput, Typography } from '@street-vendor/core';
+import { customColor, Typography } from '@street-vendor/core';
 import { useMyProfile } from 'apps/customer/src/hooks/useMyProfile';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -46,14 +46,19 @@ export const ProfileInfo = () => {
     >
       <Container>
         <TextBox label="이메일" value={email} />
-        <CustomInput
-          name="nickname"
-          register={register}
-          errors={undefined}
-          placeholder="손안의 노점에서 사용할 닉네임 입력"
-          label="닉네임"
-          value={nickname}
-        />
+
+        <InputWrapper>
+          <Label>
+            <Typography size="16" letterSpacing="-0.5px">
+              닉네임
+            </Typography>
+          </Label>
+          <Input
+            placeholder="손안의 노점에서 사용할 닉네임 입력"
+            {...register('nickname')}
+            defaultValue={nickname}
+          />
+        </InputWrapper>
         <Button type="submit">
           <Typography size="16" color="white">
             수정완료
@@ -109,8 +114,8 @@ const TextBoxWrapper = styled.div`
   font-size: 12px;
   letter-spacing: -0.5px;
   font-family: inherit;
+  font-weight: bold;
 `;
-
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -120,4 +125,30 @@ const Container = styled.div`
 `;
 const Label = styled.label`
   margin-bottom: 12px;
+`;
+
+const InputWrapper = styled.article`
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+`;
+
+const Input = styled.input`
+  width: 100%;
+  height: 48px;
+  padding: 0px 18px;
+  background-color: ${customColor.beige};
+  border-radius: 12px;
+  font-size: 12px;
+  letter-spacing: -0.5px;
+  font-family: inherit;
+  &::placeholder {
+    color: ${customColor.darkGray};
+    white-space: pre-wrap;
+  }
+  :focus {
+    outline: 2px solid ${customColor.orange3};
+  }
+  box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.161);
 `;
