@@ -1,41 +1,56 @@
+/* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import {
   MultiPhotoDisplay,
   NextButton,
   ReadLabelBox,
   Typography,
 } from '@street-vendor/core';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import {
+  atomStoreRegisterAccount,
+  atomStoreRegisterCategory,
+  atomStoreRegisterExplain,
+  atomStoreRegisterMenu,
+  atomStoreRegisterImage,
+  atomStoreRegisterFile,
+  atomStoreRegisterSchedule,
+} from 'apps/boss/src/recoil/atoms/atomStoreRegister';
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import { CustomBox } from './components/CustomBox';
 import { CustomSelectBox } from './components/CustomSelectBox';
 
 export const StoreRegisterFinal = () => {
+  const categoryValue = useRecoilValue(atomStoreRegisterCategory);
+  const accountValue = useRecoilValue(atomStoreRegisterAccount);
+  const explainValue = useRecoilValue(atomStoreRegisterExplain);
+  const scheduleValue = useRecoilValue(atomStoreRegisterSchedule);
+  const menuValue = useRecoilValue(atomStoreRegisterMenu);
+  const photoValue = useRecoilValue(atomStoreRegisterFile);
+  const imageValue = useRecoilValue(atomStoreRegisterImage);
+
   return (
     <Container>
       <Form>
         <FormInner>
-          <ReadLabelBox label="카테고리" content="떡볶이" />
-          <ReadLabelBox label="가게 이름" content="서윤보경네" />
-          <ReadLabelBox
-            label="한줄 설명"
-            content="떡볶이를 파는 서윤보경네 입니다"
-          />
-          <ReadLabelBox label="위치 설명" content="당정역 2번 출구 앞" />
+          <ReadLabelBox label="카테고리" content={categoryValue} />
+          <ReadLabelBox label="가게 이름" content={explainValue.name} />
+          <ReadLabelBox label="한줄 설명" content={explainValue.description} />
+          <ReadLabelBox label="위치 설명" content={explainValue.location} />
           <ReadLabelBox label="위치 설정" content="송도충림아이원3단지" />
           <AccountBox>
             <Typography size="16" fontWeight="bold" letterSpacing="-0.5px">
               계좌번호
             </Typography>
             <AccountBoxInner>
-              <CustomSelectBox width={140} content="하나은행" />
-              <CustomBox content="123426" />
+              <CustomSelectBox width={140} content={accountValue.bank} />
+              <CustomBox content={accountValue.number} />
             </AccountBoxInner>
           </AccountBox>
           <PhotoBox>
             <Typography size="16" fontWeight="bold" letterSpacing="-0.5px">
               가게 사진
             </Typography>
-            <MultiPhotoDisplay srcArray={[]} />
+            <MultiPhotoDisplay srcArray={imageValue} />
           </PhotoBox>
           <Button>
             <NextButton background="orange4">
