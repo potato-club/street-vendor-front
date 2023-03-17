@@ -38,7 +38,7 @@ export const AddMenu = ({ id, handleSetMenuArray }: Props) => {
     file &&
       menuName &&
       menuPrice &&
-      menuPrice &&
+      menuWeight &&
       handleSetMenuArray(id, {
         image: file,
         name: menuName,

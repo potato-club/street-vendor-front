@@ -7,7 +7,7 @@ export interface ScheduleType {
   close: string;
 }
 export interface MenuType {
-  image: File;
+  image: File | null;
   name: string;
   price: number;
   weight: string;
@@ -47,9 +47,13 @@ export const atomScheduleModalTime = atom<{ day: number; time: string }>({
 });
 export const atomStoreRegisterMenu = atom<MenuType[]>({
   key: 'atomStoreRegisterMenu',
-  default: [{ image: null, name: null, price: null, weight: null }],
+  default: [{ image: null, name: '', price: 0, weight: '' }],
 });
-export const atomStoreRegisterPhoto = atom<FileList | null>({
+export const atomStoreRegisterImage = atom<string[]>({
+  key: 'atomStoreRegisterImages',
+  default: [],
+});
+export const atomStoreRegisterFile = atom<FileList | null>({
   key: 'atomStoreRegisterPhoto',
   default: null,
   dangerouslyAllowMutability: true,
