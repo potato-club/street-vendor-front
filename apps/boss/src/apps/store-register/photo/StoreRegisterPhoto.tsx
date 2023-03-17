@@ -1,23 +1,26 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { NextButton, Typography } from '@street-vendor/core';
 import { pathName } from 'apps/boss/src/configs/pathName';
-import { atomStoreRegisterPhoto } from 'apps/boss/src/recoil/atoms/atomStoreRegister';
+import {
+  atomStoreRegisterFile,
+  atomStoreRegisterImage,
+} from 'apps/boss/src/recoil/atoms/atomStoreRegister';
 import Router from 'next/router';
-import { useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { useRecoilState } from 'recoil';
-import styled from 'styled-components';
 import { DeleteButton } from './components/DeleteButton';
 import { PhotoButton } from './components/PhotoButton';
 import { PhotoSwiper } from './components/PhotoSwiper';
+import styled from 'styled-components';
 
 export const StoreRegisterPhoto = () => {
-  const [images, setImages] = useState<string[]>([]);
-  const [files, setFiles] = useState<FileList>();
-  const [photoArray, setPhotoArray] = useRecoilState(atomStoreRegisterPhoto);
+  const [files, setFiles] = useRecoilState(atomStoreRegisterFile);
+  const [images, setImages] = useRecoilState(atomStoreRegisterImage);
 
   const handleNext = () => {
-    setPhotoArray(files);
-    Router.push(pathName.STORE_REGISTER.FINAL);
+    files
+      ? Router.push(pathName.STORE_REGISTER.FINAL)
+      : toast.error('사진을 선택해주세요');
   };
 
   return (
@@ -40,7 +43,7 @@ export const StoreRegisterPhoto = () => {
               <DeleteButton
                 setInit={() => {
                   setImages([]);
-                  setPhotoArray(null);
+                  setFiles(null);
                 }}
               />
             </Buttons>
