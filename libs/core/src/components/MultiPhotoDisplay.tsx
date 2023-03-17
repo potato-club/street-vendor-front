@@ -1,14 +1,13 @@
-import { BigPhotoModal } from '@street-vendor/core';
+import { BigPhotoModal, customColor } from '@street-vendor/core';
 import Image from 'next/image';
 import { CSSProperties, useState } from 'react';
 import styled from 'styled-components';
 import { useModal } from '../hooks';
 type Props = {
-  borderRadius?: number;
   style?: CSSProperties;
   srcArray: string[];
 };
-export const MultiPhotoDisplay = ({ borderRadius, style, srcArray }: Props) => {
+export const MultiPhotoDisplay = ({ style, srcArray }: Props) => {
   const { isOpen, handleOpenModal, handleCloseModal } = useModal();
   const [clickIndex, setClickIndex] = useState<number>(0);
   const handleImageClick = (num: number) => {
@@ -19,7 +18,7 @@ export const MultiPhotoDisplay = ({ borderRadius, style, srcArray }: Props) => {
   return (
     <Container style={style}>
       {srcArray && (
-        <Wrapper borderRadius={borderRadius}>
+        <Wrapper>
           <LeftImage style={{ width: srcArray.length > 1 ? '50%' : '100%' }}>
             <Image
               onClick={() => handleImageClick(0)}
@@ -73,14 +72,13 @@ const Wrapper = styled.div<{ borderRadius?: number }>`
   /* gap: 4px; */
   width: 100%;
   aspect-ratio: 1.5;
-  border-radius: ${({ borderRadius }) =>
-    borderRadius ? `${borderRadius}px` : ''};
+  border-radius: 20px;
   overflow: hidden;
+  box-shadow: 0px 4px 4px ${customColor.black + '25'};
 `;
 
 const LeftImage = styled.div`
   position: relative;
-  /* aspect-ratio: 0.75; */
 `;
 
 const RightImage = styled.div`
@@ -88,6 +86,4 @@ const RightImage = styled.div`
   display: flex;
   flex-direction: column;
   width: 50%;
-  margin-left: 4px;
-  gap: 4px;
 `;
