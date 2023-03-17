@@ -13,6 +13,7 @@ import {
 } from '../../recoil/atoms/atomStoreRegister';
 import Router from 'next/router';
 import { pathName } from '../../configs/pathName';
+import { toast } from 'react-hot-toast';
 
 export const StoreRegister = () => {
   const categoryValue = useRecoilValue(atomStoreRegisterCategory);
@@ -29,6 +30,15 @@ export const StoreRegister = () => {
     register,
     formState: { errors },
   } = useForm();
+
+  const isFilled =
+    categoryValue !== '' &&
+    explainValue.description !== '' &&
+    explainValue.location !== '' &&
+    explainValue.name !== '' &&
+    accountValue.bank !== '' &&
+    accountValue.number !== '';
+
   const handleNext = () => {
     const data = getValues();
     setExplainValue({
@@ -40,7 +50,9 @@ export const StoreRegister = () => {
       bank: accountValue.bank,
       number: data['storeAccountNumber'],
     });
-    Router.push(pathName.STORE_REGISTER.SCHEDULE);
+    isFilled
+      ? Router.push(pathName.STORE_REGISTER.SCHEDULE)
+      : toast.error('정보를 모두 입력해 주세요');
   };
 
   return (
