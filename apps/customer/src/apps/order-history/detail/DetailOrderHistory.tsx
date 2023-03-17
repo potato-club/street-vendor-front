@@ -26,7 +26,6 @@ const Container = styled.div`
 `;
 
 const Wrapper = styled.div`
-  max-width: 400px;
   margin: auto;
   display: flex;
   justify-content: flex-start;

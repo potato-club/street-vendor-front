@@ -11,6 +11,7 @@ const modalStyle = {
   overlay: {
     inset: 0,
     backgroundColor: `${customColor.black}90`,
+    zIndex: 99,
   },
   content: {
     '--imageSize': 'min(80vw, 80vh)',
@@ -23,19 +24,24 @@ const modalStyle = {
     height: 'var(---imageSize)',
     border: 'none',
     padding: 0,
+    zIndex: 99,
   },
 };
+
 
 type Props = {
   isOpen: boolean;
   handleCloseModal: () => void;
-  src: string | string[];
+  srcArray: string[];
   initialIndex?: number;
 };
 
-export const BigPhotoModal = ({ isOpen, handleCloseModal, src, initialIndex }: Props) => {
-  // src 가 배열인경우
-  if (Array.isArray(src))
+export const BigPhotoModal = ({
+  isOpen,
+  handleCloseModal,
+  srcArray,
+  initialIndex,
+}: Props) => {
     return (
       <Modal
         ariaHideApp={false}
@@ -49,7 +55,7 @@ export const BigPhotoModal = ({ isOpen, handleCloseModal, src, initialIndex }: P
           initialSlide={initialIndex}
           spaceBetween={100}
         >
-          {src.map((data, index) => (
+          {srcArray.map((data, index) => (
             <SwiperSlide key={`${data}-${index}`}>
               <ImageWrapper>
                 <Image
@@ -64,25 +70,6 @@ export const BigPhotoModal = ({ isOpen, handleCloseModal, src, initialIndex }: P
         </StyledSwiper>
       </Modal>
     );
-
-  // src 가 배열이 아닌경우
-  return (
-    <Modal
-      ariaHideApp={false}
-      onRequestClose={handleCloseModal}
-      isOpen={isOpen}
-      style={modalStyle}
-    >
-      <ImageWrapper>
-        <Image
-          src={src}
-          alt={'menu'}
-          fill
-          style={{ objectFit: 'contain' }}
-        />
-      </ImageWrapper>
-    </Modal>
-  );
 };
 
 const ImageWrapper = styled.section`
