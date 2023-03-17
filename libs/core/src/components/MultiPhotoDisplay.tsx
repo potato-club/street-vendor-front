@@ -1,4 +1,5 @@
-import { BigPhotoModal, customColor } from '@street-vendor/core';
+import { BigPhotoModal } from '@street-vendor/core';
+import { customColor } from '../constants/customColor';
 import Image from 'next/image';
 import { CSSProperties, useState } from 'react';
 import styled from 'styled-components';
