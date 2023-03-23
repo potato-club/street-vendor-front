@@ -22,7 +22,6 @@ export const AskAnswerBox = (props: BoxProps) => {
           config: { duration: 300 },
         }
       : {
-          from: { maxHeight: '250px' },
           to: { maxHeight: '0px' },
           config: { duration: 300 },
         }
