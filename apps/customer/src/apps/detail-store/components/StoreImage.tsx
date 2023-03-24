@@ -1,46 +1,20 @@
-import { BigPhotoModal } from '@street-vendor/core';
-import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
+import { useQueryGetDetailStore } from '../../../hooks/query/detail-store/useQueryGetDetailStore';
+import React from 'react';
 import styled from 'styled-components';
-import { storeImageDummy } from '../../../dummy/detailStore/storeImageDummy';
-import { useModal } from "./../../../hooks/useModal";
+import { ImageUrlType, MultiPhotoDisplay } from '@street-vendor/core';
 
 export const StoreImage = () => {
-  const { isOpen, handleOpenModal, handleCloseModal } = useModal();
-  const [clickIndex, setClickIndex] = useState<number>(0);
-  const handleImageClick = (num: number) => {
-    setClickIndex(num);
-    handleOpenModal();
-  }
+  const { data } = useQueryGetDetailStore();
 
   return (
     <Container>
-      {storeImageDummy && 
-      <Wrapper>
-        <LeftImage
-          style={{ width: storeImageDummy.length > 1 ? '50%' : '100%' }}
-        >
-          <Image onClick={() => handleImageClick(0)} src={storeImageDummy[0]} alt="detailStoreImage" fill style={{objectFit: 'cover'}}/>
-        </LeftImage>
-        {storeImageDummy.length > 1 && (
-          <RightImage>
-            {storeImageDummy.slice(1).map((data, index) => (
-              <div
-                key={index}
-                style={{
-                  position: 'relative',
-                  height: '100%',
-                }}
-                onClick={() => handleImageClick(index + 1)}
-              >
-                <Image src={data} fill alt="detailStoreImage" style={{objectFit: 'cover'}}/>
-              </div>
-            ))}
-          </RightImage>
-        )}
-      </Wrapper>
-      }
-      <BigPhotoModal src={storeImageDummy} isOpen={isOpen} handleCloseModal={handleCloseModal} initialIndex={clickIndex}/>
+      {data?.storeImageResponses?.length > 0 && (
+        <MultiPhotoDisplay
+          srcArray={data.storeImageResponses.map(
+            (data: ImageUrlType) => data.pictureUrl
+          )}
+        />
+      )}
     </Container>
   );
 };

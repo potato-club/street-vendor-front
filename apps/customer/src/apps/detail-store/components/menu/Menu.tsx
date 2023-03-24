@@ -1,10 +1,14 @@
-import { BasicButton, Typography } from '@street-vendor/core';
+import { BasicButton, MenuType, Typography } from '@street-vendor/core';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { CustomRadioButton, Item } from './components/index';
+import { useQueryGetDetailStore } from '../../../../hooks/query/detail-store/useQueryGetDetailStore';
+import Router from 'next/router';
 
 export const Menu = () => {
   const [filter, setFilter] = useState<string>('basic');
+  const { data } = useQueryGetDetailStore();
+  
   return (
     <Container>
       <FilterWrapper>
@@ -24,10 +28,11 @@ export const Menu = () => {
         />
       </FilterWrapper>
       <ItemWrapper>
-        <Item />
-        <Item />
+        {data?.menuList?.map((menu:MenuType) => (
+          <Item key={menu.menuId} {...menu}/>
+        ))}
       </ItemWrapper>
-      <ButtonWrapper>
+      <ButtonWrapper onClick={() => Router.push(`/order-confirm/${Router.query.id}`)}>
         <BasicButton backgroundColor="orange3" flexGrow={2} shadow>
           <Typography size="16" color="white" fontWeight="bold">
             바로 주문하기

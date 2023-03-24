@@ -31,7 +31,11 @@ export type TypographyProps = React.PropsWithChildren<{
 }>;
 export const Typography = (props: TypographyProps) => {
   return (
-    <TypographyText style={props.style} {...props} defaultColor={customColor.black}>
+    <TypographyText
+      style={props.style}
+      {...props}
+      defaultColor={customColor.black}
+    >
       {props.children}
     </TypographyText>
   );
@@ -46,6 +50,8 @@ type typographyDefault = {
   defaultColor: string;
 };
 const TypographyText = styled.div<TypographyProps & typographyDefault>`
+  word-break: keep-all;
+
   font-family: 'Noto Sans KR';
   font-size: ${({ size }) => size + 'px'};
   color: ${({ color, defaultColor }) =>
