@@ -1,3 +1,4 @@
+
 export * from './button/AddPhotoButton';
 export * from './button/AddedPhotoButton';
 export * from './button/AskButton';
@@ -47,5 +48,6 @@ export * from './Select';
 
 export { Typography } from './Typography';
 export { BasicButton } from './button/BasicButton';
+export { MultiPhotoDisplay } from './MultiPhotoDisplay';
 
 export * from './Toast';

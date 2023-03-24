@@ -1,24 +1,30 @@
-import { customColor, Typography } from '@street-vendor/core';
+import { customColor, MenuType, Typography } from '@street-vendor/core';
 import React from 'react';
 import styled from 'styled-components';
 import { Title, TotalPrice } from '../common';
 import { Item } from './components';
-import { BottomButton } from '../common/BottomButton';
+import { BottomButton } from '../common/button/BottomButton';
+import { useQueryGetDetailStore } from '../../hooks/query/detail-store/useQueryGetDetailStore';
+import Router from 'next/router';
 
-export const ShoppingBasket = () => {
+export const OrderConfirm = () => {
+  const { data } = useQueryGetDetailStore();
+  
   return (
     <Container>
       <Wrapper>
         <Title />
         <ItemWrapper>
-          <Item />
+          {data?.menuList?.map((menu: MenuType) => (
+            <Item key={menu.menuId} {...menu} />
+          ))}
         </ItemWrapper>
-        <AddButton>
+        <AddButton onClick={() => Router.push(`/detail-store/${Router.query.id}`)}>
           <Typography size="20">+ 메뉴 추가하기</Typography>
         </AddButton>
         <TotalPrice />
       </Wrapper>
-      <BottomButton buttonText='주문하기'/>
+      <BottomButton buttonText="주문하기" onClick={() => Router.push(`/order/${Router.query.id}`)}/>
     </Container>
   );
 };

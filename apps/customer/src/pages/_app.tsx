@@ -5,7 +5,18 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { RecoilRoot } from 'recoil';
 import './styles.css';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 500,
+    }
+  }
+});
+
+// Todo mock 서버 사용안하게 되면 삭제
+if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
+  import('../mocks');
+}
 
 function CustomApp({ Component, pageProps }: AppProps) {
   return (
