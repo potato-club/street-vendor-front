@@ -1,5 +1,7 @@
 import { customColor } from 'libs/core/src/constants';
 import Router from 'next/router';
+import { useEffect } from 'react';
+import { useQuery } from 'react-query';
 import styled from 'styled-components';
 import { Typography } from '../../Typography';
 import { AskGoInquiry } from './askQuestion/AskGoInquiry';
@@ -13,6 +15,9 @@ export const AskQuestionContainer = (props: Props) => {
   const handleRouter = () => {
     Router.push(props.pathName);
   };
+  useEffect(() => {
+    const { isLoading, data } = useQueryGetFAQ();
+  }, []);
   return (
     <Container>
       <AskGoInquiry handleRouter={handleRouter} />
