@@ -6,18 +6,25 @@ import { AskGoInquiry } from './askQuestion/AskGoInquiry';
 import { AskQuestionBox } from './askQuestion/AskQuestionBox';
 
 interface Props {
+  isLoading: boolean;
+  data: { content: string; imageUrl: string; title: string };
   pathName: string;
 }
 
-export const AskQuestionContainer = (props: Props) => {
+export const AskQuestionContainer = ({ isLoading, data, pathName }: Props) => {
   const handleRouter = () => {
-    Router.push(props.pathName);
+    Router.push(pathName);
   };
+
+  console.log(data);
+
   return (
     <Container>
       <AskGoInquiry handleRouter={handleRouter} />
       <AskQuestionList>
-        <AskQuestionBox
+        {/* {!isLoading && data.content} */}
+
+        {/* <AskQuestionBox
           questionLabel="사장님과 손님 페이지는 무엇인가요?"
           answerLabel="가게 위치 등록 설명"
         >
@@ -57,7 +64,7 @@ export const AskQuestionContainer = (props: Props) => {
               주시길 바랍니다.
             </Typography>
           </AnswerContent>
-        </AskQuestionBox>
+        </AskQuestionBox> */}
       </AskQuestionList>
     </Container>
   );
