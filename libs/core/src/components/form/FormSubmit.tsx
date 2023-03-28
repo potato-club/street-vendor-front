@@ -4,7 +4,7 @@ import { Typography } from '../Typography';
 
 interface ButtonProps {
   isAgreeChecked: boolean;
-  onClick: () => void;
+  onClick?: () => void;
 }
 interface ButtonStyledProps {
   isAgreeChecked: boolean;

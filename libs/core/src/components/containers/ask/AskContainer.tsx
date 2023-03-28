@@ -1,9 +1,12 @@
 import Router from 'next/router';
+import { FieldValues } from 'react-hook-form';
+import { UseMutateFunction } from 'react-query';
 import styled from 'styled-components';
 import { AskSelectButton } from '../../button/AskSelectButton';
 import { AskForm } from './askSetting/AskForm';
 
 interface Props {
+  mutate: UseMutateFunction<any, unknown, FieldValues, unknown>;
   pathName: string;
 }
 
@@ -23,7 +26,7 @@ export const AskContainer = (props: Props) => {
           />
         </TopBar>
       </ContainerInner>
-      <AskForm />
+      <AskForm mutate={props.mutate} />
     </Container>
   );
 };
