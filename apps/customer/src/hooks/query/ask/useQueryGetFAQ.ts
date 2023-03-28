@@ -3,24 +3,28 @@ import { NotificationApi } from 'apps/customer/src/apis/controller/notification.
 import { useCallback } from 'react';
 import { useQuery } from 'react-query';
 
-export type RequestFAQ = {
+export type RequestQuestion = {
   content: string;
   imageUrl: string;
   title: string;
 };
+export type FAQType = 'EVENT' | 'FAQ_BOSS' | 'FAQ_USER' | 'NOTIFICATION';
 
-export const useQueryGetFAQ = () => {
+export const useQueryGetFAQ = (type: FAQType) => {
   const load = useCallback(async () => {
-    const response = await NotificationApi.loadFAQ();
-    const faqInfo = {
-      content: response.data.content,
-      imageUrl: response.data.imageUrl,
-      title: response.data.title,
-    };
+    const response = await NotificationApi.loadFAQ(type);
+    const faqInfo: RequestQuestion[] = [];
+    response.data.map((i: RequestQuestion) => {
+      faqInfo.push({
+        content: i.content,
+        imageUrl: i.imageUrl,
+        title: i.title,
+      });
+    });
     return faqInfo;
   }, []);
 
-  return useQuery<RequestFAQ>(['getFAQ'], load, {
+  return useQuery<RequestQuestion[]>(['getFAQ'], load, {
     onError: (e) => {
       console.log(e);
     },
