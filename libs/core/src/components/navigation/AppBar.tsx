@@ -16,6 +16,7 @@ export interface AppBarProps {
   title?: string;
   titleAlign?: 'left' | 'center' | 'right';
   actions?: React.ReactNode[];
+  search?: boolean;
 }
 
 export const AppBar: React.FC<AppBarProps> = (props) => {
@@ -87,28 +88,30 @@ export const AppBar: React.FC<AppBarProps> = (props) => {
               </Typography>
             )}
             <ActionContainer>
-              <button
-                style={{
-                  backgroundColor: 'transparent',
-                  fill: !isSearching ? customColor.orange2 : customColor.gray,
-                }}
-                onClick={() => setIsSearching((value) => !value)}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="23.519"
-                  height="25.66"
-                  viewBox="0 0 23.519 25.66"
+              {props.search ? (
+                <button
+                  style={{
+                    backgroundColor: 'transparent',
+                    fill: !isSearching ? customColor.orange2 : customColor.gray,
+                  }}
+                  onClick={() => setIsSearching((value) => !value)}
                 >
-                  <g transform="matrix(0.985, 0.174, -0.174, 0.985, 3.299, 0)">
-                    <path d="M9.5,3A6.5,6.5,0,1,0,16,9.5,6.507,6.507,0,0,0,9.5,3m0-3A9.5,9.5,0,1,1,0,9.5,9.5,9.5,0,0,1,9.5,0Z" />
-                    <path
-                      d="M5,6.5a1.5,1.5,0,0,1-1.061-.439l-5-5a1.5,1.5,0,0,1,0-2.121,1.5,1.5,0,0,1,2.121,0l5,5A1.5,1.5,0,0,1,5,6.5Z"
-                      transform="translate(16.5 15.5)"
-                    />
-                  </g>
-                </svg>
-              </button>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="23.519"
+                    height="25.66"
+                    viewBox="0 0 23.519 25.66"
+                  >
+                    <g transform="matrix(0.985, 0.174, -0.174, 0.985, 3.299, 0)">
+                      <path d="M9.5,3A6.5,6.5,0,1,0,16,9.5,6.507,6.507,0,0,0,9.5,3m0-3A9.5,9.5,0,1,1,0,9.5,9.5,9.5,0,0,1,9.5,0Z" />
+                      <path
+                        d="M5,6.5a1.5,1.5,0,0,1-1.061-.439l-5-5a1.5,1.5,0,0,1,0-2.121,1.5,1.5,0,0,1,2.121,0l5,5A1.5,1.5,0,0,1,5,6.5Z"
+                        transform="translate(16.5 15.5)"
+                      />
+                    </g>
+                  </svg>
+                </button>
+              ) : undefined}
               {props.actions}
             </ActionContainer>
           </Header>
@@ -173,8 +176,10 @@ export const AppBar: React.FC<AppBarProps> = (props) => {
                     '기타 식사류',
                   ].map((value) => (
                     <Link
+                      key={value}
                       style={{ flexBasis: '40%', flexGrow: 1 }}
-                      href={`/search/${value}`}
+                      href={`/search?category=${value}`}
+                      replace={router.pathname === '/search'}
                       onClick={() => setIsSearching(false)}
                     >
                       <CategoryButton>{value}</CategoryButton>
@@ -237,7 +242,9 @@ export const AppBar: React.FC<AppBarProps> = (props) => {
 
 const Container = styled.div<{ isFull: boolean }>`
   z-index: 1000;
+  width: 100%;
   height: 68px;
+  position: fixed;
 `;
 
 const Background = styled(animated.div)`
