@@ -10,6 +10,7 @@ import {
 } from '@street-vendor/core';
 import { toast } from 'react-hot-toast';
 import { UseMutateFunction } from 'react-query';
+import { AskAgreeModal } from './AskAgreeModal';
 
 interface Props {
   mutate: UseMutateFunction<any, unknown, FieldValues, unknown>;
@@ -24,7 +25,9 @@ export const AskForm = (props: Props) => {
     getValues,
   } = useForm();
 
+  const [isAskAgreeModalOpen, setIsAskAgreeModalOpen] = useState(false);
   const [isAgreeChecked, setIsAgreeChecked] = useState(false);
+
   const isFilled =
     getValues('askSelect') !== '' &&
     getValues('askInput') !== '' &&
@@ -35,16 +38,20 @@ export const AskForm = (props: Props) => {
       data.askPhoto.pop();
       props.mutate(data);
     } else {
-      if (!isAgreeChecked) {
-        toast.error('약관동의를 해주세요');
-      } else {
+      if (!isFilled) {
         toast.error('내용을 모두 입력해주세요');
+      } else {
+        toast.error('약관동의를 해주세요');
       }
     }
   };
 
   return (
     <Form onSubmit={handleSubmit(submit)}>
+      <AskAgreeModal
+        closeModal={() => setIsAskAgreeModalOpen(false)}
+        isModalOpen={isAskAgreeModalOpen}
+      />
       <FormInner>
         <AskType>
           <FormSelect
@@ -85,7 +92,7 @@ export const AskForm = (props: Props) => {
         <AskCheck>
           <FormAgree
             isAgreeChecked={isAgreeChecked}
-            onClickAgreeContent={() => {}}
+            onClickAgreeContent={() => setIsAskAgreeModalOpen(true)}
             onClickCheckBox={() => {
               setIsAgreeChecked((prev) => !prev);
             }}
