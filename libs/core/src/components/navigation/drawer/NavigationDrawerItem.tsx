@@ -1,16 +1,18 @@
 import { customColor } from 'libs/core/src/constants';
+import Link from 'next/link';
 import React from 'react';
 import { Typography } from '../../Typography';
 
 export interface NavigationDrawerItemProps {
   title: string;
+  url: string;
 }
 
 export const NavigationDrawerItem: React.FC<NavigationDrawerItemProps> = (
   props
 ) => {
   return (
-    <div
+    <Link
       style={{
         display: 'flex',
         justifyContent: 'space-between',
@@ -18,6 +20,7 @@ export const NavigationDrawerItem: React.FC<NavigationDrawerItemProps> = (
         padding: '20px 48px',
         fill: customColor.orange2,
       }}
+      href={props.url}
     >
       <Typography size="16">{props.title}</Typography>
       <svg
@@ -35,6 +38,6 @@ export const NavigationDrawerItem: React.FC<NavigationDrawerItemProps> = (
           transform="translate(1.5 8.25)"
         />
       </svg>
-    </div>
+    </Link>
   );
 };
