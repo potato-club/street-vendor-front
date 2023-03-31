@@ -7,6 +7,7 @@ export const Home = () => {
       title="송도풍림아이원3단지"
       titleAlign="center"
       search
+      notice
       drawer={
         <NavigationDrawer
           items={[
