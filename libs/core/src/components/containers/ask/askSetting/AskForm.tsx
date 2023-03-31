@@ -36,7 +36,11 @@ export const AskForm = (props: Props) => {
   const submit = (data: FieldValues) => {
     if (isAgreeChecked && isFilled) {
       data.askPhoto.pop();
-      props.mutate(data);
+      data.askPhoto = data.askPhoto.map(
+        (i: { 0: File; length: number }) => i[0]
+      );
+      // props.mutate(data);
+      console.log(data);
     } else {
       if (!isFilled) {
         toast.error('내용을 모두 입력해주세요');
