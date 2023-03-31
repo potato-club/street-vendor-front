@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import ReactModal from 'react-modal';
-import { customColor, Typography } from '@street-vendor/core';
+import { customColor } from 'libs/core/src/constants';
+import { Typography } from '../../../Typography';
 
 interface ModalProps {
   closeModal: () => void;
@@ -36,6 +37,7 @@ export const AskAgreeModal = (props: ModalProps) => {
           top: '50%',
           left: '50%',
           transform: 'translate(-50%,-50%)',
+          background: `${customColor.white}`,
         },
       }}
     >
@@ -98,12 +100,10 @@ export const AskAgreeModal = (props: ModalProps) => {
 
 const ModalWrapper = styled.article`
   display: flex;
-  background: ${customColor.white};
   position: relative;
   width: 100%;
   height: 100%;
-  align-items: center;
-  padding: 0 7%;
+  padding-top: 40px;
 `;
 const Content = styled.div`
   display: flex;

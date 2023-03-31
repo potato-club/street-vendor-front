@@ -5,7 +5,7 @@ import { pathName } from '../../../../configs/pathName';
 
 export const MyAsk = () => {
   const { isLoading, data } = useQueryGetMyQuestion();
-  console.log(data);
+  // console.log(data);
 
   return (
     <MyAskContainer
