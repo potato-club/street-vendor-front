@@ -1,4 +1,4 @@
-import { AskSelectButton } from '@street-vendor/core';
+import { AppBarLayout, AskSelectButton } from '@street-vendor/core';
 import { useState } from 'react';
 import styled from 'styled-components';
 import { NewAlarm } from './alarmList/NewAlarm';
@@ -8,25 +8,27 @@ export const AlarmContainer = () => {
   const [isNew, setIsNew] = useState(true);
   return (
     <Container>
-      <ToggleMenu>
-        <ToggleMenuInner>
-          <AskSelectButton
-            content="최신"
-            isSelected={isNew}
-            onClick={() => {
-              setIsNew(true);
-            }}
-          />
-          <AskSelectButton
-            content="읽은 알림"
-            isSelected={!isNew}
-            onClick={() => {
-              setIsNew(false);
-            }}
-          />
-        </ToggleMenuInner>
-      </ToggleMenu>
-      {isNew ? <NewAlarm /> : <PastAlarm />}
+      <AppBarLayout title="알림" titleAlign="center" home>
+        <ToggleMenu>
+          <ToggleMenuInner>
+            <AskSelectButton
+              content="최신"
+              isSelected={isNew}
+              onClick={() => {
+                setIsNew(true);
+              }}
+            />
+            <AskSelectButton
+              content="읽은 알림"
+              isSelected={!isNew}
+              onClick={() => {
+                setIsNew(false);
+              }}
+            />
+          </ToggleMenuInner>
+        </ToggleMenu>
+        {isNew ? <NewAlarm /> : <PastAlarm />}
+      </AppBarLayout>
     </Container>
   );
 };
@@ -34,10 +36,9 @@ export const AlarmContainer = () => {
 const Container = styled.section`
   display: flex;
   flex-direction: column;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   justify-content: flex-start;
-  align-items: center;
 `;
 const ToggleMenu = styled.div`
   display: flex;
