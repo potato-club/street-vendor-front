@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { Typography } from '../../Typography';
 import { AskGoInquiry } from './askQuestion/AskGoInquiry';
 import { AskQuestionBox } from './askQuestion/AskQuestionBox';
+import { AppBarLayout } from '@street-vendor/core';
 
 interface Props {
   isLoading: boolean;
@@ -19,22 +20,24 @@ export const AskQuestionContainer = ({ isLoading, data, pathName }: Props) => {
 
   return (
     <Container>
-      <AskGoInquiry handleRouter={handleRouter} />
-      <AskQuestionList>
-        {isLoading ? (
-          <></>
-        ) : (
-          <>
-            {data.map((i, id) => (
-              <AskQuestionBox
-                key={id}
-                questionLabel={i.title}
-                answerContent={i.content}
-              />
-            ))}
-          </>
-        )}
-      </AskQuestionList>
+      <AppBarLayout title="자주 하는 질문" search home>
+        <AskGoInquiry handleRouter={handleRouter} />
+        <AskQuestionList>
+          {isLoading ? (
+            <></>
+          ) : (
+            <>
+              {data.map((i, id) => (
+                <AskQuestionBox
+                  key={id}
+                  questionLabel={i.title}
+                  answerContent={i.content}
+                />
+              ))}
+            </>
+          )}
+        </AskQuestionList>
+      </AppBarLayout>
     </Container>
   );
 };
@@ -42,8 +45,8 @@ export const AskQuestionContainer = ({ isLoading, data, pathName }: Props) => {
 const Container = styled.section`
   display: flex;
   flex-direction: column;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background: ${customColor.beige};
   overflow-y: auto;
 `;
