@@ -50,7 +50,7 @@ export default {
       ? api({
           url: url,
           method: 'put',
-          data: params,
+          params: params,
           headers: {
             Authorization: `${idSession}`,
           },

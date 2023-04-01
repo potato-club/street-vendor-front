@@ -23,7 +23,6 @@ export const Register = () => {
       </SubTitle>
       <FormContainer
         onSubmit={handleSubmit((data) => {
-          console.log(data);
           mutate({ name: data.name, nickname: data.nickname });
         })}
       >

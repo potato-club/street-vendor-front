@@ -4,6 +4,8 @@ import { useMutation } from 'react-query';
 import { useMyProfile } from '../../useMyProfile';
 import { useRouter } from 'next/router';
 import { pathName } from '../../../configs/pathName';
+import { toast } from 'react-hot-toast';
+import { sessionService } from 'apps/customer/src/libs/sessionService';
 
 type Props = {
   name: string;
@@ -24,6 +26,7 @@ export const useQueryRegister = () => {
       const response = await authApi.signUp(params);
       changeNickname(nickname);
       changeName(name);
+      sessionService.setIdSession(response.data);
       return response;
     },
     [email, profileUrl, changeNickname, changeName]
@@ -31,10 +34,11 @@ export const useQueryRegister = () => {
 
   return useMutation(register, {
     onSuccess: (e) => {
+      toast.success('회원가입되었습니다.');
       router.push(pathName.HOME);
     },
     onError: (e: any) => {
-      console.log(e.data.message);
+      toast.error(e.data.message);
     },
   });
 };
