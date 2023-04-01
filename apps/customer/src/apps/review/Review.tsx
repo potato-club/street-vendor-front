@@ -36,7 +36,7 @@ export const Review = () => {
 
   return (
     <Container>
-      <AppBarLayout title="즐겨찾기" search home>
+      <AppBarLayout title="리뷰 쓰기" search home>
         {/* <CustomModal
         isTwoButtons
         isModalOpen={isback}
