@@ -1,21 +1,26 @@
-import styled from 'styled-components';
-import { Typography } from '../Typography';
-import { NavigationButton } from './NavigationButton';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { animated, useSpring } from 'react-spring';
-import { CategoryButton } from '../button/CategoryButton';
 import useMeasure from 'react-use-measure';
-import { Line } from '../Line';
+import styled from 'styled-components';
 import { customColor } from '../../constants';
+import { Line } from '../Line';
+import { Typography } from '../Typography';
+import { CategoryButton } from '../button/CategoryButton';
 import { RecentCategoryButton } from '../button/RecentCategoryButton';
-import { useRouter } from 'next/router';
-import Link from 'next/link';
+import { NavigationButton } from './NavigationButton';
+import { HomeAction } from './action/HomeAction';
+import { NoticeAction } from './action/NoticeAction';
+import { SearchAction } from './action/SearchAction';
 
 export interface AppBarProps {
   drawer?: React.ReactNode;
   title?: string;
   titleAlign?: 'left' | 'center' | 'right';
-  actions?: React.ReactNode[];
+  search?: boolean;
+  home?: boolean;
+  notice?: boolean;
 }
 
 export const AppBar: React.FC<AppBarProps> = (props) => {
@@ -87,29 +92,14 @@ export const AppBar: React.FC<AppBarProps> = (props) => {
               </Typography>
             )}
             <ActionContainer>
-              <button
-                style={{
-                  backgroundColor: 'transparent',
-                  fill: !isSearching ? customColor.orange2 : customColor.gray,
-                }}
-                onClick={() => setIsSearching((value) => !value)}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="23.519"
-                  height="25.66"
-                  viewBox="0 0 23.519 25.66"
-                >
-                  <g transform="matrix(0.985, 0.174, -0.174, 0.985, 3.299, 0)">
-                    <path d="M9.5,3A6.5,6.5,0,1,0,16,9.5,6.507,6.507,0,0,0,9.5,3m0-3A9.5,9.5,0,1,1,0,9.5,9.5,9.5,0,0,1,9.5,0Z" />
-                    <path
-                      d="M5,6.5a1.5,1.5,0,0,1-1.061-.439l-5-5a1.5,1.5,0,0,1,0-2.121,1.5,1.5,0,0,1,2.121,0l5,5A1.5,1.5,0,0,1,5,6.5Z"
-                      transform="translate(16.5 15.5)"
-                    />
-                  </g>
-                </svg>
-              </button>
-              {props.actions}
+              {props.search ? (
+                <SearchAction
+                  color={!isSearching ? customColor.orange2 : customColor.gray}
+                  onClick={() => setIsSearching((value) => !value)}
+                />
+              ) : undefined}
+              {props.home && !isSearching ? <HomeAction /> : undefined}
+              {props.notice && !isSearching ? <NoticeAction /> : undefined}
             </ActionContainer>
           </Header>
 
@@ -173,8 +163,10 @@ export const AppBar: React.FC<AppBarProps> = (props) => {
                     '기타 식사류',
                   ].map((value) => (
                     <Link
+                      key={value}
                       style={{ flexBasis: '40%', flexGrow: 1 }}
-                      href={`/search/${value}`}
+                      href={`/search?category=${value}`}
+                      replace={router.pathname === '/search'}
                       onClick={() => setIsSearching(false)}
                     >
                       <CategoryButton>{value}</CategoryButton>
@@ -185,51 +177,6 @@ export const AppBar: React.FC<AppBarProps> = (props) => {
             </div>
           ) : undefined}
         </Background>
-        {/* <div
-      style={{
-        backgroundColor: customColor.white,
-        display: 'flex',
-        flexDirection: 'column',
-        padding: '22px 22px',
-        gap: '16px',
-      }}
-    >
-      <div style={{ display: 'flex', alignItems: 'baseline', gap: 12 }}>
-        <Typography size="20" fontWeight="bold" letterSpacing="-0.54px">
-          인기 카테고리
-        </Typography>
-        <Typography size="14" letterSpacing="-0.7px" color="gray">
-          오후 8시
-        </Typography>
-      </div>
-      <div style={{ display: 'flex', gap: '60px' }}>
-        <div
-          style={{
-            display: 'flex',
-            gap: '20px',
-            flexDirection: 'column',
-            flex: '1 1',
-          }}
-        >
-          <RankItem rank={1} name="떡볶이" />
-          <RankItem rank={2} name="타코야끼" />
-          <RankItem rank={3} name="순대" />
-          <RankItem rank={4} name="붕어빵" />
-          <RankItem rank={5} name="호떡" />
-        </div>
-        <div
-          style={{
-            display: 'flex',
-            gap: '20px',
-            flexDirection: 'column',
-            flex: '1 1',
-          }}
-        >
-          <RankItem rank={6} name="핫도그" state="down" />
-          <RankItem rank={7} name="계란빵" state="up" />
-        </div>
-      </div>
-    </div> */}
       </Container>
     </>
   );
@@ -237,7 +184,9 @@ export const AppBar: React.FC<AppBarProps> = (props) => {
 
 const Container = styled.div<{ isFull: boolean }>`
   z-index: 1000;
+  width: 100%;
   height: 68px;
+  position: fixed;
 `;
 
 const Background = styled(animated.div)`
@@ -251,13 +200,14 @@ const Background = styled(animated.div)`
 
 const Header = styled.header`
   width: 100%;
+  height: 68px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 22px;
+  padding: 18px 22px;
 `;
 
 const ActionContainer = styled.div`
   display: flex;
-  gap: 16px;
+  gap: 4px;
 `;

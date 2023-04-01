@@ -1,1 +1,1 @@
-export { customColor } from './customColor';
+export * from './customColor';
