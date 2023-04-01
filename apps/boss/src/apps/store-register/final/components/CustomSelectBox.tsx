@@ -26,7 +26,7 @@ export const CustomSelectBox = ({ width, content }: Props) => {
       >
         <path
           d="M1.83398 1L7.00098 5.183L12.167 1"
-          stroke={customColor.orange2}
+          stroke={customColor.darkGray}
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -36,7 +36,7 @@ export const CustomSelectBox = ({ width, content }: Props) => {
   );
 };
 
-const Box = styled.button<StyleProps>`
+const Box = styled.div<StyleProps>`
   display: flex;
   flex-direction: row;
   width: ${(props) => (props.width ? props.width + 'px' : '100%')};
