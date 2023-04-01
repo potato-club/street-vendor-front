@@ -5,6 +5,7 @@ import {
   CustomModal,
   SpoonRatingForm,
   Typography,
+  AppBarLayout,
 } from '@street-vendor/core';
 import { useState } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
@@ -35,7 +36,8 @@ export const Review = () => {
 
   return (
     <Container>
-      {/* <CustomModal
+      <AppBarLayout title="즐겨찾기" search home>
+        {/* <CustomModal
         isTwoButtons
         isModalOpen={isback}
         closeModal={() => {
@@ -51,61 +53,63 @@ export const Review = () => {
           setIsBack(false);
         }}
       /> */}
-      <ContainerInner onSubmit={handleSubmit(submit)}>
-        <Content>
-          <Spoon>
-            <SpoonText>
-              <Typography size="16" fontWeight="bold" letterSpacing="-0.9px">
-                맛숟가락
-              </Typography>
-              <Typography size="12" color="darkGray" letterSpacing="-0.6px">
-                맛있으셨나요? 맛있었던만큼 숟가락 갯수를 선택해주세요.
-              </Typography>
-              <SpoonRatingForm
-                name="reviewRating"
-                control={control}
+        <ContainerInner onSubmit={handleSubmit(submit)}>
+          <Content>
+            <Spoon>
+              <SpoonText>
+                <Typography size="16" fontWeight="bold" letterSpacing="-0.9px">
+                  맛숟가락
+                </Typography>
+                <Typography size="12" color="darkGray" letterSpacing="-0.6px">
+                  맛있으셨나요? 맛있었던만큼 숟가락 갯수를 선택해주세요.
+                </Typography>
+                <SpoonRatingForm
+                  name="reviewRating"
+                  control={control}
+                  errors={errors}
+                />
+              </SpoonText>
+            </Spoon>
+            <ReviewText>
+              <FormTextarea
+                label="리뷰하기"
+                placeholder="리뷰 내용을 작성해주세요:)"
+                value="reviewContent"
+                register={register}
                 errors={errors}
+                watch={watch}
               />
-            </SpoonText>
-          </Spoon>
-          <ReviewText>
-            <FormTextarea
-              label="리뷰하기"
-              placeholder="리뷰 내용을 작성해주세요:)"
-              value="reviewContent"
-              register={register}
-              errors={errors}
-              watch={watch}
+            </ReviewText>
+            <ReviewPhoto>
+              <FormPhoto
+                label="첨부 사진"
+                value="reviewPhoto"
+                placeholder="사진은 최대 3장까지 등록 가능합니다."
+                errors={errors}
+                watch={watch}
+                register={register}
+              />
+            </ReviewPhoto>
+          </Content>
+          <ReviewRegister>
+            <FormSubmit
+              isAgreeChecked={true}
+              onClick={() => {
+                console.log();
+              }}
             />
-          </ReviewText>
-          <ReviewPhoto>
-            <FormPhoto
-              label="첨부 사진"
-              value="reviewPhoto"
-              placeholder="사진은 최대 3장까지 등록 가능합니다."
-              errors={errors}
-              watch={watch}
-              register={register}
-            />
-          </ReviewPhoto>
-        </Content>
-        <ReviewRegister>
-          <FormSubmit
-            isAgreeChecked={true}
-            onClick={() => {
-              console.log();
-            }}
-          />
-        </ReviewRegister>
-      </ContainerInner>
+          </ReviewRegister>
+        </ContainerInner>
+      </AppBarLayout>
     </Container>
   );
 };
 
 const Container = styled.section`
   display: flex;
-  width: 100vw;
-  height: 100vh;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
   justify-content: center;
 `;
 const ContainerInner = styled.form`
@@ -117,6 +121,7 @@ const ContainerInner = styled.form`
   min-height: 100%;
   height: 100%;
   justify-content: space-between;
+  margin: 0 auto;
 `;
 const Content = styled.div``;
 const Spoon = styled.div`
