@@ -17,7 +17,7 @@ export const AskDetailContainer = (props: Props) => {
   };
   return (
     <Wrapper>
-      <AppBarLayout title="고객센터" search home>
+      <AppBarLayout title="1:1 문의" search home>
         <Container>
           <ContainerInner>
             <TopBar>
