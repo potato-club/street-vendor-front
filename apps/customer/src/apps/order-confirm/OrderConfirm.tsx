@@ -6,12 +6,15 @@ import { Item } from './components';
 import { BottomButton } from '../common/button/BottomButton';
 import { useQueryGetDetailStore } from '../../hooks/query/detail-store/useQueryGetDetailStore';
 import Router from 'next/router';
+import { useRecoilValue } from 'recoil';
+import { totalPrice } from '../../recoil/atoms';
 
 export const OrderConfirm = () => {
   const { data } = useQueryGetDetailStore();
+  const price = useRecoilValue(totalPrice);
   
   return (
-    <AppBarLayout title='주문확인'>
+    <AppBarLayout title="주문확인">
       <Container>
         <Wrapper>
           <Title />
@@ -20,6 +23,12 @@ export const OrderConfirm = () => {
               <Item key={menu.menuId} {...menu} />
             ))}
           </ItemWrapper>
+          {price === 0 && (
+            <Notice>
+              <Typography size="16">선택된 메뉴가 없습니다</Typography>
+              <Typography size="16">메뉴를 추가해주세요</Typography>
+            </Notice>
+          )}
           <AddButton
             onClick={() => Router.push(`/detail-store/${Router.query.id}`)}
           >
@@ -67,4 +76,14 @@ const AddButton = styled.div`
   justify-content: center;
   padding: 20px;
   border-bottom: 1px solid ${customColor.gray};
+`;
+
+const Notice = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 12px 0;
+  border-top: 1px solid ${customColor.gray}60;
+  border-bottom: 1px solid ${customColor.gray}60;
 `;
