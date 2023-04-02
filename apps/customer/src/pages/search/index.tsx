@@ -3,12 +3,14 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { Search } from '../../apps/search/Search';
 
-export const SearchPage: NextPage = (props) => {
+export const SearchPage: NextPage = () => {
   const router = useRouter();
 
   return (
     <Search
-      query={Array.isArray(router.query.query) ? '' : router.query.query}
+      category={
+        Array.isArray(router.query.category) ? '' : router.query.category
+      }
     />
   );
 };

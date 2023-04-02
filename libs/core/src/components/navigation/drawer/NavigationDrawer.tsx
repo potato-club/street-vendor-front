@@ -74,7 +74,11 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = (props) => {
           }}
         >
           {props.items.map((value) => (
-            <NavigationDrawerItem title={value.title} />
+            <NavigationDrawerItem
+              key={value.title}
+              title={value.title}
+              url={value.url}
+            />
           ))}
         </div>
         <BasicButton

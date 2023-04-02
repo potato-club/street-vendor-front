@@ -1,24 +1,21 @@
-import { AppBar, Select } from '@street-vendor/core';
-import { CategoryButton } from 'libs/core/src/components/button/CategoryButton';
 import React from 'react';
+import { AppBarLayout, CategoryButton, Select } from '@street-vendor/core';
 import styled from 'styled-components';
 import { Store } from '../favorites/components/Store';
 
 export interface SearchProps {
-  query: string;
+  category: string;
 }
 
 export const Search: React.FC<SearchProps> = (props) => {
   return (
-    <Container>
-      <AppBar title={props.query} />
+    <AppBarLayout title={props.category} search>
       <StoreList>
         <div
           style={{
             display: 'flex',
             gap: 16,
             width: '100%',
-            height: '100px',
           }}
         >
           <Select options={[]} />
@@ -32,15 +29,9 @@ export const Search: React.FC<SearchProps> = (props) => {
         <Store />
         <Store />
       </StoreList>
-    </Container>
+    </AppBarLayout>
   );
 };
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-`;
 
 const StoreList = styled.div`
   display: flex;
