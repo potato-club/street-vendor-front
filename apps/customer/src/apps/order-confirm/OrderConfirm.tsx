@@ -1,4 +1,4 @@
-import { customColor, MenuType, Typography } from '@street-vendor/core';
+import { AppBarLayout, customColor, MenuType, Typography } from '@street-vendor/core';
 import React from 'react';
 import styled from 'styled-components';
 import { Title, TotalPrice } from '../common';
@@ -11,21 +11,28 @@ export const OrderConfirm = () => {
   const { data } = useQueryGetDetailStore();
   
   return (
-    <Container>
-      <Wrapper>
-        <Title />
-        <ItemWrapper>
-          {data?.menuList?.map((menu: MenuType) => (
-            <Item key={menu.menuId} {...menu} />
-          ))}
-        </ItemWrapper>
-        <AddButton onClick={() => Router.push(`/detail-store/${Router.query.id}`)}>
-          <Typography size="20">+ 메뉴 추가하기</Typography>
-        </AddButton>
-        <TotalPrice />
-      </Wrapper>
-      <BottomButton buttonText="주문하기" onClick={() => Router.push(`/order/${Router.query.id}`)}/>
-    </Container>
+    <AppBarLayout title='주문확인'>
+      <Container>
+        <Wrapper>
+          <Title />
+          <ItemWrapper>
+            {data?.menuList?.map((menu: MenuType) => (
+              <Item key={menu.menuId} {...menu} />
+            ))}
+          </ItemWrapper>
+          <AddButton
+            onClick={() => Router.push(`/detail-store/${Router.query.id}`)}
+          >
+            <Typography size="20">+ 메뉴 추가하기</Typography>
+          </AddButton>
+          <TotalPrice />
+        </Wrapper>
+        <BottomButton
+          buttonText="주문하기"
+          onClick={() => Router.push(`/order/${Router.query.id}`)}
+        />
+      </Container>
+    </AppBarLayout>
   );
 };
 
