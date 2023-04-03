@@ -51,9 +51,12 @@ export const AskGuideContainer = (props: Props) => {
                 </Text>
               </Content>
               <BasicButton
-                backgroundColor="orange2"
+                backgroundColor="orange3"
                 padding={18}
                 onClick={handleInquiryRouter}
+                style={{
+                  boxShadow: '0px 3px 6px 0px #00000025',
+                }}
               >
                 <Typography size="16" fontWeight="bold" color="beige">
                   1:1 문의
@@ -75,6 +78,9 @@ export const AskGuideContainer = (props: Props) => {
                 backgroundColor="orange3"
                 padding={18}
                 onClick={handleQuestionRouter}
+                style={{
+                  boxShadow: '0px 3px 6px 0px #00000025',
+                }}
               >
                 <Typography
                   size="16"
@@ -114,8 +120,8 @@ const ContainerInner = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-  padding: 100px 7% 0;
-  gap: 28px 0;
+  padding: 24px 7% 0;
+  gap: 24px 0;
 `;
 const ContentBox = styled.div`
   display: flex;
