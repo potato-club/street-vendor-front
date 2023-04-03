@@ -1,10 +1,9 @@
 import { useState } from 'react';
-import { CustomInput, NextButton, Typography } from '@street-vendor/core';
+import { NextButton, Typography } from '@street-vendor/core';
 import styled from 'styled-components';
 import { CustomSelect } from './components/CustomSelect';
 import { CustomModal } from './components/CustomModal';
 import { QuestionLabel } from './components/QuestionLabel';
-import { useForm } from 'react-hook-form';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import {
   atomStoreRegisterAccount,
@@ -14,8 +13,10 @@ import {
 import Router from 'next/router';
 import { pathName } from '../../configs/pathName';
 import { toast } from 'react-hot-toast';
+import { CustomInput } from './components/CustomInput';
 
 export const StoreRegister = () => {
+  //Recoil
   const categoryValue = useRecoilValue(atomStoreRegisterCategory);
   const [accountValue, setAccountValue] = useRecoilState(
     atomStoreRegisterAccount
@@ -23,36 +24,46 @@ export const StoreRegister = () => {
   const [explainValue, setExplainValue] = useRecoilState(
     atomStoreRegisterExplain
   );
+
+  //Modal
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [modalContent, setModalContent] = useState('category');
-  const {
-    getValues,
-    register,
-    formState: { errors },
-  } = useForm();
+
+  //InputValues
+  const [storeName, setStoreName] = useState<string>(explainValue.name);
+  const [storeDescription, setStoreDescription] = useState<string>(
+    explainValue.description
+  );
+  const [storeLocation, setStoreLocation] = useState<string>(
+    explainValue.location
+  );
+  const [accountNumber, setAccountNumber] = useState<string>(
+    accountValue.number
+  );
 
   const isFilled =
     categoryValue !== '' &&
-    explainValue.description !== '' &&
-    explainValue.location !== '' &&
-    explainValue.name !== '' &&
+    storeName !== '' &&
+    storeLocation !== '' &&
+    storeDescription !== '' &&
     accountValue.bank !== '' &&
-    accountValue.number !== '';
+    accountNumber !== '';
 
-  const handleNext = () => {
-    const data = getValues();
-    setExplainValue({
-      name: data['storeName'],
-      description: data['storeDescription'],
-      location: data['storeLocation'],
+  const handleNext = async () => {
+    await setExplainValue({
+      name: storeName,
+      description: storeDescription,
+      location: storeLocation,
     });
-    setAccountValue({
+    await setAccountValue({
       bank: accountValue.bank,
-      number: data['storeAccountNumber'],
+      number: accountNumber,
     });
-    isFilled
-      ? Router.push(pathName.STORE_REGISTER.SCHEDULE)
-      : toast.error('정보를 모두 입력해 주세요');
+    if (isFilled) {
+      Router.push(pathName.STORE_REGISTER.SCHEDULE);
+    } else {
+      toast.error('정보를 모두 입력해 주세요');
+    }
   };
 
   return (
@@ -80,25 +91,22 @@ export const StoreRegister = () => {
             <QuestionLabel label="가게 이름">
               <CustomInput
                 placeholder="예) 서윤보경네"
-                name="storeName"
-                register={register}
-                errors={errors}
+                value={storeName}
+                setValue={setStoreName}
               />
             </QuestionLabel>
             <QuestionLabel label="한줄 설명">
               <CustomInput
                 placeholder="예) 분식을 파는 서윤보경네 입니다"
-                name="storeDescription"
-                register={register}
-                errors={errors}
+                value={storeDescription}
+                setValue={setStoreDescription}
               />
             </QuestionLabel>
             <QuestionLabel label="위치 설명">
               <CustomInput
                 placeholder="예) 당정역 2번 출구 앞"
-                name="storeLocation"
-                register={register}
-                errors={errors}
+                value={storeLocation}
+                setValue={setStoreLocation}
               />
             </QuestionLabel>
             <QuestionLabel label="계좌번호">
@@ -114,9 +122,8 @@ export const StoreRegister = () => {
                 />
                 <CustomInput
                   placeholder="계좌번호 입력"
-                  name="storeAccountNumber"
-                  register={register}
-                  errors={errors}
+                  value={accountNumber}
+                  setValue={setAccountNumber}
                 />
               </Account>
               <Typography size="12" color="orange1" letterSpacing="-1.0px">
