@@ -20,9 +20,9 @@ interface Props {
 export const AddMenu = ({ id, handleSetMenuArray }: Props) => {
   const [image, setImage] = useState<string>('');
   const [file, setFile] = useState<File>();
-  const [menuName, setMenuName] = useState<string>();
-  const [menuPrice, setMenuPrice] = useState<number>();
-  const [menuWeight, setMenuWeight] = useState<string>();
+  const [menuName, setMenuName] = useState<string>('');
+  const [menuPrice, setMenuPrice] = useState<number>(undefined);
+  const [menuWeight, setMenuWeight] = useState<string>('');
   const handleAddImage = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     if (e.target.value[0]) {

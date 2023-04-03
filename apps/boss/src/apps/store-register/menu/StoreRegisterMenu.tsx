@@ -3,6 +3,7 @@ import { NextButton, Typography } from '@street-vendor/core';
 import { pathName } from 'apps/boss/src/configs/pathName';
 import { atomStoreRegisterMenu } from 'apps/boss/src/recoil/atoms/atomStoreRegister';
 import Router from 'next/router';
+import { toast } from 'react-hot-toast';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { QuestionLabel } from '../components/QuestionLabel';
@@ -23,7 +24,16 @@ export const StoreRegisterMenu = () => {
   };
 
   const handleNext = () => {
-    Router.push(pathName.STORE_REGISTER.PHOTO);
+    if (
+      menuArray[0].image !== null &&
+      menuArray[0].name !== '' &&
+      menuArray[0].price !== 0 &&
+      menuArray[0].weight !== ''
+    ) {
+      Router.push(pathName.STORE_REGISTER.PHOTO);
+    } else {
+      toast.error('정보를 모두 입력해 주세요');
+    }
   };
   return (
     <Container>
