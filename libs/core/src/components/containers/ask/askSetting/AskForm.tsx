@@ -39,8 +39,7 @@ export const AskForm = (props: Props) => {
       data.askPhoto = data.askPhoto.map(
         (i: { 0: File; length: number }) => i[0]
       );
-      // props.mutate(data);
-      console.log(data);
+      props.mutate(data);
     } else {
       if (!isFilled) {
         toast.error('내용을 모두 입력해주세요');
