@@ -2,6 +2,7 @@ import { authApi } from '../../../apis/controller/auth.api';
 import { useCallback } from 'react';
 import { useQuery } from 'react-query';
 
+export const USE_QUERY_GET_MY_INFO_KEY = 'useQueryGetMyInfo';
 export type MyInfo = {
   email: string;
   memberId: number;
@@ -21,7 +22,7 @@ export const useQueryGetMyInfo = () => {
     return myInfo;
   }, []);
 
-  return useQuery(['useQueryGetMyInfo'], getData, {
+  return useQuery([USE_QUERY_GET_MY_INFO_KEY], getData, {
     onError: (e) => {
       console.log(e);
     },
