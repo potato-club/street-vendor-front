@@ -15,7 +15,7 @@ export const ProfileImage = ({ imageUrl }: Props) => {
   return (
     <Container>
       <Image
-        src={imageUrl !== '' ? imageUrl : ProfileImageDefault}
+        src={imageUrl !== null ? imageUrl : ProfileImageDefault}
         alt={''}
         width={115}
         height={115}

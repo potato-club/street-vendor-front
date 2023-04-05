@@ -24,7 +24,7 @@ export const authApi = {
       });
       return response.data;
     },
-    profileImage: async (profileUrl: string) => {
+    profileImage: async (profileUrl: File) => {
       const response = await sendApi.put('/api/v1/my-page/profileUrl', {
         profileUrl: profileUrl,
       });
