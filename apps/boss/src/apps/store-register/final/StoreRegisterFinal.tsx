@@ -31,7 +31,10 @@ export const StoreRegisterFinal = () => {
   const photoValue = useRecoilValue(atomStoreRegisterFile);
   const imageValue = useRecoilValue(atomStoreRegisterImage);
 
-  console.log(scheduleValue);
+  const handleRegister = () => {
+    console.log();
+    //Router처리
+  };
 
   return (
     <Container>
@@ -112,7 +115,7 @@ export const StoreRegisterFinal = () => {
             <MultiPhotoDisplay srcArray={imageValue} />
           </PhotoBox>
           <Button>
-            <NextButton background="orange4">
+            <NextButton background="orange4" onClick={handleRegister}>
               <Typography
                 color="black"
                 fontWeight="bold"
@@ -197,4 +200,5 @@ const MenuScroll = styled.div`
   gap: 12px;
   width: calc(100% + 7%);
   overflow-x: auto;
+  padding-right: 20px;
 `;

@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 interface Props {
   setImages: (value: string) => void;
-  setFiles: (value: FileList) => void;
+  setFiles: (value: File[]) => void;
   setInit: () => void;
 }
 
@@ -14,14 +14,18 @@ export const PhotoButton = ({ setImages, setInit, setFiles }: Props) => {
     e.preventDefault();
     setInit();
     if (e.target.value[0]) {
-      Object.values(e.target.files).map((i) => {
-        const fileReader = new FileReader();
-        fileReader.readAsDataURL(i);
-        fileReader.onload = () => {
-          setImages(String(fileReader.result!));
-        };
+      const files = [];
+      Object.values(e.target.files).map((i, id) => {
+        if (id < 3) {
+          const fileReader = new FileReader();
+          fileReader.readAsDataURL(i);
+          fileReader.onload = () => {
+            setImages(String(fileReader.result!));
+          };
+          files.push(i);
+        }
       });
-      setFiles(e.target.files);
+      setFiles(files);
     }
   };
 

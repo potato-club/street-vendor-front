@@ -53,7 +53,7 @@ export const atomStoreRegisterImage = atom<string[]>({
   key: 'atomStoreRegisterImages',
   default: [],
 });
-export const atomStoreRegisterFile = atom<FileList | null>({
+export const atomStoreRegisterFile = atom<File[] | null>({
   key: 'atomStoreRegisterPhoto',
   default: null,
   dangerouslyAllowMutability: true,

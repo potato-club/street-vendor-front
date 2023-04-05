@@ -38,7 +38,7 @@ export const StoreRegisterPhoto = () => {
                 setImages={(value: string) =>
                   setImages((prev) => [...prev, value])
                 }
-                setFiles={(values: FileList) => setFiles(values)}
+                setFiles={(values: File[]) => setFiles(values)}
               />
               <DeleteButton
                 setInit={() => {
