@@ -37,8 +37,12 @@ export const AskDetail = (props: Props) => {
         {isAnswered && (
           <Answer>
             <ReadAnswerBox label="답변" content="내가 돈 먹었다악 꿀꺽" />
-            <BasicButton backgroundColor="orange2" height={58}>
-              <EndButton onClick={handleRouter}>
+            <BasicButton
+              backgroundColor="orange2"
+              height={58}
+              onClick={handleRouter}
+            >
+              <EndButton>
                 <Typography size="20" letterSpacing="-1.0px" color="white">
                   문의 종료하기
                 </Typography>
@@ -84,6 +88,6 @@ const Answer = styled.div`
   gap: 70px 0;
   margin-bottom: 72px;
 `;
-const EndButton = styled.button`
+const EndButton = styled.div`
   background: none;
 `;

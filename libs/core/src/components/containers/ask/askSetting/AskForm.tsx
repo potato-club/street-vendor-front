@@ -1,27 +1,63 @@
 import styled from 'styled-components';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { FieldValues, useForm } from 'react-hook-form';
 import {
-  AskSelect,
-  AskContent,
-  AskPhoto,
-  AskAgree,
-  AskSubmit,
+  FormAgree,
+  FormContent,
+  FormPhoto,
+  FormSelect,
+  FormSubmit,
 } from '@street-vendor/core';
+import { toast } from 'react-hot-toast';
+import { UseMutateFunction } from 'react-query';
+import { AskAgreeModal } from './AskAgreeModal';
 
-export const AskForm = () => {
+interface Props {
+  mutate: UseMutateFunction<any, unknown, FieldValues, unknown>;
+}
+
+export const AskForm = (props: Props) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
     watch,
+    getValues,
   } = useForm();
+
+  const [isAskAgreeModalOpen, setIsAskAgreeModalOpen] = useState(false);
   const [isAgreeChecked, setIsAgreeChecked] = useState(false);
+
+  const isFilled =
+    getValues('askSelect') !== '' &&
+    getValues('askInput') !== '' &&
+    getValues('askTextarea') !== '';
+
+  const submit = (data: FieldValues) => {
+    if (isAgreeChecked && isFilled) {
+      data.askPhoto.pop();
+      data.askPhoto = data.askPhoto.map(
+        (i: { 0: File; length: number }) => i[0]
+      );
+      props.mutate(data);
+    } else {
+      if (!isFilled) {
+        toast.error('내용을 모두 입력해주세요');
+      } else {
+        toast.error('약관동의를 해주세요');
+      }
+    }
+  };
+
   return (
-    <Form>
+    <Form onSubmit={handleSubmit(submit)}>
+      <AskAgreeModal
+        closeModal={() => setIsAskAgreeModalOpen(false)}
+        isModalOpen={isAskAgreeModalOpen}
+      />
       <FormInner>
         <AskType>
-          <AskSelect
+          <FormSelect
             label="문의 유형"
             placeholder="유형을 선택해주세요."
             value="askSelect"
@@ -34,7 +70,7 @@ export const AskForm = () => {
           />
         </AskType>
         <AskContents>
-          <AskContent
+          <FormContent
             label="문의 내용"
             type="text"
             placeholderInput="제목을 작성해주세요."
@@ -47,22 +83,24 @@ export const AskForm = () => {
           />
         </AskContents>
         <AskImg>
-          <AskPhoto
+          <FormPhoto
             label="첨부 사진"
             placeholder="사진은 최대 3장까지 등록 가능합니다."
             value="askPhoto"
             errors={errors}
+            register={register}
+            watch={watch}
           />
         </AskImg>
         <AskCheck>
-          <AskAgree
+          <FormAgree
             isAgreeChecked={isAgreeChecked}
-            onClickAgreeContent={() => {}}
+            onClickAgreeContent={() => setIsAskAgreeModalOpen(true)}
             onClickCheckBox={() => {
               setIsAgreeChecked((prev) => !prev);
             }}
           />
-          <AskSubmit isAgreeChecked={isAgreeChecked} onClick={() => {}} />
+          <FormSubmit isAgreeChecked={isFilled && isAgreeChecked} />
         </AskCheck>
       </FormInner>
     </Form>

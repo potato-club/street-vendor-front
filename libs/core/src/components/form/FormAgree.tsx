@@ -36,14 +36,14 @@ export const FormAgree = (props: ButtonProps) => {
               <path
                 d="M1.07227 8.97119L5.81827 16.0902"
                 stroke={customColor.beige}
-                stroke-width="2"
-                stroke-linecap="round"
+                strokeWidth="2"
+                strokeLinecap="round"
               />
               <path
                 d="M14.3184 1.99023L5.81836 16.0902"
                 stroke={customColor.beige}
-                stroke-width="2"
-                stroke-linecap="round"
+                strokeWidth="2"
+                strokeLinecap="round"
               />
             </svg>
           )}
