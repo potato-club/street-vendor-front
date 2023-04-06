@@ -1,14 +1,15 @@
 export const settings = {
   url: '',
   api: {
-    baseUrl: 'https://dev.street-vendor.shop',
+    baseUrl: 'https://dev.street-food.shop',
     testUrl: '',
   },
   social: {
     google: {
       client: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
       secret: '',
-      redirect: 'http://localhost:4000/callback/google',
+      redirect:
+        'https://street-vendor-front-customer.vercel.app/callback/google',
     },
   },
 } as const;
