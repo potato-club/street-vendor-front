@@ -32,8 +32,10 @@ export const App = () => {
       ref={webViewRef}
       source={{
         uri: `http://${
-          Platform.OS === 'android' ? '10.0.2.2' : '127.0.0.1'
-        }:4000/home`,
+          Platform.OS === 'android'
+            ? 'street-vendor-front-customer.vercel.app/'
+            : '127.0.0.1:4000/'
+        }`,
       }}
       contentInsetAdjustmentBehavior="automatic"
     />
