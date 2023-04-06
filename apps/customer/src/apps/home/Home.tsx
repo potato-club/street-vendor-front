@@ -21,7 +21,7 @@ export const Home = () => {
         />
       }
     >
-      {/* <MarkerMap /> */}
+      <MarkerMap />
     </AppBarLayout>
   );
 };
