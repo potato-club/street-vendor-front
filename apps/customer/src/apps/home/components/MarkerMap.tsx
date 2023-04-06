@@ -1,6 +1,4 @@
 import { customColor, Typography } from '@street-vendor/core';
-import dynamic from 'next/dynamic';
-import Script from 'next/script';
 import React, { useEffect, useState } from 'react';
 import { animated, useSpring } from 'react-spring';
 import useMeasure from 'react-use-measure';
@@ -14,15 +12,12 @@ import { StorePreview } from '../../../components';
 import { ReloadButton } from './ReloadButton';
 import { ResetButton } from './ResetButton';
 
-const NaverMap = dynamic(
-  () => import('react-naver-maps').then((mod) => mod.NaverMap),
-  { ssr: false }
-) as any;
-
-const Marker = dynamic(
-  () => import('react-naver-maps').then((mod) => mod.Marker),
-  { ssr: false }
-) as any;
+import {
+  Container as MapDiv,
+  Listener,
+  Marker,
+  NaverMap,
+} from 'react-naver-maps';
 
 export type Location = {
   lat: number;
@@ -38,8 +33,6 @@ export type Point = {
 export interface MarkerMapProps {}
 
 export const MarkerMap = () => {
-  const [isLoad, setIsLoad] = useState(false);
-
   // TODO: 초기값 변경해야 함.
   const [myLocation, setMyLocation] = useState<Location>({
     lat: 37.45054589999992,
@@ -156,55 +149,45 @@ export const MarkerMap = () => {
         />
       </animated.div>
       <Container>
-        <Script
-          src={`https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.NEXT_PUBLIC_NAVER_MAP_CLIENT_ID}`}
-          onLoad={() => setIsLoad(true)}
-        />
-        {isLoad ? (
-          <NaverMap
-            style={{
-              width: '100%',
-              height: '100%',
+        <NaverMap
+          mapDataControl={false}
+          center={center}
+          onCenterChanged={(center) => setCenter(center)}
+          defaultZoom={17}
+        >
+          <Listener type="click" listener={() => setSelectStoreId(undefined)} />
+          <Marker
+            position={myLocation}
+            icon={{
+              content: myIcon,
+              size: { width: 34, height: 34 },
+              anchor: { x: 17, y: 17 },
             }}
-            mapDataControl={false}
-            center={center}
-            onCenterChanged={(center) => setCenter(center)}
-            onClick={() => setSelectStoreId(undefined)}
-            defaultZoom={17}
-          >
+          />
+          {stores.map((value) => (
             <Marker
-              position={myLocation}
+              key={value.storeId}
+              position={{
+                lat: value.location.latitude,
+                lng: value.location.longitude,
+              }}
               icon={{
-                content: myIcon,
-                size: { width: 34, height: 34 },
-                anchor: { x: 17, y: 17 },
+                content: markerIcon,
+                size: { width: 46, height: 62 },
+                anchor: { x: 23, y: 62 },
+              }}
+              onClick={() => {
+                setSelectStoreId(value.storeId);
               }}
             />
-            {stores.map((value) => (
-              <Marker
-                key={value.storeId}
-                position={{
-                  lat: value.location.latitude,
-                  lng: value.location.longitude,
-                }}
-                icon={{
-                  content: markerIcon,
-                  size: { width: 46, height: 62 },
-                  anchor: { x: 23, y: 62 },
-                }}
-                onClick={() => {
-                  setSelectStoreId(value.storeId);
-                }}
-              />
-            ))}
-          </NaverMap>
-        ) : undefined}
+          ))}
+        </NaverMap>
       </Container>
     </div>
   );
 };
 
-const Container = styled.div`
+const Container = styled(MapDiv)`
   width: 100%;
   height: 100vh;
   position: fixed;
