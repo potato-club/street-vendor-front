@@ -32,16 +32,16 @@ export const PastAlarmBar = (props: AlarmProps) => {
               <path
                 d="M14.439 2.02194C14.439 2.02194 6.93897 0.841936 8.58597 15.9349"
                 stroke={customColor.gray}
-                stroke-width="2.5"
-                stroke-miterlimit="10"
-                stroke-linecap="round"
+                strokeWidth="2.5"
+                strokeMiterlimit="10"
+                strokeLinecap="round"
               />
               <path
                 d="M14.439 2.02194C14.439 2.02194 21.939 0.841936 20.292 15.9349"
                 stroke={customColor.gray}
-                stroke-width="2.5"
-                stroke-miterlimit="10"
-                stroke-linecap="round"
+                strokeWidth="2.5"
+                strokeMiterlimit="10"
+                strokeLinecap="round"
               />
               <path
                 d="M0.829956 11H27.83V25.5C27.83 29.0804 26.4076 32.5142 23.8759 35.0459C21.3442 37.5777 17.9104 39 14.33 39C10.7495 39 7.31576 37.5777 4.78401 35.0459C2.25227 32.5142 0.829956 29.0804 0.829956 25.5L0.829956 11Z"
@@ -64,27 +64,27 @@ export const PastAlarmBar = (props: AlarmProps) => {
               <path
                 d="M6.32996 8.75C7.5726 8.75 8.57996 7.07107 8.57996 5C8.57996 2.92893 7.5726 1.25 6.32996 1.25C5.08732 1.25 4.07996 2.92893 4.07996 5C4.07996 7.07107 5.08732 8.75 6.32996 8.75Z"
                 stroke={customColor.gray}
-                stroke-width="2.5"
+                strokeWidth="2.5"
               />
               <path
                 d="M10.33 8.75C11.5726 8.75 12.58 7.07107 12.58 5C12.58 2.92893 11.5726 1.25 10.33 1.25C9.08732 1.25 8.07996 2.92893 8.07996 5C8.07996 7.07107 9.08732 8.75 10.33 8.75Z"
                 stroke={customColor.gray}
-                stroke-width="2.5"
+                strokeWidth="2.5"
               />
               <path
                 d="M18.33 8.75C19.5726 8.75 20.58 7.07107 20.58 5C20.58 2.92893 19.5726 1.25 18.33 1.25C17.0873 1.25 16.08 2.92893 16.08 5C16.08 7.07107 17.0873 8.75 18.33 8.75Z"
                 stroke={customColor.gray}
-                stroke-width="2.5"
+                strokeWidth="2.5"
               />
               <path
                 d="M14.33 8.75C15.5726 8.75 16.58 7.07107 16.58 5C16.58 2.92893 15.5726 1.25 14.33 1.25C13.0873 1.25 12.08 2.92893 12.08 5C12.08 7.07107 13.0873 8.75 14.33 8.75Z"
                 stroke={customColor.gray}
-                stroke-width="2.5"
+                strokeWidth="2.5"
               />
               <path
                 d="M22.33 8.75C23.5726 8.75 24.58 7.07107 24.58 5C24.58 2.92893 23.5726 1.25 22.33 1.25C21.0873 1.25 20.08 2.92893 20.08 5C20.08 7.07107 21.0873 8.75 22.33 8.75Z"
                 stroke={customColor.gray}
-                stroke-width="2.5"
+                strokeWidth="2.5"
               />
             </svg>
           )}
@@ -103,9 +103,9 @@ export const PastAlarmBar = (props: AlarmProps) => {
               <path
                 d="M16.088 6.7239C16.088 6.7239 5.48803 6.4359 5.48803 19.4959C5.48803 19.4959 4.733 28.3959 1.849 31.4649C1.8412 31.4736 1.83615 31.4844 1.83441 31.496C1.83267 31.5075 1.83434 31.5194 1.83923 31.53C1.84412 31.5406 1.85196 31.5496 1.86187 31.5558C1.87179 31.562 1.88333 31.5651 1.89502 31.5649H16.086"
                 stroke={customColor.gray}
-                stroke-width="2.5"
-                stroke-miterlimit="10"
-                stroke-linecap="round"
+                strokeWidth="2.5"
+                strokeMiterlimit="10"
+                strokeLinecap="round"
               />
               <path
                 d="M14.984 6.7239C14.984 6.7239 25.584 6.4359 25.584 19.4959C25.584 19.4959 26.339 28.3959 29.223 31.4649C29.2308 31.4736 29.2359 31.4844 29.2376 31.496C29.2394 31.5075 29.2377 31.5194 29.2328 31.53C29.2279 31.5406 29.2201 31.5496 29.2101 31.5558C29.2002 31.562 29.1887 31.5651 29.177 31.5649H14.984"
@@ -114,37 +114,37 @@ export const PastAlarmBar = (props: AlarmProps) => {
               <path
                 d="M14.984 6.7239C14.984 6.7239 25.584 6.4359 25.584 19.4959C25.584 19.4959 26.339 28.3959 29.223 31.4649C29.2308 31.4736 29.2359 31.4844 29.2376 31.496C29.2394 31.5075 29.2377 31.5194 29.2328 31.53C29.2279 31.5406 29.2201 31.5496 29.2101 31.5558C29.2002 31.562 29.1887 31.5651 29.177 31.5649H14.984"
                 stroke={customColor.gray}
-                stroke-width="2.5"
-                stroke-miterlimit="10"
-                stroke-linecap="round"
+                strokeWidth="2.5"
+                strokeMiterlimit="10"
+                strokeLinecap="round"
               />
               <path
                 d="M15.8211 2.01996C15.8211 2.01996 11.343 1.41996 12.346 6.71996"
                 stroke={customColor.gray}
-                stroke-width="2.5"
-                stroke-miterlimit="10"
-                stroke-linecap="round"
+                strokeWidth="2.5"
+                strokeMiterlimit="10"
+                strokeLinecap="round"
               />
               <path
                 d="M15.092 2.01996C15.092 2.01996 19.5711 1.41996 18.5671 6.71996"
                 stroke={customColor.gray}
-                stroke-width="2.5"
-                stroke-miterlimit="10"
-                stroke-linecap="round"
+                strokeWidth="2.5"
+                strokeMiterlimit="10"
+                strokeLinecap="round"
               />
               <path
                 d="M15.8409 36.8439C15.8409 36.8439 10.8979 37.2169 10.8979 31.2849"
                 stroke={customColor.gray}
-                stroke-width="2.5"
-                stroke-miterlimit="10"
-                stroke-linecap="round"
+                strokeWidth="2.5"
+                strokeMiterlimit="10"
+                strokeLinecap="round"
               />
               <path
                 d="M15.7109 36.8439C15.7109 36.8439 20.6539 37.2169 20.6539 31.2849"
                 stroke={customColor.gray}
-                stroke-width="2.5"
-                stroke-miterlimit="10"
-                stroke-linecap="round"
+                strokeWidth="2.5"
+                strokeMiterlimit="10"
+                strokeLinecap="round"
               />
             </svg>
           )}
