@@ -45,6 +45,7 @@ const ToggleMenu = styled.div`
   width: 100%;
   max-width: 400px;
   align-items: center;
+  margin: 0 auto;
 `;
 const ToggleMenuInner = styled.div`
   display: flex;

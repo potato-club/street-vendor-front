@@ -1,8 +1,8 @@
-import { AlarmContainer } from '@street-vendor/core';
 import type { NextPage } from 'next';
+import { Alarm } from '../../apps/alarm/Alarm';
 
 const AlarmPage: NextPage = () => {
-  return <AlarmContainer />;
+  return <Alarm />;
 };
 
 export default AlarmPage;
