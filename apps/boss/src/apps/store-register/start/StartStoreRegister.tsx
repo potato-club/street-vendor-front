@@ -108,7 +108,7 @@ const BackIcon = styled.div`
   display: flex;
   position: absolute;
   top: 24px;
-  left: 7%;
+  left: 22px;
 `;
 const Content = styled.div`
   display: flex;

@@ -159,8 +159,8 @@ export const StoreRegister = () => {
 const Container = styled.section`
   display: flex;
   position: relative;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   overflow-y: auto;
 `;
 const Form = styled.form`
@@ -170,7 +170,7 @@ const Form = styled.form`
   height: 100%;
   max-width: 400px;
   padding-top: 44px;
-  margin: auto;
+  margin: 0 auto;
 `;
 const FormInner = styled.div`
   display: flex;
