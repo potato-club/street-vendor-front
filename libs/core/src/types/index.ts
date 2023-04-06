@@ -1,2 +1,2 @@
-export { ImageUrlType } from './ImageUrl.type';
+export { ImageUrlType } from './imageUrl.type';
 export { MenuType } from './menu.type';
