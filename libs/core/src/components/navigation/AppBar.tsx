@@ -168,6 +168,7 @@ export const AppBar: React.FC<AppBarProps> = (props) => {
                       href={`/search?category=${value}`}
                       replace={router.pathname === '/search'}
                       onClick={() => setIsSearching(false)}
+                      passHref
                     >
                       <CategoryButton>{value}</CategoryButton>
                     </Link>
