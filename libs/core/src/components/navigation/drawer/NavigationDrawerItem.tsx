@@ -21,6 +21,7 @@ export const NavigationDrawerItem: React.FC<NavigationDrawerItemProps> = (
         fill: customColor.orange2,
       }}
       href={props.url}
+      passHref
     >
       <Typography size="16">{props.title}</Typography>
       <svg
