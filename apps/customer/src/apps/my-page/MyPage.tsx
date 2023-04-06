@@ -1,13 +1,23 @@
 import { Typography } from '@street-vendor/core';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import { pathName } from '../../configs/pathName';
 import { useQueryGetMyInfo } from '../../hooks/query/my-page/useQueryGetMyInfo';
+import { useMyProfile } from '../../hooks/useMyProfile';
 import { ProfileImage } from './components/ProfileImage';
 import { ProfileInfo } from './components/ProfileInfo';
 
 export const MyPage = () => {
   const { isLoading, data } = useQueryGetMyInfo();
+  const { changeEmail, changeNickname } = useMyProfile();
+
+  useEffect(() => {
+    if (isLoading) return;
+    changeEmail(data.email);
+    changeNickname(data.nickname);
+  }, [data]);
+
   if (isLoading) {
     return <div>로딩중</div>;
   }
@@ -15,7 +25,7 @@ export const MyPage = () => {
   return (
     <Container>
       <ProfileImage imageUrl={data.profileUrl} />
-      <ProfileInfo email={data.email} nickname={data.nickname} />
+      <ProfileInfo />
       <ButtonWithdrawal />
     </Container>
   );

@@ -10,6 +10,7 @@ interface InputProps {
   type?: React.HTMLInputTypeAttribute;
   register: UseFormRegister<FieldValues>;
   errors: Partial<FieldErrorsImpl>;
+  value?: string;
 }
 
 export const CustomInput = (props: InputProps) => {
@@ -26,6 +27,7 @@ export const CustomInput = (props: InputProps) => {
         type={props.type}
         placeholder={props.placeholder}
         {...props.register(props.name)}
+        defaultValue={props.value}
       />
       {/* 전화번호 정규식 넣으실거면 ↓↓↓
       var tel = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/
