@@ -31,8 +31,10 @@ export const authApi = {
       return response.data;
     },
   },
-  withdrawal: async () => {
-    const response = await sendApi.post('/api/v1/sign-out', {});
+  withdrawal: async (userNo: number) => {
+    const response = await sendApi.post('/api/v1/sign-out', {
+      memberId: userNo,
+    });
     return response.data;
   },
   signUp: async (params: RequestRegister) => {
