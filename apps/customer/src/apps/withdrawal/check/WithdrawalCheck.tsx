@@ -1,4 +1,4 @@
-import { customColor, Typography } from '@street-vendor/core';
+import { AppBarLayout, customColor, Typography } from '@street-vendor/core';
 import { useState } from 'react';
 import styled from 'styled-components';
 import { NoticeText } from './dummy/DummyNoticeText';
@@ -13,54 +13,56 @@ export const WithdrawalCheck = () => {
     setIsCheck((prev) => !prev);
   };
   return (
-    <Container>
-      <NoticeWrapper>
-        <Label>
-          <Typography size="20" letterSpacing="-0.5px">
-            유의사항
-          </Typography>
-        </Label>
-        <NoticeBox>
-          <Typography size="14" letterSpacing="-0.5px" color="darkGray">
-            {NoticeText}
-          </Typography>
-        </NoticeBox>
-        <CheckBox>
-          <CheckButton
-            isCheck={isCheck}
-            type="button"
-            onClick={handleClickCheck}
-          >
-            {isCheck && (
-              <svg
-                width="16"
-                height="18"
-                viewBox="0 0 16 18"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M1.07227 8.97119L5.81827 16.0902"
-                  stroke="#F6F1EC"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                />
-                <path
-                  d="M14.3184 1.99023L5.81836 16.0902"
-                  stroke="#F6F1EC"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                />
-              </svg>
-            )}
-          </CheckButton>
-          <Typography size="16" letterSpacing="-1.6px" underlineColor="black">
-            유의사항을 모두 확인했습니다.
-          </Typography>
-        </CheckBox>
-      </NoticeWrapper>
-      <ButtonWithDrawal isCheck={isCheck} />
-    </Container>
+    <AppBarLayout title="회원탈퇴" home>
+      <Container>
+        <NoticeWrapper>
+          <Label>
+            <Typography size="20" letterSpacing="-0.5px">
+              유의사항
+            </Typography>
+          </Label>
+          <NoticeBox>
+            <Typography size="14" letterSpacing="-0.5px" color="darkGray">
+              {NoticeText}
+            </Typography>
+          </NoticeBox>
+          <CheckBox>
+            <CheckButton
+              isCheck={isCheck}
+              type="button"
+              onClick={handleClickCheck}
+            >
+              {isCheck && (
+                <svg
+                  width="16"
+                  height="18"
+                  viewBox="0 0 16 18"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M1.07227 8.97119L5.81827 16.0902"
+                    stroke="#F6F1EC"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                  <path
+                    d="M14.3184 1.99023L5.81836 16.0902"
+                    stroke="#F6F1EC"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              )}
+            </CheckButton>
+            <Typography size="16" letterSpacing="-1.6px" underlineColor="black">
+              유의사항을 모두 확인했습니다.
+            </Typography>
+          </CheckBox>
+        </NoticeWrapper>
+        <ButtonWithDrawal isCheck={isCheck} />
+      </Container>
+    </AppBarLayout>
   );
 };
 
@@ -98,11 +100,11 @@ const Container = styled.div`
   display: flex;
   position: relative;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   gap: 61px;
-  padding: 0px 17px;
-  padding-top: 55px;
-  height: 100vh;
+  padding: 0 17px;
+  padding-top: 35px;
+  height: 100%;
   max-width: 400px;
   margin: auto;
 `;

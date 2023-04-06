@@ -2,6 +2,7 @@ import { customColor } from 'libs/core/src/constants';
 import Link from 'next/link';
 import React from 'react';
 import { Typography } from '../../Typography';
+import { useRouter } from 'next/router';
 
 export interface NavigationDrawerItemProps {
   title: string;
@@ -11,6 +12,7 @@ export interface NavigationDrawerItemProps {
 export const NavigationDrawerItem: React.FC<NavigationDrawerItemProps> = (
   props
 ) => {
+  const router = useRouter();
   return (
     <Link
       style={{
@@ -21,6 +23,7 @@ export const NavigationDrawerItem: React.FC<NavigationDrawerItemProps> = (
         fill: customColor.orange2,
       }}
       href={props.url}
+      passHref
     >
       <Typography size="16">{props.title}</Typography>
       <svg
