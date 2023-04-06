@@ -1,7 +1,16 @@
+import { customColor, Typography } from '@street-vendor/core';
 import dynamic from 'next/dynamic';
 import Script from 'next/script';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { animated, useSpring } from 'react-spring';
+import useMeasure from 'react-use-measure';
 import styled from 'styled-components';
+import { storeApi } from '../../../apis/controller/store.api';
+import {
+  StoreInfoResponse,
+  StoreResponse,
+} from '../../../apis/controller/store.api.type';
+import { StorePreview } from '../../../components';
 import { ReloadButton } from './ReloadButton';
 import { ResetButton } from './ResetButton';
 
@@ -30,15 +39,65 @@ export interface MarkerMapProps {}
 
 export const MarkerMap = () => {
   const [isLoad, setIsLoad] = useState(false);
+
+  // TODO: 초기값 변경해야 함.
   const [myLocation, setMyLocation] = useState<Location>({
-    lat: 37.359,
-    lng: 127.1045,
+    lat: 37.45054589999992,
+    lng: 126.7198025999998,
   });
   const [center, setCenter] = useState<Location>(myLocation);
+  const [stores, setStores] = useState<StoreResponse[]>([]);
+  const [selectStore, setSelectStore] = useState<StoreInfoResponse>();
+  const [selectStoreId, setSelectStoreId] = useState<number>();
+
+  useEffect(() => {
+    (async () => {
+      setStores(await storeApi.getStores());
+
+      const watchID = navigator.geolocation.watchPosition(
+        (position) => {
+          setMyLocation({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          });
+        },
+        () => {
+          throw '위치 불러오기 오류';
+        },
+        { enableHighAccuracy: true }
+      );
+
+      return () => {
+        navigator.geolocation.clearWatch(watchID);
+      };
+    })();
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      if (!selectStoreId) {
+        return;
+      }
+
+      setSelectStore(await storeApi.getStore(selectStoreId));
+
+      console.log(await storeApi.getStore(selectStoreId));
+    })();
+  }, [selectStoreId]);
+
+  const [ref, bounds] = useMeasure();
+
+  const previewStyles = useSpring({
+    height: bounds.height,
+  });
+
+  const buttonStyles = useSpring({
+    bottom: 20 + bounds.height,
+  });
 
   return (
     <div style={{ height: '100%', position: 'relative' }}>
-      {/* <div
+      <animated.div
         style={{
           position: 'absolute',
           bottom: 0,
@@ -47,29 +106,47 @@ export const MarkerMap = () => {
           display: 'flex',
           zIndex: 900,
           flexDirection: 'column',
+          borderRadius: '20px 20px 0px 0px',
+          overflow: 'hidden',
+          boxShadow: '3px 3px 10px rgba(0, 0, 0, 0.16)',
+          ...previewStyles,
         }}
       >
-        <Typography size="20" fontWeight="500">
-          서윤보경이네 떡볶이집
-        </Typography>
-        <Typography size="16" fontWeight="300">
-          떡볶이+분식
-        </Typography>
-      </div> */}
-      <div
+        <div ref={ref}>
+          {selectStoreId ? (
+            selectStore ? (
+              <StorePreview
+                id={selectStore.storeId}
+                name={selectStore.storeName}
+                category={selectStore.storeCategory}
+                locationDescription={selectStore.locationDescription}
+                salesStatus={selectStore.salesStatus}
+                reviews={selectStore.reviews}
+                distance={1}
+                spoon={selectStore.spoon}
+              />
+            ) : (
+              <Typography size="80" textAlign="center" style={{ height: 260 }}>
+                로딩 중
+              </Typography>
+            )
+          ) : undefined}
+        </div>
+      </animated.div>
+      <animated.div
         style={{
           display: 'flex',
           flexDirection: 'column',
           gap: 12,
           position: 'absolute',
           zIndex: 500,
-          bottom: 20,
           right: 20,
+          ...buttonStyles,
         }}
       >
         <ReloadButton
-          onClick={() => {
-            setCenter(myLocation);
+          onClick={async () => {
+            setStores(await storeApi.getStores());
           }}
         />
         <ResetButton
@@ -77,7 +154,7 @@ export const MarkerMap = () => {
             setCenter(myLocation);
           }}
         />
-      </div>
+      </animated.div>
       <Container>
         <Script
           src={`https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.NEXT_PUBLIC_NAVER_MAP_CLIENT_ID}`}
@@ -92,6 +169,7 @@ export const MarkerMap = () => {
             mapDataControl={false}
             center={center}
             onCenterChanged={(center) => setCenter(center)}
+            onClick={() => setSelectStoreId(undefined)}
             defaultZoom={17}
           >
             <Marker
@@ -102,14 +180,23 @@ export const MarkerMap = () => {
                 anchor: { x: 17, y: 17 },
               }}
             />
-            <Marker
-              position={{ lat: 37.3595704, lng: 127.105399 }}
-              icon={{
-                content: markerIcon,
-                size: { width: 46, height: 62 },
-                anchor: { x: 23, y: 62 },
-              }}
-            />
+            {stores.map((value) => (
+              <Marker
+                key={value.storeId}
+                position={{
+                  lat: value.location.latitude,
+                  lng: value.location.longitude,
+                }}
+                icon={{
+                  content: markerIcon,
+                  size: { width: 46, height: 62 },
+                  anchor: { x: 23, y: 62 },
+                }}
+                onClick={() => {
+                  setSelectStoreId(value.storeId);
+                }}
+              />
+            ))}
           </NaverMap>
         ) : undefined}
       </Container>
