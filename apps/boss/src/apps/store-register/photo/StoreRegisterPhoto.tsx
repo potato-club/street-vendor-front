@@ -1,5 +1,5 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
-import { NextButton, Typography } from '@street-vendor/core';
+import { AppBarLayout, NextButton, Typography } from '@street-vendor/core';
 import { pathName } from 'apps/boss/src/configs/pathName';
 import {
   atomStoreRegisterFile,
@@ -25,52 +25,58 @@ export const StoreRegisterPhoto = () => {
 
   return (
     <Container>
-      <Form>
-        <FormInner>
-          <PhotoBox>
-            <Typography size="16" letterSpacing="-1.5px">
-              사진은 최대 3개 선택 가능합니다
-            </Typography>
-            <PhotoSwiper images={images} />
-            <Buttons>
-              <PhotoButton
-                setInit={() => setImages([])}
-                setImages={(value: string) =>
-                  setImages((prev) => [...prev, value])
-                }
-                setFiles={(values: File[]) => setFiles(values)}
-              />
-              <DeleteButton
-                setInit={() => {
-                  setImages([]);
-                  setFiles(null);
-                }}
-              />
-            </Buttons>
-          </PhotoBox>
-          <Button>
-            <NextButton background="orange4" type="button" onClick={handleNext}>
-              <Typography
-                color="black"
-                fontWeight="bold"
-                size="16"
-                letterSpacing="-1.5px"
-                textAlign="center"
-              >
-                다음으로
+      <AppBarLayout title="가게 사진" titleAlign="center">
+        <Form>
+          <FormInner>
+            <PhotoBox>
+              <Typography size="16" letterSpacing="-1.5px">
+                사진은 최대 3개 선택 가능합니다
               </Typography>
-            </NextButton>
-          </Button>
-        </FormInner>
-      </Form>
+              <PhotoSwiper images={images} />
+              <Buttons>
+                <PhotoButton
+                  setInit={() => setImages([])}
+                  setImages={(value: string) =>
+                    setImages((prev) => [...prev, value])
+                  }
+                  setFiles={(values: File[]) => setFiles(values)}
+                />
+                <DeleteButton
+                  setInit={() => {
+                    setImages([]);
+                    setFiles(null);
+                  }}
+                />
+              </Buttons>
+            </PhotoBox>
+            <Button>
+              <NextButton
+                background="orange4"
+                type="button"
+                onClick={handleNext}
+              >
+                <Typography
+                  color="black"
+                  fontWeight="bold"
+                  size="16"
+                  letterSpacing="-1.5px"
+                  textAlign="center"
+                >
+                  다음으로
+                </Typography>
+              </NextButton>
+            </Button>
+          </FormInner>
+        </Form>
+      </AppBarLayout>
     </Container>
   );
 };
 
 const Container = styled.section`
   display: flex;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   justify-content: center;
   overflow: auto;
   overflow: hidden;
@@ -83,6 +89,7 @@ const Form = styled.form`
   max-width: 400px;
   align-items: center;
   padding-top: 30px;
+  margin: 0 auto;
 `;
 const FormInner = styled.div`
   display: flex;

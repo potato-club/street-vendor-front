@@ -26,6 +26,7 @@ const modalCustomStyles = {
   },
   overlay: {
     background: `${customColor.gray}80`,
+    zIndex: 2000,
   },
 };
 
@@ -255,7 +256,7 @@ const TopButton = styled.div<StypeProps>`
   justify-content: center;
   background: ${(props) => props.isTime && customColor.white};
   opacity: ${(props) => !props.isTime && 0.3};
-  border-radius: 21px; ;
+  border-radius: 21px;
 `;
 const TimeWrapper = styled.div`
   display: flex;

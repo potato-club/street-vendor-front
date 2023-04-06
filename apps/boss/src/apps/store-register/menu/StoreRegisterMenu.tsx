@@ -1,5 +1,5 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
-import { NextButton, Typography } from '@street-vendor/core';
+import { AppBarLayout, NextButton, Typography } from '@street-vendor/core';
 import { pathName } from 'apps/boss/src/configs/pathName';
 import { atomStoreRegisterMenu } from 'apps/boss/src/recoil/atoms/atomStoreRegister';
 import Router from 'next/router';
@@ -37,43 +37,49 @@ export const StoreRegisterMenu = () => {
   };
   return (
     <Container>
-      <Form>
-        <FormInner>
-          <QuestionLabel label="이름과 가격, 용량/개수를 적어주세요">
-            <MenuBox>
-              {menuArray.map((i, id) => (
-                <AddMenu
-                  key={id}
-                  id={id}
-                  handleSetMenuArray={handleSetMenuArray}
-                />
-              ))}
-              <AddButton />
-            </MenuBox>
-          </QuestionLabel>
-          <Button>
-            <NextButton background="orange4" type="button" onClick={handleNext}>
-              <Typography
-                color="black"
-                fontWeight="bold"
-                size="16"
-                letterSpacing="-1.5px"
-                textAlign="center"
+      <AppBarLayout title="메뉴 설정" titleAlign="center">
+        <Form>
+          <FormInner>
+            <QuestionLabel label="이름과 가격, 용량/개수를 적어주세요">
+              <MenuBox>
+                {menuArray.map((i, id) => (
+                  <AddMenu
+                    key={id}
+                    id={id}
+                    handleSetMenuArray={handleSetMenuArray}
+                  />
+                ))}
+                <AddButton />
+              </MenuBox>
+            </QuestionLabel>
+            <Button>
+              <NextButton
+                background="orange4"
+                type="button"
+                onClick={handleNext}
               >
-                다음으로
-              </Typography>
-            </NextButton>
-          </Button>
-        </FormInner>
-      </Form>
+                <Typography
+                  color="black"
+                  fontWeight="bold"
+                  size="16"
+                  letterSpacing="-1.5px"
+                  textAlign="center"
+                >
+                  다음으로
+                </Typography>
+              </NextButton>
+            </Button>
+          </FormInner>
+        </Form>
+      </AppBarLayout>
     </Container>
   );
 };
 
 const Container = styled.section`
   display: flex;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   justify-content: center;
   overflow: auto;
 `;
@@ -85,6 +91,7 @@ const Form = styled.form`
   max-width: 400px;
   align-items: center;
   padding-top: 33px;
+  margin: 0 auto;
 `;
 const FormInner = styled.div`
   display: flex;

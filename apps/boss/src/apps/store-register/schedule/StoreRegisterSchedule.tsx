@@ -1,5 +1,5 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
-import { NextButton, Typography } from '@street-vendor/core';
+import { AppBarLayout, NextButton, Typography } from '@street-vendor/core';
 import { atomStoreRegisterSchedule } from 'apps/boss/src/recoil/atoms/atomStoreRegister';
 import { pathName } from 'apps/boss/src/configs/pathName';
 import Router from 'next/router';
@@ -19,46 +19,52 @@ export const StoreRegisterSchedule = () => {
   };
   return (
     <Container>
-      <StoreRegisterTimePickerModal
-        isOpen={isModalOpen}
-        handleCloseModal={() => setIsModalOpen(false)}
-      />
-      <Form>
-        <FormInner>
-          <QuestionLabel label="영업 시간과 마감 시간을 설정해주세요">
-            <Scheduler>
-              {scheduleValue.map((i, id) => (
-                <DaySchedule
-                  key={i.day}
-                  index={id}
-                  handleOpenModal={() => setIsModalOpen(true)}
-                />
-              ))}
-            </Scheduler>
-          </QuestionLabel>
-          <Button>
-            <NextButton background="orange4" type="button" onClick={handleNext}>
-              <Typography
-                color="black"
-                fontWeight="bold"
-                size="16"
-                letterSpacing="-1.5px"
-                textAlign="center"
+      <AppBarLayout title="시간 설정" titleAlign="center">
+        <StoreRegisterTimePickerModal
+          isOpen={isModalOpen}
+          handleCloseModal={() => setIsModalOpen(false)}
+        />
+        <Form>
+          <FormInner>
+            <QuestionLabel label="영업 시간과 마감 시간을 설정해주세요">
+              <Scheduler>
+                {scheduleValue.map((i, id) => (
+                  <DaySchedule
+                    key={i.day}
+                    index={id}
+                    handleOpenModal={() => setIsModalOpen(true)}
+                  />
+                ))}
+              </Scheduler>
+            </QuestionLabel>
+            <Button>
+              <NextButton
+                background="orange4"
+                type="button"
+                onClick={handleNext}
               >
-                다음으로
-              </Typography>
-            </NextButton>
-          </Button>
-        </FormInner>
-      </Form>
+                <Typography
+                  color="black"
+                  fontWeight="bold"
+                  size="16"
+                  letterSpacing="-1.5px"
+                  textAlign="center"
+                >
+                  다음으로
+                </Typography>
+              </NextButton>
+            </Button>
+          </FormInner>
+        </Form>
+      </AppBarLayout>
     </Container>
   );
 };
 
 const Container = styled.section`
   display: flex;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   justify-content: center;
   overflow: auto;
 `;
@@ -70,6 +76,7 @@ const Form = styled.form`
   max-width: 400px;
   align-items: center;
   padding-top: 33px;
+  margin: 0 auto;
 `;
 const FormInner = styled.div`
   display: flex;
