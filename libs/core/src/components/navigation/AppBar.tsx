@@ -162,16 +162,20 @@ export const AppBar: React.FC<AppBarProps> = (props) => {
                     '기타 후식류',
                     '기타 식사류',
                   ].map((value) => (
-                    <Link
+                    <div
                       key={value}
                       style={{ flexBasis: '40%', flexGrow: 1 }}
-                      href={`/search?category=${value}`}
-                      replace={router.pathname === '/search'}
-                      onClick={() => setIsSearching(false)}
-                      passHref
+                      // href={`/search?category=${value}`}
+
+                      // replace={router.pathname === '/search'}
+                      onClick={() => {
+                        setIsSearching(false);
+                        router.replace(`/search?category=${value}`);
+                      }}
+                      // passHref
                     >
                       <CategoryButton>{value}</CategoryButton>
-                    </Link>
+                    </div>
                   ))}
                 </div>
               </div>
