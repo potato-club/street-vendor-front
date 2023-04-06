@@ -10,6 +10,7 @@ export const settings = {
       secret: '',
       redirect:
         'https://street-vendor-front-customer.vercel.app/callback/google',
+      // 'http://localhost:4000/callback/google',
     },
   },
 } as const;
