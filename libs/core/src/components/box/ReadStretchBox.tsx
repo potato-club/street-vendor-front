@@ -25,7 +25,14 @@ export const ReadStretchBox = (props: BoxProps) => {
         }}
         isFold={isFold}
       >
-        {props.content}
+        <Typography
+          size="12"
+          letterSpacing="-0.5px"
+          textAlign="left"
+          style={{ verticalAlign: 'top', height: '100%' }}
+        >
+          {props.content}
+        </Typography>
         {isFold ? (
           <ArrowIcon>
             <svg
@@ -69,8 +76,6 @@ const Box = styled.button<BoxStyle>`
   width: 100%;
   background: ${customColor.beige};
   border-radius: 12px;
-  letter-spacing: -0.5px;
-  font-size: 12px;
   transition: height 0.3s ease;
   ${(props) =>
     props.isFold
