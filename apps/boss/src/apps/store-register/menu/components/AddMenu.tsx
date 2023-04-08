@@ -11,7 +11,7 @@ interface Props {
     value: {
       image: File;
       name: string;
-      price: number;
+      price: string;
       weight: string;
     }
   ) => void;
@@ -21,7 +21,7 @@ export const AddMenu = ({ id, handleSetMenuArray }: Props) => {
   const [image, setImage] = useState<string>('');
   const [file, setFile] = useState<File>();
   const [menuName, setMenuName] = useState<string>('');
-  const [menuPrice, setMenuPrice] = useState<number>(undefined);
+  const [menuPrice, setMenuPrice] = useState<string>('');
   const [menuWeight, setMenuWeight] = useState<string>('');
   const handleAddImage = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -74,7 +74,8 @@ export const AddMenu = ({ id, handleSetMenuArray }: Props) => {
           type="number"
           placeholder="예) 가격"
           value={menuPrice}
-          onChange={(e) => setMenuPrice(Number(e.target.value))}
+          pattern="[0-9]*"
+          onChange={(e) => setMenuPrice(e.target.value)}
         />
         <Input
           type="text"

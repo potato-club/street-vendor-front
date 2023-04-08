@@ -9,7 +9,7 @@ export interface ScheduleType {
 export interface MenuType {
   image: File | null;
   name: string;
-  price: number;
+  price: string;
   weight: string;
 }
 
@@ -53,7 +53,7 @@ export const atomScheduleModalTime = atom<{
 });
 export const atomStoreRegisterMenu = atom<MenuType[]>({
   key: 'atomStoreRegisterMenu',
-  default: [{ image: null, name: '', price: 0, weight: '' }],
+  default: [{ image: null, name: '', price: '', weight: '' }],
 });
 export const atomStoreRegisterImage = atom<string[]>({
   key: 'atomStoreRegisterImages',

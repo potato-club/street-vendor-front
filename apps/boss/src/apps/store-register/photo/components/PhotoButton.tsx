@@ -1,6 +1,7 @@
 import { customColor, Typography } from '@street-vendor/core';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { ChangeEvent } from 'react';
+import { toast } from 'react-hot-toast';
 import styled from 'styled-components';
 
 interface Props {
@@ -23,6 +24,9 @@ export const PhotoButton = ({ setImages, setInit, setFiles }: Props) => {
             setImages(String(fileReader.result!));
           };
           files.push(i);
+        } else {
+          id === Object.values(e.target.files).length - 1 &&
+            toast.error('사진은 최대 3개 까지 선택 가능합니다');
         }
       });
       setFiles(files);

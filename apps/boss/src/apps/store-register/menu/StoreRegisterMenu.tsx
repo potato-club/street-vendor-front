@@ -13,7 +13,7 @@ import { AddMenu } from './components/AddMenu';
 export interface MenuProps {
   image: File;
   name: string;
-  price: number;
+  price: string;
   weight: string;
 }
 
@@ -27,7 +27,7 @@ export const StoreRegisterMenu = () => {
     if (
       menuArray[0].image !== null &&
       menuArray[0].name !== '' &&
-      menuArray[0].price !== 0 &&
+      menuArray[0].price !== '' &&
       menuArray[0].weight !== ''
     ) {
       Router.push(pathName.STORE_REGISTER.PHOTO);
