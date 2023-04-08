@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Modal from 'react-modal';
 import styled from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -53,13 +53,12 @@ export const StoreRegisterTimePickerModal = ({
     () => Array.from(new Array(60), (_, i) => formatTime(i)),
     []
   );
-  const modalValue = useRecoilValue(atomScheduleModalTime);
+  const [modalValue, setModalValue] = useRecoilState(atomScheduleModalTime);
   const [scheduleValue, setScheduleValue] = useRecoilState(
     atomStoreRegisterSchedule
   );
-  const [atNoon, setAtNoon] = useState<number>(0);
-  const [activeHours, setActiveHours] = useState<number>(1);
-  const [activeMinute, setActiveMinute] = useState<number>(0);
+
+  useEffect(() => {}, [isOpen]);
 
   const handleConfirmButton = () => {
     setScheduleValue(
@@ -69,18 +68,18 @@ export const StoreRegisterTimePickerModal = ({
             ? {
                 day: i.day,
                 isChecked: i.isChecked,
-                open: `${atNoon === 0 ? '오전' : '오후'} ${formatTime(
-                  activeHours
-                )}:${formatTime(activeMinute)}`,
+                open: `${
+                  modalValue.atNoon === 0 ? '오전' : '오후'
+                } ${formatTime(modalValue.h)}:${formatTime(modalValue.m)}`,
                 close: i.close,
               }
             : {
                 day: i.day,
                 isChecked: i.isChecked,
                 open: i.open,
-                close: `${atNoon === 0 ? '오전' : '오후'} ${formatTime(
-                  activeHours
-                )}:${formatTime(activeMinute)}`,
+                close: `${
+                  modalValue.atNoon === 0 ? '오전' : '오후'
+                } ${formatTime(modalValue.h)}:${formatTime(modalValue.m)}`,
               }
           : i
       )
@@ -126,9 +125,11 @@ export const StoreRegisterTimePickerModal = ({
           </TopButtonWrapper>
           <TimeWrapper>
             <StyledSwiper
-              onSlideChange={(e) => setAtNoon(e.realIndex)}
+              onSlideChange={(e) =>
+                setModalValue((prev) => ({ ...prev, atNoon: e.realIndex }))
+              }
               slidesPerView={3}
-              initialSlide={atNoon}
+              initialSlide={modalValue.atNoon}
               centeredSlides
               direction="vertical"
               spaceBetween={30}
@@ -155,9 +156,11 @@ export const StoreRegisterTimePickerModal = ({
               </StyledSwiperSlide>
             </StyledSwiper>
             <StyledSwiper
-              onSlideChange={(e) => setActiveHours(e.realIndex + 1)}
+              onSlideChange={(e) =>
+                setModalValue((prev) => ({ ...prev, h: e.realIndex + 1 }))
+              }
               slidesPerView={3}
-              initialSlide={activeHours - 1}
+              initialSlide={modalValue.h}
               loop
               centeredSlides
               loopedSlides={12}
@@ -184,9 +187,11 @@ export const StoreRegisterTimePickerModal = ({
               </Typography>
             </div>
             <StyledSwiper
-              onSlideChange={(e) => setActiveMinute(e.realIndex)}
+              onSlideChange={(e) =>
+                setModalValue((prev) => ({ ...prev, m: e.realIndex }))
+              }
               slidesPerView={3}
-              initialSlide={activeMinute}
+              initialSlide={modalValue.m}
               loop
               centeredSlides
               loopedSlides={12}

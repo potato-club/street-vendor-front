@@ -41,9 +41,15 @@ export const atomStoreRegisterSchedule = atom<ScheduleType[]>({
     { day: '일', isChecked: true, open: '오전 09:00', close: '오후 10:00' },
   ],
 });
-export const atomScheduleModalTime = atom<{ day: number; time: string }>({
+export const atomScheduleModalTime = atom<{
+  day: number;
+  time: 'open' | 'close';
+  atNoon: number;
+  h: number;
+  m: number;
+}>({
   key: 'atomScheduleTime',
-  default: { day: 0, time: 'open' },
+  default: { day: 0, time: 'open', atNoon: 0, h: 0, m: 0 },
 });
 export const atomStoreRegisterMenu = atom<MenuType[]>({
   key: 'atomStoreRegisterMenu',
