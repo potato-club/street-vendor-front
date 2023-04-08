@@ -1,31 +1,33 @@
 import { customColor } from 'libs/core/src/constants';
-import { Typography } from 'libs/core/src/components';
+import { AppBarLayout, Typography } from 'libs/core/src/components';
 import styled from 'styled-components';
 
 export const DetailNoticeContainer = () => {
   return (
-    <Container>
-      <Header>
-        <Tag>안내</Tag>
-        <Typography size="16" color="black" letterSpacing="-1px">
-          길거리 노점 서비스 일시 중지 안내
-        </Typography>
-      </Header>
-      <Body>
-        <Typography
-          size="20"
-          color="black"
-          letterSpacing="-1px"
-          fontWeight="600"
-        >
-          길거리 노점 서비스 일시 중지 안내
-        </Typography>
-        <ImageBox />
-        <Typography size="16" color="darkGray" letterSpacing="-1px">
-          공지사항 내용
-        </Typography>
-      </Body>
-    </Container>
+    <AppBarLayout title="공지사항" home>
+      <Container>
+        <Header>
+          <Tag>안내</Tag>
+          <Typography size="16" color="black" letterSpacing="-1px">
+            길거리 노점 서비스 일시 중지 안내
+          </Typography>
+        </Header>
+        <Body>
+          <Typography
+            size="20"
+            color="black"
+            letterSpacing="-1px"
+            fontWeight="600"
+          >
+            길거리 노점 서비스 일시 중지 안내
+          </Typography>
+          <ImageBox />
+          <Typography size="16" color="darkGray" letterSpacing="-1px">
+            공지사항 내용
+          </Typography>
+        </Body>
+      </Container>
+    </AppBarLayout>
   );
 };
 
@@ -41,7 +43,6 @@ const Header = styled.div`
   gap: 18px;
   padding: 20px 17px;
   background-color: ${customColor.white};
-  padding-top: 67px;
 `;
 
 const Tag = styled.div`

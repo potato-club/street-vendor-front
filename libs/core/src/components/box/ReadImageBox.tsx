@@ -20,8 +20,8 @@ export const ReadImageBox = (props: BoxProps) => {
         </Typography>
       </Label>
       <Box>
-        {props.images.map((item) => (
-          <ImageBox>
+        {props.images.map((item, id) => (
+          <ImageBox key={id}>
             <Image
               src={`/${item.src}`}
               alt={item.src}

@@ -1,12 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { Typography } from '@street-vendor/core';
 import { useSpring, animated } from 'react-spring';
 
 interface BoxProps {
-  answerLabel: string;
+  answerContent: string;
   isClicked: boolean;
-  children: React.ReactNode;
 }
 
 interface BoxStyle {
@@ -22,7 +20,6 @@ export const AskAnswerBox = (props: BoxProps) => {
           config: { duration: 300 },
         }
       : {
-          from: { maxHeight: '250px' },
           to: { maxHeight: '0px' },
           config: { duration: 300 },
         }
@@ -53,16 +50,17 @@ export const AskAnswerBox = (props: BoxProps) => {
               />
             </svg>
           </Icon>
-          <Typography
-            size="16"
-            letterSpacing="-1.5px"
-            textAlign="left"
-            style={{ wordBreak: 'keep-all' }}
-          >
-            {props.answerLabel}
-          </Typography>
+          <AnswerContent>
+            <Typography
+              size="12"
+              letterSpacing="-1.0px"
+              textAlign="left"
+              style={{ wordBreak: 'keep-all', lineHeight: '20px' }}
+            >
+              {props.answerContent}
+            </Typography>
+          </AnswerContent>
         </AnswerLabel>
-        <AnswerContent>{props.children}</AnswerContent>
       </AnswerInner>
     </Answer>
   );
@@ -91,14 +89,12 @@ const AnswerLabel = styled.div`
   flex-direction: row;
   gap: 0 16px;
   padding: 0 7%;
-  align-items: center;
+  align-items: flex-start;
 `;
 const AnswerContent = styled.div`
   display: flex;
-  flex-direction: row;
-  width: 100%;
   align-items: center;
-  padding: 0 7% 0 calc(7% + 46px);
+  height: 100%;
 `;
 const Icon = styled.div`
   width: 30px;

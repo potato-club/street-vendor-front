@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { FieldValues, UseFormRegister } from 'react-hook-form';
 import { customColor } from '../../constants';
-import { ChangeEvent } from "react";
+import { ChangeEvent } from 'react';
 
 interface ButtonProps {
   register: UseFormRegister<FieldValues>;

@@ -8,9 +8,6 @@ interface ButtonProps {
   onClick?: () => void;
   errors: Partial<FieldErrorsImpl>;
 }
-interface ButtonStyledProps {
-  src: string;
-}
 
 export const AddedPhotoButton = (props: ButtonProps) => {
   return (

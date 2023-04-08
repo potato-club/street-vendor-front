@@ -2,13 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 import { Review } from './components';
 import 'swiper/css';
+import { AppBarLayout } from '../home/Home';
 
 export const ReviewList = () => {
   return (
-    <Container>
-      <Review />
-      <Review />
-    </Container>
+    <AppBarLayout title='리뷰' search home>
+      <Container>
+        <Review />
+        <Review />
+      </Container>
+    </AppBarLayout>
   );
 };
 

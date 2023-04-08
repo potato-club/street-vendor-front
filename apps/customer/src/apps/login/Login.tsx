@@ -1,15 +1,28 @@
 import { Typography } from '@street-vendor/core';
-import { GOOGLE_AUTH_URL } from 'libs/core/src/config/settings';
+import {
+  DEV_GOOGLE_AUTH_URL,
+  GOOGLE_AUTH_URL,
+} from 'libs/core/src/config/settings';
 import styled from 'styled-components';
 import Image from 'next/image';
 import ProfileImageDefault from '../../../public/img/logo/logo_big.png';
 import ButtonGoogleLogin from '../../../public/img/button/google_login_button.png';
 import Router from 'next/router';
+import { useEffect, useState } from 'react';
 
 export const Login = () => {
+  const [isDev, setIsDev] = useState(false);
+
+  useEffect(() => {
+    if (window.location.hostname === 'localhost') {
+      setIsDev(true);
+    }
+  }, []);
+
   const handleClickLoginButton = () => {
-    Router.push(GOOGLE_AUTH_URL);
+    Router.push(isDev ? DEV_GOOGLE_AUTH_URL : GOOGLE_AUTH_URL);
   };
+
   return (
     <Container>
       <Typography
