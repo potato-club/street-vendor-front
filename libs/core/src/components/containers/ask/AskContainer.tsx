@@ -13,7 +13,7 @@ interface Props {
 
 export const AskContainer = (props: Props) => {
   const handleRouter = () => {
-    Router.push(props.pathName);
+    Router.replace(props.pathName);
   };
   return (
     <Wrapper>

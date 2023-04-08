@@ -11,7 +11,7 @@ interface Props {
 
 export const MyAskContainer = (props: Props) => {
   const handleRouter = () => {
-    Router.push(props.pathName);
+    Router.replace(props.pathName);
   };
   return (
     <Wrapper>
