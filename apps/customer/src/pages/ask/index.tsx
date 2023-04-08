@@ -1,3 +1,4 @@
+/* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import type { NextPage } from 'next';
 import { AskGuide } from 'apps/customer/src/apps/ask/AskGuide';
 
