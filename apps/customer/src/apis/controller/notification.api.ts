@@ -1,12 +1,12 @@
 import sendApi from '../sendApi';
-import { RequestFAQ } from './notification.api.type';
+import { FAQType, RequestQuestion } from './notification.api.type';
 
 export const NotificationApi = {
-  loadFAQ: async () => {
-    const response = await sendApi.get(`/api/v1/notification/faq`);
+  loadFAQ: async (type: FAQType) => {
+    const response = await sendApi.get(`/api/v1/notification/faq/${type}`);
     return response.data;
   },
-  registerFAQ: async (data: RequestFAQ) => {
+  registerFAQ: async (data: RequestQuestion) => {
     const response = await sendApi.post('/api/v1/notification/faq', data);
     return response.data;
   },

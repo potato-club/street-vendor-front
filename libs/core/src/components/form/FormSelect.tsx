@@ -17,7 +17,7 @@ interface SelectProps {
   errors: Partial<FieldErrorsImpl>;
 }
 
-export const AskSelect = (props: SelectProps) => {
+export const FormSelect = (props: SelectProps) => {
   return (
     <Wrapper>
       <Label>

@@ -6,8 +6,7 @@ import { AskAnswerBox } from './AskAnswerBox';
 
 interface BoxProps {
   questionLabel: string;
-  answerLabel: string;
-  children: React.ReactNode;
+  answerContent: string;
 }
 
 export const AskQuestionBox = (props: BoxProps) => {
@@ -74,9 +73,7 @@ export const AskQuestionBox = (props: BoxProps) => {
           </QuestionContent>
         </QuestionInner>
       </Question>
-      <AskAnswerBox answerLabel={props.answerLabel} isClicked={isClicked}>
-        {props.children}
-      </AskAnswerBox>
+      <AskAnswerBox answerContent={props.answerContent} isClicked={isClicked} />
     </Wrapper>
   );
 };

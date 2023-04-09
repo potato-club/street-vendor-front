@@ -23,7 +23,6 @@ export const IndexPage = () => {
     } finally {
     }
   };
-
   useEffect(() => {
     checkUser();
   }, []);

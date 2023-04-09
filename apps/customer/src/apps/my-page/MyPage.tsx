@@ -1,4 +1,4 @@
-import { Typography } from '@street-vendor/core';
+import { AppBarLayout, Typography } from '@street-vendor/core';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import styled from 'styled-components';
@@ -11,7 +11,7 @@ import { ProfileInfo } from './components/ProfileInfo';
 export const MyPage = () => {
   const { isLoading, data } = useQueryGetMyInfo();
   const { changeEmail, changeNickname } = useMyProfile();
-
+  console.log('data', data);
   useEffect(() => {
     if (isLoading) return;
     changeEmail(data.email);
@@ -23,11 +23,13 @@ export const MyPage = () => {
   }
 
   return (
-    <Container>
-      <ProfileImage imageUrl={data.profileUrl} />
-      <ProfileInfo />
-      <ButtonWithdrawal />
-    </Container>
+    <AppBarLayout title="마이페이지" home>
+      <Container>
+        <ProfileImage imageUrl={data.profileUrl} />
+        <ProfileInfo />
+        <ButtonWithdrawal />
+      </Container>
+    </AppBarLayout>
   );
 };
 
@@ -47,9 +49,9 @@ const Container = styled.div`
   position: relative;
   flex-direction: column;
   gap: 61px;
-  padding: 0px 17px;
+  padding: 0 17px;
   padding-top: 55px;
-  height: 100vh;
+  height: 100%;
   max-width: 400px;
   margin: auto;
 `;
