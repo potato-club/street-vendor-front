@@ -18,6 +18,7 @@ export const AskQuestionContainer = ({ isLoading, data, pathName }: Props) => {
     Router.push(pathName);
   };
 
+  console.log(data);
   return (
     <Container>
       <AppBarLayout title="자주 하는 질문" search home>
