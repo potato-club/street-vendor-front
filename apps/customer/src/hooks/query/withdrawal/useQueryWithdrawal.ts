@@ -5,12 +5,15 @@ import { sessionService } from 'apps/customer/src/libs/sessionService';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import { pathName } from 'apps/customer/src/configs/pathName';
+import { useQueryGetMyInfo } from '../my-page/useQueryGetMyInfo';
 
 export const useQueryWithdrawal = () => {
   const router = useRouter();
+  const { data } = useQueryGetMyInfo();
 
   const deleteData = useCallback(async () => {
-    const response = await authApi.withdrawal();
+    if (!data) return;
+    const response = await authApi.withdrawal(data.memberId);
     return response;
   }, []);
 

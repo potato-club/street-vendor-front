@@ -32,10 +32,14 @@ export const App = () => {
       ref={webViewRef}
       source={{
         uri: `http://${
-          Platform.OS === 'android' ? '10.0.2.2' : '127.0.0.1'
-        }:4000/home`,
+          Platform.OS === 'android'
+            ? 'street-vendor-front-customer.vercel.app/'
+            : '127.0.0.1:4000/'
+        }`,
       }}
       contentInsetAdjustmentBehavior="automatic"
+      javaScriptEnabled={true}
+      userAgent="Mozilla/5.0 (Linux; Android 10; SM-G981B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.162 Mobile Safari/537.36"
     />
   );
 };

@@ -14,6 +14,7 @@ export type TypographyProps = React.PropsWithChildren<{
     | '28'
     | '24'
     | '20'
+    | '18'
     | '16'
     | '14'
     | '12'
@@ -59,7 +60,7 @@ const TypographyText = styled.div<TypographyProps & typographyDefault>`
   text-align: ${({ textAlign }) => textAlign};
   font-weight: ${({ fontWeight }) => fontWeight};
   letter-spacing: ${({ letterSpacing }) => letterSpacing ?? 'normal'};
-  line-height: ${({ fontHeight }) => fontHeight ? fontHeight : 'normal'};
+  line-height: ${({ fontHeight }) => (fontHeight ? fontHeight : 'normal')};
 
   ${({ fontHidden }) =>
     fontHidden ? 'overflow: hidden;text-overflow: ellipsis;' : ''};
