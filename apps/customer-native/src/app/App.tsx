@@ -1,15 +1,21 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
-import { nativeMessage } from '@street-vendor/core';
 import React, { useEffect, useRef } from 'react';
 import { Alert, BackHandler, Platform } from 'react-native';
 import { WebView, WebViewMessageEvent } from 'react-native-webview';
+
+const NATIVE_MESSAGE = {
+  BACKPRESS: 'BACKPRESS',
+  ISMAIN: 'ISMAIN',
+  UPLOAD: 'UPLOAD',
+} as const;
 
 export const App = () => {
   const webViewRef = useRef(null);
 
   const onAndroidBackPress = () => {
     if (webViewRef.current) {
-      webViewRef.current?.postMessage(`${nativeMessage.BACKPRESS}:GO_BACK`);
+      webViewRef.current?.postMessage(`${NATIVE_MESSAGE.BACKPRESS}:GO_BACK`);
+      webViewRef.current.goBack();
       return true;
     }
 
@@ -34,12 +40,12 @@ export const App = () => {
     const [id, message] = data.split(':');
 
     switch (id) {
-      case nativeMessage.ISMAIN:
+      case NATIVE_MESSAGE.ISMAIN:
         if (message === '2') {
           BackHandler.exitApp();
         }
         break;
-      case nativeMessage.UPLOAD:
+      case NATIVE_MESSAGE.UPLOAD:
         if (message === '1') {
           Alert.alert(
             '안내',
@@ -49,14 +55,14 @@ export const App = () => {
                 text: '확인',
                 onPress: () =>
                   webViewRef.current?.postMessage(
-                    `${nativeMessage.UPLOAD}:GO_BACK`
+                    `${NATIVE_MESSAGE.UPLOAD}:GO_BACK`
                   ),
               },
               {
                 text: '취소',
                 onPress: () =>
                   webViewRef.current?.postMessage(
-                    `${nativeMessage.UPLOAD}:CANCEL`
+                    `${NATIVE_MESSAGE.UPLOAD}:CANCEL`
                   ),
               },
             ]
