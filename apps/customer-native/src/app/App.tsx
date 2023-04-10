@@ -15,7 +15,6 @@ export const App = () => {
   const onAndroidBackPress = () => {
     if (webViewRef.current) {
       webViewRef.current?.postMessage(`${NATIVE_MESSAGE.BACKPRESS}:GO_BACK`);
-      webViewRef.current.goBack();
       return true;
     }
 
