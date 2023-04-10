@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 import { pathName } from '../configs/pathName';
 
 export const useWebview = () => {
+  const router = useRouter();
   const [exitCount, setExitCount] = useState(0);
   const [backCheckCount, setBackCheckCount] = useState(0);
   const { back, pathname, push } = useRouter();
@@ -51,7 +52,7 @@ export const useWebview = () => {
                   ) {
                     setExitCount((cur) => cur + 1);
                   } //뒤로갈시 저장 안되는 페이지 경고
-                  else if (pathName.ASK.INQUIRY.FORM === location.pathname) {
+                  else if (pathName.MY_PAGE === location.pathname) {
                     setBackCheckCount((cur) => cur + 1);
                   } //그외 페이지는 뒤로가기
                   else {
