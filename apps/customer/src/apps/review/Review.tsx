@@ -21,16 +21,26 @@ export const Review = () => {
     control,
     handleSubmit,
   } = useForm<FieldValues>();
+
   const { mutate } = useQueryPostReview();
+
   const [isback, setIsBack] = useState(false);
   const submit = async (data: FieldValues) => {
-    if (data['reviewRating'] === undefined || data['reviewContent'] === '') {
-      data['reviewRating'] === undefined &&
-        toast.error('만족도를 선택해주세요');
-      data['reviewContent'] === '' && toast.error('리뷰내용을 입력해주세요');
+    if (data['rate'] === undefined || data['comment'] === '') {
+      toast.error('내용을 모두 입력해 주세요');
     } else {
-      data.reviewPhoto.pop();
-      mutate({ review: data, storeId: '1' });
+      const formData = new FormData();
+      data.images.pop();
+      for (let i = 0; i < data.images.length; i++) {
+        formData.append('images', data.images[i]);
+      }
+      delete data.images;
+      data.orderId = 1; // orderId 변경하기!
+      formData.append(
+        'request',
+        new Blob([JSON.stringify(data)], { type: 'application/json' })
+      );
+      mutate(formData);
     }
   };
 
@@ -64,7 +74,7 @@ export const Review = () => {
                   맛있으셨나요? 맛있었던만큼 숟가락 갯수를 선택해주세요.
                 </Typography>
                 <SpoonRatingForm
-                  name="reviewRating"
+                  name="rate"
                   control={control}
                   errors={errors}
                 />
@@ -74,7 +84,7 @@ export const Review = () => {
               <FormTextarea
                 label="리뷰하기"
                 placeholder="리뷰 내용을 작성해주세요:)"
-                value="reviewContent"
+                value="comment"
                 register={register}
                 errors={errors}
                 watch={watch}
@@ -83,7 +93,7 @@ export const Review = () => {
             <ReviewPhoto>
               <FormPhoto
                 label="첨부 사진"
-                value="reviewPhoto"
+                value="images"
                 placeholder="사진은 최대 3장까지 등록 가능합니다."
                 errors={errors}
                 watch={watch}

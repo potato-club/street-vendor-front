@@ -10,7 +10,7 @@ interface ButtonProps {
 }
 
 export const AddPhotoButton = ({ value, register, setImages }: ButtonProps) => {
-  const { onChange, ...rest } = register(value);
+  const { onChange, ...rest } = register(value, { required: false });
 
   const addImage = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
