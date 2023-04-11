@@ -46,7 +46,7 @@ export const App = () => {
         );
       };
     }
-  }, []);
+  }, [url]);
 
   const handleWebViewMessage = async (e: WebViewMessageEvent) => {
     const data: any = e.nativeEvent.data;
