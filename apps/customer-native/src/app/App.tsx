@@ -1,7 +1,11 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Alert, BackHandler, Platform } from 'react-native';
-import { WebView, WebViewMessageEvent } from 'react-native-webview';
+import {
+  WebView,
+  WebViewMessageEvent,
+  WebViewNavigation,
+} from 'react-native-webview';
 
 const NATIVE_MESSAGE = {
   BACKPRESS: 'BACKPRESS',
@@ -11,7 +15,7 @@ const NATIVE_MESSAGE = {
 
 export const App = () => {
   const webViewRef = useRef(null);
-
+  const [url, setUrl] = useState('');
   const onAndroidBackPress = () => {
     if (webViewRef.current) {
       webViewRef.current?.postMessage(`${NATIVE_MESSAGE.BACKPRESS}:GO_BACK`);
@@ -72,6 +76,15 @@ export const App = () => {
     }
   };
 
+  const handleNavigationStateChange = (state: WebViewNavigation) => {
+    setUrl(state.url);
+  };
+
+  //Test: url 변경
+  useEffect(() => {
+    Alert.alert('url', url);
+  }, [url]);
+
   return (
     <WebView
       ref={webViewRef}
@@ -86,6 +99,7 @@ export const App = () => {
       contentInsetAdjustmentBehavior="automatic"
       javaScriptEnabled={true}
       userAgent="Mozilla/5.0 (Linux; Android 10; SM-G981B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.162 Mobile Safari/537.36"
+      onNavigationStateChange={handleNavigationStateChange}
     />
   );
 };
