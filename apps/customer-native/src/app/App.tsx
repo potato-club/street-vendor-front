@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Alert, BackHandler, Platform } from 'react-native';
 import {
   WebView,
@@ -16,9 +16,9 @@ const NATIVE_MESSAGE = {
 export const App = () => {
   const webViewRef = useRef(null);
   const [url, setUrl] = useState('');
-  const onAndroidBackPress = () => {
+  const onAndroidBackPress = useCallback(() => {
     if (webViewRef.current) {
-      if (url.includes('street-vendor-front-customer')) {
+      if (url.indexOf('https://street-vendor-front-customer') !== -1) {
         //내부 URL이면 웹에 back명령어 전송
         webViewRef.current.postMessage(`${NATIVE_MESSAGE.BACKPRESS}:GO_BACK`);
       } else {
@@ -30,7 +30,7 @@ export const App = () => {
     }
 
     return false;
-  };
+  }, [url]);
 
   useEffect(() => {
     if (Platform.OS === 'android') {
@@ -42,7 +42,7 @@ export const App = () => {
         );
       };
     }
-  }, []);
+  }, [url]);
 
   const handleWebViewMessage = async (e: WebViewMessageEvent) => {
     const data: any = e.nativeEvent.data;
