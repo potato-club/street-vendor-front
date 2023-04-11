@@ -18,11 +18,7 @@ export const App = () => {
   const [url, setUrl] = useState('');
   const onAndroidBackPress = useCallback(() => {
     if (webViewRef.current) {
-      Alert.alert(
-        'url',
-        `${url}, ${url.indexOf('street-vendor-front-customer')}`
-      );
-      if (url.indexOf('street-vendor-front-customer') !== -1) {
+      if (url.indexOf('https://street-vendor-front-customer') !== -1) {
         //내부 URL이면 웹에 back명령어 전송
         webViewRef.current.postMessage(`${NATIVE_MESSAGE.BACKPRESS}:GO_BACK`);
       } else {
