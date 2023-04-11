@@ -18,7 +18,14 @@ export const App = () => {
   const [url, setUrl] = useState('');
   const onAndroidBackPress = () => {
     if (webViewRef.current) {
-      webViewRef.current?.postMessage(`${NATIVE_MESSAGE.BACKPRESS}:GO_BACK`);
+      if (url.includes('street-vendor-front-customer')) {
+        //내부 URL이면 웹에 back명령어 전송
+        webViewRef.current.postMessage(`${NATIVE_MESSAGE.BACKPRESS}:GO_BACK`);
+      } else {
+        //외부 URL 이면 그냥 back처리
+        webViewRef.current.goBack();
+      }
+
       return true;
     }
 
@@ -79,11 +86,6 @@ export const App = () => {
   const handleNavigationStateChange = (state: WebViewNavigation) => {
     setUrl(state.url);
   };
-
-  //Test: url 변경
-  useEffect(() => {
-    Alert.alert('url', url);
-  }, [url]);
 
   return (
     <WebView
