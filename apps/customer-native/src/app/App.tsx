@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Alert, BackHandler, Platform } from 'react-native';
 import {
   WebView,
@@ -16,7 +16,7 @@ const NATIVE_MESSAGE = {
 export const App = () => {
   const webViewRef = useRef(null);
   const [url, setUrl] = useState('');
-  const onAndroidBackPress = () => {
+  const onAndroidBackPress = useCallback(() => {
     if (webViewRef.current) {
       Alert.alert(
         'url',
@@ -34,7 +34,7 @@ export const App = () => {
     }
 
     return false;
-  };
+  }, [url]);
 
   useEffect(() => {
     if (Platform.OS === 'android') {
