@@ -11,6 +11,7 @@ type Props = {
 };
 export const CardOrderHistory = ({ detailPathName }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <Container>
       <CustomModal
@@ -23,9 +24,13 @@ export const CardOrderHistory = ({ detailPathName }: Props) => {
         onClickButton1={() => setIsModalOpen(false)}
         onClickButton2={() => setIsModalOpen(false)}
       />
-      <InfoContainer>
+      <InfoContainer
+        onClick={() => {
+          Router.push(`${detailPathName}/1`);
+        }}
+      >
         <Headers>
-          <Store onClick={() => Router.push(`${detailPathName}/1`)}>
+          <Store>
             <Typography
               size="20"
               color="black"
@@ -51,12 +56,17 @@ export const CardOrderHistory = ({ detailPathName }: Props) => {
             </svg>
           </Store>
           <RightWrapper>
-            <OrderStatus onClick={() => Router.push(`${detailPathName}/1`)}>
+            <OrderStatus>
               <Typography size="12" color="orange2" letterSpacing="-1.0px">
                 주문상세
               </Typography>
             </OrderStatus>
-            <CloseButton onClick={() => setIsModalOpen(true)}>
+            <CloseButton
+              onClick={(e) => {
+                setIsModalOpen(true);
+                e.stopPropagation();
+              }}
+            >
               <TfiClose />
             </CloseButton>
           </RightWrapper>
@@ -118,6 +128,10 @@ const Container = styled.div`
   align-items: center;
   flex-direction: column;
   gap: 16px;
+  transition: 0.5s;
+  :active {
+    background-color: #e2e2e2;
+  }
 `;
 const InfoContainer = styled.div`
   width: 100%;

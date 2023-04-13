@@ -1,7 +1,11 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Alert, BackHandler, Platform } from 'react-native';
-import { WebView, WebViewMessageEvent } from 'react-native-webview';
+import {
+  WebView,
+  WebViewMessageEvent,
+  WebViewNavigation,
+} from 'react-native-webview';
 
 const NATIVE_MESSAGE = {
   BACKPRESS: 'BACKPRESS',
@@ -11,15 +15,22 @@ const NATIVE_MESSAGE = {
 
 export const App = () => {
   const webViewRef = useRef(null);
-
-  const onAndroidBackPress = () => {
+  const [url, setUrl] = useState('');
+  const onAndroidBackPress = useCallback(() => {
     if (webViewRef.current) {
-      webViewRef.current?.postMessage(`${NATIVE_MESSAGE.BACKPRESS}:GO_BACK`);
+      if (url.indexOf('https://street-vendor-front-customer') !== -1) {
+        //내부 URL이면 웹에 back명령어 전송
+        webViewRef.current.postMessage(`${NATIVE_MESSAGE.BACKPRESS}:GO_BACK`);
+      } else {
+        //외부 URL 이면 그냥 back처리
+        webViewRef.current.goBack();
+      }
+
       return true;
     }
 
     return false;
-  };
+  }, [url]);
 
   useEffect(() => {
     if (Platform.OS === 'android') {
@@ -31,7 +42,7 @@ export const App = () => {
         );
       };
     }
-  }, []);
+  }, [url]);
 
   const handleWebViewMessage = async (e: WebViewMessageEvent) => {
     const data: any = e.nativeEvent.data;
@@ -72,6 +83,10 @@ export const App = () => {
     }
   };
 
+  const handleNavigationStateChange = (state: WebViewNavigation) => {
+    setUrl(state.url);
+  };
+
   return (
     <WebView
       ref={webViewRef}
@@ -86,6 +101,7 @@ export const App = () => {
       contentInsetAdjustmentBehavior="automatic"
       javaScriptEnabled={true}
       userAgent="Mozilla/5.0 (Linux; Android 10; SM-G981B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.162 Mobile Safari/537.36"
+      onNavigationStateChange={handleNavigationStateChange}
     />
   );
 };
