@@ -1,4 +1,4 @@
-import { Typography } from '@street-vendor/core';
+import { Typography, useLoading } from '@street-vendor/core';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import styled from 'styled-components';
@@ -8,9 +8,10 @@ import { sessionService } from '../../libs/sessionService';
 
 export const IndexPage = () => {
   const router = useRouter();
-
+  const { loadingOff, loadingOn } = useLoading();
   const checkUser = async () => {
     try {
+      loadingOn();
       const session = sessionService.getIdSession();
       if (session === '' || session === undefined) {
         router.push(pathName.LOGIN);
@@ -21,6 +22,7 @@ export const IndexPage = () => {
     } catch (e) {
       router.push(pathName.LOGIN);
     } finally {
+      loadingOff();
     }
   };
   useEffect(() => {
