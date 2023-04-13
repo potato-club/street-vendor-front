@@ -35,6 +35,7 @@ export * from './box/ReadStretchBox';
 export * from './containers/notice/detail/DetailNoticeContainer';
 export * from './containers/notice/ListNoticeContainer';
 export * from './containers/alarm/AlarmContainer';
+export * from './containers/loading/LoadingContainer';
 
 export * from './navigation/drawer/NavigationDrawer';
 export * from './navigation/action/HomeAction';
@@ -56,3 +57,4 @@ export { BasicButton } from './button/BasicButton';
 export { MultiPhotoDisplay } from './MultiPhotoDisplay';
 
 export * from './Toast';
+export * from './Loading';

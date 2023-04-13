@@ -1,4 +1,4 @@
-import { Toast } from '@street-vendor/core';
+import { Loading, Toast } from '@street-vendor/core';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { NavermapsProvider } from 'react-naver-maps';
@@ -35,6 +35,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
             <Component {...pageProps} />
           </main>
           <Toast />
+          <Loading />
         </RecoilRoot>
       </QueryClientProvider>
     </NavermapsProvider>
