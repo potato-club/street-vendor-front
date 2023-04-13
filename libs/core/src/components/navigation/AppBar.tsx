@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { animated, useSpring } from 'react-spring';
 import useMeasure from 'react-use-measure';
 import styled from 'styled-components';
@@ -13,6 +13,7 @@ import { NavigationButton } from './NavigationButton';
 import { HomeAction } from './action/HomeAction';
 import { NoticeAction } from './action/NoticeAction';
 import { SearchAction } from './action/SearchAction';
+import { NextAction } from './action/NextAction';
 
 export interface AppBarProps {
   drawer?: React.ReactNode;
@@ -21,6 +22,9 @@ export interface AppBarProps {
   search?: boolean;
   home?: boolean;
   notice?: boolean;
+  next?: string;
+  onBack?: () => boolean;
+  onNext?: () => boolean;
 }
 
 export const AppBar: React.FC<AppBarProps> = (props) => {
@@ -34,6 +38,37 @@ export const AppBar: React.FC<AppBarProps> = (props) => {
   const styles = useSpring({
     height: !isSearching ? 68 : bounds.height + 68,
   });
+
+  const onNavigation = useCallback(
+    (isBack: boolean) => {
+      if (isBack) {
+        if (!(isOpenDrawer || isSearching)) {
+          if (props.onBack ? props.onBack() : true) {
+            router.back();
+          }
+
+          return;
+        }
+
+        setIsOpenDrawer(false);
+        setIsSearching(false);
+        return;
+      }
+
+      setIsOpenDrawer(true);
+    },
+    [isOpenDrawer, isSearching, props, router]
+  );
+
+  const onNext = useCallback(() => {
+    if (!props.next) {
+      return;
+    }
+
+    if (props.onNext ? props.onNext() : true) {
+      router.push(props.next);
+    }
+  }, [props, router]);
 
   return (
     <>
@@ -54,20 +89,7 @@ export const AppBar: React.FC<AppBarProps> = (props) => {
           <Header>
             <NavigationButton
               isBack={!props.drawer || isOpenDrawer || isSearching}
-              onClick={(isBack) => {
-                if (isBack) {
-                  if (!(isOpenDrawer || isSearching)) {
-                    router.back();
-                    return;
-                  }
-
-                  setIsOpenDrawer(false);
-                  setIsSearching(false);
-                  return;
-                }
-
-                setIsOpenDrawer(true);
-              }}
+              onClick={onNavigation}
             />
             {isSearching ? (
               <Typography
@@ -98,8 +120,13 @@ export const AppBar: React.FC<AppBarProps> = (props) => {
                   onClick={() => setIsSearching((value) => !value)}
                 />
               ) : undefined}
-              {props.home && !isSearching ? <HomeAction /> : undefined}
-              {props.notice && !isSearching ? <NoticeAction /> : undefined}
+              {!isSearching && (
+                <>
+                  {props.home && <HomeAction />}
+                  {props.notice && <NoticeAction />}
+                  {props.next && <NextAction onClick={onNext} />}
+                </>
+              )}
             </ActionContainer>
           </Header>
 
@@ -208,7 +235,7 @@ const Header = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 18px 22px;
+  padding: 18px 16px;
 `;
 
 const ActionContainer = styled.div`
