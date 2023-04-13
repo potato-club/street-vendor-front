@@ -148,7 +148,8 @@ export const MarkerMap = () => {
           }}
         />
       </animated.div>
-      <Container>
+      {/* 라이브러리 문제로 스타일을 따로 적용해줘야 함. */}
+      <Container style={{ height: '100vh', position: 'fixed' }}>
         <NaverMap
           mapDataControl={false}
           center={center}
@@ -189,14 +190,7 @@ export const MarkerMap = () => {
 
 const Container = styled(MapDiv)`
   width: 100%;
-  height: 100vh;
-  position: fixed;
   top: 0px;
-
-  // 하단 로고 지우기
-  #react-naver-map > div:nth-child(2) {
-    display: none;
-  }
 `;
 
 const myIcon = `
