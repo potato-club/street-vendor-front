@@ -34,7 +34,7 @@ export const CustomModal = (props: ModalProps) => {
           right: 0,
           bottom: 0,
           backgroundColor: `${customColor.black + '88'}`,
-          zIndex: 10,
+          zIndex: 2000,
           height: '100%',
           width: '100%',
         },

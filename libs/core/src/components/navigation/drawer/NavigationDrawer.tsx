@@ -9,6 +9,9 @@ import { ProfileImage } from './ProfileImage';
 
 export interface NavigationDrawerProps {
   items: { title: string; url: string }[];
+  nickname: string;
+  profileImage: string;
+  onLogout: VoidFunction;
 }
 
 export const NavigationDrawer: React.FC<NavigationDrawerProps> = (props) => {
@@ -32,7 +35,7 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = (props) => {
             padding: '0px 0px 32px 40px',
           }}
         >
-          <ProfileImage />
+          <ProfileImage src={props.profileImage} />
           <div
             style={{
               display: 'flex',
@@ -44,7 +47,7 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = (props) => {
           >
             <div style={{ display: 'flex', alignItems: 'baseline', gap: 2 }}>
               <Typography size="16" fontWeight="bold">
-                손 안의 노점
+                {props.nickname}
               </Typography>
               <Typography size="14" fontWeight="500">
                 님
@@ -71,6 +74,7 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = (props) => {
             flexGrow: 1,
             backgroundColor: customColor.white,
             padding: '16px 0px',
+            overflowY: 'scroll',
           }}
         >
           {props.items.map((value) => (
@@ -88,6 +92,7 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = (props) => {
           maxWidth={120}
           height={40}
           shadow
+          onClick={props.onLogout}
         >
           <Typography size="16" color="white" fontWeight="bold">
             로그아웃
