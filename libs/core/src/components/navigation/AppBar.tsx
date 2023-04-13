@@ -84,7 +84,11 @@ export const AppBar: React.FC<AppBarProps> = (props) => {
         onClick={() => setIsSearching(false)}
       ></div>
       <Container isFull={isSearching}>
-        {isOpenDrawer ? props.drawer : undefined}
+        {isOpenDrawer ? (
+          <DrawerBackground onClick={() => setIsOpenDrawer(false)}>
+            {props.drawer}
+          </DrawerBackground>
+        ) : undefined}
         <Background style={styles}>
           <Header>
             <NavigationButton
@@ -227,6 +231,14 @@ const Background = styled(animated.div)`
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
   background-color: white;
   overflow: hidden;
+`;
+
+const DrawerBackground = styled.div`
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0px;
+  background-color: rgba(170, 170, 170, 0.8);
 `;
 
 const Header = styled.header`
