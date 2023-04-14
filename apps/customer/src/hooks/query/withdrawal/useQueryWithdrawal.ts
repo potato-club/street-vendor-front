@@ -17,7 +17,6 @@ export const useQueryWithdrawal = () => {
     if (!data) return;
     loadingOn();
     const response = await authApi.withdrawal(data.memberId);
-    loadingOff();
     return response;
   }, []);
 
@@ -29,6 +28,9 @@ export const useQueryWithdrawal = () => {
     },
     onError: (e: any) => {
       toast.error(e.data.message);
+    },
+    onSettled: () => {
+      loadingOff();
     },
   });
 };

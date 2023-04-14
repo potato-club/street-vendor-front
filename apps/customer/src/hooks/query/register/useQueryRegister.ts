@@ -30,7 +30,6 @@ export const useQueryRegister = () => {
       changeNickname(nickname);
       changeName(name);
       sessionService.setIdSession(response.data);
-      loadingOff();
       return response;
     },
     [email, profileUrl, changeNickname, changeName]
@@ -43,6 +42,9 @@ export const useQueryRegister = () => {
     },
     onError: (e: any) => {
       toast.error(e.data.message);
+    },
+    onSettled: () => {
+      loadingOff();
     },
   });
 };
