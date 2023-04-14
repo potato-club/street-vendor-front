@@ -104,7 +104,7 @@ const Container = styled.div`
   gap: 61px;
   padding: 0 17px;
   padding-top: 35px;
-  height: 100%;
+  padding-bottom: 35px;
   max-width: 400px;
   margin: auto;
 `;

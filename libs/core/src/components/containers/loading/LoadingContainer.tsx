@@ -21,7 +21,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   opacity: 1;
-  pointer-events: auto;
+  pointer-events: none;
   z-index: 99999;
 `;
 

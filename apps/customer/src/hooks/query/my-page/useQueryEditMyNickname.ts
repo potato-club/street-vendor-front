@@ -10,7 +10,6 @@ export const useQueryEditMyNickname = () => {
   const editData = useCallback(async (nickname: string) => {
     loadingOn();
     await authApi.edit.nickname(nickname);
-    loadingOff();
   }, []);
 
   return useMutation(editData, {
@@ -19,6 +18,9 @@ export const useQueryEditMyNickname = () => {
     },
     onError: (e: any) => {
       toast.error(e.data.message);
+    },
+    onSettled: () => {
+      loadingOff();
     },
   });
 };

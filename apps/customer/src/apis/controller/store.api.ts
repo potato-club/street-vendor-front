@@ -23,4 +23,8 @@ export const storeApi = {
     );
     return response.data;
   },
+  getMyOrderHistoryList: async () => {
+    const response = await sendApi.get('/api/v1/order/my-orders');
+    return response.data.data;
+  },
 };

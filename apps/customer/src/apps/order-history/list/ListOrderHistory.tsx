@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 import { AppBarLayout, CardOrderHistory } from '@street-vendor/core';
 import { pathName } from '../../../configs/pathName';
+import { useQueryGetMyOrderHistoryList } from 'apps/customer/src/hooks/query/order-history/useQueryGetMyOrderHistoryList';
 
 const ORDER_HISTORY_DETAIL_PATH_NAME = pathName.ORDER_HISTORY.DETAIL;
 
 export const ListOrderHistory = () => {
+  const { data } = useQueryGetMyOrderHistoryList();
   return (
     <AppBarLayout title="주문내역" home>
       <Container>
