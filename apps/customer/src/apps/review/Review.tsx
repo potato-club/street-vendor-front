@@ -25,23 +25,23 @@ export const Review = () => {
   const { mutate } = useQueryPostReview();
 
   const [isback, setIsBack] = useState(false);
+
   const submit = async (data: FieldValues) => {
     if (data['rate'] === undefined || data['comment'] === '') {
-      toast.error('내용을 모두 입력해 주세요');
-    } else {
-      const formData = new FormData();
-      data.images.pop();
-      for (let i = 0; i < data.images.length; i++) {
-        formData.append('images', data.images[i]);
-      }
-      delete data.images;
-      data.orderId = 1; // orderId 변경하기!
-      formData.append(
-        'request',
-        new Blob([JSON.stringify(data)], { type: 'application/json' })
-      );
-      mutate(formData);
+      return toast.error('내용을 모두 입력해 주세요');
     }
+    const formData = new FormData();
+    data.images.pop();
+    for (let i = 0; i < data.images.length; i++) {
+      formData.append('images', data.images[i]);
+    }
+    delete data.images;
+    data.orderId = 1; // orderId 변경하기!
+    formData.append(
+      'request',
+      new Blob([JSON.stringify(data)], { type: 'application/json' })
+    );
+    mutate(formData);
   };
 
   return (
