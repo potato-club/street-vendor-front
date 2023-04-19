@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import { customColor } from 'libs/core/src/constants';
-import { BeatLoader } from 'react-spinners';
+import { SyncLoader } from 'react-spinners';
 
 export const LoadingContainer = () => {
   return (
     <Container>
       <BlackFilter>
-        <BeatLoader color={customColor.orange1} />
+        <SyncLoader color={customColor.orange1} />
       </BlackFilter>
     </Container>
   );
@@ -21,7 +21,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   opacity: 1;
-  pointer-events: auto;
+  pointer-events: none;
   z-index: 99999;
 `;
 
