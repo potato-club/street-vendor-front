@@ -9,6 +9,7 @@ import {
 import { AddPhotoButton } from '../button/AddPhotoButton';
 import { AddedPhotoButton } from '../button/AddedPhotoButton';
 import { useState } from 'react';
+import { CustomModal } from '@street-vendor/core';
 
 interface InputProps {
   label: string;
@@ -21,8 +22,30 @@ interface InputProps {
 
 export const FormPhoto = (props: InputProps) => {
   const [images, setImages] = useState<string[]>([]);
+  const [photoIndex, setPhotoIndex] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+  const handleClickAddedPhoto = (id: number) => {
+    setPhotoIndex(id);
+    setIsModalOpen(true);
+  };
+  const handleCancelPhoto = () => {
+    setImages(images.filter((i, id) => id !== photoIndex));
+    setIsModalOpen(false);
+  };
+
   return (
     <Wrapper>
+      <CustomModal
+        isModalOpen={isModalOpen}
+        closeModal={() => setIsModalOpen(false)}
+        content="해당 사진을 삭제 하시겠습니까?"
+        button1Label="예"
+        button2Label="아니오"
+        onClickButton1={handleCancelPhoto}
+        onClickButton2={() => setIsModalOpen(false)}
+        isTwoButtons
+      />
       <Label>
         <Typography size="16" fontWeight="bold" letterSpacing="-0.5px">
           {props.label}
@@ -30,7 +53,12 @@ export const FormPhoto = (props: InputProps) => {
       </Label>
       <Images>
         {images.map((i, id) => (
-          <AddedPhotoButton key={id + 1} src={i} errors={props.errors} />
+          <AddedPhotoButton
+            key={id + 1}
+            src={i}
+            errors={props.errors}
+            onClick={() => handleClickAddedPhoto(id)}
+          />
         ))}
         {images.length < 3 && (
           <AddPhotoButton
