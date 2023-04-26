@@ -52,18 +52,18 @@ const Container = styled.div`
   display: flex;
   position: relative;
   flex-direction: column;
+
+  max-width: 400px;
+  margin: auto;
   gap: 61px;
   padding: 0 17px;
   padding-top: 55px;
-  height: 100%;
-  max-width: 400px;
-  margin: auto;
+
+  padding-bottom: 55px;
 `;
 
 const Button = styled.button`
-  position: absolute;
-  bottom: 22px;
-  right: 19px;
+  margin-left: auto;
   background: transparent;
   border: none;
 `;

@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Alert, BackHandler, Platform } from 'react-native';
+import { Alert, BackHandler, Platform, View, StyleSheet } from 'react-native';
 import {
   WebView,
   WebViewMessageEvent,
@@ -88,22 +88,36 @@ export const App = () => {
   };
 
   return (
-    <WebView
-      ref={webViewRef}
-      source={{
-        uri: `http://${
-          Platform.OS === 'android'
-            ? 'street-vendor-front-customer.vercel.app/'
-            : '127.0.0.1:4000/'
-        }`,
-      }}
-      onMessage={handleWebViewMessage}
-      contentInsetAdjustmentBehavior="automatic"
-      javaScriptEnabled={true}
-      userAgent="Mozilla/5.0 (Linux; Android 10; SM-G981B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.162 Mobile Safari/537.36"
-      onNavigationStateChange={handleNavigationStateChange}
-    />
+    <View style={styles.container}>
+      <WebView
+        ref={webViewRef}
+        style={styles.webContainer}
+        source={{
+          uri: `http://${
+            Platform.OS === 'android'
+              ? 'street-vendor-front-customer.vercel.app/'
+              : '127.0.0.1:4000/'
+          }`,
+        }}
+        onMessage={handleWebViewMessage}
+        contentInsetAdjustmentBehavior="automatic"
+        javaScriptEnabled={true}
+        userAgent="Mozilla/5.0 (Linux; Android 10; SM-G981B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.162 Mobile Safari/537.36"
+        onNavigationStateChange={handleNavigationStateChange}
+      />
+    </View>
   );
 };
 
 export default App;
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#fff',
+    flex: 1,
+  },
+  webContainer: {
+    width: '100%',
+    height: '100%',
+  },
+});
