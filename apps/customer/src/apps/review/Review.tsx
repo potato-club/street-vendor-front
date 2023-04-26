@@ -2,12 +2,10 @@ import {
   FormPhoto,
   FormSubmit,
   FormTextarea,
-  CustomModal,
   SpoonRatingForm,
   Typography,
   AppBarLayout,
 } from '@street-vendor/core';
-import { useState } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import styled from 'styled-components';
@@ -24,19 +22,14 @@ export const Review = () => {
 
   const { mutate } = useQueryPostReview();
 
-  const [isback, setIsBack] = useState(false);
-
   const submit = async (data: FieldValues) => {
-    if (data['rate'] === undefined || data['comment'] === '') {
-      return toast.error('내용을 모두 입력해 주세요');
-    }
     const formData = new FormData();
     data.images.pop();
     for (let i = 0; i < data.images.length; i++) {
-      formData.append('images', data.images[i]);
+      formData.append('images', data.images[i][0]);
     }
     delete data.images;
-    data.orderId = 1; // orderId 변경하기!
+    data.orderId = 2;
     formData.append(
       'request',
       new Blob([JSON.stringify(data)], { type: 'application/json' })
@@ -44,26 +37,14 @@ export const Review = () => {
     mutate(formData);
   };
 
+  const handleErrors = () => {
+    return toast.error('내용을 모두 입력해 주세요');
+  };
+
   return (
     <Container>
       <AppBarLayout title="리뷰 쓰기" search home>
-        {/* <CustomModal
-        isTwoButtons
-        isModalOpen={isback}
-        closeModal={() => {
-          setIsBack(false);
-        }}
-        content="리뷰 작성을 취소하시겠습니까?"
-        button1Label="예"
-        button2Label="아니오"
-        onClickButton1={() => {
-          setIsBack(true);
-        }}
-        onClickButton2={() => {
-          setIsBack(false);
-        }}
-      /> */}
-        <ContainerInner onSubmit={handleSubmit(submit)}>
+        <ContainerInner onSubmit={handleSubmit(submit, handleErrors)}>
           <Content>
             <Spoon>
               <SpoonText>

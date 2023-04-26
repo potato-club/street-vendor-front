@@ -40,7 +40,7 @@ export const FormTextarea = (props: InputProps) => {
       <Textarea
         placeholder={props.placeholder}
         maxLength={300}
-        {...props.register(props.value)}
+        {...props.register(props.value, { required: true })}
         defaultValue={''}
       />
     </Wrapper>
