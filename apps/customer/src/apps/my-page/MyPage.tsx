@@ -1,4 +1,8 @@
-import { AppBarLayout, Typography } from '@street-vendor/core';
+import {
+  AppBarLayout,
+  LoadingContainer,
+  Typography,
+} from '@street-vendor/core';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import styled from 'styled-components';
@@ -11,7 +15,7 @@ import { ProfileInfo } from './components/ProfileInfo';
 export const MyPage = () => {
   const { isLoading, data } = useQueryGetMyInfo();
   const { changeEmail, changeNickname } = useMyProfile();
-  console.log('data', data);
+
   useEffect(() => {
     if (isLoading) return;
     changeEmail(data.email);
@@ -19,7 +23,7 @@ export const MyPage = () => {
   }, [data]);
 
   if (isLoading) {
-    return <div>로딩중</div>;
+    return <LoadingContainer />;
   }
 
   return (
@@ -48,18 +52,18 @@ const Container = styled.div`
   display: flex;
   position: relative;
   flex-direction: column;
+
+  max-width: 400px;
+  margin: auto;
   gap: 61px;
   padding: 0 17px;
   padding-top: 55px;
-  height: 100%;
-  max-width: 400px;
-  margin: auto;
+
+  padding-bottom: 55px;
 `;
 
 const Button = styled.button`
-  position: absolute;
-  bottom: 22px;
-  right: 19px;
+  margin-left: auto;
   background: transparent;
   border: none;
 `;

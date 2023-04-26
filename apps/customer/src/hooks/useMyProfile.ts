@@ -51,6 +51,14 @@ export const useMyProfile = () => {
   const changeProfileUrl = (value: string) => {
     setProfileUrl(value);
   };
+
+  const resetProfile = () => {
+    resetEmail();
+    resetName();
+    resetNickname();
+    resetProfileUrl();
+  };
+
   const resetEmail = () => setEmail('');
   const resetName = () => setName('');
   const resetNickname = () => setNickname('');
@@ -65,6 +73,7 @@ export const useMyProfile = () => {
     changeName,
     changeNickname,
     changeProfileUrl,
+    resetProfile,
     resetEmail,
     resetName,
     resetNickname,
