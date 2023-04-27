@@ -1,19 +1,13 @@
 import styled from 'styled-components';
 import { customColor } from '../../constants';
 import { Typography } from '../Typography';
-import {
-  FieldErrorsImpl,
-  FieldValues,
-  UseFormRegister,
-  UseFormWatch,
-} from 'react-hook-form';
+import { FieldValues, UseFormRegister, UseFormWatch } from 'react-hook-form';
 
 interface InputProps {
   label: string;
   placeholder: string;
   value: string;
   register: UseFormRegister<FieldValues>;
-  errors: Partial<FieldErrorsImpl>;
   watch: UseFormWatch<FieldValues>;
 }
 

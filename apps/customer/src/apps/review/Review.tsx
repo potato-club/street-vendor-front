@@ -12,13 +12,7 @@ import styled from 'styled-components';
 import { useQueryPostReview } from '../../hooks/query/review/useQueryPostReview';
 
 export const Review = () => {
-  const {
-    register,
-    formState: { errors },
-    watch,
-    control,
-    handleSubmit,
-  } = useForm<FieldValues>();
+  const { register, watch, control, handleSubmit } = useForm<FieldValues>();
 
   const { mutate } = useQueryPostReview();
 
@@ -54,11 +48,7 @@ export const Review = () => {
                 <Typography size="12" color="darkGray" letterSpacing="-0.6px">
                   맛있으셨나요? 맛있었던만큼 숟가락 갯수를 선택해주세요.
                 </Typography>
-                <SpoonRatingForm
-                  name="rate"
-                  control={control}
-                  errors={errors}
-                />
+                <SpoonRatingForm name="rate" control={control} />
               </SpoonText>
             </Spoon>
             <ReviewText>
@@ -67,7 +57,6 @@ export const Review = () => {
                 placeholder="리뷰 내용을 작성해주세요:)"
                 value="comment"
                 register={register}
-                errors={errors}
                 watch={watch}
               />
             </ReviewText>
@@ -76,7 +65,6 @@ export const Review = () => {
                 label="첨부 사진"
                 value="images"
                 placeholder="사진은 최대 3장까지 등록 가능합니다."
-                errors={errors}
                 watch={watch}
                 register={register}
               />
