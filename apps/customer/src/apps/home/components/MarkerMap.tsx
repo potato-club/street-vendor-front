@@ -1,5 +1,11 @@
 import { customColor, Typography } from '@street-vendor/core';
 import React, { useEffect, useState } from 'react';
+import {
+  Listener,
+  Container as MapDiv,
+  Marker,
+  NaverMap,
+} from 'react-naver-maps';
 import { animated, useSpring } from 'react-spring';
 import useMeasure from 'react-use-measure';
 import styled from 'styled-components';
@@ -9,15 +15,10 @@ import {
   StoreResponse,
 } from '../../../apis/controller/store.api.type';
 import { StorePreview } from '../../../components';
+import { locationState } from '../../../recoil/atoms/location';
 import { ReloadButton } from './ReloadButton';
 import { ResetButton } from './ResetButton';
-
-import {
-  Container as MapDiv,
-  Listener,
-  Marker,
-  NaverMap,
-} from 'react-naver-maps';
+import { useRecoilState } from 'recoil';
 
 export type Location = {
   lat: number;
@@ -33,12 +34,12 @@ export type Point = {
 export interface MarkerMapProps {}
 
 export const MarkerMap = () => {
-  // TODO: 초기값 변경해야 함.
-  const [myLocation, setMyLocation] = useState<Location>({
-    lat: 37.45054589999992,
-    lng: 126.7198025999998,
+  const [location, setLocation] = useRecoilState(locationState);
+
+  const [center, setCenter] = useState<Location>({
+    lat: location.latitude,
+    lng: location.longitude,
   });
-  const [center, setCenter] = useState<Location>(myLocation);
   const [stores, setStores] = useState<StoreResponse[]>([]);
   const [selectStore, setSelectStore] = useState<StoreInfoResponse>();
   const [selectStoreId, setSelectStoreId] = useState<number>();
@@ -49,10 +50,7 @@ export const MarkerMap = () => {
 
       const watchID = navigator.geolocation.watchPosition(
         (position) => {
-          setMyLocation({
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          });
+          setLocation(position.coords);
         },
         () => {
           throw '위치 불러오기 오류';
@@ -144,7 +142,10 @@ export const MarkerMap = () => {
         />
         <ResetButton
           onClick={() => {
-            setCenter(myLocation);
+            setCenter({
+              lat: location.latitude,
+              lng: location.longitude,
+            });
           }}
         />
       </animated.div>
@@ -158,7 +159,10 @@ export const MarkerMap = () => {
         >
           <Listener type="click" listener={() => setSelectStoreId(undefined)} />
           <Marker
-            position={myLocation}
+            position={{
+              lat: location.latitude,
+              lng: location.longitude,
+            }}
             icon={{
               content: myIcon,
               size: { width: 34, height: 34 },
