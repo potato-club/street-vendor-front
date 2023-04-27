@@ -10,6 +10,7 @@ import styled from 'styled-components';
 import { BottomButton, Line, Title, TotalPrice } from '../common';
 import { PhoneNumberInput } from './components';
 import { TimePickerInput } from './components/TimePickerInput';
+import { usePostOrder } from '../../hooks/query/order/usePostOrder';
 
 export const Order = () => {
   const {
@@ -20,9 +21,11 @@ export const Order = () => {
     handleSubmit
   } = useForm();
 
+  const { mutate } = usePostOrder()
 
   const submit = useCallback((data: FieldValues) => {
-    console.log(data);
+    console.log(data)
+    // mutate(data)
   }, []);
   
   return (

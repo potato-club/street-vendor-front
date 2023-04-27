@@ -27,4 +27,7 @@ export const storeApi = {
     const response = await sendApi.get('/api/v1/order/my-orders');
     return response.data.data;
   },
+
+  getDetail: async (storeId: string) =>
+    sendApi.get(`/api/v1/store/detail/${storeId}`),
 };

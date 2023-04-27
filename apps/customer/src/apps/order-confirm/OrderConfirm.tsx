@@ -8,10 +8,19 @@ import { useQueryGetDetailStore } from '../../hooks/query/detail-store/useQueryG
 import Router from 'next/router';
 import { useRecoilValue } from 'recoil';
 import { totalPrice } from '../../recoil/atoms';
+import toast from 'react-hot-toast';
 
 export const OrderConfirm = () => {
   const { data } = useQueryGetDetailStore();
   const price = useRecoilValue(totalPrice);
+
+  const handleOnClick = () => {
+    if(price <= 0) {
+      toast.error('선택된 메뉴가 없습니다');
+      return
+    }
+    Router.push(`/order/${Router.query.id}`)
+  }
   
   return (
     <AppBarLayout title="주문확인">
@@ -36,10 +45,7 @@ export const OrderConfirm = () => {
           </AddButton>
           <TotalPrice />
         </Wrapper>
-        <BottomButton
-          buttonText="주문하기"
-          onClick={() => Router.push(`/order/${Router.query.id}`)}
-        />
+        <BottomButton buttonText="주문하기" onClick={handleOnClick} />
       </Container>
     </AppBarLayout>
   );
