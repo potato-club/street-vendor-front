@@ -20,9 +20,8 @@ export const AskForm = (props: Props) => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { isValid },
     watch,
-    getValues,
   } = useForm();
 
   const [isAskAgreeModalOpen, setIsAskAgreeModalOpen] = useState(false);
@@ -82,7 +81,6 @@ export const AskForm = (props: Props) => {
             label="첨부 사진"
             placeholder="사진은 최대 3장까지 등록 가능합니다."
             value="askPhoto"
-            errors={errors}
             register={register}
             watch={watch}
           />

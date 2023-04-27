@@ -4,13 +4,31 @@ import { TfiClose } from 'react-icons/tfi';
 import { customColor } from '../../constants';
 import { Typography } from '../Typography';
 import { CustomModal } from '../modal/CustomModal';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
+import { OrderHistoryType, formatDate } from '@street-vendor/core';
 
 type Props = {
   detailPathName: string;
+  orderHistoryInfo: OrderHistoryType;
 };
-export const CardOrderHistory = ({ detailPathName }: Props) => {
+export const CardOrderHistory = ({
+  detailPathName,
+  orderHistoryInfo,
+}: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const orderStatus = useMemo(() => {
+    switch (orderHistoryInfo.orderStatus) {
+      case 'REQUEST ':
+        return '주문 완료';
+      case 'PREPARING':
+        return '음식 준비 중';
+      case 'READY_TO_PICK_UP':
+        return '픽업 준비 완료';
+      default:
+        return '';
+    }
+  }, [orderHistoryInfo]);
 
   return (
     <Container>
@@ -26,7 +44,7 @@ export const CardOrderHistory = ({ detailPathName }: Props) => {
       />
       <InfoContainer
         onClick={() => {
-          Router.push(`${detailPathName}/1`);
+          Router.push(`${detailPathName}/${orderHistoryInfo.orderId}`);
         }}
       >
         <Headers>
@@ -37,7 +55,7 @@ export const CardOrderHistory = ({ detailPathName }: Props) => {
               fontWeight="bold"
               letterSpacing="-1.5px"
             >
-              서윤보경이네 떡볶이
+              {orderHistoryInfo.storeName}
             </Typography>
             <svg
               width="8"
@@ -72,7 +90,7 @@ export const CardOrderHistory = ({ detailPathName }: Props) => {
           </RightWrapper>
         </Headers>
         <Typography size="14" color="gray">
-          2022-09-26 오후 09:18
+          {formatDate(orderHistoryInfo.orderCreateAt)}
         </Typography>
         <Typography
           size="14"
@@ -80,7 +98,7 @@ export const CardOrderHistory = ({ detailPathName }: Props) => {
           fontWeight="bold"
           letterSpacing="-1.0px"
         >
-          주문 완료
+          {orderStatus}
         </Typography>
         <MenuInfo>
           <Row>
@@ -90,7 +108,9 @@ export const CardOrderHistory = ({ detailPathName }: Props) => {
               </Typography>
             </Label>
             <Typography size="12" color="darkGray" letterSpacing="-1.0px">
-              서윤이의 떡볶이 외 3개
+              {orderHistoryInfo.firstMenuName}
+              {orderHistoryInfo.totalMenuCount > 1 &&
+                `외 ${orderHistoryInfo.totalMenuCount - 1}개`}
             </Typography>
           </Row>
           <Row>
@@ -100,7 +120,7 @@ export const CardOrderHistory = ({ detailPathName }: Props) => {
               </Typography>
             </Label>
             <Typography size="12" color="darkGray">
-              23,000원
+              {orderHistoryInfo.totalAmount.toLocaleString()}원
             </Typography>
           </Row>
           <Row>

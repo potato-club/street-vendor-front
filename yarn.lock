@@ -11406,6 +11406,11 @@ react-simple-star-rating@^5.1.7:
   resolved "https://registry.yarnpkg.com/react-simple-star-rating/-/react-simple-star-rating-5.1.7.tgz#5406ade8d0e117a654e979ebd702d89389876c29"
   integrity sha512-NTFkW8W3uwvI82Fv7JW5i7gmDjEZKxJmj+Z9vn+BjYIXT6ILdnU9qnSUP2cWrWN/WAUlue81f9SgM4CQcenltQ==
 
+react-spinners@^0.13.8:
+  version "0.13.8"
+  resolved "https://registry.yarnpkg.com/react-spinners/-/react-spinners-0.13.8.tgz#5262571be0f745d86bbd49a1e6b49f9f9cb19acc"
+  integrity sha512-3e+k56lUkPj0vb5NDXPVFAOkPC//XyhKPJjvcGjyMNPWsBKpplfeyialP74G7H7+It7KzhtET+MvGqbKgAqpZA==
+
 react-spring@^9.6.1:
   version "9.7.1"
   resolved "https://registry.yarnpkg.com/react-spring/-/react-spring-9.7.1.tgz#8acfed700823490a4d9d4cf131c5fea12d1aaa93"
