@@ -27,4 +27,8 @@ export const storeApi = {
     const response = await sendApi.get('/api/v1/order/my-orders');
     return response.data.data;
   },
+  getMyOrderHistoryDetail: async (orderId: number) => {
+    const response = await sendApi.get(`/api/v1/order/${orderId}`);
+    return response.data.data;
+  },
 };
