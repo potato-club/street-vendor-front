@@ -41,13 +41,14 @@ export const StoreRegister = () => {
     accountValue.number
   );
 
-  const isFilled =
-    categoryValue !== '' &&
-    storeName !== '' &&
-    storeLocation !== '' &&
-    storeDescription !== '' &&
-    accountValue.bank !== '' &&
-    accountNumber !== '';
+  const isFilled = [
+    categoryValue,
+    storeName,
+    storeLocation,
+    storeDescription,
+    accountValue.bank,
+    accountNumber,
+  ].every((value) => value !== '');
 
   const handleNext = async () => {
     await setExplainValue({

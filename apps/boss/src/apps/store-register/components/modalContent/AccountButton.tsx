@@ -24,14 +24,16 @@ export const AccountButton = ({ name, src }: Props) => {
     >
       <ButtonBody>
         <svg
-          width="160"
+          width="120"
           height="42"
-          viewBox="0 0 160 42"
+          viewBox="0 0 122 42"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            d="M145.79 41.9999H18.3921C15.9327 42.0054 13.4977 41.444 11.2328 40.3495C9.04746 39.2955 7.06206 37.7672 5.38683 35.8493C3.70711 33.9365 2.36856 31.6696 1.44548 29.1744C0.486859 26.5884 -0.0047479 23.8081 3.45608e-05 21C-0.00472921 18.1919 0.486877 15.4116 1.44548 12.8256C2.36856 10.3303 3.70711 8.06345 5.38683 6.15069C7.06208 4.23282 9.04747 2.70448 11.2328 1.65048C13.4977 0.555973 15.9327 -0.00537905 18.3921 3.8847e-05H145.79C148.508 -0.0041293 151.193 0.681611 153.651 2.00765C156.108 3.33369 158.277 5.26688 160 7.66735C156.446 11.8012 154.568 16.534 154.568 21.3562C154.568 26.0439 156.349 30.6623 159.719 34.713C158.02 36.956 155.927 38.7673 153.577 40.0298C151.14 41.3347 148.481 42.0075 145.79 41.9999Z"
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M0 21C0 9.5918 8.01392 0.308289 18 0.00750732V0H18.5H108V0.00750732C108.166 0.00250244 108.333 0 108.5 0C113.77 0 118.526 2.50159 121.895 6.51569C117.821 9.07312 115 14.5974 115 21C115 27.4026 117.821 32.9269 121.895 35.4843C118.526 39.4984 113.77 42 108.5 42C108.333 42 108.166 41.9975 108 41.9925V42H18.5H18V41.9925C8.01392 41.6917 0 32.4082 0 21Z"
             fill={color}
           />
         </svg>
@@ -43,7 +45,7 @@ export const AccountButton = ({ name, src }: Props) => {
           width={21}
           height={21}
         />
-        <Typography size="12" letterSpacing="-1.5px">
+        <Typography size="12" letterSpacing="-0.5px">
           {name}
         </Typography>
       </ButtonContent>
@@ -55,7 +57,7 @@ const Button = styled.button`
   display: flex;
   position: relative;
   min-height: 54px;
-  min-width: 160px;
+  min-width: 120px;
   width: 100%;
 `;
 const ButtonBody = styled.div`
@@ -69,12 +71,10 @@ const ButtonBody = styled.div`
 const ButtonContent = styled.div`
   display: flex;
   flex-direction: row;
-  width: 160px;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(calc(-50% + 36px), -50%);
+  transform: translate(calc(-50% - 6px), -50%);
   align-items: center;
-  justify-content: flex-start;
-  gap: 0 20px;
+  gap: 20%;
 `;
