@@ -16,7 +16,7 @@ interface Props {
   mutate: UseMutateFunction<any, unknown, FieldValues, unknown>;
 }
 
-export const AskForm = (props: Props) => {
+export const AskForm = ({ mutate }: Props) => {
   const {
     register,
     handleSubmit,
@@ -27,17 +27,22 @@ export const AskForm = (props: Props) => {
   const [isAskAgreeModalOpen, setIsAskAgreeModalOpen] = useState(false);
   const [isAgreeChecked, setIsAgreeChecked] = useState(false);
 
-  const isFilled = isValid;
-
   const submit = (data: FieldValues) => {
-    if (isAgreeChecked && isFilled) {
-      data.askPhoto.pop();
-      data.askPhoto = data.askPhoto.map(
-        (i: { 0: File; length: number }) => i[0]
+    if (isAgreeChecked && isValid) {
+      const formData = new FormData();
+      data.images.pop();
+      for (let i = 0; i < data.images.length; i++) {
+        formData.append('images', data.images[i][0]);
+      }
+      delete data.images;
+      data.memeberId = 2;
+      formData.append(
+        'request',
+        new Blob([JSON.stringify(data)], { type: 'application/json' })
       );
-      props.mutate(data);
+      mutate(formData);
     } else {
-      if (!isFilled) {
+      if (!isValid) {
         toast.error('내용을 모두 입력해주세요');
       } else {
         toast.error('약관동의를 해주세요');
@@ -56,10 +61,12 @@ export const AskForm = (props: Props) => {
           <FormSelect
             label="문의 유형"
             placeholder="유형을 선택해주세요."
-            value="askSelect"
+            value="type"
             options={[
-              { name: '조금주', value: 'human' },
-              { name: '조흥', value: 'dog' },
+              { name: '주문', value: 'ORDER' },
+              { name: '리뷰', value: 'REVIEW' },
+              { name: '계정', value: 'ACCOUNT' },
+              { name: '기타', value: 'ETC' },
             ]}
             register={register}
           />
@@ -69,9 +76,9 @@ export const AskForm = (props: Props) => {
             label="문의 내용"
             type="text"
             placeholderInput="제목을 작성해주세요."
-            valueInput="askInput"
+            valueInput="title"
             placeholderText={`문의 내용을 작성해주세요.\n최선을 다해 답변해드리겠습니다!:)`}
-            valueText="askTextarea"
+            valueText="content"
             register={register}
             watch={watch}
           />
@@ -80,7 +87,7 @@ export const AskForm = (props: Props) => {
           <FormPhoto
             label="첨부 사진"
             placeholder="사진은 최대 3장까지 등록 가능합니다."
-            value="askPhoto"
+            value="images"
             register={register}
             watch={watch}
           />
@@ -93,7 +100,7 @@ export const AskForm = (props: Props) => {
               setIsAgreeChecked((prev) => !prev);
             }}
           />
-          <FormSubmit isAgreeChecked={isFilled && isAgreeChecked} />
+          <FormSubmit isAgreeChecked={isValid && isAgreeChecked} />
         </AskCheck>
       </FormInner>
     </Form>
