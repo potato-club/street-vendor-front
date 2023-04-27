@@ -20,7 +20,7 @@ export const AskForm = (props: Props) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
     watch,
     getValues,
   } = useForm();
@@ -28,10 +28,7 @@ export const AskForm = (props: Props) => {
   const [isAskAgreeModalOpen, setIsAskAgreeModalOpen] = useState(false);
   const [isAgreeChecked, setIsAgreeChecked] = useState(false);
 
-  const isFilled =
-    getValues('askSelect') !== '' &&
-    getValues('askInput') !== '' &&
-    getValues('askTextarea') !== '';
+  const isFilled = isValid;
 
   const submit = (data: FieldValues) => {
     if (isAgreeChecked && isFilled) {
@@ -66,7 +63,6 @@ export const AskForm = (props: Props) => {
               { name: '조흥', value: 'dog' },
             ]}
             register={register}
-            errors={errors}
           />
         </AskType>
         <AskContents>
@@ -78,7 +74,6 @@ export const AskForm = (props: Props) => {
             placeholderText={`문의 내용을 작성해주세요.\n최선을 다해 답변해드리겠습니다!:)`}
             valueText="askTextarea"
             register={register}
-            errors={errors}
             watch={watch}
           />
         </AskContents>
