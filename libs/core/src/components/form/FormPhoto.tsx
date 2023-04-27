@@ -1,11 +1,6 @@
 import styled from 'styled-components';
 import { Typography } from '../Typography';
-import {
-  FieldErrorsImpl,
-  FieldValues,
-  UseFormRegister,
-  UseFormWatch,
-} from 'react-hook-form';
+import { FieldValues, UseFormRegister, UseFormWatch } from 'react-hook-form';
 import { AddPhotoButton } from '../button/AddPhotoButton';
 import { AddedPhotoButton } from '../button/AddedPhotoButton';
 import { useState } from 'react';
@@ -16,7 +11,6 @@ interface InputProps {
   value: string;
   register: UseFormRegister<FieldValues>;
   watch: UseFormWatch<FieldValues>;
-  errors: Partial<FieldErrorsImpl>;
 }
 
 export const FormPhoto = (props: InputProps) => {
@@ -30,7 +24,7 @@ export const FormPhoto = (props: InputProps) => {
       </Label>
       <Images>
         {images.map((i, id) => (
-          <AddedPhotoButton key={id + 1} src={i} errors={props.errors} />
+          <AddedPhotoButton key={id + 1} src={i} />
         ))}
         {images.length < 3 && (
           <AddPhotoButton
@@ -43,7 +37,6 @@ export const FormPhoto = (props: InputProps) => {
           />
         )}
       </Images>
-
       <Typography size="12" color="darkGray" letterSpacing="-0.5px">
         {props.placeholder}
       </Typography>

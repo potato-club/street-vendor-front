@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { useQueryEditMyNickname } from '../../../hooks/query/my-page/useQueryEditMyNickname';
+import { toast } from 'react-hot-toast';
 
 export const ProfileInfo = () => {
   const [editMode, setEditMode] = useState(false);
@@ -34,6 +35,10 @@ export const ProfileInfo = () => {
       onSubmit={handleSubmit((data) => {
         if (data.nickname === nickname) {
           handleEditMode();
+          return;
+        }
+        if (data.nickname === '') {
+          toast.error('닉네임을 입력해주세요');
           return;
         }
         mutate(data.nickname, {

@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import { pathName } from '../../../configs/pathName';
 import { toast } from 'react-hot-toast';
 import { sessionService } from 'apps/customer/src/libs/sessionService';
+import { useLoading } from '@street-vendor/core';
 
 type Props = {
   name: string;
@@ -14,9 +15,11 @@ type Props = {
 export const useQueryRegister = () => {
   const router = useRouter();
   const { profileUrl, email, changeNickname, changeName } = useMyProfile();
+  const { loadingOff, loadingOn } = useLoading();
 
   const register = useCallback(
     async ({ name, nickname }: Props) => {
+      loadingOn();
       const params = {
         email,
         name,
@@ -39,6 +42,9 @@ export const useQueryRegister = () => {
     },
     onError: (e: any) => {
       toast.error(e.data.message);
+    },
+    onSettled: () => {
+      loadingOff();
     },
   });
 };
