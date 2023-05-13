@@ -1,7 +1,8 @@
+import { QuestionType } from './question.api.type';
 import sendApi from '../sendApi';
 
 export const questionApi = {
-  registerQuestion: async (data: FormData) => {
+  registerQuestion: async (data: QuestionType) => {
     const response = await sendApi.post('/api/v1/question', data);
     return response.data;
   },

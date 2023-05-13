@@ -38,12 +38,6 @@ export const AskForm = ({ mutate }: Props) => {
       }
       delete data.images;
       mutate({ images: formDataImages, request: data });
-      // delete data.images;
-      // formData.append(
-      //   'request',
-      //   new Blob([JSON.stringify(data)], { type: 'application/json' })
-      // );
-      // mutateQuestion(formData);
     } else {
       if (!isValid) {
         toast.error('내용을 모두 입력해주세요');
