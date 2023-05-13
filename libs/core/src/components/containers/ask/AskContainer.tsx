@@ -11,9 +11,9 @@ interface Props {
   pathName: string;
 }
 
-export const AskContainer = (props: Props) => {
+export const AskContainer = ({ mutate, pathName }: Props) => {
   const handleRouter = () => {
-    Router.replace(props.pathName);
+    Router.replace(pathName);
   };
   return (
     <Wrapper>
@@ -29,7 +29,7 @@ export const AskContainer = (props: Props) => {
               />
             </TopBar>
           </ContainerInner>
-          <AskForm mutate={props.mutate} />
+          <AskForm mutate={mutate} />
         </Container>
       </AppBarLayout>
     </Wrapper>

@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 import { Typography } from '../Typography';
-import { FieldValues, UseFormRegister, UseFormWatch } from 'react-hook-form';
+import {
+  FieldValues,
+  UseFormGetValues,
+  UseFormRegister,
+  UseFormSetValue,
+  UseFormWatch,
+} from 'react-hook-form';
 import { AddPhotoButton } from '../button/AddPhotoButton';
 import { AddedPhotoButton } from '../button/AddedPhotoButton';
 import { useState } from 'react';
@@ -12,6 +18,8 @@ interface InputProps {
   value: string;
   register: UseFormRegister<FieldValues>;
   watch: UseFormWatch<FieldValues>;
+  setValue: UseFormSetValue<FieldValues>;
+  getValues: UseFormGetValues<FieldValues>;
 }
 
 export const FormPhoto = (props: InputProps) => {
@@ -26,6 +34,12 @@ export const FormPhoto = (props: InputProps) => {
   const handleCancelPhoto = () => {
     setImages(images.filter((i, id) => id !== photoIndex));
     setIsModalOpen(false);
+    props.setValue(
+      props.value,
+      props
+        .getValues(props.value)
+        .filter((i: FileList, id: number) => id !== photoIndex)
+    );
   };
 
   return (

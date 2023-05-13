@@ -22,6 +22,8 @@ export const AskForm = ({ mutate }: Props) => {
     handleSubmit,
     formState: { isValid },
     watch,
+    setValue,
+    getValues,
   } = useForm();
 
   const [isAskAgreeModalOpen, setIsAskAgreeModalOpen] = useState(false);
@@ -29,18 +31,19 @@ export const AskForm = ({ mutate }: Props) => {
 
   const submit = (data: FieldValues) => {
     if (isAgreeChecked && isValid) {
-      const formData = new FormData();
-      data.images.pop();
+      data.images[data.images.length - 1].length === 0 && data.images.pop();
+      const formDataImages = new FormData();
       for (let i = 0; i < data.images.length; i++) {
-        formData.append('images', data.images[i][0]);
+        formDataImages.append('imageFiles', data.images[i][0]);
       }
       delete data.images;
-      data.memeberId = 2;
-      formData.append(
-        'request',
-        new Blob([JSON.stringify(data)], { type: 'application/json' })
-      );
-      mutate(formData);
+      mutate({ images: formDataImages, request: data });
+      // delete data.images;
+      // formData.append(
+      //   'request',
+      //   new Blob([JSON.stringify(data)], { type: 'application/json' })
+      // );
+      // mutateQuestion(formData);
     } else {
       if (!isValid) {
         toast.error('내용을 모두 입력해주세요');
@@ -90,6 +93,8 @@ export const AskForm = ({ mutate }: Props) => {
             value="images"
             register={register}
             watch={watch}
+            setValue={setValue}
+            getValues={getValues}
           />
         </AskImg>
         <AskCheck>

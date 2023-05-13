@@ -1,6 +1,6 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { AskContainer } from '@street-vendor/core';
-import { useQueryPostQuestion } from 'apps/customer/src/hooks/query/ask/useQueryPostQuestion';
+import { useQueryPostQuestion } from 'apps/customer/src/hooks/query/ask/useQueryPostImages';
 import { pathName } from '../../../configs/pathName';
 
 export const AskMain = () => {
