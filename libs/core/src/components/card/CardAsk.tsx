@@ -1,15 +1,31 @@
+import Router from 'next/router';
 import styled from 'styled-components';
 import { customColor } from '../../constants';
+import { formatDate } from '../../utils';
 import { Typography } from '../Typography';
 
 interface Props {
-  onClick: () => void;
+  detailPathName: string;
+  data: {
+    createdAt: string;
+    questionId: number;
+    status: string;
+    title: string;
+    type: string;
+  };
 }
 
-export const CardAsk = (props: Props) => {
+export const CardAsk = ({ detailPathName, data }: Props) => {
   return (
     <Container>
-      <ContainerInner onClick={props.onClick}>
+      <ContainerInner
+        onClick={() =>
+          Router.push({
+            pathname: detailPathName,
+            query: String(data.questionId),
+          })
+        }
+      >
         <Title>
           <State>
             <Typography
@@ -18,7 +34,7 @@ export const CardAsk = (props: Props) => {
               color="orange2"
               letterSpacing="-1.0px"
             >
-              답변 대기
+              {data.status}
             </Typography>
           </State>
           <Type>
@@ -28,18 +44,19 @@ export const CardAsk = (props: Props) => {
               color="gray"
               letterSpacing="-1.0px"
             >
-              결제/환불
+              {data.type}
             </Typography>
           </Type>
         </Title>
         <Body>
           <Typography size="12" letterSpacing="-1.0px">
-            환불이 안돼요ㅜㅜㅜ
+            {data.title}
+            {data.questionId}
           </Typography>
         </Body>
         <Date>
           <Typography size="12" letterSpacing="-0.5px">
-            2022년 12월 1일
+            {formatDate(data.createdAt)}
           </Typography>
         </Date>
         <ArrowIcon>
