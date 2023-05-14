@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { Typography } from '../../Typography';
 import { AskGoInquiry } from './askQuestion/AskGoInquiry';
 import { AskQuestionBox } from './askQuestion/AskQuestionBox';
-import { AppBarLayout } from '@street-vendor/core';
+import { AppBarLayout, LoadingContainer } from '@street-vendor/core';
 
 interface Props {
   isLoading: boolean;
@@ -17,15 +17,13 @@ export const AskQuestionContainer = ({ isLoading, data, pathName }: Props) => {
   const handleRouter = () => {
     Router.push(pathName);
   };
-
-  console.log(data);
   return (
     <Container>
       <AppBarLayout title="자주 하는 질문" search home>
         <AskGoInquiry handleRouter={handleRouter} />
         <AskQuestionList>
           {isLoading ? (
-            <></>
+            <LoadingContainer />
           ) : (
             <>
               {data.map((i, id) => (

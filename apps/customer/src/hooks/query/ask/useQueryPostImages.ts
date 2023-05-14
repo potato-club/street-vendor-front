@@ -36,7 +36,7 @@ export const useQueryPostImages = () => {
 
   return useMutation(register, {
     onSuccess: async (e) => {
-      await mutate({
+      mutate({
         ...requestValue,
         questionsImages: e.data,
       });

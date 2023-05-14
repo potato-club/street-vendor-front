@@ -6,8 +6,15 @@ import { useMutation } from 'react-query';
 import { questionApi } from 'apps/customer/src/apis/controller/question.api';
 import Router from 'next/router';
 
+interface QuestionType {
+  content: string;
+  title: string;
+  type: 'ETC' | 'ORDER' | 'REVIEW' | 'ACCOUNT';
+  questionsImages: { imageUrl: string }[];
+}
+
 export const useQueryPostQuestion = () => {
-  const register = useCallback(async (question: any) => {
+  const register = useCallback(async (question: QuestionType) => {
     const response = await questionApi.registerQuestion(question);
     return response;
   }, []);
