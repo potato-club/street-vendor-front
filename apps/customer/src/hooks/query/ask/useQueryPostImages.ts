@@ -1,3 +1,4 @@
+import { useQueryPostQuestion } from './useQueryPostQuestion';
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { useCallback } from 'react';
@@ -16,13 +17,14 @@ interface QuestionType {
   questionsImages: { imageUrl: string }[];
 }
 
-export const useQueryPostQuestion = () => {
+export const useQueryPostImages = () => {
   let requestValue: QuestionType = {
     content: '',
     title: '',
     type: 'ETC',
     questionsImages: [{ imageUrl: '' }],
   };
+  const { mutate } = useQueryPostQuestion();
   const register = useCallback(
     async (data: { images: FormData; request: RequestType }) => {
       requestValue = { ...data.request, questionsImages: [{ imageUrl: '' }] };
@@ -34,7 +36,7 @@ export const useQueryPostQuestion = () => {
 
   return useMutation(register, {
     onSuccess: async (e) => {
-      await questionApi.registerQuestion({
+      await mutate({
         ...requestValue,
         questionsImages: e.data,
       });
