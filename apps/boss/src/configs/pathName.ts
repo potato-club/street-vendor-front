@@ -9,4 +9,8 @@ export const pathName = {
     PHOTO: '/store-register/photo',
     FINAL: '/store-register/final',
   },
+  NOTICE: {
+    LIST: '/notice',
+    DETAIL: '/notice/detail',
+  },
 };
