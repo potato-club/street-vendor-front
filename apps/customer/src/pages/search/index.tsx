@@ -9,7 +9,7 @@ export const SearchPage: NextPage = () => {
   return (
     <Search
       category={
-        Array.isArray(router.query.category) ? '' : router.query.category
+        Array.isArray(router.query.category) ? '' : router.query.category ?? ''
       }
     />
   );
