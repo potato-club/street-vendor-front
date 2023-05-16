@@ -13,4 +13,8 @@ export const pathName = {
     LIST: '/notice',
     DETAIL: '/notice/detail',
   },
+  WITHDRAWAL: {
+    CHECK: '/withdrawal/check',
+    OUTRO: '/withdrawal/outro',
+  },
 };
