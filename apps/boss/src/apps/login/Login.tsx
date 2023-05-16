@@ -42,9 +42,9 @@ export const Login = () => {
         fontHeight="40px"
         letterSpacing="-1.96px"
       >
-        주변 노점들의 위치와
+        자신의 노점 관리와
         <br />
-        메뉴주문, 예약픽업까지 한번에
+        주문관리, 예약관리까지 한번에
       </Typography>
 
       <ImageWrapper>
