@@ -42,6 +42,9 @@ export const ProfileInfo = () => {
           toast.error('닉네임을 입력해주세요');
           return;
         }
+        console.log(data);
+        handleEditMode();
+        return;
         // mutate(data.nickname, {
         //   onSuccess: () => {
         //     handleEditMode();
@@ -52,7 +55,6 @@ export const ProfileInfo = () => {
     >
       <Container>
         <TextBox label="이메일" value={email} />
-
         <InputWrapper>
           <Label>
             <Typography size="16" letterSpacing="-0.5px">
@@ -64,16 +66,25 @@ export const ProfileInfo = () => {
             {...register('nickname')}
             defaultValue={nickname}
           />
+        </InputWrapper>
+        <InputWrapper>
           <Label>
             <Typography size="16" letterSpacing="-0.5px">
               전화번호
             </Typography>
           </Label>
-          <Input
-            placeholder="손안의 노점에서 사용할 닉네임 입력"
-            {...register('phonenumber')}
-            defaultValue={nickname}
-          />
+
+          <PhoneBoxWrapper>
+            <PhonetextLeftBox>010</PhonetextLeftBox>
+            <PhonetextRightInputBox
+              placeholder="직접 입력"
+              type="number"
+              {...register('phonenumber', {
+                valueAsNumber: true,
+              })}
+              defaultValue={nickname}
+            />
+          </PhoneBoxWrapper>
         </InputWrapper>
         <Button type="submit">
           <Typography size="16" color="white">
@@ -172,6 +183,24 @@ const InputWrapper = styled.article`
 
 const Input = styled.input`
   width: 100%;
+  height: 48px;
+  padding: 0px 18px;
+  background-color: ${customColor.beige};
+  border-radius: 12px;
+  font-size: 12px;
+  letter-spacing: -0.5px;
+  font-family: inherit;
+  &::placeholder {
+    color: ${customColor.darkGray};
+    white-space: pre-wrap;
+  }
+  :focus {
+    outline: 2px solid ${customColor.orange3};
+  }
+  box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.161);
+`;
+const PhonetextRightInputBox = styled.input`
+  width: 70%;
   height: 48px;
   padding: 0px 18px;
   background-color: ${customColor.beige};
