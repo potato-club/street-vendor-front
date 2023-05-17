@@ -1,12 +1,4 @@
-export type Category =
-  | 'BUNG_EO_PPANG'
-  | 'EGG_BREAD'
-  | 'HO_DDEOK'
-  | 'OTHER_DESSERT'
-  | 'OTHER_MEAL'
-  | 'SUNDAE'
-  | 'TAKOYAKI'
-  | 'TTEOK_BOKKI';
+import { Category } from '@street-vendor/core';
 
 export type Location = {
   latitude: number;
@@ -24,6 +16,8 @@ export type StoreResponse = {
 };
 
 export type StoreInfoResponse = {
+  badge: string;
+  distance: number;
   locationDescription: string;
   pictureUrl: string;
   reviews: number;

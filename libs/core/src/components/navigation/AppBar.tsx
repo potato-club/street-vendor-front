@@ -14,6 +14,7 @@ import { HomeAction } from './action/HomeAction';
 import { NoticeAction } from './action/NoticeAction';
 import { SearchAction } from './action/SearchAction';
 import { NextAction } from './action/NextAction';
+import { Category, CategoryName } from '../../constants/category';
 
 export interface AppBarProps {
   drawer?: React.ReactNode;
@@ -181,30 +182,21 @@ export const AppBar: React.FC<AppBarProps> = (props) => {
                     flexWrap: 'wrap',
                   }}
                 >
-                  {[
-                    '떡볶이',
-                    '순대',
-                    '타코야끼',
-                    '핫도그',
-                    '붕어빵',
-                    '호떡',
-                    '계란빵',
-                    '꼬치',
-                    '기타 후식류',
-                    '기타 식사류',
-                  ].map((value) => (
+                  {Object.keys(CategoryName).map((key) => (
                     <Link
-                      key={value}
+                      key={key}
                       style={{ flexBasis: '40%', flexGrow: 1 }}
-                      href={`/search?category=${value}`}
+                      href={`/search?category=${key}`}
                       replace={router.pathname === '/search'}
                       onClick={() => {
                         setIsSearching(false);
-                        router.replace(`/search?category=${value}`);
+                        router.replace(`/search?category=${key}`);
                       }}
                       passHref
                     >
-                      <CategoryButton>{value}</CategoryButton>
+                      <CategoryButton>
+                        {CategoryName[key as Category]}
+                      </CategoryButton>
                     </Link>
                   ))}
                 </div>
