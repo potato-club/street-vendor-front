@@ -22,7 +22,7 @@ export const CardAsk = ({ detailPathName, data }: Props) => {
         onClick={() =>
           Router.push({
             pathname: detailPathName,
-            query: String(data.questionId),
+            query: { questionId: String(data.questionId) },
           })
         }
       >
@@ -51,7 +51,6 @@ export const CardAsk = ({ detailPathName, data }: Props) => {
         <Body>
           <Typography size="12" letterSpacing="-1.0px">
             {data.title}
-            {data.questionId}
           </Typography>
         </Body>
         <Date>
