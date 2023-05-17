@@ -10,12 +10,12 @@ interface BoxProps {
 }
 
 export const AskQuestionBox = (props: BoxProps) => {
-  const [isClicked, setIsClicked] = useState(false);
+  const [isclicked, setIsclicked] = useState(false);
   return (
     <Wrapper>
       <Question
         onClick={() => {
-          setIsClicked((prev) => !prev);
+          setIsclicked((prev) => !prev);
         }}
       >
         <QuestionInner>
@@ -73,7 +73,7 @@ export const AskQuestionBox = (props: BoxProps) => {
           </QuestionContent>
         </QuestionInner>
       </Question>
-      <AskAnswerBox answerContent={props.answerContent} isClicked={isClicked} />
+      <AskAnswerBox answerContent={props.answerContent} isclicked={isclicked} />
     </Wrapper>
   );
 };

@@ -24,7 +24,7 @@ export const pathName = {
       FORM: '/ask/inquiry',
       MY: {
         LIST: '/ask/inquiry/my',
-        DETAIL: '/ask/inquiry/my/*',
+        DETAIL: '/ask/inquiry/my/detail',
       },
     },
   },

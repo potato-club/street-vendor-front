@@ -14,9 +14,10 @@ export const AddPhotoButton = ({ value, register, setImages }: ButtonProps) => {
 
   const addImage = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    if (e.target.value[0] && e.target.files) {
+    const selectedFile = e.target.files?.[0];
+    if (selectedFile) {
       const fileReader = new FileReader();
-      fileReader.readAsDataURL(e.target.files[0]);
+      fileReader.readAsDataURL(selectedFile);
       fileReader.onload = () => {
         setImages(String(fileReader.result));
       };
