@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Image from 'next/image';
 
 interface ImageProps {
-  src: string;
+  imageUrl: string;
 }
 interface BoxProps {
   label: string;
@@ -23,8 +23,8 @@ export const ReadImageBox = (props: BoxProps) => {
         {props.images.map((item, id) => (
           <ImageBox key={id}>
             <Image
-              src={`/${item.src}`}
-              alt={item.src}
+              src={`/${item.imageUrl}png`}
+              alt={item.imageUrl}
               fill
               style={{ objectFit: 'cover', borderRadius: 'inherit' }}
             />

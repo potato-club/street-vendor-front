@@ -1,3 +1,4 @@
+/* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { MyAsk } from 'apps/customer/src/apps/ask/inquiry/my/MyAsk';
 import type { NextPage } from 'next';
 

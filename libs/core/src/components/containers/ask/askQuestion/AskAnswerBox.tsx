@@ -4,16 +4,16 @@ import { useSpring, animated } from 'react-spring';
 
 interface BoxProps {
   answerContent: string;
-  isClicked: boolean;
+  isclicked: boolean;
 }
 
 interface BoxStyle {
-  isClicked: boolean;
+  isclicked: boolean;
 }
 
-export const AskAnswerBox = (props: BoxProps) => {
+export const AskAnswerBox = ({ answerContent, isclicked }: BoxProps) => {
   const anime = useSpring(
-    props.isClicked
+    isclicked
       ? {
           from: { maxHeight: '0px' },
           to: { maxHeight: '250px' },
@@ -25,7 +25,7 @@ export const AskAnswerBox = (props: BoxProps) => {
         }
   );
   return (
-    <Answer isClicked={props.isClicked} style={anime}>
+    <Answer isclicked={isclicked} style={anime}>
       <AnswerInner>
         <AnswerLabel>
           <Icon>
@@ -57,7 +57,7 @@ export const AskAnswerBox = (props: BoxProps) => {
               textAlign="left"
               style={{ wordBreak: 'keep-all', lineHeight: '20px' }}
             >
-              {props.answerContent}
+              {answerContent}
             </Typography>
           </AnswerContent>
         </AnswerLabel>
@@ -70,7 +70,7 @@ const Answer = styled(animated.article)<BoxStyle>`
   display: flex;
   background: transparent;
   width: 100%;
-  max-height: ${(props) => (props.isClicked ? '205px' : '0px')};
+  max-height: ${(props) => (props.isclicked ? '205px' : '0px')};
   justify-content: center;
   overflow: hidden;
   transition: max-height 0.3s ease;

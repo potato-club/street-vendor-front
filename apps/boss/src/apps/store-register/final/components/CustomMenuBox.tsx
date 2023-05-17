@@ -6,7 +6,7 @@ interface Props {
   item: {
     image: File | null;
     name: string;
-    price: number;
+    price: string;
     weight: string;
   };
 }

@@ -4,14 +4,23 @@ import styled from 'styled-components';
 import { AskSelectButton } from '../../button/AskSelectButton';
 import { MyAsk } from './askSetting/MyAsk';
 
+interface RequestType {
+  createdAt: string;
+  questionId: number;
+  status: string;
+  title: string;
+  type: string;
+}
 interface Props {
   pathName: string;
   detailPathName: string;
+  data: RequestType[];
+  isLoading: boolean;
 }
 
 export const MyAskContainer = (props: Props) => {
   const handleRouter = () => {
-    Router.push(props.pathName);
+    Router.replace(props.pathName);
   };
   return (
     <Wrapper>
@@ -27,7 +36,11 @@ export const MyAskContainer = (props: Props) => {
               <AskSelectButton content="나의 문의내역" isSelected={true} />
             </TopBar>
           </ContainerInner>
-          <MyAsk detailPathName={props.detailPathName} />
+          <MyAsk
+            detailPathName={props.detailPathName}
+            isLoading={props.isLoading}
+            data={props.data}
+          />
         </Container>
       </AppBarLayout>
     </Wrapper>
