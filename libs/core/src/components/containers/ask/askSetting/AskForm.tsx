@@ -14,9 +14,10 @@ import { AskAgreeModal } from './AskAgreeModal';
 
 interface Props {
   mutate: UseMutateFunction<any, unknown, FieldValues, unknown>;
+  mutateNoImage: UseMutateFunction<any, unknown, FieldValues, unknown>;
 }
 
-export const AskForm = ({ mutate }: Props) => {
+export const AskForm = ({ mutate, mutateNoImage }: Props) => {
   const {
     register,
     handleSubmit,
@@ -32,12 +33,17 @@ export const AskForm = ({ mutate }: Props) => {
   const submit = (data: FieldValues) => {
     if (isAgreeChecked && isValid) {
       data.images[data.images.length - 1].length === 0 && data.images.pop();
-      const formDataImages = new FormData();
-      for (let i = 0; i < data.images.length; i++) {
-        formDataImages.append('imageFiles', data.images[i][0]);
+      if (data.images.length !== 0) {
+        const formDataImages = new FormData();
+        for (let i = 0; i < data.images.length; i++) {
+          formDataImages.append('imageFiles', data.images[i][0]);
+        }
+        delete data.images;
+        mutate({ images: formDataImages, request: data });
+      } else {
+        delete data.images;
+        mutateNoImage({ ...data, questionsImages: [] });
       }
-      delete data.images;
-      mutate({ images: formDataImages, request: data });
     } else {
       if (!isValid) {
         toast.error('내용을 모두 입력해주세요');
@@ -62,7 +68,7 @@ export const AskForm = ({ mutate }: Props) => {
             options={[
               { name: '주문', value: 'ORDER' },
               { name: '리뷰', value: 'REVIEW' },
-              { name: '계정', value: 'ACCOUNT' },
+              { name: '계정', value: 'MEMBER' },
               { name: '기타', value: 'ETC' },
             ]}
             register={register}
