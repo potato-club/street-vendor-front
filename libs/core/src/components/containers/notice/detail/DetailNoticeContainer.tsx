@@ -1,15 +1,32 @@
 import { customColor } from 'libs/core/src/constants';
-import { AppBarLayout, Typography } from 'libs/core/src/components';
+import {
+  AppBarLayout,
+  LoadingContainer,
+  Typography,
+} from 'libs/core/src/components';
 import styled from 'styled-components';
+import { DetailNoticeType } from 'libs/core/src/types';
 
-export const DetailNoticeContainer = () => {
+type Props = {
+  data: DetailNoticeType;
+  isLoading: boolean;
+};
+export const DetailNoticeContainer = ({ data, isLoading }: Props) => {
+  if (isLoading || data === undefined) {
+    return (
+      <AppBarLayout title="공지사항" home>
+        <LoadingContainer />
+      </AppBarLayout>
+    );
+  }
+
   return (
     <AppBarLayout title="공지사항" home>
       <Container>
         <Header>
           <Tag>안내</Tag>
           <Typography size="16" color="black" letterSpacing="-1px">
-            길거리 노점 서비스 일시 중지 안내
+            {data.title}
           </Typography>
         </Header>
         <Body>
@@ -18,12 +35,13 @@ export const DetailNoticeContainer = () => {
             color="black"
             letterSpacing="-1px"
             fontWeight="600"
+            textAlign="center"
           >
-            길거리 노점 서비스 일시 중지 안내
+            {data.title}
           </Typography>
-          <ImageBox />
+          {data.imageUrl !== null && <ImageBox src={data.imageUrl} alt="" />}
           <Typography size="16" color="darkGray" letterSpacing="-1px">
-            공지사항 내용
+            {data.content}
           </Typography>
         </Body>
       </Container>
@@ -68,7 +86,7 @@ const Body = styled.div`
   margin: auto;
 `;
 
-const ImageBox = styled.div`
+const ImageBox = styled.img`
   width: 100%;
   background-color: ${customColor.white};
   height: 300px;

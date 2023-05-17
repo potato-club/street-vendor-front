@@ -1,12 +1,14 @@
 import styled from 'styled-components';
 import { customColor } from '../../constants';
 import { Typography } from '../Typography';
+import { ListNoticeType } from '../../types';
 
 type Props = {
   onClick: () => void;
+  data: ListNoticeType;
 };
 
-export const CardNotice = ({ onClick }: Props) => {
+export const CardNotice = ({ onClick, data }: Props) => {
   return (
     <Container onClick={onClick}>
       <Tag>안내</Tag>
@@ -16,7 +18,7 @@ export const CardNotice = ({ onClick }: Props) => {
         </Typography>
         <ContentWrapper>
           <Typography size="16" color="black" letterSpacing="-1px">
-            길거리 노점 서비스 일시 중지 안내
+            {data.title}
           </Typography>
           <ButtonArrow>
             <svg
