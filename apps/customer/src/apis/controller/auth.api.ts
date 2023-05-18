@@ -24,10 +24,11 @@ export const authApi = {
       });
       return response.data;
     },
-    profileImage: async (profileUrl: File) => {
-      const response = await sendApi.put('/api/v1/my-page/profileUrl', {
-        profileUrl: profileUrl,
-      });
+    profileImage: async (profileUrl: FormData) => {
+      const response = await sendApi.post(
+        '/api/v1/my-page/profileUrl',
+        profileUrl
+      );
       return response.data;
     },
   },
