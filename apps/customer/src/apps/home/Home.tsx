@@ -2,19 +2,46 @@ import {
   AppBarLayout,
   CustomModal,
   LoadingContainer,
+  MarkerMap,
   NavigationDrawer,
+  StoreMarker,
+  Typography,
 } from '@street-vendor/core';
-import { MarkerMap } from './components/MarkerMap';
 import { useQueryGetMyInfo } from '../../hooks/query/my-page/useQueryGetMyInfo';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { sessionService } from '../../libs/sessionService';
 import { useMyProfile } from '../../hooks/useMyProfile';
 import { useRouter } from 'next/router';
+import {
+  StoreInfoResponse,
+  StoreResponse,
+} from '../../apis/controller/store.api.type';
+import { storeApi } from '../../apis/controller/store.api';
+import { StorePreview } from '../../components';
 
 export const Home = () => {
   const { isLoading, data } = useQueryGetMyInfo();
   const { resetProfile } = useMyProfile();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [stores, setStores] = useState<StoreResponse[]>([]);
+  const [selectStore, setSelectStore] = useState<StoreInfoResponse>();
+  const [selectStoreId, setSelectStoreId] = useState<number>();
+
+  useEffect(() => {
+    (async () => {
+      setStores(await storeApi.getStores());
+    })();
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      if (!selectStoreId) {
+        return;
+      }
+
+      setSelectStore(await storeApi.getStore(selectStoreId));
+    })();
+  }, [selectStoreId]);
 
   const router = useRouter();
 
@@ -62,7 +89,38 @@ export const Home = () => {
           />
         }
       >
-        <MarkerMap />
+        <MarkerMap
+          preview={
+            selectStoreId &&
+            (selectStore ? (
+              <StorePreview
+                id={selectStore.storeId}
+                name={selectStore.storeName}
+                category={selectStore.storeCategory}
+                locationDescription={selectStore.locationDescription}
+                salesStatus={selectStore.salesStatus}
+                reviews={selectStore.reviews}
+                distance={1}
+                spoon={selectStore.spoon}
+              />
+            ) : (
+              <Typography size="80" textAlign="center" style={{ height: 260 }}>
+                로딩 중
+              </Typography>
+            ))
+          }
+          onClick={() => setSelectStoreId(undefined)}
+        >
+          {stores.map((value) => (
+            <StoreMarker
+              key={value.storeId}
+              position={value.location}
+              onClick={() => {
+                setSelectStoreId(value.storeId);
+              }}
+            />
+          ))}
+        </MarkerMap>
       </AppBarLayout>
     </>
   );
