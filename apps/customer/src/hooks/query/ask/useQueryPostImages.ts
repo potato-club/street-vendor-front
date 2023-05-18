@@ -10,35 +10,22 @@ interface RequestType {
   title: string;
   type: 'ETC' | 'ORDER' | 'REVIEW' | 'ACCOUNT';
 }
-interface QuestionType {
-  content: string;
-  title: string;
-  type: 'ETC' | 'ORDER' | 'REVIEW' | 'ACCOUNT';
-  questionsImages: { imageUrl: string }[];
-}
 
 export const useQueryPostImages = () => {
-  let requestValue: QuestionType = {
-    content: '',
-    title: '',
-    type: 'ETC',
-    questionsImages: [{ imageUrl: '' }],
-  };
   const { mutate } = useQueryPostQuestion();
   const register = useCallback(
     async (data: { images: FormData; request: RequestType }) => {
-      requestValue = { ...data.request, questionsImages: [{ imageUrl: '' }] };
       const response = await questionApi.registerImages(data.images);
-      return response;
+      return { response, request: data.request };
     },
     []
   );
 
   return useMutation(register, {
-    onSuccess: async (e) => {
+    onSuccess: async ({ response, request }) => {
       mutate({
-        ...requestValue,
-        questionsImages: e.data,
+        ...request,
+        questionsImages: response.data,
       });
     },
     onError: (e) => {
