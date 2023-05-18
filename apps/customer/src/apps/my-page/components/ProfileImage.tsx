@@ -15,7 +15,7 @@ export const ProfileImage = ({ imageUrl }: Props) => {
   return (
     <Container>
       <Image
-        src={imageUrl !== null ? imageUrl : ProfileImageDefault}
+        src={imageUrl.includes('http') ? imageUrl : ProfileImageDefault}
         alt={''}
         width={115}
         height={115}
