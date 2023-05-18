@@ -16,8 +16,8 @@ export const ListNoticeContainer = ({
   list,
   isLoading,
 }: Props) => {
-  const handleClickCardNotice = () => {
-    Router.push(`${detailPathName}/1`);
+  const handleClickCardNotice = (id: number) => {
+    Router.push(`${detailPathName}/${id}`);
   };
 
   if (list.length === 0) {
@@ -43,7 +43,11 @@ export const ListNoticeContainer = ({
       <Container>
         <ListContainer>
           {list.map((item) => (
-            <CardNotice onClick={handleClickCardNotice} data={item} />
+            <CardNotice
+              onClick={handleClickCardNotice}
+              data={item}
+              key={item.id}
+            />
           ))}
         </ListContainer>
       </Container>

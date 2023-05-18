@@ -2,19 +2,20 @@ import styled from 'styled-components';
 import { customColor } from '../../constants';
 import { Typography } from '../Typography';
 import { ListNoticeType } from '../../types';
+import { formatDate } from '../../utils';
 
 type Props = {
-  onClick: () => void;
+  onClick: (id: number) => void;
   data: ListNoticeType;
 };
 
 export const CardNotice = ({ onClick, data }: Props) => {
   return (
-    <Container onClick={onClick}>
+    <Container onClick={() => onClick(data.id)}>
       <Tag>안내</Tag>
       <Info>
         <Typography size="12" color="darkGray">
-          2022.11.02
+          {data.createTime.substring(0, 10)}
         </Typography>
         <ContentWrapper>
           <Typography size="16" color="black" letterSpacing="-1px">
