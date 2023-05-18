@@ -5,23 +5,19 @@ import styled from 'styled-components';
 interface BoxProps {
   label: string;
   content: string;
-  textAlign?: 'center' | 'right' | 'left';
+  isCentertext?: boolean;
 }
 
 export const ReadLabelBox = (props: BoxProps) => {
   return (
     <Wrapper>
       <Label>
-        <Typography size="16" fontWeight="bold" letterSpacing="-0.5px">
+        <Typography size="16" fontWeight="bold" letterSpacing="-1.5px">
           {props.label}
         </Typography>
       </Label>
-      <Box>
-        <Typography
-          size="12"
-          letterSpacing="-0.5px"
-          textAlign={props.textAlign}
-        >
+      <Box style={props.isCentertext ? { justifyContent: 'center' } : {}}>
+        <Typography size="12" letterSpacing="-0.5px">
           {props.content}
         </Typography>
       </Box>

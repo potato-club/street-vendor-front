@@ -1,16 +1,10 @@
-import {
-  Control,
-  Controller,
-  FieldErrorsImpl,
-  FieldValues,
-} from 'react-hook-form';
+import { Control, Controller, FieldValues } from 'react-hook-form';
 import { Rating } from 'react-simple-star-rating';
 import { EmptySpoon, FullSpoon } from './icons';
 
 interface Props {
   name: string;
   control: Control<FieldValues>;
-  errors: Partial<FieldErrorsImpl>;
 }
 
 export const SpoonRatingForm = (props: Props) => {
@@ -18,7 +12,7 @@ export const SpoonRatingForm = (props: Props) => {
     <Controller
       name={props.name}
       control={props.control}
-      rules={{ required: false }}
+      rules={{ required: true }}
       render={({ field: { onChange } }) => (
         <Rating
           onClick={onChange}

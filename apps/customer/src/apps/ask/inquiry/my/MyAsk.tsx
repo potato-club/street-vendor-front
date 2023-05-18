@@ -5,12 +5,12 @@ import { pathName } from '../../../../configs/pathName';
 
 export const MyAsk = () => {
   const { isLoading, data } = useQueryGetMyQuestion();
-  // console.log(data);
-
   return (
     <MyAskContainer
       pathName={pathName.ASK.INQUIRY.FORM}
       detailPathName={pathName.ASK.INQUIRY.MY.DETAIL}
+      isLoading={isLoading}
+      data={data}
     />
   );
 };

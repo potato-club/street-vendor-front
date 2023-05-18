@@ -8,12 +8,13 @@ import { AskForm } from './askSetting/AskForm';
 
 interface Props {
   mutate: UseMutateFunction<any, unknown, FieldValues, unknown>;
+  mutateNoImage: UseMutateFunction<any, unknown, FieldValues, unknown>;
   pathName: string;
 }
 
-export const AskContainer = (props: Props) => {
+export const AskContainer = ({ mutate, mutateNoImage, pathName }: Props) => {
   const handleRouter = () => {
-    Router.push(props.pathName);
+    Router.replace(pathName);
   };
   return (
     <Wrapper>
@@ -29,7 +30,7 @@ export const AskContainer = (props: Props) => {
               />
             </TopBar>
           </ContainerInner>
-          <AskForm mutate={props.mutate} />
+          <AskForm mutate={mutate} mutateNoImage={mutateNoImage} />
         </Container>
       </AppBarLayout>
     </Wrapper>

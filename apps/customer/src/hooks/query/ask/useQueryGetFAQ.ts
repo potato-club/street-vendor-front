@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { NotificationApi } from 'apps/customer/src/apis/controller/notification.api';
 import { useCallback } from 'react';

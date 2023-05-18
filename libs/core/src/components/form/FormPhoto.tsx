@@ -1,14 +1,16 @@
 import styled from 'styled-components';
 import { Typography } from '../Typography';
 import {
-  FieldErrorsImpl,
   FieldValues,
+  UseFormGetValues,
   UseFormRegister,
+  UseFormSetValue,
   UseFormWatch,
 } from 'react-hook-form';
 import { AddPhotoButton } from '../button/AddPhotoButton';
 import { AddedPhotoButton } from '../button/AddedPhotoButton';
 import { useState } from 'react';
+import { CustomModal } from '@street-vendor/core';
 
 interface InputProps {
   label: string;
@@ -16,13 +18,42 @@ interface InputProps {
   value: string;
   register: UseFormRegister<FieldValues>;
   watch: UseFormWatch<FieldValues>;
-  errors: Partial<FieldErrorsImpl>;
+  setValue: UseFormSetValue<FieldValues>;
+  getValues: UseFormGetValues<FieldValues>;
 }
 
 export const FormPhoto = (props: InputProps) => {
   const [images, setImages] = useState<string[]>([]);
+  const [photoIndex, setPhotoIndex] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+  const handleClickAddedPhoto = (id: number) => {
+    setPhotoIndex(id);
+    setIsModalOpen(true);
+  };
+  const handleCancelPhoto = () => {
+    setImages(images.filter((i, id) => id !== photoIndex));
+    setIsModalOpen(false);
+    props.setValue(
+      props.value,
+      props
+        .getValues(props.value)
+        .filter((i: FileList, id: number) => id !== photoIndex)
+    );
+  };
+
   return (
     <Wrapper>
+      <CustomModal
+        isModalOpen={isModalOpen}
+        closeModal={() => setIsModalOpen(false)}
+        content="해당 사진을 삭제 하시겠습니까?"
+        button1Label="예"
+        button2Label="아니오"
+        onClickButton1={handleCancelPhoto}
+        onClickButton2={() => setIsModalOpen(false)}
+        isTwoButtons
+      />
       <Label>
         <Typography size="16" fontWeight="bold" letterSpacing="-0.5px">
           {props.label}
@@ -30,7 +61,11 @@ export const FormPhoto = (props: InputProps) => {
       </Label>
       <Images>
         {images.map((i, id) => (
-          <AddedPhotoButton key={id + 1} src={i} errors={props.errors} />
+          <AddedPhotoButton
+            key={id + 1}
+            src={i}
+            onClick={() => handleClickAddedPhoto(id)}
+          />
         ))}
         {images.length < 3 && (
           <AddPhotoButton
@@ -43,7 +78,6 @@ export const FormPhoto = (props: InputProps) => {
           />
         )}
       </Images>
-
       <Typography size="12" color="darkGray" letterSpacing="-0.5px">
         {props.placeholder}
       </Typography>

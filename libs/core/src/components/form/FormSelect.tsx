@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { customColor } from '../../constants';
 import { Typography } from '../Typography';
-import { FieldErrorsImpl, FieldValues, UseFormRegister } from 'react-hook-form';
+import { FieldValues, UseFormRegister } from 'react-hook-form';
 import { FormOption } from './FormOption';
 
 interface OptionProps {
@@ -14,7 +14,6 @@ interface SelectProps {
   value: string;
   options: OptionProps[];
   register: UseFormRegister<FieldValues>;
-  errors: Partial<FieldErrorsImpl>;
 }
 
 export const FormSelect = (props: SelectProps) => {
@@ -25,7 +24,10 @@ export const FormSelect = (props: SelectProps) => {
           {props.label}
         </Typography>
       </Label>
-      <Select defaultValue={''} {...props.register(props.value)}>
+      <Select
+        defaultValue={''}
+        {...props.register(props.value, { required: true })}
+      >
         <Option value={''} disabled hidden>
           {props.placeholder}
         </Option>
@@ -50,11 +52,6 @@ export const FormSelect = (props: SelectProps) => {
           />
         </svg>
       </ArrowIcon>
-      {props.errors[props.value] && (
-        <Error>
-          <Typography size="16">에러Select</Typography>
-        </Error>
-      )}
     </Wrapper>
   );
 };
@@ -94,4 +91,3 @@ const ArrowIcon = styled.div`
   transform: translate(0, 50%);
   pointer-events: none;
 `;
-const Error = styled.span``;

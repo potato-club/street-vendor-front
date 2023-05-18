@@ -1,7 +1,6 @@
 import {
   StoreInfoResponse,
   StoreResponse,
-  SalesStatus,
 } from './store.api.type';
 import sendApi from '../sendApi';
 
@@ -30,4 +29,9 @@ export const storeApi = {
 
   getDetail: async (storeId: string) =>
     sendApi.get(`/api/v1/store/detail/${storeId}`),
+
+  getMyOrderHistoryDetail: async (orderId: number) => {
+    const response = await sendApi.get(`/api/v1/order/${orderId}`);
+    return response.data.data;
+  },
 };

@@ -1,10 +1,15 @@
-import { customColor, SpoonRating, Typography } from '@street-vendor/core';
+import {
+  Category,
+  CategoryName,
+  customColor,
+  SpoonRating,
+  Typography,
+} from '@street-vendor/core';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
-import { Category, SalesStatus } from '../../apis/controller/store.api.type';
-import { getCategoryName } from '../../utilities/category';
+import { SalesStatus } from '../../apis/controller/store.api.type';
 import { Star } from '../icons';
 
 export interface StorePreviewProps {
@@ -35,7 +40,7 @@ export const StorePreview: React.FC<StorePreviewProps> = (props) => {
         </Typography>
         <Row>
           <Typography size="16" fontWeight="300" letterSpacing="-0.8px">
-            {getCategoryName(props.category)}
+            {CategoryName[props.category]}
           </Typography>
           <Tag>
             <Typography

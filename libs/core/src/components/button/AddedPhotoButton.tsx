@@ -1,12 +1,10 @@
 import styled from 'styled-components';
-import { FieldErrorsImpl } from 'react-hook-form';
 import Image from 'next/image';
 import { customColor } from '../../constants';
 
 interface ButtonProps {
   src: string;
   onClick?: () => void;
-  errors: Partial<FieldErrorsImpl>;
 }
 
 export const AddedPhotoButton = (props: ButtonProps) => {

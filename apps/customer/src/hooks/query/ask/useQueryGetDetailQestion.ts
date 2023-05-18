@@ -14,18 +14,21 @@ export interface RequestDetailQuestion {
 export const useQueryGetDetailQuestion = (questionId: number) => {
   const load = useCallback(async () => {
     const response = await questionApi.loadMyQuestionDetail(questionId);
-    const detailQuestionInfo = {
-      content: response.data.content,
-      images: response.data.images,
-      title: response.data.title,
-      type: response.data.type,
-      writtenBy: response.data.writtenBy,
-    };
+    const myQuestionDetailInfo: RequestDetailQuestion[] = [];
+    response.data.map((i: RequestDetailQuestion) => {
+      myQuestionDetailInfo.push({
+        content: i.content,
+        images: i.images,
+        title: i.title,
+        type: i.type,
+        writtenBy: i.writtenBy,
+      });
+    });
 
-    return detailQuestionInfo;
+    return myQuestionDetailInfo;
   }, []);
 
-  return useQuery<RequestDetailQuestion>(['getMyQuestion'], load, {
+  return useQuery<RequestDetailQuestion[]>(['getMyQuestionDetail'], load, {
     onError: (e) => {
       console.log(e);
     },

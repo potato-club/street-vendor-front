@@ -1,15 +1,10 @@
-import { storeApi } from '../../../apis/controller/store.api';
+import { ReviewApi } from '../../../apis/controller/review.api';
 import { useCallback } from 'react';
 import { useMutation } from 'react-query';
 
-type Props = {
-  review: any;
-  storeId: string;
-};
-
 export const useQueryPostReview = () => {
-  const register = useCallback(async ({ review, storeId }: Props) => {
-    const response = await storeApi.registerReview(review, storeId);
+  const register = useCallback(async (data: FormData) => {
+    const response = await ReviewApi.registerReview(data);
     return response;
   }, []);
 

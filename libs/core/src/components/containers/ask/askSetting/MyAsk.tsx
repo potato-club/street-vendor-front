@@ -1,25 +1,36 @@
-import Router from 'next/router';
 import styled from 'styled-components';
 import { CardAsk } from '../../../card/CardAsk';
+import { LoadingContainer } from '../../loading/LoadingContainer';
 
+interface RequestType {
+  createdAt: string;
+  questionId: number;
+  status: string;
+  title: string;
+  type: string;
+}
 interface Props {
   detailPathName: string;
+  data: RequestType[];
+  isLoading: boolean;
 }
 
-export const MyAsk = (props: Props) => {
-  const handleDetailRouter = () => {
-    Router.push(props.detailPathName);
-  };
+export const MyAsk = ({ detailPathName, data, isLoading }: Props) => {
   return (
     <Container>
       <ContainerInner>
         <CardList>
-          <CardAsk onClick={handleDetailRouter} />
-          <CardAsk onClick={handleDetailRouter} />
-          <CardAsk onClick={handleDetailRouter} />
-          <CardAsk onClick={handleDetailRouter} />
-          <CardAsk onClick={handleDetailRouter} />
-          <CardAsk onClick={handleDetailRouter} />
+          {isLoading ? (
+            <LoadingContainer />
+          ) : (
+            data.map((i) => (
+              <CardAsk
+                detailPathName={detailPathName}
+                key={i.questionId}
+                data={i}
+              />
+            ))
+          )}
           <ContainerEnd />
         </CardList>
       </ContainerInner>
