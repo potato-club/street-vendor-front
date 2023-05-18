@@ -2,8 +2,16 @@ import { ReviewApi } from '../../../apis/controller/review.api';
 import { useCallback } from 'react';
 import { useMutation } from 'react-query';
 
+interface ReviewType {
+  comment: string;
+  orderId: number;
+  rate: number;
+  reviewImages: ({ imageUrl: string } | null)[];
+}
+
 export const useQueryPostReview = () => {
-  const register = useCallback(async (data: FormData) => {
+  const register = useCallback(async (data: ReviewType) => {
+    console.log(data);
     const response = await ReviewApi.registerReview(data);
     return response;
   }, []);
