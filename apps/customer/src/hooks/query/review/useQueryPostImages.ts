@@ -27,7 +27,7 @@ export const useQueryPostImages = () => {
       });
     },
     onError: (e) => {
-      toast.error('리뷰등록에 실패하였습니다');
+      toast.error('리뷰 등록에 실패하였습니다');
     },
   });
 };
