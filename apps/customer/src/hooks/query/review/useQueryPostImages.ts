@@ -10,26 +10,19 @@ interface RequestType {
   rate: number;
 }
 export const useQueryPostImages = () => {
-  let requestValue: RequestType = {
-    comment: '',
-    orderId: 0,
-    rate: 0,
-  };
+  const { mutate } = useQueryPostReview();
   const register = useCallback(
     async (data: { images: FormData; request: RequestType }) => {
-      requestValue = { ...data.request };
       const response = await ReviewApi.registerImages(data.images);
-      return response;
+      return { response, request: data.request };
     },
     []
   );
-  const { mutate } = useQueryPostReview();
   return useMutation(register, {
-    onSuccess: async (e) => {
-      console.log(requestValue);
+    onSuccess: async ({ response, request }) => {
       mutate({
-        ...requestValue,
-        reviewImages: e.data,
+        ...request,
+        reviewImages: response.data,
       });
     },
     onError: (e) => {
