@@ -4,6 +4,7 @@ import { useQueryPostQuestion } from './useQueryPostQuestion';
 import { useCallback } from 'react';
 import { useMutation } from 'react-query';
 import { questionApi } from 'apps/customer/src/apis/controller/question.api';
+import { toast } from 'react-hot-toast';
 
 interface RequestType {
   content: string;
@@ -29,7 +30,7 @@ export const useQueryPostImages = () => {
       });
     },
     onError: (e) => {
-      console.log(e);
+      toast.error('1:1문의 등록에 실패하였습니다');
     },
   });
 };
