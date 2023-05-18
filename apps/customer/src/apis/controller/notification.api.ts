@@ -10,4 +10,10 @@ export const NotificationApi = {
     const response = await sendApi.post('/api/v1/notification/faq', data);
     return response.data;
   },
+  getDetailNotification: async (notificationId: string) => {
+    const response = await sendApi.get(
+      `/api/v1/notification/${notificationId}`
+    );
+    return response.data;
+  },
 };
