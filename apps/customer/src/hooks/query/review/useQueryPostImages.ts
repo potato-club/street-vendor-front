@@ -3,6 +3,7 @@ import { ReviewApi } from '../../../apis/controller/review.api';
 import { useCallback } from 'react';
 import { useMutation } from 'react-query';
 import { useQueryPostReview } from './useQueryPostReview';
+import { toast } from 'react-hot-toast';
 
 interface RequestType {
   comment: string;
@@ -26,7 +27,7 @@ export const useQueryPostImages = () => {
       });
     },
     onError: (e) => {
-      console.log(e);
+      toast.error('리뷰등록에 실패하였습니다');
     },
   });
 };
