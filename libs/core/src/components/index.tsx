@@ -1,9 +1,14 @@
+export * from './button/map/ReloadButton';
+export * from './button/map/ResetButton';
+
 export * from './button/AddPhotoButton';
 export * from './button/AddedPhotoButton';
 export * from './button/AskButton';
 export * from './button/AskSelectButton';
 export * from './button/NextButton';
 export * from './button/CategoryButton';
+
+export * from './map';
 
 export * from './modal/BigPhotoModal';
 export * from './modal/GetPhotoModal';

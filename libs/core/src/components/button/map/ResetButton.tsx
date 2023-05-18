@@ -1,9 +1,9 @@
-import { customColor } from '@street-vendor/core';
+import { customColor } from 'libs/core/src/constants';
 import React from 'react';
 import styled from 'styled-components';
 
 export interface ResetButtonProps {
-  onClick: VoidFunction;
+  onClick?: VoidFunction;
 }
 
 export const ResetButton: React.FC<ResetButtonProps> = (props) => {
