@@ -14,6 +14,7 @@ import {
   atomStoreRegisterImage,
   atomStoreRegisterFile,
   atomStoreRegisterSchedule,
+  atomStoreRegisterLocation,
 } from 'apps/boss/src/recoil/atoms/atomStoreRegister';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
@@ -27,6 +28,7 @@ export const StoreRegisterFinal = () => {
   const categoryValue = useRecoilValue(atomStoreRegisterCategory);
   const accountValue = useRecoilValue(atomStoreRegisterAccount);
   const explainValue = useRecoilValue(atomStoreRegisterExplain);
+  const locationValue = useRecoilValue(atomStoreRegisterLocation);
   const scheduleValue = useRecoilValue(atomStoreRegisterSchedule);
   const menuValue = useRecoilValue(atomStoreRegisterMenu);
   const photoValue = useRecoilValue(atomStoreRegisterFile);
@@ -64,7 +66,7 @@ export const StoreRegisterFinal = () => {
             />
             <ReadLabelBox
               label="위치 설정"
-              content="송도충림아이원3단지"
+              content={locationValue.address}
               isCentertext
             />
             <AccountBox>

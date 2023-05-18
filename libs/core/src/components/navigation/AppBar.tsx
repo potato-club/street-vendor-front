@@ -23,9 +23,9 @@ export interface AppBarProps {
   search?: boolean;
   home?: boolean;
   notice?: boolean;
-  next?: string;
+  next?: string | boolean;
   onBack?: () => boolean;
-  onNext?: () => boolean;
+  onNext?: () => boolean | void;
 }
 
 export const AppBar: React.FC<AppBarProps> = (props) => {
@@ -67,6 +67,10 @@ export const AppBar: React.FC<AppBarProps> = (props) => {
     }
 
     if (props.onNext ? props.onNext() : true) {
+      if (props.next === true) {
+        return;
+      }
+
       router.push(props.next);
     }
   }, [props, router]);

@@ -61,7 +61,7 @@ export const StoreRegister = () => {
       number: accountNumber,
     });
     if (isFilled) {
-      Router.push(pathName.STORE_REGISTER.SCHEDULE);
+      Router.push(pathName.STORE_REGISTER.LOCATION);
     } else {
       toast.error('정보를 모두 입력해 주세요');
     }

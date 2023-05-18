@@ -1,3 +1,4 @@
+import { Position } from '@street-vendor/core';
 import { atom } from 'recoil';
 
 export interface ScheduleType {
@@ -28,6 +29,13 @@ export const atomStoreRegisterExplain = atom<{
 }>({
   key: 'atomStoreRegisterExplain',
   default: { name: '', description: '', location: '' },
+});
+export const atomStoreRegisterLocation = atom<{
+  address: string;
+  position: Position;
+}>({
+  key: 'atomStoreRegisterLocation',
+  default: { address: '', position: { latitude: 0, longitude: 0 } },
 });
 export const atomStoreRegisterSchedule = atom<ScheduleType[]>({
   key: 'atomStoreRegisterSchedule',
