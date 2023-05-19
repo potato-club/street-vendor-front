@@ -10,7 +10,13 @@ export interface ProfileImagePros {
 export const ProfileImage: React.FC<ProfileImagePros> = (props) => {
   return (
     <Container>
-      <Image src={props.src ?? ''} alt={''} priority={true} fill />
+      <Image
+        src={props.src ?? ''}
+        alt={''}
+        priority={true}
+        fill
+        style={{ objectFit: 'contain' }}
+      />
     </Container>
   );
 };
