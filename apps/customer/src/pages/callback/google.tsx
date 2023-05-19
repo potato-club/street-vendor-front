@@ -28,26 +28,31 @@ const GooglePage = () => {
   }, [asPath]);
 
   const handleCheckNewUser = async (accessToken: string) => {
-    loadingOn();
-    const response = await authApi.googleLogin({ accessToken });
-    loadingOff();
-    if (!response.data) {
-      //로그인 실패
-      router.push(pathName.LOGIN);
-    }
-    if (response.data.sessionId === null) {
-      //회원가입 필요
-      sessionService.resetIdSession();
-      changeEmail(response.data.email);
-      resetName();
-      resetNickname();
-      resetProfileUrl();
-      router.push(pathName.REGISTER);
-    } else {
-      //로그인 완료
-      sessionService.setIdSession(response.data.sessionId);
-      refreshProfile();
-      router.push(pathName.HOME);
+    try {
+      loadingOn();
+      const response = await authApi.googleLogin({ accessToken });
+      loadingOff();
+      if (!response.data) {
+        //로그인 실패
+        router.push(pathName.LOGIN);
+      }
+      if (response.data.sessionId === null) {
+        //회원가입 필요
+        sessionService.resetIdSession();
+        changeEmail(response.data.email);
+        resetName();
+        resetNickname();
+        resetProfileUrl();
+        router.push(pathName.REGISTER);
+      } else {
+        //로그인 완료
+        sessionService.setIdSession(response.data.sessionId);
+        refreshProfile();
+        router.push(pathName.HOME);
+      }
+    } catch (e) {
+    } finally {
+      loadingOff();
     }
   };
 

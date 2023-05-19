@@ -23,7 +23,7 @@ export const ReadImageBox = (props: BoxProps) => {
         {props.images.map((item, id) => (
           <ImageBox key={id}>
             <Image
-              src={`/${item.imageUrl}png`}
+              src={item.imageUrl}
               alt={item.imageUrl}
               fill
               style={{ objectFit: 'cover', borderRadius: 'inherit' }}

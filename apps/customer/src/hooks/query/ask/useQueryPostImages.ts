@@ -4,45 +4,33 @@ import { useQueryPostQuestion } from './useQueryPostQuestion';
 import { useCallback } from 'react';
 import { useMutation } from 'react-query';
 import { questionApi } from 'apps/customer/src/apis/controller/question.api';
+import { toast } from 'react-hot-toast';
 
 interface RequestType {
   content: string;
   title: string;
   type: 'ETC' | 'ORDER' | 'REVIEW' | 'ACCOUNT';
 }
-interface QuestionType {
-  content: string;
-  title: string;
-  type: 'ETC' | 'ORDER' | 'REVIEW' | 'ACCOUNT';
-  questionsImages: { imageUrl: string }[];
-}
 
 export const useQueryPostImages = () => {
-  let requestValue: QuestionType = {
-    content: '',
-    title: '',
-    type: 'ETC',
-    questionsImages: [{ imageUrl: '' }],
-  };
   const { mutate } = useQueryPostQuestion();
   const register = useCallback(
     async (data: { images: FormData; request: RequestType }) => {
-      requestValue = { ...data.request, questionsImages: [{ imageUrl: '' }] };
       const response = await questionApi.registerImages(data.images);
-      return response;
+      return { response, request: data.request };
     },
     []
   );
 
   return useMutation(register, {
-    onSuccess: async (e) => {
+    onSuccess: async ({ response, request }) => {
       mutate({
-        ...requestValue,
-        questionsImages: e.data,
+        ...request,
+        questionsImages: response.data,
       });
     },
     onError: (e) => {
-      console.log(e);
+      toast.error('1:1문의 등록에 실패하였습니다');
     },
   });
 };

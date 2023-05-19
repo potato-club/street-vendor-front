@@ -1,9 +1,9 @@
-import { customColor } from '@street-vendor/core';
+import { customColor } from 'libs/core/src/constants';
 import React from 'react';
 import styled from 'styled-components';
 
 export interface ReloadButtonProps {
-  onClick: VoidFunction;
+  onClick?: VoidFunction;
 }
 
 export const ReloadButton: React.FC<ReloadButtonProps> = (props) => {
