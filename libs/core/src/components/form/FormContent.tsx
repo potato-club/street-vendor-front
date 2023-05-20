@@ -1,12 +1,7 @@
 import styled from 'styled-components';
 import { customColor } from '../../constants';
 import { Typography } from '../Typography';
-import {
-  FieldErrorsImpl,
-  FieldValues,
-  UseFormRegister,
-  UseFormWatch,
-} from 'react-hook-form';
+import { FieldValues, UseFormRegister, UseFormWatch } from 'react-hook-form';
 
 interface ContentProps {
   label: string;
@@ -16,7 +11,6 @@ interface ContentProps {
   placeholderText: string;
   valueText: string;
   register: UseFormRegister<FieldValues>;
-  errors: Partial<FieldErrorsImpl>;
   watch: UseFormWatch<FieldValues>;
 }
 
@@ -44,19 +38,14 @@ export const FormContent = (props: ContentProps) => {
         type={props.type}
         placeholder={props.placeholderInput}
         maxLength={32}
-        {...props.register(props.valueInput)}
+        {...props.register(props.valueInput, { required: true })}
       />
       <Textarea
         placeholder={props.placeholderText}
         maxLength={3000}
-        {...props.register(props.valueText)}
+        {...props.register(props.valueText, { required: true })}
         defaultValue={''}
       />
-      {(props.errors[props.valueInput] || props.errors[props.valueText]) && (
-        <Error>
-          <Typography size="16">에러Content</Typography>
-        </Error>
-      )}
     </Wrapper>
   );
 };
@@ -110,4 +99,3 @@ const MaxLength = styled.span`
   right: 24px;
   pointer-events: none;
 `;
-const Error = styled.span``;

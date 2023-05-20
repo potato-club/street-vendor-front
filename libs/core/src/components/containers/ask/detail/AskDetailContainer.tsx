@@ -4,17 +4,27 @@ import styled from 'styled-components';
 import { AskSelectButton } from '../../../button/AskSelectButton';
 import { AskDetail } from '../askSetting/AskDetail';
 
+interface RequestDetailQuestion {
+  content: string;
+  images: { imageUrl: string }[];
+  title: string;
+  type: string;
+  writtenBy: string;
+}
 interface Props {
   pathName: string;
+  data: RequestDetailQuestion[];
+  isLoading: boolean;
 }
 
-export const AskDetailContainer = (props: Props) => {
+export const AskDetailContainer = ({ pathName, data, isLoading }: Props) => {
   const handleAskRouter = () => {
-    Router.push(props.pathName);
+    Router.push(pathName);
   };
   const handleMyRouter = () => {
-    Router.push(props.pathName + '/my');
+    Router.push(pathName + '/my');
   };
+
   return (
     <Wrapper>
       <AppBarLayout title="1:1 문의" search home>
@@ -33,7 +43,7 @@ export const AskDetailContainer = (props: Props) => {
               />
             </TopBar>
           </ContainerInner>
-          <AskDetail pathName={props.pathName} />
+          <AskDetail pathName={pathName} data={data} isLoading={isLoading} />
         </Container>
       </AppBarLayout>
     </Wrapper>

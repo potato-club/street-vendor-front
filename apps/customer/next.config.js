@@ -14,9 +14,11 @@ const nextConfig = {
   },
   images: {
     // Todo mock 서버 도메인은 나중에 지워야함! (search.pstatic.net)
-    domains: ['search.pstatic.net'],
+    domains: [
+      'search.pstatic.net',
+      'street-vendor-s3.s3.ap-northeast-2.amazonaws.com',
+    ],
   },
 };
-
 
 module.exports = withNx(nextConfig);

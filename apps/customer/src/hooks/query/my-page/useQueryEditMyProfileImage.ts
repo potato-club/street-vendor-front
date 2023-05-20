@@ -8,7 +8,9 @@ export const useQueryEditMyProfileImage = () => {
   const queryClient = useQueryClient();
 
   const editData = useCallback(async (profileUrl: File) => {
-    const response = await authApi.edit.profileImage(profileUrl);
+    const formData = new FormData();
+    formData.append('profileUrl', profileUrl);
+    const response = await authApi.edit.profileImage(formData);
     return response;
   }, []);
 
