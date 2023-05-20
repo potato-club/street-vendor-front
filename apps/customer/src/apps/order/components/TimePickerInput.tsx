@@ -33,7 +33,12 @@ export const TimePickerInput = (props: InputProps) => {
           </Error>
         )}
       </Wrapper>
-      <TimePickerModal isOpen={isOpen} handleCloseModal={handleCloseModal} setValue={props.setValue}/>
+      <TimePickerModal
+        name={props.name}
+        isOpen={isOpen}
+        handleCloseModal={handleCloseModal}
+        setValue={props.setValue}
+      />
     </>
   );
 };

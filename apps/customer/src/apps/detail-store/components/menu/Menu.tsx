@@ -8,7 +8,6 @@ import Router from 'next/router';
 export const Menu = () => {
   const [filter, setFilter] = useState<string>('basic');
   const { data } = useQueryGetDetailStore();
-  
   return (
     <Container>
       <FilterWrapper>

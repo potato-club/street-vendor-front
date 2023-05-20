@@ -2,15 +2,19 @@ import {
   AppBarLayout,
   BasicButton,
   customColor,
+  getPosition,
   Typography,
 } from '@street-vendor/core';
-import React, { useCallback } from 'react';
+import React from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { BottomButton, Line, Title, TotalPrice } from '../common';
 import { PhoneNumberInput } from './components';
 import { TimePickerInput } from './components/TimePickerInput';
 import { usePostOrder } from '../../hooks/query/order/usePostOrder';
+import { useQueryGetMenuId } from '../../hooks/query/order/useQueryGetMenuId';
+import { useRecoilSnapshot } from 'recoil';
+import { menuCount } from '../../recoil/atoms';
 
 export const Order = () => {
   const {
@@ -18,18 +22,44 @@ export const Order = () => {
     formState: { errors },
     control,
     setValue,
-    handleSubmit
+    handleSubmit,
   } = useForm();
 
-  const { mutate } = usePostOrder()
+  const { mutate } = usePostOrder();
 
-  const submit = useCallback((data: FieldValues) => {
-    console.log(data)
-    // mutate(data)
-  }, []);
-  
+  const { data: ids } = useQueryGetMenuId();
+
+  const snapshot = useRecoilSnapshot();
+
+  const submit = async (data: FieldValues) => {
+    if (!ids) return;
+
+    const location = await getPosition();
+
+    const payload = {
+      ...data,
+      menus: ids.map((id: number) => {
+        const menuInfo = snapshot.getLoadable(menuCount(id));
+        const {
+          contents: { menuId, count },
+        } = menuInfo;
+        return { menuId, count };
+      }),
+      location,
+      // location: {
+      //   latitude:37.7708104,
+      //   longitude:126.7021019
+      // },
+      paymentMethod: 'ACCOUNT_TRANSFER',
+    };
+
+    console.log(payload);
+
+    mutate(payload)
+  };
+
   return (
-    <AppBarLayout title='주문하기'>
+    <AppBarLayout title="주문하기">
       <Container>
         <Wrapper>
           <Title />
@@ -38,13 +68,13 @@ export const Order = () => {
             <FlexColumn className="inputWrapper">
               <PhoneNumberInput
                 control={control}
-                name="phoneNumber"
+                name="memberPhoneNumber"
                 placeholder="전화번호를 입력해주세요"
                 errors={errors}
                 label="주문자 정보"
               />
               <TimePickerInput
-                name="time"
+                name="pickUpTime"
                 label="가게 방문 예정 시간"
                 placeholder="언제 오실 예정이신가요?"
                 register={register}

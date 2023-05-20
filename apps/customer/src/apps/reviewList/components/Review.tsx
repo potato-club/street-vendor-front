@@ -54,7 +54,7 @@ export const Review = () => {
           <Menu />
         </SwiperSlide>
       </StyledSwiper>
-      <MultiPhotoDisplay srcArray={imageSrcDummy} borderRadius={12} style={{ paddingRight: 20 }} />
+      <MultiPhotoDisplay srcArray={imageSrcDummy} style={{ paddingRight: 20 }} />
       <Typography size="14">짱 맛있어요~~</Typography>
     </Container>
   );

@@ -24,7 +24,7 @@ export const PhoneNumberInput = ({ name, control, label, placeholder, errors }: 
       )}
       <Input
         country="KR"
-        name="phoneInput"
+        name={name}
         control={control}
         rules={{ required: true }}
         placeholder={placeholder}

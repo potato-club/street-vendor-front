@@ -30,8 +30,9 @@ type Props = {
   isOpen: boolean;
   handleCloseModal: () => void;
   setValue: UseFormSetValue<FieldValues>;
+  name?: string;
 };
-export const TimePickerModal = ({ isOpen, handleCloseModal, setValue }: Props) => {
+export const TimePickerModal = ({ isOpen, handleCloseModal, setValue, name }: Props) => {
   const formatTime = (data: { toString: () => string; }) => {
     return data.toString().padStart(2, '0');
   };
@@ -51,7 +52,14 @@ export const TimePickerModal = ({ isOpen, handleCloseModal, setValue }: Props) =
 
 
   const handleConfirmButton = () => {
-    setValue('time', `${atNoon === 0 ? '오전' : '오후'} ${formatTime(activeHours)} : ${formatTime(activeMinute)}`);
+    // setValue(name ? name : 'time', `${atNoon === 0 ? '오전' : '오후'} ${formatTime(activeHours)} : ${formatTime(activeMinute)}`);
+
+    // Todo 백엔드 API 수정요청
+    const time = new Date();
+    time.setHours(atNoon === 0 ? activeHours : activeHours + 12)
+    time.setMinutes(activeMinute)
+    setValue(name ? name : 'time', time.toISOString());
+
     handleCloseModal();
   }
 
