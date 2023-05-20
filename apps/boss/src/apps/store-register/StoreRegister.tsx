@@ -50,17 +50,17 @@ export const StoreRegister = () => {
     accountNumber,
   ].every((value) => value !== '');
 
-  const handleNext = async () => {
-    await setExplainValue({
-      name: storeName,
-      description: storeDescription,
-      location: storeLocation,
-    });
-    await setAccountValue({
-      bank: accountValue.bank,
-      number: accountNumber,
-    });
+  const handleNext = () => {
     if (isFilled) {
+      setExplainValue({
+        name: storeName,
+        description: storeDescription,
+        location: storeLocation,
+      });
+      setAccountValue({
+        bank: accountValue.bank,
+        number: accountNumber,
+      });
       Router.push(pathName.STORE_REGISTER.LOCATION);
     } else {
       toast.error('정보를 모두 입력해 주세요');
@@ -69,7 +69,12 @@ export const StoreRegister = () => {
 
   return (
     <Container>
-      <AppBarLayout title="카테고리" titleAlign="center">
+      <AppBarLayout
+        title="카테고리"
+        titleAlign="center"
+        next
+        onNext={handleNext}
+      >
         <CustomModal
           isModalOpen={isModalOpen}
           closeModal={() => {

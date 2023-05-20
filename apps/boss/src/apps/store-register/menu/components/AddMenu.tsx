@@ -6,23 +6,25 @@ import Image from 'next/image';
 
 interface Props {
   id: number;
-  handleSetMenuArray: (
-    id: number,
-    value: {
-      image: File;
-      name: string;
-      price: string;
-      weight: string;
-    }
-  ) => void;
+
+  value: MenuType;
+  handleSetMenuArray: (id: number, value: MenuType) => void;
+}
+interface MenuType {
+  image: File;
+  name: string;
+  price: string;
+  weight: string;
 }
 
-export const AddMenu = ({ id, handleSetMenuArray }: Props) => {
-  const [image, setImage] = useState<string>('');
-  const [file, setFile] = useState<File>();
-  const [menuName, setMenuName] = useState<string>('');
-  const [menuPrice, setMenuPrice] = useState<string>('');
-  const [menuWeight, setMenuWeight] = useState<string>('');
+export const AddMenu = ({ id, handleSetMenuArray, value }: Props) => {
+  const [image, setImage] = useState<string>(
+    value.image ? URL.createObjectURL(value.image) : ''
+  );
+  const [file, setFile] = useState<File>(value.image);
+  const [menuName, setMenuName] = useState<string>(value.name);
+  const [menuPrice, setMenuPrice] = useState<string>(value.price);
+  const [menuWeight, setMenuWeight] = useState<string>(value.weight);
   const handleAddImage = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     if (e.target.value[0]) {

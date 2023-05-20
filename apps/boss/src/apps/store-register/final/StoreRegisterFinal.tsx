@@ -41,7 +41,7 @@ export const StoreRegisterFinal = () => {
 
   return (
     <Container>
-      <AppBarLayout title="최종" titleAlign="center">
+      <AppBarLayout title="최종" titleAlign="center" next>
         <Form>
           <FormInner>
             <ReadLabelBox

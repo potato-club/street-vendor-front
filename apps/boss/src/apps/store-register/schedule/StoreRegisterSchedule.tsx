@@ -19,7 +19,12 @@ export const StoreRegisterSchedule = () => {
   };
   return (
     <Container>
-      <AppBarLayout title="시간 설정" titleAlign="center">
+      <AppBarLayout
+        title="시간 설정"
+        titleAlign="center"
+        next
+        onNext={handleNext}
+      >
         <StoreRegisterTimePickerModal
           isOpen={isModalOpen}
           handleCloseModal={() => setIsModalOpen(false)}

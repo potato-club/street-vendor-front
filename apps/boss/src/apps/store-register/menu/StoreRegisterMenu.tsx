@@ -30,6 +30,8 @@ export const StoreRegisterMenu = () => {
       menuArray[0].price !== '' &&
       menuArray[0].weight !== ''
     ) {
+      console.log(menuArray);
+
       Router.push(pathName.STORE_REGISTER.PHOTO);
     } else {
       toast.error('정보를 모두 입력해 주세요');
@@ -37,7 +39,12 @@ export const StoreRegisterMenu = () => {
   };
   return (
     <Container>
-      <AppBarLayout title="메뉴 설정" titleAlign="center">
+      <AppBarLayout
+        title="메뉴 설정"
+        titleAlign="center"
+        next
+        onNext={handleNext}
+      >
         <Form>
           <FormInner>
             <QuestionLabel label="이름과 가격, 용량/개수를 적어주세요">
@@ -46,6 +53,7 @@ export const StoreRegisterMenu = () => {
                   <AddMenu
                     key={id}
                     id={id}
+                    value={i}
                     handleSetMenuArray={handleSetMenuArray}
                   />
                 ))}

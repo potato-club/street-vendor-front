@@ -59,9 +59,16 @@ export const atomScheduleModalTime = atom<{
   key: 'atomScheduleTime',
   default: { day: 0, time: 'open', atNoon: 0, h: 0, m: 0 },
 });
-export const atomStoreRegisterMenu = atom<MenuType[]>({
+export const atomStoreRegisterMenu = atom<MenuType[] | null>({
   key: 'atomStoreRegisterMenu',
-  default: [{ image: null, name: '', price: '', weight: '' }],
+  default: [
+    {
+      image: null,
+      name: '',
+      price: '',
+      weight: '',
+    },
+  ],
 });
 export const atomStoreRegisterImage = atom<string[]>({
   key: 'atomStoreRegisterImages',

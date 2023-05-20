@@ -25,7 +25,12 @@ export const StoreRegisterPhoto = () => {
 
   return (
     <Container>
-      <AppBarLayout title="가게 사진" titleAlign="center">
+      <AppBarLayout
+        title="가게 사진"
+        titleAlign="center"
+        next
+        onNext={handleNext}
+      >
         <Form>
           <FormInner>
             <PhotoBox>
