@@ -9,7 +9,7 @@ import styled from 'styled-components';
 import { pathName } from '../../configs/pathName';
 import { useQueryGetMyInfo } from '../../hooks/query/my-page/useQueryGetMyInfo';
 import { useMyProfile } from '../../hooks/useMyProfile';
-import { ProfileImage } from './components/ProfileImage';
+import { ProfileImageContainer } from './components/ProfileImage';
 import { ProfileInfo } from './components/ProfileInfo';
 
 export const MyPage = () => {
@@ -29,7 +29,7 @@ export const MyPage = () => {
   return (
     <AppBarLayout title="마이페이지" home>
       <Container>
-        <ProfileImage imageUrl={data.profileUrl} />
+        <ProfileImageContainer imageUrl={data.profileUrl} />
         <ProfileInfo />
         <ButtonWithdrawal />
       </Container>

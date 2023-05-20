@@ -13,9 +13,11 @@ const nextConfig = {
     svgr: false,
   },
   images: {
-    domains: ['street-vendor-s3.s3.ap-northeast-2.amazonaws.com'],
+    domains: [
+      'search.pstatic.net',
+      'street-vendor-s3.s3.ap-northeast-2.amazonaws.com',
+    ],
   },
 };
-
 
 module.exports = withNx(nextConfig);

@@ -5,6 +5,7 @@ import { useCallback } from 'react';
 import { useMutation } from 'react-query';
 import { questionApi } from 'apps/customer/src/apis/controller/question.api';
 import Router from 'next/router';
+import toast from 'react-hot-toast';
 
 interface QuestionType {
   content: string;
@@ -24,7 +25,7 @@ export const useQueryPostQuestion = () => {
       Router.replace(pathName.ASK.INQUIRY.MY.LIST);
     },
     onError: (e) => {
-      console.log(e);
+      toast.error('1:1문의 등록에 실패하였습니다');
     },
   });
 };
