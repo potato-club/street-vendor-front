@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { useModal } from '../hooks';
 type Props = {
   style?: CSSProperties;
-  srcArray: string[];
+  srcArray: File[];
 };
 export const MultiPhotoDisplay = ({ style, srcArray }: Props) => {
   const { isOpen, handleOpenModal, handleCloseModal } = useModal();
@@ -23,7 +23,7 @@ export const MultiPhotoDisplay = ({ style, srcArray }: Props) => {
           <LeftImage style={{ width: srcArray.length > 1 ? '50%' : '100%' }}>
             <Image
               onClick={() => handleImageClick(0)}
-              src={srcArray[0]}
+              src={URL.createObjectURL(srcArray[0])}
               alt="detailStoreImage"
               fill
               style={{ objectFit: 'cover' }}
@@ -41,7 +41,7 @@ export const MultiPhotoDisplay = ({ style, srcArray }: Props) => {
                   onClick={() => handleImageClick(index + 1)}
                 >
                   <Image
-                    src={data}
+                    src={URL.createObjectURL(data)}
                     fill
                     alt="detailStoreImage"
                     style={{ objectFit: 'cover' }}
@@ -53,7 +53,7 @@ export const MultiPhotoDisplay = ({ style, srcArray }: Props) => {
         </Wrapper>
       )}
       <BigPhotoModal
-        srcArray={srcArray}
+        srcArray={srcArray.map((i) => URL.createObjectURL(i))}
         isOpen={isOpen}
         handleCloseModal={handleCloseModal}
         initialIndex={clickIndex}

@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Image from 'next/image';
 
 interface Props {
-  images: string[];
+  images: File[];
 }
 
 export const PhotoSwiper = ({ images }: Props) => {
@@ -18,7 +18,7 @@ export const PhotoSwiper = ({ images }: Props) => {
           images.map((i, id) => (
             <StyledSwiperSlide key={id}>
               <Image
-                src={i}
+                src={URL.createObjectURL(i)}
                 alt={String(id)}
                 fill
                 style={{ objectFit: 'cover', borderRadius: 'inherit' }}

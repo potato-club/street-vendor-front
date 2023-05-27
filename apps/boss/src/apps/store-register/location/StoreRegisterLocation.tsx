@@ -3,7 +3,6 @@ import {
   MarkerMap,
   NextButton,
   Typography,
-  customColor,
 } from '@street-vendor/core';
 import Router from 'next/router';
 import React from 'react';
@@ -35,7 +34,7 @@ export const StoreRegisterLocation: React.FC<StoreRegisterLocationProps> = (
         <MarkerMap
           centerMarker
           onChangeCenter={(center) =>
-            setLocation({ info: '', position: center })
+            setLocation({ address: '', position: center })
           }
         />
         <NextButtonWrapper>

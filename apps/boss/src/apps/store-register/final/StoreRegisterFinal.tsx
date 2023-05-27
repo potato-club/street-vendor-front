@@ -11,7 +11,6 @@ import {
   atomStoreRegisterCategory,
   atomStoreRegisterExplain,
   atomStoreRegisterMenu,
-  atomStoreRegisterImage,
   atomStoreRegisterFile,
   atomStoreRegisterSchedule,
   atomStoreRegisterLocation,
@@ -32,7 +31,6 @@ export const StoreRegisterFinal = () => {
   const scheduleValue = useRecoilValue(atomStoreRegisterSchedule);
   const menuValue = useRecoilValue(atomStoreRegisterMenu);
   const photoValue = useRecoilValue(atomStoreRegisterFile);
-  const imageValue = useRecoilValue(atomStoreRegisterImage);
 
   const handleRegister = () => {
     console.log();
@@ -120,7 +118,7 @@ export const StoreRegisterFinal = () => {
               <Typography size="16" fontWeight="bold" letterSpacing="-1.5px">
                 가게 사진
               </Typography>
-              <MultiPhotoDisplay srcArray={imageValue} />
+              <MultiPhotoDisplay srcArray={photoValue} />
             </PhotoBox>
             <Button>
               <NextButton background="orange4" onClick={handleRegister}>

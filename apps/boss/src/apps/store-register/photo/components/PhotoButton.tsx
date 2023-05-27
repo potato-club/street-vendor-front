@@ -5,28 +5,22 @@ import { toast } from 'react-hot-toast';
 import styled from 'styled-components';
 
 interface Props {
-  setImages: (value: string) => void;
   setFiles: (value: File[]) => void;
   setInit: () => void;
 }
 
-export const PhotoButton = ({ setImages, setInit, setFiles }: Props) => {
+export const PhotoButton = ({ setInit, setFiles }: Props) => {
   const handleAddImage = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setInit();
     if (e.target.value[0]) {
       const files = [];
       Object.values(e.target.files).map((i, id) => {
-        if (id < 3) {
-          const fileReader = new FileReader();
-          fileReader.readAsDataURL(i);
-          fileReader.onload = () => {
-            setImages(String(fileReader.result!));
-          };
-          files.push(i);
-        } else {
+        if (id >= 3) {
           id === Object.values(e.target.files).length - 1 &&
             toast.error('사진은 최대 3개 까지 선택 가능합니다');
+        } else {
+          if (id < 3) files.push(i);
         }
       });
       setFiles(files);

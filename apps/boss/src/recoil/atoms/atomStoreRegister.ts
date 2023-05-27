@@ -70,12 +70,8 @@ export const atomStoreRegisterMenu = atom<MenuType[] | null>({
     },
   ],
 });
-export const atomStoreRegisterImage = atom<string[]>({
-  key: 'atomStoreRegisterImages',
-  default: [],
-});
 export const atomStoreRegisterFile = atom<File[] | null>({
   key: 'atomStoreRegisterPhoto',
-  default: null,
+  default: [],
   dangerouslyAllowMutability: true,
 });

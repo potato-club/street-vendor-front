@@ -1,10 +1,7 @@
 /* eslint-disable @nrwl/nx/enforce-module-boundaries */
 import { AppBarLayout, NextButton, Typography } from '@street-vendor/core';
 import { pathName } from 'apps/boss/src/configs/pathName';
-import {
-  atomStoreRegisterFile,
-  atomStoreRegisterImage,
-} from 'apps/boss/src/recoil/atoms/atomStoreRegister';
+import { atomStoreRegisterFile } from 'apps/boss/src/recoil/atoms/atomStoreRegister';
 import Router from 'next/router';
 import { toast } from 'react-hot-toast';
 import { useRecoilState } from 'recoil';
@@ -15,13 +12,13 @@ import styled from 'styled-components';
 
 export const StoreRegisterPhoto = () => {
   const [files, setFiles] = useRecoilState(atomStoreRegisterFile);
-  const [images, setImages] = useRecoilState(atomStoreRegisterImage);
 
   const handleNext = () => {
     files
       ? Router.push(pathName.STORE_REGISTER.FINAL)
       : toast.error('사진을 선택해주세요');
   };
+  const setInit = () => setFiles([]);
 
   return (
     <Container>
@@ -37,21 +34,13 @@ export const StoreRegisterPhoto = () => {
               <Typography size="16" letterSpacing="-1.5px">
                 사진은 최대 3개 선택 가능합니다
               </Typography>
-              <PhotoSwiper images={images} />
+              <PhotoSwiper images={files} />
               <Buttons>
                 <PhotoButton
-                  setInit={() => setImages([])}
-                  setImages={(value: string) =>
-                    setImages((prev) => [...prev, value])
-                  }
+                  setInit={setInit}
                   setFiles={(values: File[]) => setFiles(values)}
                 />
-                <DeleteButton
-                  setInit={() => {
-                    setImages([]);
-                    setFiles(null);
-                  }}
-                />
+                <DeleteButton setInit={setInit} />
               </Buttons>
             </PhotoBox>
             <Button>
