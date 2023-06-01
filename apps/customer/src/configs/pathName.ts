@@ -20,7 +20,6 @@ export const pathName = {
     GUIDE: '/ask',
     QUESTION: '/ask/question',
     INQUIRY: {
-      START: '/ask/inquiry/start',
       FORM: '/ask/inquiry',
       MY: {
         LIST: '/ask/inquiry/my',
