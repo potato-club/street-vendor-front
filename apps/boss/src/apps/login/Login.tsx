@@ -1,7 +1,7 @@
 import { Typography } from '@street-vendor/core';
 import {
-  DEV_GOOGLE_AUTH_URL,
-  GOOGLE_AUTH_URL,
+  DEV_GOOGLE_AUTH_URL_BOSS,
+  GOOGLE_AUTH_URL_BOSS,
 } from 'libs/core/src/config/settings';
 import styled from 'styled-components';
 import Image from 'next/image';
@@ -21,7 +21,7 @@ export const Login = () => {
 
   const handleClickLoginButton = () => {
     //구글 사장 로그인 링크로 이동
-    // Router.push(isDev ? DEV_GOOGLE_AUTH_URL : GOOGLE_AUTH_URL);
+    Router.push(isDev ? DEV_GOOGLE_AUTH_URL_BOSS : GOOGLE_AUTH_URL_BOSS);
   };
 
   return (
