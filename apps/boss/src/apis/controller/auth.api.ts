@@ -14,7 +14,7 @@ export const authApi = {
     return response.data;
   },
   signUp: async (params: RequestRegister) => {
-    const response = await sendApi.post('/boss/v1/sign-up', {});
+    const response = await sendApi.post('/boss/v1/sign-up', params);
     return response.data;
   },
 };

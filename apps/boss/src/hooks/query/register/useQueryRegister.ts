@@ -11,6 +11,7 @@ import { useLoading } from '@street-vendor/core';
 type Props = {
   name: string;
   nickname: string;
+  phoneNumber: string;
 };
 export const useQueryRegister = () => {
   const router = useRouter();
@@ -18,13 +19,14 @@ export const useQueryRegister = () => {
   const { loadingOff, loadingOn } = useLoading();
 
   const register = useCallback(
-    async ({ name, nickname }: Props) => {
+    async ({ name, nickname, phoneNumber }: Props) => {
       loadingOn();
       const params = {
         email,
         name,
         nickName: nickname,
         profileUrl,
+        phoneNumber,
       };
       const response = await authApi.signUp(params);
       changeNickname(nickname);
