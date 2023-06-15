@@ -3,18 +3,15 @@ import {
   CategoryButton,
   CategoryName,
   Select,
+  getPosition,
   useLoading,
 } from '@street-vendor/core';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { storeApi } from '../../apis/controller/store.api';
 import { Store } from '../../components/card/Store';
 import { StoreInfoResponse } from '../../apis/controller/store.api.type';
-import { useRecoilCallback } from 'recoil';
-import { locationState } from '../../recoil/atoms/location';
 import { toast } from 'react-hot-toast';
-
-const DISTANCE = 1000;
 
 export interface SearchProps {
   category: string;
@@ -24,23 +21,23 @@ export const Search: React.FC<SearchProps> = (props) => {
   const [stores, setStores] = useState<StoreInfoResponse[]>([]);
   const { loadingOn, loadingOff } = useLoading();
 
-  const getStores = useRecoilCallback(({ snapshot }) => async () => {
-    const location = await snapshot.getPromise(locationState);
+  const getStores = useCallback(async () => {
+    const position = await getPosition();
 
     try {
       setStores(
         await storeApi.getStoreWithCategory(
           props.category,
-          location.latitude,
-          location.longitude,
-          10,
+          position.latitude,
+          position.longitude,
+          20,
           1
         )
       );
     } catch (error) {
       toast.error(error.message);
     }
-  });
+  }, [props.category]);
 
   useEffect(() => {
     if (!props.category) {
