@@ -3,6 +3,21 @@ export type Position = {
   longitude: number;
 };
 
+export type MapPosition = {
+  lat: number;
+  lng: number;
+};
+
+export const toPosition = (position: MapPosition): Position => ({
+  latitude: position.lat,
+  longitude: position.lng,
+});
+
+export const toMapPosition = (position: Position): MapPosition => ({
+  lat: position.latitude,
+  lng: position.longitude,
+});
+
 const options: PositionOptions = {
   enableHighAccuracy: true,
 };

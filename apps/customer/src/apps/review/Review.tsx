@@ -9,26 +9,41 @@ import {
 import { FieldValues, useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import styled from 'styled-components';
+import { useQueryPostImages } from '../../hooks/query/review/useQueryPostImages';
 import { useQueryPostReview } from '../../hooks/query/review/useQueryPostReview';
 
 export const Review = () => {
-  const { register, watch, control, handleSubmit } = useForm<FieldValues>();
+  const { register, watch, control, handleSubmit, setValue, getValues } =
+    useForm();
+  const { mutate } = useQueryPostImages();
+  const { mutate: mutateNoImage } = useQueryPostReview();
 
-  const { mutate } = useQueryPostReview();
-
-  const submit = async (data: FieldValues) => {
-    const formData = new FormData();
-    data.images.pop();
-    for (let i = 0; i < data.images.length; i++) {
-      formData.append('images', data.images[i][0]);
+  const submit = (data: FieldValues) => {
+    data.orderId = 1; //orderId setting
+    data.images[data.images.length - 1].length === 0 && data.images.pop();
+    if (data.images.length !== 0) {
+      const formData = new FormData();
+      for (let i = 0; i < data.images.length; i++) {
+        formData.append('reviewImages', data.images[i][0]);
+      }
+      delete data.images;
+      mutate({
+        images: formData,
+        request: {
+          comment: data.comment,
+          orderId: data.orderId,
+          rate: data.rate,
+        },
+      });
+    } else {
+      delete data.images;
+      mutateNoImage({
+        comment: data.comment,
+        orderId: data.orderId,
+        rate: data.rate,
+        reviewImages: [],
+      });
     }
-    delete data.images;
-    data.orderId = 2;
-    formData.append(
-      'request',
-      new Blob([JSON.stringify(data)], { type: 'application/json' })
-    );
-    mutate(formData);
   };
 
   const handleErrors = () => {
@@ -67,16 +82,13 @@ export const Review = () => {
                 placeholder="사진은 최대 3장까지 등록 가능합니다."
                 watch={watch}
                 register={register}
+                getValues={getValues}
+                setValue={setValue}
               />
             </ReviewPhoto>
           </Content>
           <ReviewRegister>
-            <FormSubmit
-              isAgreeChecked={true}
-              onClick={() => {
-                console.log();
-              }}
-            />
+            <FormSubmit isAgreeChecked={true} />
           </ReviewRegister>
         </ContainerInner>
       </AppBarLayout>
