@@ -12,6 +12,7 @@ export interface NavigationDrawerProps {
   nickname: string;
   profileImage: string;
   onLogout: VoidFunction;
+  isBoss?: boolean;
 }
 
 export const NavigationDrawer: React.FC<NavigationDrawerProps> = (props) => {
@@ -49,7 +50,7 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = (props) => {
               {props.nickname}
             </Typography>
             <Typography size="14" fontWeight="500">
-              님
+              {props.isBoss ? '사장님' : '님'}
             </Typography>
           </div>
           <Typography size="14" fontWeight="500">
