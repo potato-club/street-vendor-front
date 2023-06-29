@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import { Listener, Container as MapDiv, NaverMap } from 'react-naver-maps';
 import { animated, useSpring } from 'react-spring';
 import useMeasure from 'react-use-measure';
@@ -6,10 +6,11 @@ import styled from 'styled-components';
 
 import { customColor } from '../../constants';
 import { usePosition } from '../../hooks/usePosition';
-import { MapPosition, Position, toMapPosition, toPosition } from '../../utils';
+import { MapPosition, Position, toMapPosition } from '../../utils';
 import { ReloadButton } from '../button/map/ReloadButton';
 import { ResetButton } from '../button/map/ResetButton';
 import { MyPositionMarker } from './MyPositionMarker';
+import { GeocoderResult, useGeocoder } from '../../hooks/useGeocoder';
 
 export interface MarkerMapProps extends React.PropsWithChildren {
   preview?: ReactNode;
@@ -17,14 +18,23 @@ export interface MarkerMapProps extends React.PropsWithChildren {
   onClick?: VoidFunction;
   onReload?: VoidFunction;
   onSelectStore?: (storeID: number) => void;
-  onChangeCenter?: (center: Position) => void;
+  onChangeCenter?: (center: GeocoderResult) => void;
 }
 
 export const MarkerMap: React.FC<MarkerMapProps> = (props) => {
   const { position } = usePosition();
+  const { fromMapPosition } = useGeocoder();
+
+  const changeCenter = async (position: Position) => {
+    const mapPosition = toMapPosition(position);
+
+    const address = (await fromMapPosition(mapPosition)).address;
+
+    props.onChangeCenter?.({ address, position: mapPosition });
+  };
 
   const [center, setCenter] = useState<MapPosition>(() => {
-    props.onChangeCenter?.(position);
+    changeCenter(position);
 
     return toMapPosition(position);
   });
@@ -76,7 +86,7 @@ export const MarkerMap: React.FC<MarkerMapProps> = (props) => {
               return;
             }
 
-            props.onChangeCenter?.(position);
+            changeCenter(position);
             setCenter(toMapPosition(position));
           }}
         />
@@ -117,8 +127,15 @@ export const MarkerMap: React.FC<MarkerMapProps> = (props) => {
           mapDataControl={false}
           center={center}
           onCenterChanged={(center) => {
-            props.onChangeCenter?.(toPosition(center));
-            setCenter(center);
+            const position = {
+              lat: center.y,
+              lng: center.x,
+              latitude: center.y,
+              longitude: center.x,
+            };
+
+            changeCenter(position);
+            setCenter(position);
           }}
           defaultZoom={17}
         >

@@ -22,6 +22,7 @@ import { StorePreview } from '../../components';
 export const Home = () => {
   const { isLoading, data } = useQueryGetMyInfo();
   const { resetProfile } = useMyProfile();
+  const [title, setTitle] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [stores, setStores] = useState<StoreResponse[]>([]);
   const [selectStore, setSelectStore] = useState<StoreInfoResponse>();
@@ -69,7 +70,7 @@ export const Home = () => {
         onClickButton2={() => setIsModalOpen(false)}
       />
       <AppBarLayout
-        title="송도풍림아이원3단지"
+        title={title}
         titleAlign="center"
         search
         notice
@@ -110,6 +111,15 @@ export const Home = () => {
             ))
           }
           onClick={() => setSelectStoreId(undefined)}
+          onChangeCenter={(center) => {
+            if (!center.address) {
+              return;
+            }
+
+            const addressArray = center.address.split(' ');
+
+            setTitle(`${addressArray.at(-4)} ${addressArray.at(-3)} ${addressArray.at(-2)} ${addressArray.at(-1)}`);
+          }}
         >
           {stores.map((value) => (
             <StoreMarker
