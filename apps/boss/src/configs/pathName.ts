@@ -20,4 +20,15 @@ export const pathName = {
     CHECK: '/withdrawal/check',
     OUTRO: '/withdrawal/outro',
   },
+  ASK: {
+    GUIDE: '/ask',
+    QUESTION: '/ask/question',
+    INQUIRY: {
+      FORM: '/ask/inquiry',
+      MY: {
+        LIST: '/ask/inquiry/my',
+        DETAIL: '/ask/inquiry/my/detail',
+      },
+    },
+  },
 };
