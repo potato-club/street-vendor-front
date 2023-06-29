@@ -1,5 +1,8 @@
 export const pathName = {
   INDEX: '/',
+  LOGIN: '/login',
+  REGISTER: '/register',
+  HOME: '/home',
   STORE_REGISTER: {
     START: '/store-register/start',
     CATEGORY: '/store-register',

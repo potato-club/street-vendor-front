@@ -26,8 +26,6 @@ export const AskDetail = ({ pathName, data, isLoading }: Props) => {
   const handleRouter = () => {
     Router.push(pathName + '/my');
   };
-  !isLoading && console.log(data);
-
   return (
     <Container>
       {isLoading ? (

@@ -1,36 +1,33 @@
-import { useQueryPostQuestion } from './useQueryPostQuestion';
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable @nrwl/nx/enforce-module-boundaries */
+import { ReviewApi } from '../../../apis/controller/review.api';
 import { useCallback } from 'react';
 import { useMutation } from 'react-query';
-import { questionApi } from 'apps/customer/src/apis/controller/question.api';
+import { useQueryPostReview } from './useQueryPostReview';
 import { toast } from 'react-hot-toast';
 
 interface RequestType {
-  content: string;
-  title: string;
-  type: 'ETC' | 'ORDER' | 'REVIEW' | 'ACCOUNT';
+  comment: string;
+  orderId: number;
+  rate: number;
 }
-
 export const useQueryPostImages = () => {
-  const { mutate } = useQueryPostQuestion();
+  const { mutate } = useQueryPostReview();
   const register = useCallback(
     async (data: { images: FormData; request: RequestType }) => {
-      const response = await questionApi.registerImages(data.images);
+      const response = await ReviewApi.registerImages(data.images);
       return { response, request: data.request };
     },
     []
   );
-
   return useMutation(register, {
     onSuccess: async ({ response, request }) => {
       mutate({
         ...request,
-        questionsImages: response.data,
+        reviewImages: response.data,
       });
     },
     onError: (e) => {
-      toast.error('1:1문의 등록에 실패하였습니다');
+      toast.error('리뷰 등록에 실패하였습니다');
     },
   });
 };
