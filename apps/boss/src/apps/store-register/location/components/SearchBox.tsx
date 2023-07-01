@@ -2,12 +2,21 @@ import { customColor, Typography } from '@street-vendor/core';
 import { useState } from 'react';
 import styled from 'styled-components';
 
+interface ResultListProps {
+  isEnd: boolean;
+}
 export const SearchBox = () => {
   const [isValue, setIsValue] = useState(false);
+  const dummy = [
+    { 1: '경기도군포시', 2: '한세로 30한세대학교' },
+    { 1: '경기도군포시', 2: '한세로 30한세대학교' },
+    { 1: '경기도군포시', 2: '한세로 30한세대학교' },
+    { 1: '경기도군포시', 2: '한세로 30한세대학교' },
+  ];
   return (
     <Box>
       <InputBox>
-        <SearchIcon>
+        <SearchIcon onClick={() => setIsValue(!isValue)}>
           <svg
             width="19"
             height="19"
@@ -29,29 +38,54 @@ export const SearchBox = () => {
       </InputBox>
       <Division />
       <ResultBox>
-        <Example>
-          <Typography size="14" style={{ padding: '6px 0' }}>
-            이렇게 검색해보세요!
-          </Typography>
-          <div>
-            <Typography size="12">도로명 + 건물번호</Typography>
-            <Typography size="12" style={{ paddingTop: '4px' }} color={'gray'}>
-              길노프로 11길 11
+        {isValue ? (
+          dummy.map((i, id) => (
+            <ResultItem isEnd={id === dummy.length - 1} key={id}>
+              <Typography size="12">{i['1']}</Typography>
+              <Typography size="12" color="orange2">
+                {i['2']}
+              </Typography>
+            </ResultItem>
+          ))
+        ) : (
+          <Example>
+            <Typography size="14" style={{ padding: '6px 0' }}>
+              이렇게 검색해보세요!
             </Typography>
-          </div>
-          <div>
-            <Typography size="12">지역명(동/리) + 번지</Typography>
-            <Typography size="12" style={{ paddingTop: '4px' }} color={'gray'}>
-              길노프로 1234-5
-            </Typography>
-          </div>
-          <div>
-            <Typography size="12">지역명(동/리) + 건물명(아파트명)</Typography>
-            <Typography size="12" style={{ paddingTop: '4px' }} color={'gray'}>
-              길노프동 떡볶이빌딩
-            </Typography>
-          </div>
-        </Example>
+            <div>
+              <Typography size="12">도로명 + 건물번호</Typography>
+              <Typography
+                size="12"
+                style={{ paddingTop: '4px' }}
+                color={'gray'}
+              >
+                길노프로 11길 11
+              </Typography>
+            </div>
+            <div>
+              <Typography size="12">지역명(동/리) + 번지</Typography>
+              <Typography
+                size="12"
+                style={{ paddingTop: '4px' }}
+                color={'gray'}
+              >
+                길노프로 1234-5
+              </Typography>
+            </div>
+            <div>
+              <Typography size="12">
+                지역명(동/리) + 건물명(아파트명)
+              </Typography>
+              <Typography
+                size="12"
+                style={{ paddingTop: '4px' }}
+                color={'gray'}
+              >
+                길노프동 떡볶이빌딩
+              </Typography>
+            </div>
+          </Example>
+        )}
       </ResultBox>
     </Box>
   );
@@ -76,7 +110,7 @@ const InputBox = styled.div`
   gap: 10px;
   align-items: center;
 `;
-const SearchIcon = styled.div`
+const SearchIcon = styled.button`
   display: flex;
 `;
 const SearchInput = styled.input`
@@ -100,6 +134,7 @@ const Division = styled.div`
 `;
 const ResultBox = styled.div`
   display: flex;
+  flex-direction: column;
   overflow: auto;
   ::-webkit-scrollbar {
     width: 0px;
@@ -110,4 +145,13 @@ const Example = styled.div`
   flex-direction: column;
   width: 100%;
   gap: 12px;
+`;
+const ResultItem = styled.div<ResultListProps>`
+  display: flex;
+  flex-direction: row;
+  min-height: 36px;
+  width: 100%;
+  align-items: center;
+  border-bottom: ${(props) =>
+    !props.isEnd && `1px solid ${customColor.gray + '55'}`};
 `;
