@@ -52,8 +52,7 @@ export const StoreRegisterPhoto = () => {
                 <Typography
                   color="black"
                   fontWeight="bold"
-                  size="16"
-                  letterSpacing="-1.5px"
+                  size="18"
                   textAlign="center"
                 >
                   다음으로

@@ -33,8 +33,7 @@ export const StoreRegisterFinal = () => {
   const photoValue = useRecoilValue(atomStoreRegisterFile);
 
   const handleRegister = () => {
-    console.log();
-    //Router처리
+    console.log('어디로 가야하누');
   };
 
   return (
@@ -121,11 +120,15 @@ export const StoreRegisterFinal = () => {
               <MultiPhotoDisplay srcArray={photoValue} />
             </PhotoBox>
             <Button>
-              <NextButton background="orange4" onClick={handleRegister}>
+              <NextButton
+                type="button"
+                background="orange4"
+                onClick={handleRegister}
+              >
                 <Typography
                   color="black"
                   fontWeight="bold"
-                  size="16"
+                  size="18"
                   letterSpacing="-1.0px"
                   textAlign="center"
                 >
