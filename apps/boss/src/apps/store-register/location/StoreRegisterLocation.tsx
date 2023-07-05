@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useSetRecoilState } from 'recoil';
 import { atomStoreRegisterLocation } from '../../../recoil/atoms/atomStoreRegister';
 import { LocationAppBarLayout } from './components/LocationAppBarLayout';
+import { LocationUnderBar } from './components/LocationUnderBar';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface StoreRegisterLocationProps {}
@@ -21,6 +22,7 @@ export const StoreRegisterLocation: React.FC<StoreRegisterLocationProps> = (
           onChangeCenter={(center) =>
             setLocation({ address: '', position: center })
           }
+          preview={<LocationUnderBar />}
         />
       </Container>
     </LocationAppBarLayout>

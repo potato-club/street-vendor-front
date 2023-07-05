@@ -8,7 +8,6 @@ export const LocationAppBarLayout: React.FC<AppBarLayoutProps> = (props) => (
   <Container>
     <LocationAppBar {...props} />
     <ChildrenWrapper>{props.children}</ChildrenWrapper>
-    <LocationUnderBar />
   </Container>
 );
 

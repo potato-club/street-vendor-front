@@ -36,7 +36,7 @@ export const MarkerMap: React.FC<MarkerMapProps> = (props) => {
   });
 
   const buttonStyles = useSpring({
-    bottom: 282 + bounds.height,
+    bottom: 20 + bounds.height,
   });
 
   return (
