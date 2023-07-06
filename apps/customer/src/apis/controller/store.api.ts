@@ -1,8 +1,4 @@
-import {
-  StoreInfoResponse,
-  StoreResponse,
-  SalesStatus,
-} from './store.api.type';
+import { StoreInfoResponse, StoreResponse } from './store.api.type';
 import sendApi from '../sendApi';
 
 export const storeApi = {
@@ -12,7 +8,47 @@ export const storeApi = {
   },
 
   getStore: async (id: number): Promise<StoreInfoResponse> => {
-    const response = await sendApi.get(`/api/v1/store/${id}`);
+    const response = await sendApi.get(`/api/v1/store/detail/${id}`);
+    return response.data.data;
+  },
+
+  getStoreWithCategory: async (
+    category: string,
+    latitude: number,
+    longitude: number,
+    size?: number,
+    cursor?: number
+  ): Promise<StoreInfoResponse[]> => {
+    const response = await sendApi.get(`/api/v1/store/category/${category}`, {
+      latitude,
+      longitude,
+      size,
+      cursor,
+    });
+    return response.data.data;
+  },
+
+  likeStore: async (storeId: number, memberId = 10000) => {
+    const response = await sendApi.post(
+      `/api/v1/store/like?storeId=${storeId}`,
+      {
+        memberId,
+      }
+    );
+
+    console.log(response.data.data);
+
+    return response.data.data;
+  },
+
+  unlikeStore: async (storeId: number, memberId: number) => {
+    const response = await sendApi.delete(
+      `/api/v1/store/like/cancel?storeId=${storeId}`,
+      {
+        memberId,
+      }
+    );
+
     return response.data.data;
   },
 
@@ -23,6 +59,7 @@ export const storeApi = {
     );
     return response.data;
   },
+
   getMyOrderHistoryList: async () => {
     const response = await sendApi.get('/api/v1/order/my-orders');
     return response.data.data;

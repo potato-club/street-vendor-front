@@ -5,7 +5,7 @@ import { Store } from './components/Store';
 
 export const Favorites = () => {
   return (
-    <AppBarLayout title='즐겨찾기' home search>
+    <AppBarLayout title="즐겨찾기" home search>
       <Container>
         <Store />
         <Store />

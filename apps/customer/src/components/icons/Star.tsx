@@ -1,7 +1,11 @@
 import { customColor } from '@street-vendor/core';
-import React from 'react'
+import React from 'react';
 
-export const Star = () => {
+export interface StarProps {
+  color?: string;
+}
+
+export const Star: React.FC<StarProps> = (props) => {
   return (
     <svg
       width="26"
@@ -12,8 +16,8 @@ export const Star = () => {
     >
       <path
         d="M12.857 0L17.421 7.1L25.714 9.165L20.242 15.62L20.8 24L12.854 20.887L4.911 24L5.472 15.622L0 9.167L8.293 7.1L12.857 0Z"
-        fill={customColor.orange3}
+        fill={props.color ?? customColor.orange3}
       />
     </svg>
   );
-}
+};
