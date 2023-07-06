@@ -1,4 +1,4 @@
-import { MarkerMap } from '@street-vendor/core';
+import { MarkerMap, toPosition } from '@street-vendor/core';
 import React from 'react';
 import styled from 'styled-components';
 import { useSetRecoilState } from 'recoil';
@@ -19,8 +19,11 @@ export const StoreRegisterLocation: React.FC<StoreRegisterLocationProps> = (
       <Container>
         <MarkerMap
           centerMarker
-          onChangeCenter={(center) =>
-            setLocation({ address: '', position: center })
+          onChangeGeocode={(center) =>
+            setLocation({
+              address: center.address,
+              position: toPosition(center.position),
+            })
           }
           preview={<LocationUnderBar />}
         />
