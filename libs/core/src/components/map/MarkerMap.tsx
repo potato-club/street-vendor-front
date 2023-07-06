@@ -18,24 +18,14 @@ export interface MarkerMapProps extends React.PropsWithChildren {
   onClick?: VoidFunction;
   onReload?: VoidFunction;
   onSelectStore?: (storeID: number) => void;
-  onChangeCenter?: (center: GeocoderResult) => void;
+  onChangeGeocode?: (center: GeocoderResult) => void;
 }
 
 export const MarkerMap: React.FC<MarkerMapProps> = (props) => {
   const { position } = usePosition();
   const { fromMapPosition } = useGeocoder();
 
-  const changeCenter = async (position: Position) => {
-    const mapPosition = toMapPosition(position);
-
-    const address = (await fromMapPosition(mapPosition)).address;
-
-    props.onChangeCenter?.({ address, position: mapPosition });
-  };
-
   const [center, setCenter] = useState<MapPosition>(() => {
-    changeCenter(position);
-
     return toMapPosition(position);
   });
 
@@ -48,6 +38,12 @@ export const MarkerMap: React.FC<MarkerMapProps> = (props) => {
   const buttonStyles = useSpring({
     bottom: 20 + bounds.height,
   });
+
+  const changeGeocode = async () => {
+    const address = (await fromMapPosition(center)).address;
+
+    props.onChangeGeocode?.({ address, position: center });
+  };
 
   return (
     <div style={{ height: '100%', position: 'relative' }}>
@@ -86,8 +82,8 @@ export const MarkerMap: React.FC<MarkerMapProps> = (props) => {
               return;
             }
 
-            changeCenter(position);
             setCenter(toMapPosition(position));
+            changeGeocode();
           }}
         />
       </animated.div>
@@ -134,12 +130,14 @@ export const MarkerMap: React.FC<MarkerMapProps> = (props) => {
               longitude: center.x,
             };
 
-            changeCenter(position);
             setCenter(position);
           }}
           defaultZoom={17}
         >
           {props.onClick && <Listener type="click" listener={props.onClick} />}
+          {props.onChangeGeocode && (
+            <Listener type="dragend" listener={() => changeGeocode()} />
+          )}
           <MyPositionMarker position={position} />
           {props.children}
         </NaverMap>

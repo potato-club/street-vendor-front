@@ -49,9 +49,6 @@ export const useGeocoder = () => {
               return reject(response.v2.status.message);
             }
 
-            console.log(response.v2)
-            console.log(response.v2.address.roadAddress);
-
             resolve({ address: response.v2.address.roadAddress, position });
           }
         );

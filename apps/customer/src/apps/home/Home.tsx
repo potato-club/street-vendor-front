@@ -111,14 +111,16 @@ export const Home = () => {
             ))
           }
           onClick={() => setSelectStoreId(undefined)}
-          onChangeCenter={(center) => {
+          onChangeGeocode={(center) => {
             if (!center.address) {
+              setTitle('정보 없음');
               return;
             }
 
-            const addressArray = center.address.split(' ');
+            const addressArray = center.address.split(' ').slice(2);
 
-            setTitle(`${addressArray.at(-4)} ${addressArray.at(-3)} ${addressArray.at(-2)} ${addressArray.at(-1)}`);
+
+            setTitle(addressArray.join(' '));
           }}
         >
           {stores.map((value) => (
