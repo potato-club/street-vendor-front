@@ -18,4 +18,8 @@ export const questionApi = {
     const response = await sendApi.get(`/api/v1/question/${questionId}`);
     return response.data;
   },
+  removeQuestionDetail: async (questionId: number) => {
+    const response = await sendApi.delete(`/api/v1/question/${questionId}`);
+    return response.data;
+  },
 };

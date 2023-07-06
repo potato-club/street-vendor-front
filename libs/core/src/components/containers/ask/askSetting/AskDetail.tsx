@@ -1,5 +1,5 @@
 import Router from 'next/router';
-import { useState } from 'react';
+import { UseMutateFunction } from 'react-query';
 import styled from 'styled-components';
 import { ReadAnswerBox } from '../../../box/ReadAnswerBox';
 import { ReadImageBox } from '../../../box/ReadImageBox';
@@ -20,10 +20,12 @@ interface Props {
   pathName: string;
   data: RequestDetailQuestion[];
   isLoading: boolean;
+  mutate: UseMutateFunction<any, unknown, void, unknown>;
 }
 
-export const AskDetail = ({ pathName, data, isLoading }: Props) => {
+export const AskDetail = ({ pathName, data, isLoading, mutate }: Props) => {
   const handleRouter = () => {
+    mutate();
     Router.push(pathName + '/my');
   };
   return (
@@ -42,22 +44,22 @@ export const AskDetail = ({ pathName, data, isLoading }: Props) => {
           <AnswerImage>
             <ReadImageBox label="첨부 사진" images={data[0].images} />
           </AnswerImage>
-          {data.length !== 1 && (
-            <Answer>
-              <ReadAnswerBox label="답변" content={data[1].content} />
-              <BasicButton
-                backgroundColor="orange2"
-                height={58}
-                onClick={handleRouter}
-              >
-                <EndButton>
-                  <Typography size="20" letterSpacing="-1.0px" color="white">
-                    문의 종료하기
-                  </Typography>
-                </EndButton>
-              </BasicButton>
-            </Answer>
-          )}
+          {/* {data.length !== 1 && ( */}
+          <Answer>
+            <ReadAnswerBox label="답변" content={data[0].content} />
+            <BasicButton
+              backgroundColor="orange2"
+              height={58}
+              onClick={handleRouter}
+            >
+              <EndButton>
+                <Typography size="20" letterSpacing="-1.0px" color="white">
+                  문의 종료하기
+                </Typography>
+              </EndButton>
+            </BasicButton>
+          </Answer>
+          {/* )} */}
         </ContainerInner>
       )}
     </Container>

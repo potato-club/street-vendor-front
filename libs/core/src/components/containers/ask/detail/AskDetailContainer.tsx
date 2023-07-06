@@ -1,5 +1,6 @@
 import { AppBarLayout } from '@street-vendor/core';
 import Router from 'next/router';
+import { UseMutateFunction } from 'react-query';
 import styled from 'styled-components';
 import { AskSelectButton } from '../../../button/AskSelectButton';
 import { AskDetail } from '../askSetting/AskDetail';
@@ -15,9 +16,15 @@ interface Props {
   pathName: string;
   data: RequestDetailQuestion[];
   isLoading: boolean;
+  mutate: UseMutateFunction<any, unknown, void, unknown>;
 }
 
-export const AskDetailContainer = ({ pathName, data, isLoading }: Props) => {
+export const AskDetailContainer = ({
+  pathName,
+  data,
+  isLoading,
+  mutate,
+}: Props) => {
   const handleAskRouter = () => {
     Router.push(pathName);
   };
@@ -43,7 +50,12 @@ export const AskDetailContainer = ({ pathName, data, isLoading }: Props) => {
               />
             </TopBar>
           </ContainerInner>
-          <AskDetail pathName={pathName} data={data} isLoading={isLoading} />
+          <AskDetail
+            pathName={pathName}
+            data={data}
+            isLoading={isLoading}
+            mutate={mutate}
+          />
         </Container>
       </AppBarLayout>
     </Wrapper>
