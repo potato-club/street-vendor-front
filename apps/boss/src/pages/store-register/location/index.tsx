@@ -1,4 +1,3 @@
-
 import type { NextPage } from 'next';
 import { StoreRegisterLocation } from '../../../apps/store-register/location/StoreRegisterLocation';
 

@@ -9,41 +9,33 @@ export const LocationUnderBar = () => {
   };
 
   return (
-    <Container>
-      <Background>
-        <AdressHeader>
-          <Typography size="12">
-            인천광역시연수구해돋이로 84번길 29 송도풍림아이원 3단지아파트 304동
-          </Typography>
-        </AdressHeader>
-        <AdressSubHeader>
-          <Typography size="12" color="gray">
-            지번: 송도동 3-13
-          </Typography>
-        </AdressSubHeader>
-        <SearchInput placeholder="상세주소를 입력하세요(건물명, 동/호수 등)" />
-        <Division />
-        <NextButton background="orange4" type="button" onClick={handleNext}>
-          <Typography
-            color="black"
-            fontWeight="bold"
-            size="18"
-            textAlign="center"
-          >
-            다음으로
-          </Typography>
-        </NextButton>
-      </Background>
-    </Container>
+    <Background>
+      <AdressHeader>
+        <Typography size="12">
+          인천광역시연수구해돋이로 84번길 29 송도풍림아이원 3단지아파트 304동
+        </Typography>
+      </AdressHeader>
+      <AdressSubHeader>
+        <Typography size="12" color="gray">
+          지번: 송도동 3-13
+        </Typography>
+      </AdressSubHeader>
+      <SearchInput placeholder="상세주소를 입력하세요(건물명, 동/호수 등)" />
+      <Division />
+      <NextButton background="orange4" type="button" onClick={handleNext}>
+        <Typography
+          color="black"
+          fontWeight="bold"
+          size="18"
+          textAlign="center"
+        >
+          다음으로
+        </Typography>
+      </NextButton>
+    </Background>
   );
 };
 
-const Container = styled.div`
-  z-index: 1000;
-  width: 100%;
-  position: fixed;
-  bottom: 0;
-`;
 const Background = styled.div`
   display: flex;
   flex-direction: column;
