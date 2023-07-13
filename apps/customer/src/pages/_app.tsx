@@ -20,6 +20,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
   return (
     <NavermapsProvider
       ncpClientId={process.env.NEXT_PUBLIC_NAVER_MAP_CLIENT_ID}
+      submodules={['geocoder']}
     >
       <QueryClientProvider client={queryClient}>
         <RecoilRoot>

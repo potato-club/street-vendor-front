@@ -3,10 +3,7 @@ export type Position = {
   longitude: number;
 };
 
-export type MapPosition = {
-  lat: number;
-  lng: number;
-};
+export type MapPosition = naver.maps.LatLngObjectLiteral;
 
 export const toPosition = (position: MapPosition): Position => ({
   latitude: position.lat,

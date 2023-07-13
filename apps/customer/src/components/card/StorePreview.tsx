@@ -11,6 +11,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { SalesStatus } from '../../apis/controller/store.api.type';
 import { Star } from '../icons';
+import { storeApi } from '../../apis/controller/store.api';
 
 export interface StorePreviewProps {
   id: number;
@@ -29,7 +30,7 @@ export const StorePreview: React.FC<StorePreviewProps> = (props) => {
   return (
     <Container href={`/detail-store/${props.id}`}>
       <ImageWrapper>
-        <StarWrapper>
+        <StarWrapper onClick={() => storeApi.likeStore(props.id)}>
           <Star />
         </StarWrapper>
         <Image src="/cat.png" alt="store" fill style={{ objectFit: 'cover' }} />

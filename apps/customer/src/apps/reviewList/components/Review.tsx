@@ -1,4 +1,9 @@
-import { customColor, MultiPhotoDisplay, SpoonRating, Typography } from '@street-vendor/core';
+import {
+  customColor,
+  MultiPhotoDisplay,
+  SpoonRating,
+  Typography,
+} from '@street-vendor/core';
 import Image from 'next/image';
 import React from 'react';
 import styled from 'styled-components';
@@ -54,7 +59,10 @@ export const Review = () => {
           <Menu />
         </SwiperSlide>
       </StyledSwiper>
-      <MultiPhotoDisplay srcArray={imageSrcDummy} style={{ paddingRight: 20 }} />
+      <MultiPhotoDisplay
+        srcArray={imageSrcDummy}
+        style={{ paddingRight: 20 }}
+      />
       <Typography size="14">짱 맛있어요~~</Typography>
     </Container>
   );

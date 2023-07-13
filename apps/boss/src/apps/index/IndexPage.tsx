@@ -15,12 +15,13 @@ export const IndexPage = () => {
       const session = sessionService.getIdSession();
       if (session === '' || session === undefined) {
         //로그인페이지이동
+        router.push(pathName.LOGIN);
       } else {
         //내정보 확인 api
         //홈으로 이동
       }
     } catch (e) {
-      //로그인페이지이동
+      router.push(pathName.LOGIN);
     } finally {
       loadingOff();
     }
