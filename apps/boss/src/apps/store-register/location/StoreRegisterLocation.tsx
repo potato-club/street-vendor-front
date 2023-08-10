@@ -5,6 +5,7 @@ import { useSetRecoilState } from 'recoil';
 import { atomStoreRegisterLocation } from '../../../recoil/atoms/atomStoreRegister';
 import { LocationAppBarLayout } from './components/LocationAppBarLayout';
 import { LocationUnderBar } from './components/LocationUnderBar';
+import dynamic from 'next/dynamic';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface StoreRegisterLocationProps {}
@@ -12,12 +13,21 @@ export interface StoreRegisterLocationProps {}
 export const StoreRegisterLocation: React.FC<StoreRegisterLocationProps> = (
   props
 ) => {
+  const Map = dynamic(
+    () => import('@street-vendor/core').then((mod) => mod.MarkerMap),
+    { ssr: false }
+  );
+
   const setLocation = useSetRecoilState(atomStoreRegisterLocation);
 
   return (
-    <LocationAppBarLayout>
+    <LocationAppBarLayout
+      onSelected={(result) => {
+        console.log(result);
+      }}
+    >
       <Container>
-        <MarkerMap
+        <Map
           centerMarker
           onChangeGeocode={(center) =>
             setLocation({

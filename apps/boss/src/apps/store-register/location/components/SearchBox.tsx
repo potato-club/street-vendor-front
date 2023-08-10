@@ -1,22 +1,36 @@
-import { customColor, Typography } from '@street-vendor/core';
+import { customColor, GeocoderResult, Typography, useGeocoder } from '@street-vendor/core';
 import { useState } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
 interface ResultListProps {
   isEnd: boolean;
 }
-export const SearchBox = () => {
-  const [isValue, setIsValue] = useState(false);
-  const dummy = [
-    { 1: '경기도군포시', 2: '한세로 30한세대학교' },
-    { 1: '경기도군포시', 2: '한세로 30한세대학교' },
-    { 1: '경기도군포시', 2: '한세로 30한세대학교' },
-    { 1: '경기도군포시', 2: '한세로 30한세대학교' },
-  ];
+
+interface SearchBoxProps {
+  onSelected: (result: GeocoderResult) => void;
+}
+
+export const SearchBox: React.FC<SearchBoxProps> = (props) => {
+  const { fromAddress } = useGeocoder();
+
+  const [query, setQuery] = useState('');
+  const [result, setResult] = useState<string[]>([]);
+
   return (
     <Box>
       <InputBox>
-        <SearchIcon onClick={() => setIsValue(!isValue)}>
+        <SearchIcon
+          onClick={async () => {
+            const data = await axios.get(
+              `https://business.juso.go.kr/addrlink/addrLinkApi.do?confmKey${process.env.NEXT_PUBLIC_JUSO_KEY}&currentPage=1&countPerPage=10&keyword=${query}&resultType=json`
+            );
+
+            console.log(data.data.results.juso)
+
+            setResult(data.data.results.juso.map((value) => value.roadAddr));
+          }}
+        >
           <svg
             width="19"
             height="19"
@@ -34,17 +48,23 @@ export const SearchBox = () => {
             />
           </svg>
         </SearchIcon>
-        <SearchInput placeholder="지번, 도로명, 건물명으로 검색" />
+        <SearchInput
+          placeholder="지번, 도로명, 건물명으로 검색"
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+        />
       </InputBox>
       <Division />
       <ResultBox>
-        {isValue ? (
-          dummy.map((i, id) => (
-            <ResultItem isEnd={id === dummy.length - 1} key={id}>
-              <Typography size="12">{i['1']}</Typography>
-              <Typography size="12" color="orange2">
+        {query !== '' ? (
+          result.map((i, index) => (
+            <ResultItem isEnd={index === result.length - 1} key={index} onClick={async () => {
+              props.onSelected(await fromAddress(i)[0])
+            }}>
+              <Typography size="12">{i}</Typography>
+              {/* <Typography size="12" color="orange2">
                 {i['2']}
-              </Typography>
+              </Typography> */}
             </ResultItem>
           ))
         ) : (

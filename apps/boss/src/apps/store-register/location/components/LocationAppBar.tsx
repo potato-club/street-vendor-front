@@ -1,4 +1,4 @@
-import { Typography } from '@street-vendor/core';
+import { GeocoderResult, Typography } from '@street-vendor/core';
 import { NextAction } from 'libs/core/src/components/navigation/action/NextAction';
 import { NavigationButton } from 'libs/core/src/components/navigation/NavigationButton';
 import { useState } from 'react';
@@ -11,6 +11,7 @@ import { pathName } from '../../../../configs/pathName';
 
 export interface AppBarProps {
   content?: string;
+  onSelected: (result: GeocoderResult) => void;
 }
 
 interface SearchProps {
@@ -53,7 +54,7 @@ export const LocationAppBar: React.FC<AppBarProps> = (props) => {
             </SearchHeader>
             <NextAction onClick={handleNext} />
           </Header>
-          <SearchBox />
+          <SearchBox onSelected={props.onSelected} />
         </Background>
       </Container>
     </>
