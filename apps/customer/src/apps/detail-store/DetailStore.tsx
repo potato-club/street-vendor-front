@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useQueryGetDetailStore } from '../../hooks/query/detail-store/useQueryGetDetailStore';
+import { Order } from './steps/order/Order';
 
 const StoreInfo = dynamic(() => import('./steps/storeInfo'));
 const OrderConfirm = dynamic(
@@ -15,8 +16,8 @@ export type StepProps = {
 };
 
 export type OrderDataType = {
-  menus: Array<MenuType>
-}
+  menus: Array<MenuType>;
+};
 
 export type Steps = '가게페이지' | '주문확인' | '주문하기';
 export type OrderDataStateType = {
@@ -39,6 +40,11 @@ export const DetailStore = () => {
     }
   }, [isLoading]);
 
+
+  const totalPrice = orderData?.menus?.reduce((total, menuItem) => {
+    return total + (menuItem.orderCount || 0) * menuItem.menuPrice || 0;
+  }, 0);
+
   if (isLoading) {
     return <div>로딩중</div>;
   }
@@ -57,7 +63,11 @@ export const DetailStore = () => {
           setStep={setStep}
           orderData={orderData}
           setOrderData={setOrderData}
+          totalPrice={totalPrice}
         />
+      )}
+      {step === '주문하기' && (
+        <Order orderData={orderData} totalPrice={totalPrice} />
       )}
     </Container>
   );

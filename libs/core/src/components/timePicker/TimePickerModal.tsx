@@ -52,13 +52,12 @@ export const TimePickerModal = ({ isOpen, handleCloseModal, setValue, name }: Pr
 
 
   const handleConfirmButton = () => {
-    // setValue(name ? name : 'time', `${atNoon === 0 ? '오전' : '오후'} ${formatTime(activeHours)} : ${formatTime(activeMinute)}`);
+    // Todo POST 요청전에 format 변경해야함
+    setValue(name ? name : 'time', `${atNoon === 0 ? '오전' : '오후'} ${formatTime(activeHours)} : ${formatTime(activeMinute)}`);
 
-    // Todo 백엔드 API 수정요청
     const time = new Date();
     time.setHours(atNoon === 0 ? activeHours : activeHours + 12)
     time.setMinutes(activeMinute)
-    setValue(name ? name : 'time', time.toISOString());
 
     handleCloseModal();
   }

@@ -14,19 +14,15 @@ import { Item } from './components';
 const OrderConfirm = ({
   setStep,
   orderData,
+  totalPrice,
   setOrderData,
-}: StepProps & OrderDataStateType) => {
-  const totalPrice = 
-      orderData?.menus.reduce((total, menuItem) => {
-        return total + (menuItem.orderCount || 0) * menuItem.menuPrice || 0;
-      }, 0)
-
+}: StepProps & OrderDataStateType & { totalPrice: number }) => {
   const handleOnClick = () => {
     if (totalPrice <= 0) {
       toast.error('선택된 메뉴가 없습니다');
       return;
     }
-    setStep('주문하기')
+    setStep('주문하기');
   };
 
   return (
@@ -36,7 +32,12 @@ const OrderConfirm = ({
           <Title />
           <ItemWrapper>
             {orderData?.menus?.map((menu: MenuType) => (
-              <Item key={menu.menuId} {...menu} orderData={orderData} setOrderData={setOrderData} />
+              <Item
+                key={menu.menuId}
+                {...menu}
+                orderData={orderData}
+                setOrderData={setOrderData}
+              />
             ))}
           </ItemWrapper>
           {totalPrice === 0 && (
@@ -45,9 +46,7 @@ const OrderConfirm = ({
               <Typography size="16">메뉴를 추가해주세요</Typography>
             </Notice>
           )}
-          <AddButton
-          onClick={() => setStep('가게페이지')}
-          >
+          <AddButton onClick={() => setStep('가게페이지')}>
             <Typography size="20">+ 메뉴 추가하기</Typography>
           </AddButton>
           <TotalPrice totalPrice={totalPrice} />
