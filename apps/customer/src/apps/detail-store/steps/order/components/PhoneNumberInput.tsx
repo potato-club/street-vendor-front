@@ -24,19 +24,13 @@ export const PhoneNumberInput = ({ name, control, label, placeholder, errors }: 
       )}
       <Input
         country="KR"
-        name="phoneInput"
+        name={name}
         control={control}
-        rules={{ required: true }}
         placeholder={placeholder}
       />
       {/* 전화번호 정규식 넣으실거면 ↓↓↓
       var tel = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/
       */}
-      {errors[name] && (
-        <Error>
-          <Typography size="16">에러Title</Typography>
-        </Error>
-      )}
     </Wrapper>
   );
 };

@@ -1,21 +1,11 @@
-import { customColor, Typography } from '@street-vendor/core';
+import { customColor, MenuType, Typography } from '@street-vendor/core';
 import Image from 'next/image';
-import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { OrderDataStateType } from '../../../DetailStore';
 import { Counter } from './Counter';
-import { MenuType } from '@street-vendor/core';
-import { useRecoilState } from 'recoil';
-import { menuCount } from '../../../../../recoil/atoms/menuCount';
 
-export const Item = (props: MenuType) => {
-  const [menu, setMenu] = useRecoilState(menuCount(props.menuId));
-  useEffect(() => {
-    setMenu({
-      ...menu,
-      price: props.menuPrice,
-    });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+export const Item = ({ setOrderData, ...props }: OrderDataStateType & MenuType) => {
+
 
   return (
     <Container>
@@ -34,7 +24,12 @@ export const Item = (props: MenuType) => {
           <Typography size="16">{props.menuPrice}원</Typography>
         </div>
       </FoodInfo>
-      <Counter menuId={props.menuId} menuPrice={props.menuPrice}/>
+      <Counter
+        menuId={props.menuId}
+        menuPrice={props.menuPrice}
+        setOrderData={setOrderData}
+        orderCount={props.orderCount}
+      />
     </Container>
   );
 };

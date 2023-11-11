@@ -9,7 +9,7 @@ type Props = {
 };
 export const BottomButton = ({ buttonText, type, TopText, onClick }: Props) => {
   return (
-    <Container onClick={onClick}>
+    <Container>
       {TopText && (
         <TopTextWrapper>
           <Typography size="16" fontWeight="bold">
@@ -18,6 +18,7 @@ export const BottomButton = ({ buttonText, type, TopText, onClick }: Props) => {
         </TopTextWrapper>
       )}
       <BasicButton
+        onClick={onClick}
         backgroundColor="orange3"
         maxWidth={320}
         height={54}

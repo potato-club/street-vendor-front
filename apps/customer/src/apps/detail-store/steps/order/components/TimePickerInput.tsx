@@ -1,6 +1,17 @@
 import styled from 'styled-components';
-import { FieldErrorsImpl, FieldValues, UseFormRegister, UseFormSetValue } from 'react-hook-form';
-import { customColor, TimePickerModal, Typography, useModal } from '@street-vendor/core';
+import {
+  FieldErrorsImpl,
+  FieldValues,
+  UseFormRegister,
+  UseFormSetValue,
+  UseFormWatch,
+} from 'react-hook-form';
+import {
+  customColor,
+  TimePickerModal,
+  Typography,
+  useModal,
+} from '@street-vendor/core';
 
 interface InputProps {
   name: string;
@@ -9,6 +20,7 @@ interface InputProps {
   register: UseFormRegister<FieldValues>;
   setValue: UseFormSetValue<FieldValues>;
   errors: Partial<FieldErrorsImpl>;
+  watch: UseFormWatch<FieldValues>;
 }
 
 export const TimePickerInput = (props: InputProps) => {
@@ -25,15 +37,17 @@ export const TimePickerInput = (props: InputProps) => {
         )}
         <Input
           placeholder={props.placeholder}
-          {...props.register(props.name)}
+          // {...props.register(props.name)}
+          value={props.watch(props.name) || ''}
+          readOnly
         />
-        {props.errors[props.name] && (
-          <Error>
-            <Typography size="16">에러Title</Typography>
-          </Error>
-        )}
       </Wrapper>
-      <TimePickerModal isOpen={isOpen} handleCloseModal={handleCloseModal} setValue={props.setValue}/>
+      <TimePickerModal
+        name={props.name}
+        isOpen={isOpen}
+        handleCloseModal={handleCloseModal}
+        setValue={props.setValue}
+      />
     </>
   );
 };

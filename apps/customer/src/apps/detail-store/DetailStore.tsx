@@ -1,20 +1,49 @@
-import React from 'react';
-import { customColor } from '@street-vendor/core';
-import { Info, Menu } from './components';
+import { MenuType, customColor } from '@street-vendor/core';
+import dynamic from 'next/dynamic';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useSpring, animated } from '@react-spring/web';
 import { useQueryGetDetailStore } from '../../hooks/query/detail-store/useQueryGetDetailStore';
-import { StoreImage } from './components/StoreImage';
+import { Order } from './steps/order/Order';
+
+const StoreInfo = dynamic(() => import('./steps/storeInfo'));
+const OrderConfirm = dynamic(
+  () => import('./steps/order-confirm/OrderConfirm')
+);
+
+export type StepProps = {
+  step?: number;
+  setStep: Dispatch<SetStateAction<Steps>>;
+};
+
+export type OrderDataType = {
+  menus: Array<MenuType>;
+};
+
+export type Steps = '가게페이지' | '주문확인' | '주문하기';
+export type OrderDataStateType = {
+  orderData?: OrderDataType;
+  setOrderData?: Dispatch<SetStateAction<OrderDataType>>;
+};
 
 export const DetailStore = () => {
- const springAnimation = useSpring({
-   from: { y: -10 },
-   to: { y: -40 },
-   config: {
-    tension: 100,
-   }
- });
- const { isLoading } = useQueryGetDetailStore();
+  // Funnel 패턴
+  const [step, setStep] = useState<Steps>('가게페이지');
+  const [orderData, setOrderData] = useState<OrderDataType>();
+
+  const { data, isFetching: isLoading } = useQueryGetDetailStore();
+
+  useEffect(() => {
+    if (!isLoading) {
+      setOrderData({
+        menus: data?.menuList,
+      });
+    }
+  }, [isLoading]);
+
+
+  const totalPrice = orderData?.menus?.reduce((total, menuItem) => {
+    return total + (menuItem.orderCount || 0) * menuItem.menuPrice || 0;
+  }, 0);
 
   if (isLoading) {
     return <div>로딩중</div>;
@@ -22,12 +51,24 @@ export const DetailStore = () => {
 
   return (
     <Container>
-      <StoreImage />
-      <ContentWrapper style={springAnimation}>
-        <Info />
-        <Line />
-        <Menu />
-      </ContentWrapper>
+      {step === '가게페이지' && (
+        <StoreInfo
+          setStep={setStep}
+          orderData={orderData}
+          setOrderData={setOrderData}
+        />
+      )}
+      {step === '주문확인' && (
+        <OrderConfirm
+          setStep={setStep}
+          orderData={orderData}
+          setOrderData={setOrderData}
+          totalPrice={totalPrice}
+        />
+      )}
+      {step === '주문하기' && (
+        <Order orderData={orderData} totalPrice={totalPrice} />
+      )}
     </Container>
   );
 };
@@ -42,19 +83,4 @@ const Container = styled.div`
   /* box-shadow: 3px 3px 10px ${customColor.black}26; */
   /* border-top-left-radius: 24px; */
   /* border-top-right-radius: 24px; */
-`;
-
-const ContentWrapper = styled(animated.div)`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: ${customColor.white};
-  border-top-left-radius: 24px;
-  border-top-right-radius: 24px;
-`;
-
-const Line = styled.hr`
-  width: 100%;
-  border: solid 6px ${customColor.beige};
 `;

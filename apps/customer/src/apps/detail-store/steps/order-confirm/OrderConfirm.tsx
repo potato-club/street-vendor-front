@@ -1,49 +1,63 @@
-import { AppBarLayout, customColor, MenuType, Typography } from '@street-vendor/core';
-import React from 'react';
+import {
+  AppBarLayout,
+  customColor,
+  MenuType,
+  Typography,
+} from '@street-vendor/core';
+import toast from 'react-hot-toast';
 import styled from 'styled-components';
-import { Title, TotalPrice } from '../common';
+import { Title, TotalPrice } from '../../../common';
+import { BottomButton } from '../../../common/button/BottomButton';
+import { OrderDataStateType, StepProps } from '../../DetailStore';
 import { Item } from './components';
-import { BottomButton } from '../common/button/BottomButton';
-import { useQueryGetDetailStore } from '../../hooks/query/detail-store/useQueryGetDetailStore';
-import Router from 'next/router';
-import { useRecoilValue } from 'recoil';
-import { totalPrice } from '../../recoil/atoms';
 
-export const OrderConfirm = () => {
-  const { data } = useQueryGetDetailStore();
-  const price = useRecoilValue(totalPrice);
-  
+const OrderConfirm = ({
+  setStep,
+  orderData,
+  totalPrice,
+  setOrderData,
+}: StepProps & OrderDataStateType & { totalPrice: number }) => {
+  const handleOnClick = () => {
+    if (totalPrice <= 0) {
+      toast.error('선택된 메뉴가 없습니다');
+      return;
+    }
+    setStep('주문하기');
+  };
+
   return (
     <AppBarLayout title="주문확인">
       <Container>
         <Wrapper>
           <Title />
           <ItemWrapper>
-            {data?.menuList?.map((menu: MenuType) => (
-              <Item key={menu.menuId} {...menu} />
+            {orderData?.menus?.map((menu: MenuType) => (
+              <Item
+                key={menu.menuId}
+                {...menu}
+                orderData={orderData}
+                setOrderData={setOrderData}
+              />
             ))}
           </ItemWrapper>
-          {price === 0 && (
+          {totalPrice === 0 && (
             <Notice>
               <Typography size="16">선택된 메뉴가 없습니다</Typography>
               <Typography size="16">메뉴를 추가해주세요</Typography>
             </Notice>
           )}
-          <AddButton
-            onClick={() => Router.push(`/detail-store/${Router.query.id}`)}
-          >
+          <AddButton onClick={() => setStep('가게페이지')}>
             <Typography size="20">+ 메뉴 추가하기</Typography>
           </AddButton>
-          <TotalPrice />
+          <TotalPrice totalPrice={totalPrice} />
         </Wrapper>
-        <BottomButton
-          buttonText="주문하기"
-          onClick={() => Router.push(`/order/${Router.query.id}`)}
-        />
+        <BottomButton buttonText="주문하기" onClick={handleOnClick} />
       </Container>
     </AppBarLayout>
   );
 };
+
+export default OrderConfirm;
 
 const Container = styled.div`
   display: flex;

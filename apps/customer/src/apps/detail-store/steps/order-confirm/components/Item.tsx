@@ -1,15 +1,19 @@
 import { customColor, MenuType, Typography } from '@street-vendor/core';
-import { menuCount } from '../../../recoil/atoms/menuCount';
 import Image from 'next/image';
-import React from 'react';
-import { useRecoilValue } from 'recoil';
+import { useMemo } from 'react';
 import styled from 'styled-components';
-import { Counter } from '../../detail-store/components/menu/components';
-export const Item = (props: MenuType) => {
-  const menu = useRecoilValue(menuCount(props.menuId));
+import { Counter } from '../../../components/menu/components';
+import { OrderDataStateType } from '../../../DetailStore';
+export const Item = (props: MenuType & OrderDataStateType) => {
+  // const menu = useRecoilValue(menuCount(props.menuId));
+  const menu = useMemo(
+    () =>
+      props.orderData.menus.filter((menu) => menu.menuId === props.menuId)[0],
+    [props.orderData, props.menuId]
+  );
 
   return (
-    menu.count > 0 && (
+    menu?.orderCount > 0 && (
       <Container>
         <FoodInfo>
           <ImageWrapper>
@@ -34,7 +38,12 @@ export const Item = (props: MenuType) => {
               </Typography>
               <Typography size="16">{props.menuPrice}원</Typography>
             </div>
-            <Counter menuId={props.menuId} menuPrice={props.menuPrice}/>
+            <Counter
+              menuId={props.menuId}
+              menuPrice={props.menuPrice}
+              setOrderData={props.setOrderData}
+              orderCount={props.orderCount}
+            />
           </PriceAndOrder>
         </FoodInfo>
       </Container>

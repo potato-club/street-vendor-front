@@ -64,6 +64,10 @@ export const storeApi = {
     const response = await sendApi.get('/api/v1/order/my-orders');
     return response.data.data;
   },
+
+  getDetail: async (storeId: string) =>
+    sendApi.get(`/api/v1/store/detail/${storeId}`),
+
   getMyOrderHistoryDetail: async (orderId: number) => {
     const response = await sendApi.get(`/api/v1/order/${orderId}`);
     return response.data.data;

@@ -1,34 +1,44 @@
 import { customColor, Typography } from '@street-vendor/core';
-import { menuCount, totalPrice } from '../../../../../recoil/atoms';
-import React, { useCallback } from 'react';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { OrderDataStateType } from '../../../DetailStore';
 type Props = {
   menuId: number;
   menuPrice: number;
+  orderCount?: number
 };
-export const Counter = ({ menuId, menuPrice }: Props) => {
-  const [menu, setMenu] = useRecoilState(menuCount(menuId));
-  const setTotalPrice = useSetRecoilState(totalPrice);
+export const Counter = ({
+  menuId,
+  menuPrice,
+  setOrderData,
+  orderCount = 0,
+}: Props & OrderDataStateType) => {
+  const [count, setCount] = useState<number>(orderCount);
+  
   const handleCount = useCallback(
     (action: string) => {
       if (action === '+') {
-        setMenu({
-          ...menu,
-          count: menu.count + 1,
-        });
-        setTotalPrice((prev) => prev + menuPrice);
+        setCount(count + 1);
       } else {
-        if (menu.count === 0) return;
-        setMenu({
-          ...menu,
-          count: menu.count - 1,
-        });
-        setTotalPrice((prev) => prev - menuPrice);
+        if (count === 0) return;
+        setCount(count - 1);
       }
     },
-    [menu, setMenu]
+    [count, setCount]
   );
+
+  useEffect(() => {
+    setOrderData((prev) => {
+      const updateMenu = prev?.menus?.map((menu) => {
+        // POST 요청보낼때는 orderCount -> count 로 수정해서 보내야함
+        if (menu.menuId === menuId) {
+          return { ...menu, orderCount: count };
+        }
+        return { ...menu };
+      });
+      return { ...prev, menus: updateMenu };
+    });
+  }, [count, menuPrice, setOrderData, menuId]);
 
   return (
     <Container>
@@ -39,7 +49,7 @@ export const Counter = ({ menuId, menuPrice }: Props) => {
           </Typography>
         </Button>
         <Typography size="14" fontWeight="bold" color="black">
-          {menu.count}
+          {count}
         </Typography>
         <Button onClick={() => handleCount('+')}>
           <Typography size="14" fontWeight="bold" color="black">

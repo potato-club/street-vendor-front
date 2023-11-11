@@ -3,21 +3,20 @@ import { useCallback } from 'react';
 import { useQuery } from 'react-query';
 import { useRouter } from 'next/router';
 
-export const useQueryGetDetailStore = () => {
+export const useQueryGetMenuId = () => {
   const router = useRouter();
 
   const getData = useCallback(async () => {
-    const { data } = await storeApi.getDetail(String(router.query.id));
+    const response = await storeApi.getDetail(String(router.query.id));
     // console.log('response.data', response.data);
-    return data.data;
+    const ids = response.data.data.menuList.map((menu) => menu.menuId)
+    return ids;
   }, [router.query.id]);
 
-  return useQuery(['useQueryGetDetailStore', router.query.id], getData, {
+  return useQuery(['useQueryGetMenuId', router.query.id], getData, {
     enabled: router.isReady && !!router.query.id,
     onError: (e) => {
       console.log(e);
     },
-    refetchOnWindowFocus: false,
-    refetchOnMount: false,
   });
 };
