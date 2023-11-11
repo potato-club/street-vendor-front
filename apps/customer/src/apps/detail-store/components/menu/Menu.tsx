@@ -1,24 +1,15 @@
 import { BasicButton, MenuType, Typography } from '@street-vendor/core';
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
-import { CustomRadioButton, Item } from './components/index';
-import { useQueryGetDetailStore } from '../../../../hooks/query/detail-store/useQueryGetDetailStore';
 import { OrderDataStateType, StepProps } from '../../DetailStore';
+import { CustomRadioButton, Item } from './components/index';
 
 export const Menu = ({
   setStep,
+  orderData,
   setOrderData,
 }: StepProps & OrderDataStateType) => {
   const [filter, setFilter] = useState<string>('basic');
-  const { data, isFetching: isLoadingGet } = useQueryGetDetailStore();
-
-  useEffect(() => {
-    if (!isLoadingGet) {
-      setOrderData({
-        menus: data?.menuList,
-      });
-    }
-  }, [isLoadingGet]);
 
   return (
     <Container>
@@ -39,8 +30,8 @@ export const Menu = ({
         />
       </FilterWrapper>
       <ItemWrapper>
-        {data?.menuList?.map((menu: MenuType) => (
-          <Item key={menu.menuId} {...menu} setOrderData={setOrderData} />
+        {orderData?.menus?.map((menu: MenuType) => (
+          <Item key={menu.menuId} {...menu} setOrderData={setOrderData} orderCount={menu.orderCount}/>
         ))}
       </ItemWrapper>
       <ButtonWrapper onClick={() => setStep('주문확인')}>

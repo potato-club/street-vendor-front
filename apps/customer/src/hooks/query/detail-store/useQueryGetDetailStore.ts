@@ -18,5 +18,6 @@ export const useQueryGetDetailStore = () => {
       console.log(e);
     },
     refetchOnWindowFocus: false,
+    refetchOnMount: false,
   });
 };

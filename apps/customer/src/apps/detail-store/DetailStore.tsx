@@ -1,6 +1,6 @@
 import { MenuType, customColor } from '@street-vendor/core';
 import dynamic from 'next/dynamic';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useQueryGetDetailStore } from '../../hooks/query/detail-store/useQueryGetDetailStore';
 
@@ -29,7 +29,15 @@ export const DetailStore = () => {
   const [step, setStep] = useState<Steps>('가게페이지');
   const [orderData, setOrderData] = useState<OrderDataType>();
 
-  const { isLoading } = useQueryGetDetailStore();
+  const { data, isFetching: isLoading } = useQueryGetDetailStore();
+
+  useEffect(() => {
+    if (!isLoading) {
+      setOrderData({
+        menus: data?.menuList,
+      });
+    }
+  }, [isLoading]);
 
   if (isLoading) {
     return <div>로딩중</div>;
@@ -38,9 +46,19 @@ export const DetailStore = () => {
   return (
     <Container>
       {step === '가게페이지' && (
-        <StoreInfo setStep={setStep} setOrderData={setOrderData} />
+        <StoreInfo
+          setStep={setStep}
+          orderData={orderData}
+          setOrderData={setOrderData}
+        />
       )}
-      {step === '주문확인' && <OrderConfirm setStep={setStep} orderData={orderData} setOrderData={setOrderData}/>}
+      {step === '주문확인' && (
+        <OrderConfirm
+          setStep={setStep}
+          orderData={orderData}
+          setOrderData={setOrderData}
+        />
+      )}
     </Container>
   );
 };

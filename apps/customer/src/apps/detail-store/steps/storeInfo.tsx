@@ -5,7 +5,11 @@ import { OrderDataStateType, StepProps } from '../DetailStore';
 import { Info, Menu } from '../components';
 import { StoreImage } from '../components/StoreImage';
 
-const StoreInfo = ({ setStep, setOrderData }: StepProps & OrderDataStateType) => {
+const StoreInfo = ({
+  setStep,
+  orderData,
+  setOrderData,
+}: StepProps & OrderDataStateType) => {
   const springAnimation = useSpring({
     from: { y: -10 },
     to: { y: -40 },
@@ -20,7 +24,11 @@ const StoreInfo = ({ setStep, setOrderData }: StepProps & OrderDataStateType) =>
       <ContentWrapper style={springAnimation}>
         <Info />
         <Line />
-        <Menu setStep={setStep} setOrderData={setOrderData} />
+        <Menu
+          setStep={setStep}
+          orderData={orderData}
+          setOrderData={setOrderData}
+        />
       </ContentWrapper>
     </>
   );

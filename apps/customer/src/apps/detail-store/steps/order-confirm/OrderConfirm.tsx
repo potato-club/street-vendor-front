@@ -46,6 +46,7 @@ const OrderConfirm = ({
             </Notice>
           )}
           <AddButton
+          onClick={() => setStep('가게페이지')}
           >
             <Typography size="20">+ 메뉴 추가하기</Typography>
           </AddButton>

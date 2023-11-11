@@ -14,6 +14,7 @@ export const Counter = ({
   orderCount = 0,
 }: Props & OrderDataStateType) => {
   const [count, setCount] = useState<number>(orderCount);
+  
   const handleCount = useCallback(
     (action: string) => {
       if (action === '+') {

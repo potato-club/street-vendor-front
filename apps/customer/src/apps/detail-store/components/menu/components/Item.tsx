@@ -3,7 +3,6 @@ import Image from 'next/image';
 import styled from 'styled-components';
 import { OrderDataStateType } from '../../../DetailStore';
 import { Counter } from './Counter';
-import { useEffect } from 'react';
 
 export const Item = ({ setOrderData, ...props }: OrderDataStateType & MenuType) => {
 
@@ -29,6 +28,7 @@ export const Item = ({ setOrderData, ...props }: OrderDataStateType & MenuType) 
         menuId={props.menuId}
         menuPrice={props.menuPrice}
         setOrderData={setOrderData}
+        orderCount={props.orderCount}
       />
     </Container>
   );
